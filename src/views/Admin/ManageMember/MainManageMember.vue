@@ -82,9 +82,9 @@
                                     <td class="border px-2 py-1 break-words">{{
                                         member.firstName }}</td>
                                     <td class="border px-2 py-1 break-words">{{ member.lastName
-                                    }}</td>
+                                        }}</td>
                                     <td class="border px-2 py-1 break-words">{{ member.sex
-                                    }}</td>
+                                        }}</td>
                                     <td class="border px-2 py-1 break-words">{{ member.nickName }}
                                     </td>
                                     <td class="border px-2 py-1 break-words">{{ member.personalEmail }}
@@ -224,7 +224,7 @@ export default {
         },
 
         navigateToDetailPartnerAdmin() {
-            this.$router.push("/detailpartnerall");
+            this.$router.push("/detailmemberall");
         },
         navigateBackToMainPartner() {
             this.$router.push("/mainpartner");

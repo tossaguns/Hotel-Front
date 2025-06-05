@@ -165,18 +165,7 @@
                         <p class="text-gray-500 text-sm mt-1">รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร</p>
                     </div>
 
-                    <!-- ยืนยันรหัสผ่าน -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            ยืนยันรหัสผ่าน <span class="text-red-500">*</span>
-                        </label>
-                        <input v-model="form.confirmPassword" type="password"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            :class="{ 'border-red-500': errors.confirmPassword }" required />
-                        <p v-if="errors.confirmPassword" class="text-red-500 text-sm mt-1">{{ errors.confirmPassword }}
-                        </p>
-                    </div>
-
+                    
                     <!-- ปุ่ม -->
                     <div class="flex space-x-2 pt-6">
                         <button type="submit"
@@ -234,7 +223,7 @@ export default {
                 personalPostalCode: '',
                 username: '',
                 password: '',
-                confirmPassword: ''
+              
             },
             errors: {},
             isSubmitting: false,
@@ -265,7 +254,7 @@ export default {
                 personalPostalCode: 'กรุณากรอกรหัสไปรษณีย์',
                 username: 'กรุณากรอก Username',
                 password: 'กรุณากรอกรหัสผ่าน',
-                confirmPassword: 'กรุณายืนยันรหัสผ่าน'
+              
             };
 
             for (const [field, message] of Object.entries(requiredFields)) {
@@ -308,11 +297,7 @@ export default {
                 isValid = false;
             }
 
-            // Confirm password validation
-            if (this.form.password !== this.form.confirmPassword) {
-                this.errors.confirmPassword = 'รหัสผ่านไม่ตรงกัน';
-                isValid = false;
-            }
+            
 
             // Username validation (no spaces, special characters)
             if (this.form.username) {
@@ -340,10 +325,7 @@ export default {
 
             this.isSubmitting = true;
 
-            try {
-                // Prepare data for API (exclude confirmPassword)
-                const { confirmPassword, ...formData } = this.form;
-
+            try {  
                 const response = await axios.post('/api/member/register', formData);
 
                 if (response.data.success) {
@@ -392,7 +374,6 @@ export default {
                 personalPostalCode: '',
                 username: '',
                 password: '',
-                confirmPassword: ''
             };
             this.errors = {};
         },

@@ -294,9 +294,7 @@ const router = createRouter({
       path: "/detailpartnerall",
       name: "DetailPartnerAll",
       component: () =>
-        import(
-          "@/views/Admin/ManagePartner/DetailPartnerAll.vue"
-        ),
+        import("@/views/Admin/ManagePartner/DetailPartnerAll.vue"),
     },
     {
       path: "/mainpartnersleepgun",
@@ -305,6 +303,11 @@ const router = createRouter({
         import(
           "@/views/Admin/ManagePartner/PartnerSleepGun/MainPartnerSleepGun.vue"
         ),
+    },
+    {
+      path: "/detailmemberall",
+      name: "DetailMemberAll",
+      component: () => import("@/views/Admin/ManageMember/DetailMemberAll.vue"),
     },
   ],
 });

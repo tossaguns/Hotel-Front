@@ -91,12 +91,12 @@
                                     </td>
                                     <td class="border px-2 py-1 break-words">{{ partner.phone }}
                                     </td>
-                                    <td class="border px-2 py-1 break-words">{{ partner.datetime }}
+                                    <td class="border px-2 py-1 break-words">{{ partner.updatedAt }}
                                     </td>
 
                                     <td class="border px-2 py-1 break-words">
                                         <div class="flex gap-2 justify-center">
-                                            <button @click="approvePartner(partner)"
+                                            <button @click="toggleApproveForm(partner.id)"
                                                 class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm font-medium transition-colors">
                                                 อนุมัติ
                                             </button>
@@ -107,6 +107,24 @@
                                             <button @click="navigateToDetailPartnerAdmin"
                                                 class="bg-blue-300 rounded-full text-sm px-2">ข้อมูลเพิ่มเติม</button>
                                         </div>
+
+                                        <div v-if="activeApproveId === partner.id" class="mt-2 space-y-1 text-left">
+                                            <label class="block">
+                                                <span class="text-sm">Username:</span>
+                                                <input type="text" v-model="credentials.username"
+                                                    class="border px-2 py-1 rounded w-full text-sm" />
+                                            </label>
+                                            <label class="block">
+                                                <span class="text-sm">Password:</span>
+                                                <input type="password" v-model="credentials.password"
+                                                    class="border px-2 py-1 rounded w-full text-sm" />
+                                            </label>
+                                            <button @click="submitApprove(partner)"
+                                                class="bg-blue-500 hover:bg-blue-600 text-white mt-1 px-3 py-1 rounded text-sm">
+                                                ยืนยันการอนุมัติ
+                                            </button>
+                                        </div>
+
                                     </td>
                                 </tr>
                             </tbody>
@@ -163,54 +181,23 @@ export default {
             itemsPerPage: 10,
             partnerApplications: [
                 {
-                    id: 1,
-                    logo: 'https://via.placeholder.com/40x40/007bff/ffffff?text=A',
-                    companyName: 'บริษัท เอบีซี จำกัด',
-                    firstName: 'สมชาย',
-                    lastName: 'ใจดี',
-                    nickname: 'ชาย',
-                    email: 'somchai@abc.com',
-                    phone: '081-234-5678',
-                    datetime: '5/6/2024 12:00',
-                    isApproved: false,
+                    id: '',
+                    logo: '',
+                    companyName: '',
+                    firstName: '',
+                    lastName: '',
+                    nickname: '',
+                    email: '',
+                    phone: '',
+                    datetime: '',
+                    isApproved: null,
                 },
-                {
-                    id: 2,
-                    logo: 'https://via.placeholder.com/40x40/28a745/ffffff?text=X',
-                    companyName: 'บริษัท เอ็กซ์วายซี จำกัด',
-                    firstName: 'สมหญิง',
-                    lastName: 'รักงาน',
-                    nickname: 'หญิง',
-                    email: 'somying@xyz.com',
-                    phone: '082-345-6789',
-                    datetime: '5/6/2024 12:00',
-                    isApproved: false,
-                },
-                {
-                    id: 3,
-                    logo: 'https://via.placeholder.com/40x40/dc3545/ffffff?text=T',
-                    companyName: 'บริษัท เทคโนโลยี จำกัด',
-                    firstName: 'สมศักดิ์',
-                    lastName: 'มั่นใจ',
-                    nickname: 'โอ๋',
-                    email: 'somsak@tech.com',
-                    phone: '083-456-7890',
-                    datetime: '5/6/2024 12:00',
-                    isApproved: false,
-                },
-                ...Array.from({ length: 12 }, (_, i) => ({
-                    id: i + 1,
-                    logo: `https://via.placeholder.com/40x40/${Math.floor(Math.random() * 16777215).toString(16)}/ffffff?text=${String.fromCharCode(65 + (i % 26))}`,
-                    companyName: `บริษัท ตัวอย่าง ${i + 1} จำกัด`,
-                    firstName: `ชื่อ${i + 1}`,
-                    lastName: `นามสกุล${i + 1}`,
-                    nickname: `เล่น${i + 1}`,
-                    email: `example${i + 1}@company.com`,
-                    phone: `08${i + 1}-000-0000`,
-                    datetime: '5/6/2024 12:00',
-                    isApproved: false,
-                }))
-            ]
+            ],
+            activeApproveId: null,
+            credentials: {
+                username: '',
+                password: ''
+            }
         }
     },
     computed: {
@@ -290,35 +277,16 @@ export default {
         navigateBackToMainPartner() {
             this.$router.push("/mainpartner");
         },
-        toggleDropdown(id) {
-            this.activeDropdown = this.activeDropdown === id ? null : id
-        },
-        getDropdownPosition(index) {
-            const isNearBottom = index >= this.paginatedData.length - 2
 
-            if (isNearBottom) {
-                return 'bottom-full mb-1'
-            } else {
-                return 'top-full mt-1'
-            }
-        },
         getRowNumber(index) {
             return (this.currentPage - 1) * this.itemsPerPage + index + 1
         },
         changePage(page) {
             if (page >= 1 && page <= this.totalPages) {
                 this.currentPage = page
-                this.activeDropdown = null // ปิด dropdown เมื่อเปลี่ยนหน้า
             }
         },
-        viewDetails(partner) {
-            console.log('ดูข้อมูลเพิ่มเติม:', partner)
-            this.activeDropdown = null
-        },
-        editPartner(partner) {
-            console.log('แก้ไขข้อมูล:', partner)
-            this.activeDropdown = null
-        },
+
         approvePartner(partner) {
             partner.isApproved = true
             partner.status = 'approved'
@@ -328,19 +296,35 @@ export default {
             partner.isApproved = false
             partner.status = 'disapproved'
             console.log('ไม่อนุมัติ Partner:', partner.companyName)
+        },
+        toggleApproveForm(partnerId) {
+            this.activeApproveId = this.activeApproveId === partnerId ? null : partnerId
+            this.credentials = { username: '', password: '' }
+        },
+
+        submitApprove(partner) {
+            if (!this.credentials.username || !this.credentials.password) {
+                alert('กรุณากรอก Username และ Password')
+                return
+            }
+            partner.isApproved = true
+            partner.status = 'approved'
+
+            console.log('อนุมัติ Partner:', partner.companyName)
+            console.log('Username:', this.credentials.username)
+            console.log('Password:', this.credentials.password)
+
+
+            this.activeApproveId = null
+            this.credentials = { username: '', password: '' }
         }
+
     },
     mounted() {
         const savedState = localStorage.getItem('sidebarCollapsed')
         if (savedState !== null) {
             this.isSidebarCollapsed = JSON.parse(savedState)
         }
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.dropdown-container')) {
-                this.activeDropdown = null
-            }
-        })
     },
     beforeUnmount() {
         document.removeEventListener('click', this.handleClickOutside)
