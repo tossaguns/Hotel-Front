@@ -1,0 +1,74 @@
+<template>
+    FIXME:ใส่ข้อมูลของ Booking ไปดูมา
+    <div class="w-full min-h-screen bg-gray-200">
+        <Sidebar @toggle-sidebar="handleSidebarToggle" />
+
+        <div class="flex-1 md:px-4  md:py-3 mt-16 md:mt-0 transition-all duration-300" :class="{
+            'md:ml-[260px]': !isSidebarCollapsed,
+            'md:ml-[80px]': isSidebarCollapsed
+        }">
+
+            <div class="bg-white md:rounded-lg mt-2 px-4 min-h-screen">
+                <div class="mb-10 pt-3">
+                    <p class="text-center md:text-left text-3xl">ข้อมูลเกี่ยวกับโรงเเรมของคุณ</p>
+                </div>
+
+                <div class="flex flex-col items-center">
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-4 mt-3 md:mt-6">
+                        <p class="md:w-1/3">โรงเเรมคุณมีอาหารเช้าหรือไม่?</p>
+                        <input type="text" class="w-full border p-2 rounded" />
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-4 mt-3 md:mt-6">
+                        <p class="md:w-1/3">มีกำหนดเวลา CheckIn-CheckOut หรือไม่?</p>
+                        <input type="text" class="w-full border p-2 rounded" />
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-4 mt-3 md:mt-6">
+                        <p class="md:w-1/3"></p>
+                        <input type="text" class="w-full border p-2 rounded" />
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-4 mt-3 md:mt-6">
+                        <p class="md:w-1/3">เเก้ไขชื่อบริษัท</p>
+                        <input type="text" class="w-full border p-2 rounded" />
+                    </div>
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-4 mt-3 md:mt-6">
+                        <p class="md:w-1/3">เเก้ไขชื่อบริษัท</p>
+                        <input type="text" class="w-full border p-2 rounded" />
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>
+
+<script>
+import Sidebar from '@/components/SidebarExecutive.vue'
+
+export default {
+    name: "EmployeeList",
+    components: {
+        Sidebar
+    },
+    data() {
+        return {
+            isSidebarCollapsed: false,
+
+        }
+    },
+    methods: {
+        handleSidebarToggle(isCollapsed) {
+            this.isSidebarCollapsed = isCollapsed
+        },
+        /*navigateBackToMainPartner() {
+            this.$router.push("/request");
+        },*/
+    },
+    mounted() {
+        const savedState = localStorage.getItem('sidebarCollapsed')
+        if (savedState !== null) {
+            this.isSidebarCollapsed = JSON.parse(savedState)
+        }
+    },
+}
+</script>
