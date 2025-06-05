@@ -318,7 +318,6 @@ export default {
             this.activeApproveId = null
             this.credentials = { username: '', password: '' }
         }
-
     },
     mounted() {
         const savedState = localStorage.getItem('sidebarCollapsed')

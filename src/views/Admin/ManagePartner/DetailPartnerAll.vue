@@ -18,85 +18,86 @@
                             <!-- ลำดับ -->
                             <div>
                                 <p class="block text-sm font-medium">ลำดับ</p>
-                                <p></p>
+                                <p>{{ partner.id }}</p>
                             </div>
-
-
                             <div>
                                 <p class="block text-sm font-medium">รูปบริษัท</p>
-                                <img />
+                                <img v-if="partner.companyLogo" :src="partner.companyLogo"
+                                    class="w-32 h-auto rounded border" />
                             </div>
+
                             <div>
                                 <p class="block text-sm font-medium">ชื่อบริษัท</p>
-                                <p></p>
+                                <p>{{ partner.companyName }}</p>
                             </div>
 
 
                             <div>
                                 <div class="block text-sm font-medium mb-1">เบอร์ติดต่อบริษัท</div>
-                                <p></p>
+                                <p>{{ partner.companyPhone }}</p>
                             </div>
 
 
                             <div>
                                 <div class="block text-sm font-medium mb-1">อีเมลติดต่อบริษัท</div>
-                                <p></p>
+                                <p>{{ partner.companyEmail }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">เลขบัญชี</p>
-                                <p></p>
+                                <p>{{ partner.bankNumber }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">ธนาคาร</p>
-                                <p></p>
+                                <p>{{ partner.bankName }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">รูปบัญชี</p>
-                                <img />
+                                <img v-if="partner.bankImage" :src="partner.bankImage"
+                                    class="w-32 h-auto rounded border" />
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">เลขประจำตัวผู้เสียภาษี</p>
-                                <p></p>
+                                <p>{{ partner.companyTaxId }}</p>
                             </div>
 
 
                             <div>
                                 <p class="block text-sm font-medium">บ้านเลขที่</p>
-                                <p></p>
+                                <p>{{ partner.companyAddress }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">ตำบล</p>
-                                <p></p>
+                                <p>{{ partner.companySubdistrict }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">อำเภอ</p>
-                                <p></p>
+                                <p>{{ partner.companyDistrict }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">จังหวัด</p>
-                                <p></p>
+                                <p>{{ partner.companyProvince }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">รหัสไปรษณีย์</p>
-                                <p></p>
+                                <p>{{ partner.companyPostalCode }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">ละติจูด</p>
-                                <p></p>
+                                <p>{{ partner.hotelLatitude }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">ลองติจูด</p>
-                                <p></p>
+                                <p>{{ partner.hotelLongitude }}</p>
                             </div>
 
                         </div>
@@ -107,62 +108,63 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <p class="block text-sm font-medium">ชื่อ</p>
-                                <p></p>
+                                <p>{{ partner.fristName }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">นามสกุล</p>
-                                <p></p>
+                                <p>{{ partner.lastName }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">ชื่อเล่น</p>
-                                <p></p>
+                                <p>{{ partner.nickName }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">เพศ</p>
-                                <p></p>
+                                <p>{{ partner.sex }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">เบอร์โทร</p>
-                                <p></p>
+                                <p>{{ partner.personalPhone }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">เลขบัตรประชาชน</p>
-                                <p></p>
+                                <p>{{ partner.personalId }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">รูปบัตรประชาชน</p>
-                                <img />
+                                <img v-if="partner.personalIdImg" :src="partner.personalIdImg"
+                                    class="w-32 h-auto rounded border" />
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">บ้านเลขที่ตัวบุคคล</p>
-                                <p></p>
+                                <p>{{ partner.personalAddress }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">ตำบล</p>
-                                <p></p>
+                                <p>{{ partner.personalSubdistrict }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">อำเภอ</p>
-                                <p></p>
+                                <p>{{ partner.personalDistrict }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">จังหวัด</p>
-                                <p></p>
+                                <p>{{ partner.personalProvince }}</p>
                             </div>
 
                             <div>
                                 <p class="block text-sm font-medium">รหัสไปรษณีย์</p>
-                                <p></p>
+                                <p>{{ partner.personalPostalCode }}</p>
                             </div>
                         </div>
 
@@ -171,7 +173,7 @@
                         <div>
                             <div>
                                 <p class="block text-sm font-medium">วันเวลาที่ยื่นสมัคร</p>
-                                <p></p>
+                                <p>{{ partner.createdAt }}</p>
                             </div>
                         </div>
 
@@ -181,7 +183,7 @@
 
                             <div>
                                 <p class="block text-sm font-medium">โปรโมชั่นที่ใช้</p>
-                                <p></p>
+                                <p>{{ partner.promotionName }}</p>
                             </div>
                         </div>
 
@@ -211,6 +213,41 @@ export default {
     data() {
         return {
             isSidebarCollapsed: false,
+            partner: {
+                fristName: '',
+                lastName: '',
+                nickName: '',
+                sex: '',
+                personalEmail: '',
+                personalPhone: '',
+                personalId: '',
+                personalAddress: '',
+                personalSubdistrict: '',
+                personalDistrict: '',
+                personalProvince: '',
+                personalPostalCode: '',
+
+                companyName: '',
+                companyPhone: '',
+                companyEmail: '',
+                bankNumber: '',
+                bankName: '',
+                companyAddress: '',
+                companySubdistrict: '',
+                companyDistrict: '',
+                companyProvince: '',
+                companyPostalCode: '',
+                hotelLatitude: '',
+                hotelLongitude: '',
+                companyTaxId: '',
+                personalIdImg: null,
+                companyLogo: null,
+                bankImage: null,
+
+                promotionName: '',
+                createdAt: '',
+
+            }
 
         }
     },

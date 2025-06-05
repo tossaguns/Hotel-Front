@@ -1,0 +1,67 @@
+member มี        firstName: '',
+                lastName: '',
+                sex: '',
+                nickName: '',
+                personalEmail: '',
+                personalPhone: '',
+                personalType: '',
+                personalAddress: '',
+                personalSubdistrict: '',
+                personalDistrict: '',
+                personalProvince: '',
+                personalPostalCode: '',
+                username: '',
+                password: '',
+
+partner มี       fristName: '',
+                lastName: '',
+                nickName: '',
+                partner: '',
+                personalEmail: '',
+                personalPhone: '',
+                personalId: '',
+                personalAddress: '',
+                personalSubdistrict: '',
+                personalDistrict: '',
+                personalProvince: '',
+                personalPostalCode: '',
+                companyName: '',
+                companyPhone: '',
+                companyEmail: '',
+                bankNumber: '',
+                bankName: '',
+                companyTaxId: '',
+                companyAddress: '',
+                companySubdistrict: '',
+                companyDistrict: '',
+                companyProvince: '',
+                companyPostalCode: '',
+                hotelLatitude: '',
+                companyTaxId: '',
+                personalId: null,
+                companyLogo: null,
+                bankImage: null,
+                createdAt
+
+Admin สามารถ
+        -/request เมื่อ admin  ทำการกดอนุมัติ Partner จะเเสดงช่องให้กรอก username เเละ Password เมื่อกดคลิ๊กยืนยันจะส่งข้อมูล ไปยัง email Partner
+        -/request ฟิวเตอร์ข้อมูล วัน/เดือน/ปี/ชื่อบริษัท
+
+        -/approvepartner ฟิวเตอร์ข้อมูล วัน/เดือน/ปี/ชื่อบริษัท
+
+        -/noapprovepartner ฟิวเตอร์ข้อมูล วัน/เดือน/ปี/ชื่อบริษัท
+
+        -/mainpartnersleepgun ฟิวเตอร์ข้อมูล วัน/เดือน/ปี/ชื่อบริษัท/ชื่อโปรโมชั่น
+     
+promotion  มี    namePromotion : string
+                detailPromotion : string
+                dateStart : datetime
+                dateFinish : datetime
+                price : int
+                nameUpdate : string
+                createAt : datetime
+                updateAt : datetime
+
+
+
+

@@ -113,7 +113,7 @@
                     <label>ละติจูด: <input v-model="partner.hotelLatitude" /></label><!--hotelLatitude-->
                 </div>
                 <div>
-                    <label>ลองติจูด: <input v-model="partner.companyTaxId" /></label><!--companyTaxId-->
+                    <label>ลองติจูด: <input v-model="partner.hotelLongitude" /></label><!--hotelLongitude-->
                 </div>
 
             </div>
@@ -138,7 +138,7 @@ export default {
                 fristName: '',
                 lastName: '',
                 nickName: '',
-                partner: '',
+                sex: '',
                 personalEmail: '',
                 personalPhone: '',
                 personalId: '',
@@ -147,22 +147,23 @@ export default {
                 personalDistrict: '',
                 personalProvince: '',
                 personalPostalCode: '',
+
                 companyName: '',
                 companyPhone: '',
                 companyEmail: '',
                 bankNumber: '',
                 bankName: '',
-                companyTaxId: '',
                 companyAddress: '',
                 companySubdistrict: '',
                 companyDistrict: '',
                 companyProvince: '',
                 companyPostalCode: '',
                 hotelLatitude: '',
+                hotelLongitude:'',
                 companyTaxId: '',
-                personalIdPreview: null,
-                companyLogoPreview: null,
-                bankImagePreview: null
+                personalIdImg: null,
+                companyLogo: null,
+                bankImage: null
             }
         }
     },

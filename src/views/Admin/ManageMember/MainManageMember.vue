@@ -149,17 +149,29 @@ export default {
     },
     data() {
         return {
-            partnerApplications: [],
             isSidebarCollapsed: false,
 
+            memberApplications: [
+                {
+                    id: '',
+                    firstName: '',
+                    lastName: '',
+                    sex: '',
+                    nickName: '',
+                    personalEmail: '',
+                    personalPhone: '',
+                    personalType: '',
+                    personalProvince: ''
+                }
+            ],
 
             currentPage: 1,
-            itemsPerPage: 10,
+            itemsPerPage: 10
         }
     },
     computed: {
         totalItems() {
-            return this.partnerApplications.length
+            return this.memberApplications.length
         },
         totalPages() {
             return Math.ceil(this.totalItems / this.itemsPerPage)
@@ -167,7 +179,7 @@ export default {
         paginatedData() {
             const start = (this.currentPage - 1) * this.itemsPerPage
             const end = start + this.itemsPerPage
-            return this.partnerApplications.slice(start, end)
+            return this.memberApplications.slice(start, end)
         },
         startItem() {
             return (this.currentPage - 1) * this.itemsPerPage + 1
@@ -242,39 +254,7 @@ export default {
             this.isSidebarCollapsed = JSON.parse(savedState)
         }
 
-        {
-            const savedState = localStorage.getItem('sidebarCollapsed')
-            if (savedState !== null) {
-                this.isSidebarCollapsed = JSON.parse(savedState)
-            }
 
-            // 🔧 ตัวอย่างข้อมูล mock
-            this.partnerApplications = [
-                {
-                    id: 1,
-                    firstName: "สมชาย",
-                    lastName: "ใจดี",
-                    sex: "ชาย",
-                    nickName: "ชาย",
-                    personalEmail: "somchai@example.com",
-                    personalPhone: "0812345678",
-                    personalType: "นิติบุคคล",
-                    personalProvince: "กรุงเทพมหานคร"
-                },
-                {
-                    id: 2,
-                    firstName: "สุดารัตน์",
-                    lastName: "แสนดี",
-                    sex: "หญิง",
-                    nickName: "ดาว",
-                    personalEmail: "sudarat@example.com",
-                    personalPhone: "0898765432",
-                    personalType: "บุคคลธรรมดา",
-                    personalProvince: "เชียงใหม่"
-                }
-                // เพิ่มอีกตามต้องการ
-            ]
-        }
     },
     beforeUnmount() {
         document.removeEventListener('click', this.handleClickOutside)

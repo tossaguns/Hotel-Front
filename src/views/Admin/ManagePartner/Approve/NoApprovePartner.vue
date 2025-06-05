@@ -87,11 +87,11 @@
                                     <td class="border px-2 py-1 break-words">{{
                                         partner.companyName }}</td>
                                     <td class="border px-2 py-1 break-words">{{ partner.firstName
-                                        }}</td>
+                                    }}</td>
                                     <td class="border px-2 py-1 break-words">{{ partner.lastName
-                                        }}</td>
+                                    }}</td>
                                     <td class="border px-2 py-1 break-words">{{ partner.nickname
-                                        }}</td>
+                                    }}</td>
                                     <td class="border px-2 py-1 break-words">{{ partner.email }}
                                     </td>
                                     <td class="border px-2 py-1 break-words">{{ partner.phone }}
@@ -173,53 +173,17 @@ export default {
             itemsPerPage: 10,
             partnerApplications: [
                 {
-                    id: 1,
-                    logo: 'https://via.placeholder.com/40x40/007bff/ffffff?text=A',
-                    companyName: 'บริษัท เอบีซี จำกัด',
-                    firstName: 'สมชาย',
-                    lastName: 'ใจดี',
-                    nickname: 'ชาย',
-                    email: 'somchai@abc.com',
-                    phone: '081-234-5678',
-                    datetime: '5/6/2024 12:00',
+                    id: '',
+                    logo: '',
+                    companyName: '',
+                    firstName: '',
+                    lastName: '',
+                    nickname: '',
+                    email: '',
+                    phone: '',
+                    datetime: '',
                     isApproved: false,
-                },
-                {
-                    id: 2,
-                    logo: 'https://via.placeholder.com/40x40/28a745/ffffff?text=X',
-                    companyName: 'บริษัท เอ็กซ์วายซี จำกัด',
-                    firstName: 'สมหญิง',
-                    lastName: 'รักงาน',
-                    nickname: 'หญิง',
-                    email: 'somying@xyz.com',
-                    phone: '082-345-6789',
-                    datetime: '5/6/2024 12:00',
-                    isApproved: false,
-                },
-                {
-                    id: 3,
-                    logo: 'https://via.placeholder.com/40x40/dc3545/ffffff?text=T',
-                    companyName: 'บริษัท เทคโนโลยี จำกัด',
-                    firstName: 'สมศักดิ์',
-                    lastName: 'มั่นใจ',
-                    nickname: 'โอ๋',
-                    email: 'somsak@tech.com',
-                    phone: '083-456-7890',
-                    datetime: '5/6/2024 12:00',
-                    isApproved: false,
-                },
-                ...Array.from({ length: 12 }, (_, i) => ({
-                    id: i + 1,
-                    logo: `https://via.placeholder.com/40x40/${Math.floor(Math.random() * 16777215).toString(16)}/ffffff?text=${String.fromCharCode(65 + (i % 26))}`,
-                    companyName: `บริษัท ตัวอย่าง ${i + 1} จำกัด`,
-                    firstName: `ชื่อ${i + 1}`,
-                    lastName: `นามสกุล${i + 1}`,
-                    nickname: `เล่น${i + 1}`,
-                    email: `example${i + 1}@company.com`,
-                    phone: `08${i + 1}-000-0000`,
-                    datetime: '5/6/2024 12:00',
-                    isApproved: false,
-                }))
+                }
             ]
         }
     },

@@ -49,8 +49,8 @@
                                     <td class="border px-2 py-1 break-words">
                                         {{ promotion.price }}
                                     </td>
-                                    <td class="border px-2 py-1 break-words">{{ promotion.updateDate }}</td>
-                                    <td class="border px-2 py-1 break-words">{{ promotion.updateName }}</td>
+                                    <td class="border px-2 py-1 break-words">{{ promotion.createAt }}</td>
+                                    <td class="border px-2 py-1 break-words">{{ promotion.nameUpdate }}</td>
 
 
                                     <td class="border px-2 py-1 break-words space-x-2">
@@ -80,7 +80,17 @@ import SidebarAdmin from '@/components/SidebarAdmin.vue'
 export default {
     name: "Promotion",
     components: {
-        SidebarAdmin
+        SidebarAdmin,
+        promotion: {
+            promotion_id:'',
+            namePromotion: '',
+            detailPromotion: '',
+            dateStart: '',
+            dateFinish: '',
+            createAt: '',
+            nameUpdate: '',
+
+        },
     },
     data() {
         return {
