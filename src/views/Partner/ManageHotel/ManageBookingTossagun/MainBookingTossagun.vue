@@ -19,8 +19,6 @@
                             <dropdown class="border">{{ StatusBooking }}</dropdown>
                         </div>
                     </div>
-
-
                     <div class="flex justify-center space-x-5 mb-2">
                         <div class="flex space-x-2">
                             <p>วัน</p>

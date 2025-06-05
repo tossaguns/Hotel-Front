@@ -42,7 +42,7 @@ export default {
             this.isSidebarCollapsed = isCollapsed
         },
         navigateBackToEditDetailHotel() {
-            this.$router.push("/editdetailhotel");
+            this.$router.push("/detailhotel");
         },
         navigateBackToEditProfileCompany() {
             this.$router.push("/profilecompany");

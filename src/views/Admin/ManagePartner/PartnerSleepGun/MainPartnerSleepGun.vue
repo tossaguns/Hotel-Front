@@ -8,13 +8,12 @@
         }">
             <div>
                 <div class="mt-2 rounded-t-lg bg-rose-400 p-2 text-white text-lg">
-                    <h1>จัดการคำขออนุมัติ</h1>
+                    <h1>Partner กับ Sleep Gun</h1>
                 </div>
 
                 <div class="bg-white rounded-b-lg py-4 px-2">
-
-                    <div class="text-gray-400 flex justify-center my-3">
-                        <p>ค้นหาวันที่ member สมัครใช้งาน</p>
+                    <div class="flex justify-center pb-3">
+                        <p class="text-gray-400">ค้นหาวันที่ Approve</p>
                     </div>
 
                     <div class="flex justify-center space-x-5 mb-2">
@@ -31,12 +30,16 @@
                             <dropdown class="border "></dropdown>
                         </div>
                     </div>
-                </div>
 
+                    <div class="flex justify-center mt-4">
+                        <p>ค้นหาโปรโมชั่นที่ใช้</p>
+                        <dropdown></dropdown>
+                    </div>
+                </div>
 
                 <div class="flex justify-center space-x-5 mb-2 bg-white mt-2 py-4 rounded-lg px-2">
                     <div class="flex space-x-2">
-                        <p>ค้นหาด้วยชื่อ</p>
+                        <p>ค้นหาด้วยชื่อบริษัท</p>
                         <input class="border rounded-md" />
                     </div>
                     <div>
@@ -46,15 +49,8 @@
 
                 </div>
 
-                <div class="bg-white rounded-lg pb-6">
-                    <div class="flex justify-center pt-7 mb-5">
-                        <button @click="navigateToApprove"
-                            class="rounded-lg px-2 py- text-lg hover:bg-rose-300 shadow-lg">บริษัทที่อนุมัติเเล้ว
-                        </button>
-                        <p class="text-2xl px-2 text-gray-400 font-bold">|</p>
-                        <button @click="navigateToNoApprove"
-                            class="rounded-lg px-2 py-1 text-lg hover:bg-rose-300 shadow-lg">บริษัทที่ไม่อนุมัติ</button>
-                    </div>
+                <div class="bg-white rounded-lg pb-6 pt-4">
+                   
 
                     <!-- เพิ่ม wrapper -->
 
@@ -63,37 +59,41 @@
                             <thead>
                                 <tr class="bg-gray-200 whitespace-nowrap">
                                     <th class="border px-2 py-1">ลำดับ</th>
+                                    <th class="border px-2 py-1">โลโก้บริษัท</th>
+                                    <th class="border px-2 py-1">ชื่อบริษัท</th>
                                     <th class="border px-2 py-1">ชื่อ</th>
                                     <th class="border px-2 py-1">นามสกุล</th>
-                                    <th class="border px-2 py-1">เพศ</th>
                                     <th class="border px-2 py-1">ชื่อเล่น</th>
                                     <th class="border px-2 py-1">อีเมล</th>
                                     <th class="border px-2 py-1">เบอร์โทร</th>
-                                    <th class="border px-2 py-1">เป็นบุคคลประเภทใด</th>
-                                    <th class="border px-2 py-1">จังหวัด</th>
+                                    <th class="border px-2 py-1">วันเวลาที่ Approve</th>
+                                    <th class="border px-2 py-1">โปรโมชั่น</th>
                                     <th class="border px-2 py-1">จัดการ</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(member, index) in paginatedData" :key="member.id"
+                                <tr v-for="(partner, index) in paginatedData" :key="partner.id"
                                     class="hover:bg-gray-50 whitespace-nowrap">
                                     <td class="border px-2 py-1 break-words">{{ getRowNumber(index) }}</td>
-
+                                    <td class="border px-2 py-1 break-words">
+                                        <img :src="partner.logo" :alt="partner.companyName + ' logo'"
+                                            class="w-10 h-10 rounded-full object-cover">
+                                    </td>
                                     <td class="border px-2 py-1 break-words">{{
-                                        member.firstName }}</td>
-                                    <td class="border px-2 py-1 break-words">{{ member.lastName
-                                    }}</td>
-                                    <td class="border px-2 py-1 break-words">{{ member.sex
-                                    }}</td>
-                                    <td class="border px-2 py-1 break-words">{{ member.nickName }}
+                                        partner.companyName }}</td>
+                                    <td class="border px-2 py-1 break-words">{{ partner.firstName
+                                        }}</td>
+                                    <td class="border px-2 py-1 break-words">{{ partner.lastName
+                                        }}</td>
+                                    <td class="border px-2 py-1 break-words">{{ partner.nickname
+                                        }}</td>
+                                    <td class="border px-2 py-1 break-words">{{ partner.email }}
                                     </td>
-                                    <td class="border px-2 py-1 break-words">{{ member.personalEmail }}
+                                    <td class="border px-2 py-1 break-words">{{ partner.phone }}
                                     </td>
-                                    <td class="border px-2 py-1 break-words">{{ member.personalPhone }}
+                                    <td class="border px-2 py-1 break-words">{{ partner.datetime }}
                                     </td>
-                                    <td class="border px-2 py-1 break-words">{{ member.personalType }}
-                                    </td>
-                                    <td class="border px-2 py-1 break-words">{{ member.personalProvince }}
+                                    <td class="border px-2 py-1 break-words">{{ partner.promotion }}
                                     </td>
 
                                     <td class="border px-2 py-1 break-words">
@@ -104,7 +104,9 @@
                                     </td>
                                 </tr>
                             </tbody>
+
                         </table>
+
                     </div>
 
                     <!-- Pagination -->
@@ -143,18 +145,67 @@
 import SidebarAdmin from '@/components/SidebarAdmin.vue'
 
 export default {
-    name: "MainManageMember",
+    name: "MainPartner",
     components: {
         SidebarAdmin
     },
     data() {
         return {
-            partnerApplications: [],
             isSidebarCollapsed: false,
-
-
+            activeDropdown: null,
             currentPage: 1,
             itemsPerPage: 10,
+            partnerApplications: [
+                {
+                    id: 1,
+                    logo: 'https://via.placeholder.com/40x40/007bff/ffffff?text=A',
+                    companyName: 'บริษัท เอบีซี จำกัด',
+                    firstName: 'สมชาย',
+                    lastName: 'ใจดี',
+                    nickname: 'ชาย',
+                    email: 'somchai@abc.com',
+                    phone: '081-234-5678',
+                    datetime: '5/6/2024 12:00',
+                    promotion: '13/13 ดีลดีดีลเด็ด',
+                    isApproved: false,
+                },
+                {
+                    id: 2,
+                    logo: 'https://via.placeholder.com/40x40/28a745/ffffff?text=X',
+                    companyName: 'บริษัท เอ็กซ์วายซี จำกัด',
+                    firstName: 'สมหญิง',
+                    lastName: 'รักงาน',
+                    nickname: 'หญิง',
+                    email: 'somying@xyz.com',
+                    phone: '082-345-6789',
+                    datetime: '5/6/2024 12:00',
+                    isApproved: false,
+                },
+                {
+                    id: 3,
+                    logo: 'https://via.placeholder.com/40x40/dc3545/ffffff?text=T',
+                    companyName: 'บริษัท เทคโนโลยี จำกัด',
+                    firstName: 'สมศักดิ์',
+                    lastName: 'มั่นใจ',
+                    nickname: 'โอ๋',
+                    email: 'somsak@tech.com',
+                    phone: '083-456-7890',
+                    datetime: '5/6/2024 12:00',
+                    isApproved: false,
+                },
+                ...Array.from({ length: 12 }, (_, i) => ({
+                    id: i + 1,
+                    logo: `https://via.placeholder.com/40x40/${Math.floor(Math.random() * 16777215).toString(16)}/ffffff?text=${String.fromCharCode(65 + (i % 26))}`,
+                    companyName: `บริษัท ตัวอย่าง ${i + 1} จำกัด`,
+                    firstName: `ชื่อ${i + 1}`,
+                    lastName: `นามสกุล${i + 1}`,
+                    nickname: `เล่น${i + 1}`,
+                    email: `example${i + 1}@company.com`,
+                    phone: `08${i + 1}-000-0000`,
+                    datetime: '5/6/2024 12:00',
+                    isApproved: false,
+                }))
+            ]
         }
     },
     computed: {
@@ -222,19 +273,57 @@ export default {
         handleSidebarToggle(isCollapsed) {
             this.isSidebarCollapsed = isCollapsed
         },
-
+        navigateToApprove() {
+            this.$router.push("/approvepartner");
+        },
+        navigateToNoApprove() {
+            this.$router.push("/noapprovepartner");
+        },
         navigateToDetailPartnerAdmin() {
             this.$router.push("/detailpartnerall");
         },
         navigateBackToMainPartner() {
             this.$router.push("/mainpartner");
         },
+        toggleDropdown(id) {
+            this.activeDropdown = this.activeDropdown === id ? null : id
+        },
+        getDropdownPosition(index) {
+            const isNearBottom = index >= this.paginatedData.length - 2
 
+            if (isNearBottom) {
+                return 'bottom-full mb-1'
+            } else {
+                return 'top-full mt-1'
+            }
+        },
         getRowNumber(index) {
             return (this.currentPage - 1) * this.itemsPerPage + index + 1
         },
-
-
+        changePage(page) {
+            if (page >= 1 && page <= this.totalPages) {
+                this.currentPage = page
+                this.activeDropdown = null // ปิด dropdown เมื่อเปลี่ยนหน้า
+            }
+        },
+        viewDetails(partner) {
+            console.log('ดูข้อมูลเพิ่มเติม:', partner)
+            this.activeDropdown = null
+        },
+        editPartner(partner) {
+            console.log('แก้ไขข้อมูล:', partner)
+            this.activeDropdown = null
+        },
+        approvePartner(partner) {
+            partner.isApproved = true
+            partner.status = 'approved'
+            console.log('อนุมัติ Partner:', partner.companyName)
+        },
+        disapprovePartner(partner) {
+            partner.isApproved = false
+            partner.status = 'disapproved'
+            console.log('ไม่อนุมัติ Partner:', partner.companyName)
+        }
     },
     mounted() {
         const savedState = localStorage.getItem('sidebarCollapsed')
@@ -242,39 +331,11 @@ export default {
             this.isSidebarCollapsed = JSON.parse(savedState)
         }
 
-        {
-            const savedState = localStorage.getItem('sidebarCollapsed')
-            if (savedState !== null) {
-                this.isSidebarCollapsed = JSON.parse(savedState)
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown-container')) {
+                this.activeDropdown = null
             }
-
-            // 🔧 ตัวอย่างข้อมูล mock
-            this.partnerApplications = [
-                {
-                    id: 1,
-                    firstName: "สมชาย",
-                    lastName: "ใจดี",
-                    sex: "ชาย",
-                    nickName: "ชาย",
-                    personalEmail: "somchai@example.com",
-                    personalPhone: "0812345678",
-                    personalType: "นิติบุคคล",
-                    personalProvince: "กรุงเทพมหานคร"
-                },
-                {
-                    id: 2,
-                    firstName: "สุดารัตน์",
-                    lastName: "แสนดี",
-                    sex: "หญิง",
-                    nickName: "ดาว",
-                    personalEmail: "sudarat@example.com",
-                    personalPhone: "0898765432",
-                    personalType: "บุคคลธรรมดา",
-                    personalProvince: "เชียงใหม่"
-                }
-                // เพิ่มอีกตามต้องการ
-            ]
-        }
+        })
     },
     beforeUnmount() {
         document.removeEventListener('click', this.handleClickOutside)

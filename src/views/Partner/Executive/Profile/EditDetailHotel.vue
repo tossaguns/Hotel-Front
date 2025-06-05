@@ -10,10 +10,10 @@
 
             <div class="bg-white rounded-lg pb-10 ">
                 <div class="py-2 bg-amber-400 rounded-t-lg">
-                    <p class="text-center md:text-left text-xl text-white px-2">ข้อมูลเกี่ยวกับโรงเเรมของคุณ</p>
+                    <p class="text-center md:text-left text-xl text-white px-2">เเก้ไขข้อมูลเกี่ยวกับโรงเเรมของคุณ</p>
                 </div>
 
-                <div class="bg-white md:rounded-b-lg px-4 min-h-screen">
+                <div class="bg-white md:rounded-b-lg px-4 min-h-screen mt-4">
                     <div>
                         <p class="mb-2">อธิบายเกี่ยวกับโรงเเรมของคุณ</p>
                         <textarea rows="3" class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
@@ -78,7 +78,8 @@
                     <div class="flex justify-center mt-8 mb-6 space-x-3">
                         <button class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600">บันทึก</button>
                         <button class="bg-gray-400 text-white py-2 px-4 rounded-lg hover:bg-gray-500">รีเซต</button>
-                        <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600">กลับ</button>
+                        <button @click="navigateToDetailHotel"
+                            class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600">กลับ</button>
                     </div>
                 </div>
 
@@ -109,9 +110,9 @@ export default {
         handleSidebarToggle(isCollapsed) {
             this.isSidebarCollapsed = isCollapsed
         },
-        /*navigateBackToMainPartner() {
-            this.$router.push("/request");
-        },*/
+        navigateToDetailHotel() {
+            this.$router.push("/detailhotel");
+        },
     },
     mounted() {
         const savedState = localStorage.getItem('sidebarCollapsed')

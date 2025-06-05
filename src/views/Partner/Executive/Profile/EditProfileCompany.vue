@@ -39,6 +39,43 @@
                             <input type="file" class="w-full border p-2 rounded bg-white" />
                         </div>
                     </div>
+
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-4 mt-6">
+                        <p class="md:w-1/3">บ้านเลขที่</p>
+                        <p></p>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-4">
+                        <p class="md:w-1/3">ตำบล</p>
+                        <p></p>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-4">
+                        <p class="md:w-1/3">อำเภอ</p>
+                        <p></p>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-4">
+                        <p class="md:w-1/3">จังหวัด</p>
+                        <p></p>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row md:items-center md:gap-4">
+                        <p class="md:w-1/3">รหัสไปรษณีย์</p>
+                        <p></p>
+                    </div>
+
+                    <div class="mt-6">
+                        <div class="flex flex-col md:flex-row md:items-center md:gap-4">
+                            <p class="md:w-1/3">เบอร์โทร</p>
+                            <p></p>
+                        </div>
+                        <div class="flex flex-col md:flex-row md:items-center md:gap-4">
+                            <p class="md:w-1/3">อีเมล</p>
+                            <p></p>
+                        </div>
+                    </div>
+
                     <div class="mt-8 space-x-4">
                         <button class="bg-green-500 p-2 rounded-lg">บันทึก</button>
                         <button class="bg-stone-400 p-2 rounded-lg">รีเซ็ท</button>

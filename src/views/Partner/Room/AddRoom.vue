@@ -117,13 +117,15 @@
                 </div>
 
                 <!-- Room Features -->
+
+                <!--เเก้-->
                 <div class="mb-6 flex justify-center border rounded-lg mx-4 my-3">
                     <div class="w-full max-w-6xl py-8">
                         <p class="text-2xl sm:text-3xl mb-8 text-center">กรุณาเลือกลักษณะห้องพัก</p>
 
                         <div class="text-xl">
                             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 justify-center">
-                                <div class="text-left" v-for="(section, index) in features" :key="index">
+                                <div class="text-left" v-for="(section, typeOption) in features" :key="typeOption">
                                     <p class="font-bold mb-2">{{ section.title }}</p>
                                     <div v-for="(item, i) in section.items" :key="index + '-' + i">
                                         <label><input type="checkbox" v-model="item.selected" />

@@ -53,7 +53,7 @@
                     </p>
                 </div>
 
-<!--TODO: เดี๋ยวกลับมาทำ
+                <!--TODO: เดี๋ยวกลับมาทำ
                 <div @click="navigateToReserveTossagun('reservetossagun')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-rose-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
@@ -94,6 +94,14 @@
                         :class="isCollapsed ? '' : 'mr-3'" />
                     <p v-show="!isCollapsed" class="transition-transform duration-300 group-hover:scale-110">
                         โปรโมชั่น
+                    </p>
+                </div>
+
+                <div class="flex justify-center mt-6 space-x-2 text-sm">
+                    <p>Admin </p>
+                    <p v-show="!isCollapsed"
+                        class="transition-transform duration-300 group-hover:scale-110 text-rose-500">
+                        {{ nameAdmin }}
                     </p>
                 </div>
 
@@ -139,8 +147,8 @@
                 <div class="flex-1 overflow-y-auto px-4 py-6">
                     <div class="space-y-2">
                         <div @click="navigateToDashboardEx('dashboard')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
-                            :class="activeMenu === 'dashboard' ? 'bg-amber-400 text-white' : 'text-gray-700'">
+                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-rose-400 hover:text-white"
+                            :class="activeMenu === 'dashboard' ? 'bg-rose-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">Dashboard</span>
                         </div>
 
@@ -175,6 +183,20 @@
                             :class="activeMenu === 'promotion' ? 'bg-rose-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">โปรโมชั่น</span>
                         </div>
+
+                        <div class="flex justify-center mt-6 space-x-2 text-sm">
+                            <p>Admin :</p>
+                            <p v-show="!isCollapsed"
+                                class="transition-transform duration-300 group-hover:scale-110 text-rose-500">
+                                {{ nameAdmin }}
+                            </p>
+                        </div>
+
+                        <div class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-red-400 hover:text-white flex justify-center"
+                            :class="activeMenu === '' ? 'bg-red-400 text-white' : 'text-gray-700'">
+                            <span class="text-lg hover:text-white">LogOut</span>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -189,6 +211,7 @@ export default {
             isCollapsed: false,
             isMobileMenuOpen: false,
             activeMenu: this.getActiveMenuFromRoute(),
+            nameAdmin: 'Agfdii 9e8wfr',
         }
     },
     created() {
@@ -222,18 +245,17 @@ export default {
                 '/approvepartner': 'managepartner',
                 '/mainpartner': 'managepartner',
                 '/request': 'managepartner',
+                '/noapprovepartner': 'managepartner',
+                '/mainpartnersleepgun': 'managepartner',
+                '/detailpartnerall': 'managepartner',
 
-
+                
                 '/mainmanagemember': 'managemember',
                 '/mainpromotion': 'promotion',
                 '/addpromotion': 'promotion',
 
 
-                
-                '/mainemployee': 'manageemployee',
-                '/addemployee': 'manageemployee',
-                '/editemployee': 'manageemployee',
-                '/editprofilecompany': 'editproflie',
+
                 // เพิ่ม route อื่นๆ ตามต้องการ
             };
 

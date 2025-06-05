@@ -131,6 +131,17 @@
                     </p>
                 </div>
 
+
+                <div class="flex justify-center mt-6 space-x-2 text-sm">
+                    <p>Partner</p>
+                    <p v-show="!isCollapsed"
+                        class="transition-transform duration-300 group-hover:scale-110 text-rose-500">
+                        {{ namePartner }}
+                    </p>
+                </div>
+
+
+
                 <div @click="navigateTologout('logout')"
                     class="mt-20 group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-red-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
@@ -220,6 +231,20 @@
                             :class="activeMenu === 'editproflie' ? 'bg-amber-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">แก้ไขโปรไฟล์</span>
                         </div>
+
+                        <div class="flex justify-center mt-6 space-x-2 text-sm">
+                            <p>Partner :</p>
+                            <p v-show="!isCollapsed"
+                                class="transition-transform duration-300 group-hover:scale-110 text-amber-500">
+                                {{ namePartner }}
+                            </p>
+                        </div>
+
+                        <div class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-red-400 hover:text-white flex justify-center"
+                            :class="activeMenu === '' ? 'bg-red-400 text-white' : 'text-gray-700'">
+                            <span class="text-lg hover:text-white">LogOut</span>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -236,7 +261,8 @@ export default {
             activeMenu: this.getActiveMenuFromRoute(),
             nav: {
                 logocompany: '/ImgTossagun/Tosdrink.jpg',
-                companyname: 'ชื่อบริษัท'
+                companyname: 'ชื่อบริษัท',
+                namePartner: 'Agfdii 9e8wfr',
             }
         }
     },
@@ -295,9 +321,9 @@ export default {
                 '/maindetailbookingtossagun': 'reservetossagun',
 
                 '/mainreport': 'report',
-                '/editprofilecompany' : 'editproflie',
-                '/mainprofilecompany' : 'editproflie',
-                '/editdetailhotel' : 'editproflie',
+                '/editprofilecompany': 'editproflie',
+                '/mainprofilecompany': 'editproflie',
+                '/editdetailhotel': 'editproflie',
 
 
 
