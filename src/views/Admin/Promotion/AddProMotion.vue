@@ -18,24 +18,29 @@
 
                     <div>
                         <p class="mb-2">ชื่อโปรโมชั่น</p>
-                        <input class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" v-model="promotion.namePromotion" />
+                        <input class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4"
+                            v-model="promotion.namePromotion" />
                     </div>
                     <div>
                         <p class="mb-2">รายละเอียด</p>
-                        <textarea rows="3" v-model="promotion.detailPromotion"  class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
+                        <textarea rows="3" v-model="promotion.detailPromotion"
+                            class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
                             placeholder="พิมพ์รายละเอียดที่นี่..."></textarea>
                     </div>
                     <div>
                         <p class="mb-2">วันเริ่มโปรโมชั่น</p>
-                        <input type="date" v-model="promotion.dateStart"  class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
+                        <input type="date" v-model="promotion.dateStart"
+                            class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
                     </div>
                     <div>
                         <p class="mb-2">วันสิ้นสุดโปรโมชั่น</p>
-                        <input type="date" v-model="promotion.dateFinish"  class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
+                        <input type="date" v-model="promotion.dateFinish"
+                            class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
                     </div>
                     <div>
                         <p class="mb-2">ราคา</p>
-                        <input v-model="promotion.price"  class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
+                        <input v-model="promotion.price"
+                            class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
                     </div>
 
                     <div class="my-6 flex justify-center space-x-3">
@@ -49,41 +54,39 @@
         </div>
     </div>
 </template>
-
 <script>
 import SidebarAdmin from '@/components/SidebarAdmin.vue'
 
 export default {
-    name: "DetailPartnerWaitApprove",
+    name: "AddProMotion",
     components: {
-        SidebarAdmin,
-        promotion: {
-            namePromotion: '',
-            detailPromotion: '',
-            dateStart: '',
-            dateFinish: '',
-            price: '',
-        }
+        SidebarAdmin
     },
     data() {
         return {
             isSidebarCollapsed: false,
-
-        }
+            promotion: {
+                namePromotion: '',
+                detailPromotion: '',
+                dateStart: '',
+                dateFinish: '',
+                price: ''
+            }
+        };
     },
     methods: {
         handleSidebarToggle(isCollapsed) {
-            this.isSidebarCollapsed = isCollapsed
+            this.isSidebarCollapsed = isCollapsed;
         },
         navigateBackToMainPromotion() {
             this.$router.push("/mainpromotion");
-        },
-    },
-    mounted() {
-        const savedState = localStorage.getItem('sidebarCollapsed')
-        if (savedState !== null) {
-            this.isSidebarCollapsed = JSON.parse(savedState)
         }
     },
+    mounted() {
+        const savedState = localStorage.getItem('sidebarCollapsed');
+        if (savedState !== null) {
+            this.isSidebarCollapsed = JSON.parse(savedState);
+        }
+    }
 }
 </script>

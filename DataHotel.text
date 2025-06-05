@@ -10,6 +10,8 @@ member มี        firstName: '',
                 personalDistrict: '',
                 personalProvince: '',
                 personalPostalCode: '',
+                 createdAt: date,
+                updateAt: date,
                 username: '',
                 password: '',
 
@@ -41,7 +43,35 @@ partner มี       fristName: '',
                 personalId: null,
                 companyLogo: null,
                 bankImage: null,
-                createdAt
+                createdAt: date,
+                updateAt: date,
+                username: '',
+                password: '',
+
+employee มี      employeeImg: img,
+                position : string,
+                firstName: '',
+                lastName: '',
+                code: string,
+                nickName: string,
+                personalPhone: string,
+                personalEmail: ,
+
+                createdAt: date,
+                updateAt: date,
+                username: '',
+                password: '',
+
+                dateLogin: date,
+                timeLogin: time
+
+
+
+
+
+
+
+
 
 Admin สามารถ
         -/request เมื่อ admin  ทำการกดอนุมัติ Partner จะเเสดงช่องให้กรอก username เเละ Password เมื่อกดคลิ๊กยืนยันจะส่งข้อมูล ไปยัง email Partner
@@ -53,7 +83,8 @@ Admin สามารถ
 
         -/mainpartnersleepgun ฟิวเตอร์ข้อมูล วัน/เดือน/ปี/ชื่อบริษัท/ชื่อโปรโมชั่น
      
-promotion  มี    namePromotion : string
+promotion  มี    promotion_id:
+                namePromotion : string
                 detailPromotion : string
                 dateStart : datetime
                 dateFinish : datetime
@@ -62,6 +93,31 @@ promotion  มี    namePromotion : string
                 createAt : datetime
                 updateAt : datetime
 
+room มี              Room_id:
+                    numberRoom: string
+                    type: string
+                    description: string
+                    capacity: int
+                    price: int
+                    status: string
+                    note: string
+                    createAt : datetime
+                updateAt : datetime
+                nameUpdated : string
 
 
 
+
+
+
+
+
+ตอนนี้ที่เหลือเยอะสุดคือ user ยังไม่ได้เชื่อม/Receipt ใน Partner ยังไม่ได้เชื่อม/ addroom กรุณาเลือกลักษณะห้องพัก ยังไม่ได้เชื่อม
+
+ใน Partner ที่ยังไม่ได้เชื่อมมีหัวข้อใหญ่ Executive/ManageHotel/Receipt
+
+
+
+
+อันที่เชื่อมเเล้ว(อันนี้ไม่เเน่ใจนะว่าถูกมั้ย) login/register  
+admin ที่ทำได้ตอนนี้ทั้งโฟเดอร์/Partner มี โฟเดอร์ Room/employee หน้า checkLogin

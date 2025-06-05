@@ -7,7 +7,7 @@
                 <div>
                     <div class="flex flex-col rounded-tl-lg md:flex-row md:h-[200px]">
                         <div class="md:w-1/3 flex flex-col items-center justify-center pl-12">
-                            <img :src="getImageUrl(imagePath)" alt="รูปพนักงาน"
+                            <img :src="getImageUrl(employee.employeeImg)" alt="รูปพนักงาน"
                                 class="w-32 h-32 rounded-full object-cover border" />
                         </div>
 
@@ -15,20 +15,21 @@
                             <p class="text-white mb-1 border w-[300px] bg-green-600 rounded-md text-xs text-center p-1">
                                 ตำแหน่ง {{ employee.position }}
                             </p>
-                            <p class="text-3xl font-bold py-1">{{ employee.name }}</p>
+                            <p class="text-3xl font-bold py-1">{{ employee.firstName }}</p>
+                            <p class="text-3xl font-bold py-1">{{ employee.lastName }}</p>
                             <div class="text-xs">
                                 <div class="flex">
                                     <p>
-                                        <span class="text-gray-400">รหัสพนักงาน : </span>{{ employee.numberid }}
+                                        <span class="text-gray-400">รหัสพนักงาน : </span>{{ employee.code }}
                                     </p>
                                     <p class="ml-5">
-                                        <span class="text-gray-400">ชื่อเล่น : </span>{{ employee.nickname }}
+                                        <span class="text-gray-400">ชื่อเล่น : </span>{{ employee.nickName }}
                                     </p>
                                 </div>
                                 <div class="flex">
-                                    <p><span class="text-gray-400">เบอร์โทร : </span>{{ employee.tel }}</p>
+                                    <p><span class="text-gray-400">เบอร์โทร : </span>{{ employee.personalPhone }}</p>
                                     <p class="ml-5">
-                                        <span class="text-gray-400">อีเมล : </span>{{ employee.email }}
+                                        <span class="text-gray-400">อีเมล : </span>{{ employee.personalEmail }}
                                     </p>
                                 </div>
                             </div>
@@ -55,8 +56,8 @@
                                     <td class="p-2">{{ (currentPage - 1) * perPage + index + 1 }}</td>
                                     <td class="p-2">{{ record.numberid }}</td>
                                     <td class="p-2">{{ record.name }}</td>
-                                    <td class="p-2">{{ record.date }}</td>
-                                    <td class="p-2">{{ record.time }}</td>
+                                    <td class="p-2">{{ record.dateLogin }}</td>
+                                    <td class="p-2">{{ record.timeLogin }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -84,7 +85,7 @@
                     <div @click="checkIn"
                         class="mx-auto border rounded-lg bg-white px-6 py-10 text-center text-bold cursor-pointer relative transition transform duration-300 ease-in-out hover:translate-y-2 hover:shadow-2xl mt-5 mb-10">
                         <p class="text-2xl mb-2">เช็คชื่อ</p>
-                        <p class="text-gray-600 font-bold">{{ employee.date }}</p>
+                        <p class="text-gray-600 font-bold">{{ employee.dateLogin }}</p>
 
                         <div class="mt-6 flex justify-center relative">
                             <div v-if="checked"
@@ -99,7 +100,7 @@
                             </svg>
                         </div>
                         <p v-if="checked" class="text-green-600 mt-4 text-3xl">เช็คชื่อสำเร็จ</p>
-                        <p v-if="checked" class="text-green-600 text-xl">เวลา {{ employee.Time }}</p>
+                        <p v-if="checked" class="text-green-600 text-xl">เวลา {{ employee.timeLogin }}</p>
                     </div>
                 </div>
 
@@ -123,105 +124,25 @@ export default {
         return {
             currentPage: 1,
             perPage: 8,
-            lastId: 12, // เปลี่ยนจาก 11 เป็น 12 ตามข้อมูลจริง
-
             employee: {
-                date: "",
-                Time: "",
-                name: "นางสาว วรีรัตน์ คำเเก้ว",
-                nickname: "วี",
-                numberid: "A25001",
-                position: "Seller",
-                tel: "022-2222222",
-                email: "veers@email.com",
-                imagePath: "/images/hotel-room/room06.jpg",
+                dateLogin: "",
+                timeLogin: "",
+                name: "",
+                nickName: "",
+                code: "",
+                position: "",
+                personalPhone: "",
+                personalEmail: "",
+                employeeImg: '',
             },
             checked: false,
             checkInRecords: [
                 {
-                    id: 1,
-                    numberid: "A25003",
-                    name: "นาย สมชาย ใจดี",
-                    date: "24/05/2567",
-                    time: "09:15:22",
-                },
-                {
-                    id: 2,
-                    numberid: "A25002",
-                    name: "นางสาว สายฝน สุขใจ",
-                    date: "24/05/2567",
-                    time: "09:10:11",
-                },
-                {
-                    id: 3,
-                    numberid: "A25001",
-                    name: "นางสาว วรีรัตน์ คำเเก้ว",
-                    date: "24/05/2567",
-                    time: "09:05:03",
-                },
-                // ลบข้อมูลซ้ำออก เหลือเฉพาะที่จำเป็น
-                {
-                    id: 4,
-                    numberid: "A25004",
-                    name: "นาย ทดสอบ ระบบ",
-                    date: "23/05/2567",
-                    time: "08:30:15",
-                },
-                {
-                    id: 5,
-                    numberid: "A25005",
-                    name: "นางสาว ตัวอย่าง ข้อมูล",
-                    date: "23/05/2567",
-                    time: "08:25:10",
-                },
-                {
-                    id: 6,
-                    numberid: "A25006",
-                    name: "นาย ผู้ใช้ ทดลอง",
-                    date: "22/05/2567",
-                    time: "09:00:00",
-                },
-                {
-                    id: 7,
-                    numberid: "A25007",
-                    name: "นางสาว ทดลอง ใช้งาน",
-                    date: "22/05/2567",
-                    time: "08:45:30",
-                },
-                {
-                    id: 8,
-                    numberid: "A25008",
-                    name: "นาย ข้อมูล ตัวอย่าง",
-                    date: "21/05/2567",
-                    time: "09:20:45",
-                },
-                {
-                    id: 9,
-                    numberid: "A25009",
-                    name: "นางสาว ระบบ ทดสอบ",
-                    date: "21/05/2567",
-                    time: "08:55:20",
-                },
-                {
-                    id: 10,
-                    numberid: "A25010",
-                    name: "นาย การ ทดลอง",
-                    date: "20/05/2567",
-                    time: "09:10:35",
-                },
-                {
-                    id: 11,
-                    numberid: "A25011",
-                    name: "นางสาว ใช้งาน จริง",
-                    date: "20/05/2567",
-                    time: "08:40:12",
-                },
-                {
-                    id: 12,
-                    numberid: "A25012",
-                    name: "นาย สุดท้าย รายการ",
-                    date: "19/05/2567",
-                    time: "09:15:50",
+                    id: '',
+                    code: "",
+                    name: "",
+                    dateLogin: "",
+                    timeLogin: "",
                 },
             ],
         };
@@ -242,7 +163,7 @@ export default {
             month: "2-digit",
             day: "2-digit",
         });
-        this.employee.date = formattedDate;
+        this.employee.dateLogin = formattedDate;
     },
     methods: {
         goToPage(page) {
@@ -266,16 +187,16 @@ export default {
                     second: "2-digit",
                 });
 
-                this.employee.Time = formattedTime;
+                this.employee.timeLogin = formattedTime;
                 this.checked = true;
 
                 // เพิ่มข้อมูลใหม่ในอันดับแรก
                 this.checkInRecords.unshift({
                     id: ++this.lastId,
-                    numberid: this.employee.numberid,
+                    code: this.employee.code,
                     name: this.employee.name,
-                    date: this.employee.date,
-                    time: this.employee.Time,
+                    dateLogin: this.employee.dateLogin,
+                    timeLogin: this.employee.timeLogin,
                     justAdded: true,
                 });
 
@@ -300,8 +221,8 @@ export default {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         name: this.employee.name,
-                        date: this.employee.date,
-                        time: this.employee.Time,
+                        dateLogin: this.employee.dateLogin,
+                        timeLogin: this.employee.timeLogin,
                     }),
                 });
 

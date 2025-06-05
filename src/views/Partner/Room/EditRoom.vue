@@ -18,7 +18,7 @@
 import Sidebar from '@/components/SidebarExecutive.vue'
 
 export default {
-    name: "EmployeeList",
+    name: "EditRoom",
     components: {
         Sidebar
     },

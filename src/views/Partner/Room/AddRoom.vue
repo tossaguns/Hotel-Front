@@ -17,7 +17,8 @@
 
                 <div class="flex flex-wrap items-center gap-2 mx-5 pb-1 text-sm justify-center text-center">
                     <span>ที่อยู่โรงแรม ที่พัก กรุงเทพ, 52000 /</span>
-                    <span>{{ currentDate }} /</span>
+                    <span>{{ company.companyAddress }}{{ company.companySubdistrict }}{{ company.companyDistrict }}{{
+                        company.companyProvince }}{{ company.companyPostalCode }} /</span>
                     <span> รายชื่อพนักงาน เดี๋ยวไปต่อกับดาต้าเบส </span>
                 </div>
 
@@ -32,7 +33,7 @@
 
                         <div class="w-full space-y-4">
                             <div class="relative">
-                                <input v-model="numberroom" type="text" id="roomInput" required
+                                <input v-model="room.numberRoom" type="text" id="roomInput" required
                                     class="peer h-14 w-full border-2 rounded-xl px-4 text-xl text-black placeholder-transparent hover:border-yellow-500 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-400 transition"
                                     placeholder="เลขที่ห้อง" />
                                 <label for="roomInput"
@@ -42,7 +43,7 @@
                             </div>
 
                             <div class="relative">
-                                <input v-model="typeroom" type="text" id="typeInput" required
+                                <input v-model="room.type" type="text" id="typeInput" required
                                     class="peer h-14 w-full border-2 rounded-xl px-4 text-xl text-black placeholder-transparent hover:border-yellow-500 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-400 transition"
                                     placeholder="ประเภทห้องพัก" />
                                 <label for="typeInput"
@@ -52,7 +53,7 @@
                             </div>
 
                             <div class="relative">
-                                <input v-model="price" type="text" id="priceInput" required
+                                <input v-model="room.price" type="text" id="priceInput" required
                                     class="peer h-14 w-full border-2 rounded-xl px-4 text-xl text-black placeholder-transparent hover:border-yellow-500 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-400 transition"
                                     placeholder="ราคา" />
                                 <label for="priceInput"
@@ -62,7 +63,7 @@
                             </div>
 
                             <div class="relative">
-                                <input v-model="peopleperroom" type="text" id="peopleInput" required
+                                <input v-model="room.capacity" type="text" id="peopleInput" required
                                     class="peer h-14 w-full border-2 rounded-xl px-4 text-xl text-black placeholder-transparent hover:border-yellow-500 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-400 transition"
                                     placeholder="จำนวนคนที่สามารถเข้าพักได้" />
                                 <label for="peopleInput"
@@ -74,7 +75,7 @@
 
 
                             <div class="relative">
-                                <textarea v-model="note" id="noteInput" rows="4"
+                                <textarea v-model="room.note" id="noteInput" rows="4"
                                     class="peer w-full border-2 rounded-xl px-4 pt-4 text-xl text-black placeholder-transparent hover:border-yellow-500 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-400 transition resize-none"
                                     placeholder="หมายเหตุ"></textarea>
                                 <label for="noteInput"
@@ -116,9 +117,7 @@
                     </div>
                 </div>
 
-                <!-- Room Features -->
 
-                <!--เเก้-->
                 <div class="mb-6 flex justify-center border rounded-lg mx-4 my-3">
                     <div class="w-full max-w-6xl py-8">
                         <p class="text-2xl sm:text-3xl mb-8 text-center">กรุณาเลือกลักษณะห้องพัก</p>
@@ -165,20 +164,26 @@ export default {
     data() {
         return {
             isSidebarCollapsed: false,
-            currentDate: "",
-            statusRoom: "",
-            numberroom: "",
-            typeroom: "",
-            price: "",
-            peopleperroom: "",
-            province: "",
-            uploadimg: null,
-            imageUrl: null,
-            detail: "",
-            markdetail: "",
-            note: "",
             imagePreviews: [],
+            company:
+            {
+                companyAddress: "",
+                companySubdistrict: "",
+                companyDistrict: "",
+                companyProvince: "",
+                companyPostalCode: "",
+            },
+            room: {
+                roomImg: [],
+                numberRoom: '',
+                type: '',
+                price: '',
+                capacity: '',
+                note: '',
+            },
 
+
+            // typeOption ยังไม่ได้เชื่อม
             typeOption: [
                 {
                     title: "กิจกรรม",
@@ -236,25 +241,8 @@ export default {
         navigateToBackMainRoom() {
             this.$router.push("/roomlist");
         },
-        reseatall() {
-            this.statusRoom = "";
-            this.numberroom = "";
-            this.typeroom = "";
-            this.price = "";
-            this.peopleperroom = "";
-            this.uploadimg = null;
-            this.imageUrl = null;
-            this.detail = "";
-            this.markdetail = "";
 
-            this.$refs.fileInput.value = null;
 
-            this.activities.forEach((item) => (item.selected = false));
-            this.roomFeatures.forEach((item) => (item.selected = false));
-            this.bedTypes.forEach((item) => (item.selected = false));
-            this.restrictions.forEach((item) => (item.selected = false));
-            this.imagePreviews = [];
-        },
         onFileChange(event) {
             const files = Array.from(event.target.files);
             const remainingSlots = 10 - this.imagePreviews.length;
@@ -300,6 +288,24 @@ export default {
         removeImage(index) {
             this.imagePreviews.splice(index, 1);
         },
+        async onFileChange(event) {
+            const files = event.target.files;
+            for (let i = 0; i < files.length && this.imagePreviews.length < 10; i++) {
+                const file = files[i];
+
+                // สร้าง preview
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.imagePreviews.push(e.target.result);
+                    this.room.roomImg.push(file); // เก็บไว้เพื่อส่ง backend
+                };
+                reader.readAsDataURL(file); // preview base64
+            }
+        },
+        removeImage(index) {
+            this.imagePreviews.splice(index, 1);
+            this.room.roomImg.splice(index, 1);
+        }
     },
     mounted() {
         const savedState = localStorage.getItem('sidebarCollapsed')

@@ -68,8 +68,8 @@
                                 <tr v-for="(room, index) in filteredRooms" :key="room.Room_id"
                                     class="hover:bg-gray-50 whitespace-nowrap">
                                     <td class="border px-2 py-1 break-words">{{ index + 1 }}</td>
-                                    <td class="border px-2 py-1 break-words">{{ room.Room_number }}</td>
-                                    <td class="border px-2 py-1 break-words">{{ room.Room_type }}</td>
+                                    <td class="border px-2 py-1 break-words">{{ room.numberRoom }}</td>
+                                    <td class="border px-2 py-1 break-words">{{ room.type }}</td>
                                     <td class="border px-2 py-1 break-words">
                                         {{ room.Room_description }}
                                     </td>
@@ -80,18 +80,18 @@
                                         {{ room.Room_price }}
                                     </td>
                                     <td class="border px-2 py-1 break-words" :class="{
-                                        'bg-lime-600 text-white': room.Room_status === 'ใช้งานได้',
-                                        'bg-red-600 text-white': room.Room_status === 'ปิดใช้งาน',
-                                        'bg-yellow-400 text-black': room.Room_status === 'ใช้งานกับTossagun',
+                                        'bg-lime-600 text-white': room.status === 'ใช้งานได้',
+                                        'bg-red-600 text-white': room.status === 'ปิดใช้งาน',
+                                        'bg-yellow-400 text-black': room.status === 'ใช้งานกับTossagun',
                                     }">
                                         {{ room.Room_status }}
                                     </td>
-                                    <td class="border px-2 py-1 break-words">{{ room.Room_note }}</td>
+                                    <td class="border px-2 py-1 break-words">{{ room.note }}</td>
                                     <td class="border px-2 py-1 break-words">
-                                        {{ room.Room_lastUpdated }}
+                                        {{ room.updatedAt }}
                                     </td>
                                     <td class="border px-2 py-1 break-words">
-                                        {{ room.Room_updatedBy }}
+                                        {{ room.nameUpdated }}
                                     </td>
                                     <td class="border px-2 py-1 break-words space-x-2">
                                         <button @click="editRoom(room.Room_id)"
@@ -129,53 +129,17 @@ export default {
             statusFilter: "",
             rooms: [
                 {
-                    Room_id: 1,
-                    Room_number: "101",
-                    Room_type: "ห้องเดี่ยว",
-                    Room_description: "ห้องเดี่ยวพร้อมวิวทะเล",
-                    Room_capacity: 2,
-                    Room_price: 1200,
-                    Room_status: "ใช้งานได้",
-                    Room_note: "ห้องใหม่",
-                    Room_lastUpdated: "2025-05-19",
-                    Room_updatedBy: "คุณสมชาย",
-                },
-                {
-                    Room_id: 2,
-                    Room_number: "102",
-                    Room_type: "ห้องคู่",
-                    Room_description: "ห้องกว้างพร้อมอ่างอาบน้ำ",
-                    Room_capacity: 4,
-                    Room_price: 2000,
-                    Room_status: "ใช้งานกับTossagun",
-                    Room_note: "-",
-                    Room_lastUpdated: "2025-05-18",
-                    Room_updatedBy: "คุณสมหญิง",
-                },
-                {
-                    Room_id: 3,
-                    Room_number: "103",
-                    Room_type: "ห้องคู่",
-                    Room_description: "ห้องกว้างพร้อมอ่างอาบน้ำ",
-                    Room_capacity: 4,
-                    Room_price: 2000,
-                    Room_status: "ปิดใช้งาน",
-                    Room_note: "-",
-                    Room_lastUpdated: "2025-05-18",
-                    Room_updatedBy: "คุณสมหญิง",
-                },
-                {
-                    Room_id: 4,
-                    Room_number: "104",
-                    Room_type: "ห้องคู่",
-                    Room_description: "ห้องกว้างพร้อมอ่างอาบน้ำ",
-                    Room_capacity: 4,
-                    Room_price: 2000,
-                    Room_status: "ใช้งานได้",
-                    Room_note: "-",
-                    Room_lastUpdated: "2025-05-18",
-                    Room_updatedBy: "คุณสมหญิง",
-                },
+                    Room_id: '',
+                    numberRoom: '',
+                    type: '',
+                    description: '',
+                    capacity: '',
+                    price: '',
+                    status: '',
+                    note: '',
+                    updatedAt: '',
+                    nameUpdated: '',
+                }
             ],
         };
     },
