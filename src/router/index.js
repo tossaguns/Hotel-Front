@@ -309,6 +309,12 @@ const router = createRouter({
       name: "DetailMemberAll",
       component: () => import("@/views/Admin/ManageMember/DetailMemberAll.vue"),
     },
+
+    {
+      path: "/registermemberemail",
+      name: "RegisterMemberEmail",
+      component: () => import("@/views/RegisterMemberEmail.vue"),
+    },
   ],
 });
 
