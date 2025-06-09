@@ -1,12 +1,13 @@
 <template>
-    <div class="w-full min-h-screen bg-gray-50">
-        <div class="container mx-auto py-8">
-            <div class="bg-white rounded-lg shadow-md p-8">
+    <div class="backgr w-full min-h-screen bg-gray-50">
+        <div class="frommember container mx-auto py-8">
+            <!-- <div class="bg-white rounded-lg shadow-md p-8"> -->
+            <div class="regintermember-container">
                 <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">สมัครสมาชิก</h1>
 
-                <form @submit.prevent="submitForm" class="space-y-6">
+                <form @submit.prevent="submitForm" class="form-group space-y-6">
                     <!-- ชื่อ -->
-                    <div>
+                    <!-- <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             ชื่อ <span class="text-red-500">*</span>
                         </label>
@@ -14,10 +15,10 @@
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             :class="{ 'border-red-500': errors.firstName }" required />
                         <p v-if="errors.firstName" class="text-red-500 text-sm mt-1">{{ errors.firstName }}</p>
-                    </div>
+                    </div> -->
 
                     <!-- นามสกุล -->
-                    <div>
+                    <!-- <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             นามสกุล <span class="text-red-500">*</span>
                         </label>
@@ -25,10 +26,10 @@
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             :class="{ 'border-red-500': errors.lastName }" required />
                         <p v-if="errors.lastName" class="text-red-500 text-sm mt-1">{{ errors.lastName }}</p>
-                    </div>
+                    </div> -->
 
                     <!-- เพศ -->
-                    <div>
+                    <!-- <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             เพศ <span class="text-red-500">*</span>
                         </label>
@@ -40,10 +41,10 @@
                             <option value="เพศหญิง">เพศหญิง</option>
                         </select>
                         <p v-if="errors.sex" class="text-red-500 text-sm mt-1">{{ errors.sex }}</p>
-                    </div>
+                    </div> -->
 
                     <!-- ชื่อเล่น -->
-                    <div>
+                    <!-- <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             ชื่อเล่น <span class="text-red-500">*</span>
                         </label>
@@ -51,7 +52,7 @@
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             :class="{ 'border-red-500': errors.nickName }" required />
                         <p v-if="errors.nickName" class="text-red-500 text-sm mt-1">{{ errors.nickName }}</p>
-                    </div>
+                    </div> -->
 
                     <!-- อีเมล -->
                     <div>
@@ -60,12 +61,12 @@
                         </label>
                         <input v-model="form.personalEmail" type="email"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            :class="{ 'border-red-500': errors.personalEmail }" required />
+                            :class="{ 'border-red-500': errors.personalEmail }" placeholder="Enter your email"  required />
                         <p v-if="errors.personalEmail" class="text-red-500 text-sm mt-1">{{ errors.personalEmail }}</p>
                     </div>
 
                     <!-- เบอร์โทร -->
-                    <div>
+                    <!-- <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             เบอร์โทร <span class="text-red-500">*</span>
                         </label>
@@ -73,10 +74,10 @@
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             :class="{ 'border-red-500': errors.personalPhone }" placeholder="0812345678" required />
                         <p v-if="errors.personalPhone" class="text-red-500 text-sm mt-1">{{ errors.personalPhone }}</p>
-                    </div>
+                    </div> -->
 
                     <!-- เป็นบุคคลประเภทใด -->
-                    <div>
+                    <!-- <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             เป็นบุคคลประเภทใด <span class="text-red-500">*</span>
                         </label>
@@ -88,10 +89,10 @@
                             <option value="นิติบุคคล">นิติบุคคล</option>
                         </select>
                         <p v-if="errors.personalType" class="text-red-500 text-sm mt-1">{{ errors.personalType }}</p>
-                    </div>
+                    </div> -->
 
                     <!-- ที่อยู่ -->
-                    <div class="space-y-4">
+                    <!-- <div class="space-y-4">
                         <label class="block text-sm font-medium text-gray-700">
                             ที่อยู่ <span class="text-red-500">*</span>
                         </label>
@@ -140,10 +141,10 @@
                             <p v-if="errors.personalPostalCode" class="text-red-500 text-sm mt-1">{{
                                 errors.personalPostalCode }}</p>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Username -->
-                    <div>
+                    <!-- <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             Username <span class="text-red-500">*</span>
                         </label>
@@ -151,34 +152,34 @@
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                             :class="{ 'border-red-500': errors.username }" required />
                         <p v-if="errors.username" class="text-red-500 text-sm mt-1">{{ errors.username }}</p>
-                    </div>
+                    </div> -->
 
-                    <!-- รหัสผ่าน -->
-                    <div>
+                    <!-- รหัสผ่าน --> 
+                    <div v-if="form.personalEmail">
                         <label class="block text-sm font-medium text-gray-700 mb-2">
                             รหัสผ่าน <span class="text-red-500">*</span>
                         </label>
                         <input v-model="form.password" type="password"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            :class="{ 'border-red-500': errors.password }" minlength="8" required />
+                            :class="{ 'border-red-500': errors.password }" minlength="8" placeholder="Enter your password" required />
                         <p v-if="errors.password" class="text-red-500 text-sm mt-1">{{ errors.password }}</p>
                         <p class="text-gray-500 text-sm mt-1">รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร</p>
                     </div>
 
                     
                     <!-- ปุ่ม -->
-                    <div class="flex space-x-2 pt-6">
+                    <div class="flex justify-center space-x-2 pt-6">
                         <button type="submit"
-                            class="flex-1 bg-green-500 hover:bg-green-600 text-white font-medium py-3 rounded-md transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="buttonsum flex-1 bg-green-500 hover:bg-green-600 text-white font-medium py-3 rounded-md transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                             :disabled="isSubmitting">
                             <span v-if="isSubmitting">กำลังสมัครสมาชิก...</span>
                             <span v-else>สมัครสมาชิก</span>
                         </button>
-                        <button type="button"
+                        <!-- <button type="button"
                             class="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-medium py-3 rounded-md transition duration-200"
                             :disabled="isSubmitting">
                             รีเซ็ต
-                        </button>
+                        </button> -->
                         <button type="button" @click="navigateBackToRegister"
                             class="flex-1 bg-red-500 hover:bg-red-600 text-white font-medium py-3 rounded-md transition duration-200"
                             :disabled="isSubmitting">
@@ -389,7 +390,7 @@ export default {
 
         navigateBackToRegister() {
             this.$router.push("/register");
-        }
+        },
     }
 };
 </script>
@@ -399,4 +400,20 @@ export default {
 .transition {
     transition: all 0.2s ease-in-out;
 }
+
+.frommember{
+    width: 30%;
+}
+
+.buttonsum{
+    padding: 10px;
+}
+
+
+
+.backgr {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, yellow, blue);
+    }
 </style>
