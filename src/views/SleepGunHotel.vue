@@ -20,7 +20,7 @@
 
 <script>
 
-import Bar from '@/components/BarMember.vue'
+import Bar from '@/components/Bar.vue'
 import Footer from '@/components/Footer.vue'
 import Offer from '@/views/MainPage/Offer.vue'
 import Sleepgun from '@/views/MainPage/Sleepgun.vue'

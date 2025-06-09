@@ -1,216 +1,137 @@
 <template>
-    <div class="w-full min-h-screen">
-        <div>
-            <p>สมัครสมาชิกพาร์ทเนอร์</p>
+    <div class="w-full min-h-screen p-6 bg-gray-100">
+        <h2 class="text-xl font-bold mb-4">สมัครสมาชิกพาร์ทเนอร์</h2>
+
+        <!-- ข้อมูลส่วนบุคคล -->
+        <div class="border-2 bg-white p-3 space-x-3 space-y-3 rounded-lg">
+            <p class="font-semibold">ข้อมูลบุคคล</p>
+            <input v-model="partner.firstname" placeholder="ชื่อ" />
+            <input v-model="partner.lastname" placeholder="นามสกุล" />
+            <input v-model="partner.nickname" placeholder="ชื่อเล่น" />
+            <input v-model="partner.sex" placeholder="เพศ" />
+            <input type="email" v-model="partner.email" placeholder="อีเมล" />
+            <input v-model="partner.phone" placeholder="เบอร์โทร" />
+            <input v-model="partner.idenNumber" placeholder="เลขบัตรประชาชน" />
+            <input type="file" @change="handleFile($event, 'imageIden')" />
+            <img v-if="partner.imageIdenPreview" :src="partner.imageIdenPreview" class="w-32 mt-2 rounded" />
         </div>
 
-        <div>
-
+        <!-- ข้อมูลบริษัท -->
+        <div class="border-2 bg-white p-3 space-x-3 space-y-3 rounded-lg mt-6">
+            <p class="font-semibold">ข้อมูลบริษัท</p>
+            <input v-model="partner.companyName" placeholder="ชื่อบริษัท" />
+            <input type="file" @change="handleFile($event, 'imageLogo')" />
+            <img v-if="partner.imageLogoPreview" :src="partner.imageLogoPreview" class="w-32 mt-2 rounded" />
         </div>
 
-        <div class="m-6">
-            <div>
-                <p>ข้อมูลบุคคล</p>
-                <div>
-                    <label>ชื่อ: <input v-model="partner.fristName" /></label><!--fristName-->
-                </div>
-                <div>
-                    <label>นามสกุล: <input v-model="partner.lastName" /></label><!--lastName-->
-                </div>
-                <div>
-                    <label>ชื่อเล่น: <input v-model="partner.nickName" /></label><!--nickName-->
-                </div>
-                <div>
-                    <label>เพศ: </label><!--sex-->
-                    <dropdown v-model="partner.sex"></dropdown>
-                </div>
-                <div>
-                    <label>อีเมล: <input type="email" v-model="partner.personalEmail" /></label><!--personalEmail-->
-                </div>
-                <div>
-                    <label>เบอร์โทร: <input v-model="partner.personalPhone" /></label><!--personalPhone-->
-                </div>
-                <div>
-                    <label>เลขบัตรประชาชน: <input v-model="partner.personalId" /></label><!--personalId-->
-                </div>
-                <div>
-                    <label>
-                        รูปบัตรประชาชน:
-                        <input type="file" @change="handleIdCardImage" />
-                    </label>
-
-                    <div v-if="partner.personalIdPreview">
-                        <p>Preview:</p>
-                        <img :src="partner.personalIdPreview" class="w-40 mt-2 rounded" />
-                    </div>
-                </div>
-                <div>
-                    <label>ที่อยู่:</label>
-                    <p>บ้านเลขที่</p><input v-model="partner.personalAddress" /><!--personalAddress-->
-                    <p>ตำบล</p><input v-model="partner.personalSubdistrict" /><!--personalSubdistrict-->
-                    <p>อำเภอ</p><input v-model="partner.personalDistrict" /><!--personalDistrict-->
-                    <p>จังหวัด</p><input v-model="partner.personalProvince" /><!--personalProvince-->
-                    <p>รหัสไปรษณีย์</p><input v-model="partner.personalPostalCode" /><!--personalPostalCode-->
-                </div>
-            </div>
-
-
-            <div class="mt-8">
-                <p>ข้อมูลบริษัท</p>
-
-                <div>
-                    <label>ชื่อบริษัท: <input v-model="partner.companyName" /></label><!-- companyName-->
-                </div>
-                <div>
-                    <label>
-                        รูปโลโก้บริษัท:
-                        <input type="file" @change="handleCompanyLogo" />
-                    </label>
-
-                    <div v-if="partner.companyLogoPreview">
-                        <p>Preview โลโก้:</p>
-                        <img :src="partner.companyLogoPreview" class="w-40 mt-2 rounded" />
-                    </div>
-                </div>
-                <div>
-                    <label>เบอร์ติดต่อบริษัท: <input v-model="partner.companyPhone" /></label><!--companyPhone-->
-                </div>
-                <div>
-                    <label>อีเมลติดต่อบริษัท: <input v-model="partner.companyEmail" /></label><!--companyEmail-->
-                </div>
-                <div>
-                    <label>เลขที่บัญชี: <input v-model="partner.bankNumber" /></label><!--bankNumber-->
-                </div>
-                <div>
-                    <label>ธนาคาร: <input v-model="partner.bankName" /></label><!--bankName-->
-                </div>
-                <div>
-                    <label>
-                        รูปบัญชี:
-                        <input type="file" @change="handleBankImage" />
-                    </label>
-
-                    <div v-if="partner.bankImagePreview">
-                        <p>Preview:</p>
-                        <img :src="partner.bankImagePreview" class="w-40 mt-2 rounded" />
-                    </div>
-                </div>
-
-
-                <div>
-                    <label>เลขประจำตัวผู้เสียภาษี: <input v-model="partner.companyTaxId" /></label><!--companyTaxId-->
-                </div>
-
-                <div>
-                    <label>ที่อยู่:</label>
-                    <p>บ้านเลขที่</p><input v-model="partner.companyAddress" /><!--companyAddress-->
-                    <p>ตำบล</p><input v-model="partner.companySubdistrict" /><!--companySubdistrict-->
-                    <p>อำเภอ</p><input v-model="partner.companyDistrict" /><!--companyDistrict-->
-                    <p>จังหวัด</p><input v-model="partner.companyProvince" /><!--companyProvince-->
-                    <p>รหัสไปรษณีย์</p><input v-model="partner.companyPostalCode" /><!--companyPostalCode-->
-                </div>
-                <div>
-                    <label>ละติจูด: <input v-model="partner.hotelLatitude" /></label><!--hotelLatitude-->
-                </div>
-                <div>
-                    <label>ลองติจูด: <input v-model="partner.hotelLongitude" /></label><!--hotelLongitude-->
-                </div>
-
-            </div>
-
-            <button type="submit" @click="navigateToWaitforApprove" class="bg-green-500 mt-3">สมัครสมาชิก</button>
-            <button @click="navigateBackToRegister" class="bg-red-400 mt-3">ย้อนกลับ</button>
+        <!-- ปุ่ม -->
+        <div class="mt-6 space-x-4 flex justify-center">
+            <button @click="submitForm" class="bg-green-500 text-white px-4 py-2 rounded">สมัครสมาชิก</button>
+            <button @click="navigateBack" class="bg-red-400 text-white px-4 py-2 rounded">ย้อนกลับ</button>
         </div>
     </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     name: "RegisterPartner",
     data() {
         return {
             partner: {
-                bankImage: null,
-                companyLogo: null,
-                personalId: null,
-
-
-                fristName: '',
-                lastName: '',
-                nickName: '',
-                sex: '',
-                personalEmail: '',
-                personalPhone: '',
-                personalId: '',
-                personalAddress: '',
-                personalSubdistrict: '',
-                personalDistrict: '',
-                personalProvince: '',
-                personalPostalCode: '',
-
-                companyName: '',
-                companyPhone: '',
-                companyEmail: '',
-                bankNumber: '',
-                bankName: '',
-                companyAddress: '',
-                companySubdistrict: '',
-                companyDistrict: '',
-                companyProvince: '',
-                companyPostalCode: '',
-                hotelLatitude: '',
-                hotelLongitude:'',
-                companyTaxId: '',
-                personalIdImg: null,
-                companyLogo: null,
-                bankImage: null
-            }
-        }
+                firstname: "",
+                lastname: "",
+                nickname: "",
+                sex: "",
+                email: "",
+                phone: "",
+                idenNumber: "",
+                imageIden: null,
+                imageIdenPreview: null,
+                companyName: "",
+                imageLogo: null,
+                imageLogoPreview: null,
+            },
+        };
     },
     methods: {
-        handleIdCardImage(event) {
-            this.form.idCardImage = event.target.files[0];
-        },
-        handleBankImage(event) {
-            this.form.bankImage = event.target.files[0];
-        },
-        navigateToWaitforApprove() {
-            this.$router.push("/waitforapprove")
-        },
-        navigateBackToRegister() {
-            this.$router.push("/register")
+        handleFile(event, field) {
+            const file = event.target.files[0];
+            if (file) {
+                this.partner[field] = file;
+                this.partner[field + "Preview"] = URL.createObjectURL(file);
+            }
         },
 
-        handleBankImage(event) {
-            const file = event.target.files[0]
-            if (file) {
-                this.partner.bankImage = file
-                this.partner.bankImagePreview = URL.createObjectURL(file)
-            } else {
-                this.partner.bankImage = null
-                this.partner.bankImagePreview = null
+        toBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+            });
+        },
+
+        async submitForm() {
+            try {
+                // ... ตรวจสอบฟิลด์ required ตามเดิม
+
+                // แปลงไฟล์เป็น base64
+                const imageIdenBase64 = this.partner.imageIden
+                    ? await this.toBase64(this.partner.imageIden)
+                    : "";
+                const imageLogoBase64 = this.partner.imageLogo
+                    ? await this.toBase64(this.partner.imageLogo)
+                    : "";
+
+                const data = {
+                    firstname: this.partner.firstname,
+                    lastname: this.partner.lastname,
+                    nickname: this.partner.nickname,
+                    sex: this.partner.sex,
+                    email: this.partner.email,
+                    phone: this.partner.phone,
+                    idenNumber: this.partner.idenNumber,
+                    imageIden: imageIdenBase64,
+                    companyName: this.partner.companyName,
+                    imageLogo: imageLogoBase64,
+                };
+
+                const res = await axios.post(
+                    "http://localhost:9999/SleepGun/partner/register",
+                    data,
+                    {
+                        headers: { "Content-Type": "application/json" },
+                    }
+                );
+
+                alert("สมัครสำเร็จ");
+                this.$router.push("/waitforapprove");
+            } catch (err) {
+                console.error("Error response from server:", err.response);
+
+                // ดึงข้อความ error จาก backend มาแสดง หรือถ้าไม่มี ให้แสดงข้อความทั่วไป
+                let errorMsg = "ไม่สามารถสมัครสมาชิกได้";
+
+                if (err.response && err.response.data) {
+                    if (typeof err.response.data.message === "string") {
+                        errorMsg = err.response.data.message;
+                    } else if (typeof err.response.data.message === "object") {
+                        // กรณี backend ส่ง validation error หลายตัวมาเป็น object
+                        errorMsg = Object.values(err.response.data.message).join(", ");
+                    }
+                }
+
+                alert(errorMsg);
             }
         },
-        handleCompanyLogo(event) {
-            const file = event.target.files[0]
-            if (file) {
-                this.partner.companyLogo = file
-                this.partner.companyLogoPreview = URL.createObjectURL(file)
-            } else {
-                this.partner.companyLogo = null
-                this.partner.companyLogoPreview = null
-            }
+
+
+
+        navigateBack() {
+            this.$router.push("/register");
         },
-        handleIdCardImage(event) {
-            const file = event.target.files[0]
-            if (file) {
-                this.partner.personalId = file
-                this.partner.personalIdPreview = URL.createObjectURL(file)
-            } else {
-                this.partner.personalId = null
-                this.partner.personalIdPreview = null
-            }
-        }
     },
 };
 </script>

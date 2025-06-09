@@ -1,35 +1,33 @@
 <template>
-    <!--TODO:ปัญหารูปไม่เเสดง/ในส่วนของข้อมูลพนักงานในหน้าจอโทรศนัพท์ขนาดไม่เท่ากับ เชฌ็คชื่อ
-    มาเเก้ด้วย!!!-->
     <div class="min-h-fit w-full bg-gray-200">
         <div class="flex flex-col-reverse md:flex-row justify-between md:mx-4 md:my-20 shadow-lg rounded-lg bg-white">
             <div class="w-4/5 flex flex-col">
                 <div>
                     <div class="flex flex-col rounded-tl-lg md:flex-row md:h-[200px]">
                         <div class="md:w-1/3 flex flex-col items-center justify-center pl-12">
-                            <img :src="getImageUrl(employee.employeeImg)" alt="รูปพนักงาน"
+                            <img :src="getImageUrl(employee.imageIden)" alt="รูปพนักงาน"
                                 class="w-32 h-32 rounded-full object-cover border" />
                         </div>
 
                         <div class="md:w-2/3 mt-6 w-full px-4 md:mt-6">
                             <p class="text-white mb-1 border w-[300px] bg-green-600 rounded-md text-xs text-center p-1">
-                                ตำแหน่ง {{ employee.position }}
+                                ตำแหน่ง {{ employee.positionEmployee }}
                             </p>
-                            <p class="text-3xl font-bold py-1">{{ employee.firstName }}</p>
-                            <p class="text-3xl font-bold py-1">{{ employee.lastName }}</p>
+                            <p class="text-3xl font-bold py-1">{{ employee.firstname }}</p>
+                            <p class="text-3xl font-bold py-1">{{ employee.lastname }}</p>
                             <div class="text-xs">
                                 <div class="flex">
                                     <p>
-                                        <span class="text-gray-400">รหัสพนักงาน : </span>{{ employee.code }}
+                                        <span class="text-gray-400">รหัสพนักงาน : </span>{{ employee.employeeCode }}
                                     </p>
                                     <p class="ml-5">
-                                        <span class="text-gray-400">ชื่อเล่น : </span>{{ employee.nickName }}
+                                        <span class="text-gray-400">ชื่อเล่น : </span>{{ employee.nickname }}
                                     </p>
                                 </div>
                                 <div class="flex">
-                                    <p><span class="text-gray-400">เบอร์โทร : </span>{{ employee.personalPhone }}</p>
+                                    <p><span class="text-gray-400">เบอร์โทร : </span>{{ employee.phone }}</p>
                                     <p class="ml-5">
-                                        <span class="text-gray-400">อีเมล : </span>{{ employee.personalEmail }}
+                                        <span class="text-gray-400">อีเมล : </span>{{ employee.email }}
                                     </p>
                                 </div>
                             </div>
@@ -125,26 +123,35 @@ export default {
             currentPage: 1,
             perPage: 8,
             employee: {
+                username: "",
+                password: "",
+                firstname: "",
+                lastname: "",
+                nickname: "",
+                employeeCode: "",
+                positionEmployee: "",
+                email: "",
+                phone: "",
+                imageIden: "",
+
+                sex: "",
+                statusByPartner: "",
+
                 dateLogin: "",
                 timeLogin: "",
-                name: "",
-                nickName: "",
-                code: "",
-                position: "",
-                personalPhone: "",
-                personalEmail: "",
-                employeeImg: '',
             },
             checked: false,
             checkInRecords: [
                 {
                     id: '',
-                    code: "",
+                    numberid: "",
                     name: "",
                     dateLogin: "",
                     timeLogin: "",
+                    justAdded: false,
                 },
             ],
+            lastId: 0,
         };
     },
     computed: {
@@ -193,8 +200,8 @@ export default {
                 // เพิ่มข้อมูลใหม่ในอันดับแรก
                 this.checkInRecords.unshift({
                     id: ++this.lastId,
-                    code: this.employee.code,
-                    name: this.employee.name,
+                    numberid: this.employee.employeeCode,
+                    name: this.employee.firstname + " " + this.employee.lastname,
                     dateLogin: this.employee.dateLogin,
                     timeLogin: this.employee.timeLogin,
                     justAdded: true,
@@ -220,7 +227,7 @@ export default {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                        name: this.employee.name,
+                        name: this.employee.firstname + " " + this.employee.lastname,
                         dateLogin: this.employee.dateLogin,
                         timeLogin: this.employee.timeLogin,
                     }),
@@ -274,33 +281,23 @@ export default {
 
     70% {
         transform: translateY(15%);
-        box-shadow: 0 0 15px 3px rgba(102, 247, 69, 0.6);
-    }
-
-    90% {
-        transform: translateY(-7%);
-        box-shadow: 0 0 10px 2px rgba(38, 253, 0, 0.4);
+        box-shadow: 0 0 15px 3px rgba(102, 247, 69, 0.931);
     }
 
     100% {
-        transform: translateY(0);
-        box-shadow: none;
+        opacity: 1;
+        transform: translateY(0%);
+        box-shadow: 0 0 10px 0px rgba(255, 215, 0, 0);
     }
 }
 
-/* ปุ่ม fade transition */
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.5s ease;
+    transition: opacity 0.5s;
 }
 
 .fade-enter-from,
 .fade-leave-to {
     opacity: 0;
-}
-
-.fade-enter-to,
-.fade-leave-from {
-    opacity: 1;
 }
 </style>
