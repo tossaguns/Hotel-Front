@@ -32,7 +32,7 @@ export default {
     components: { Bar },
     data() {
         return {
-            form: {
+            form: {                                                                                                                            
                 email: '',
                 username: '',
                 password: '',

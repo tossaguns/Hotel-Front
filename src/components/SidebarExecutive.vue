@@ -325,6 +325,9 @@ export default {
                 '/mainprofilecompany': 'editproflie',
                 '/editdetailhotel': 'editproflie',
 
+                '/profilecompany': 'editproflie',
+                '/detailhotel': 'editproflie',
+
 
 
                 '/mainbyepromotion': 'promotion',
