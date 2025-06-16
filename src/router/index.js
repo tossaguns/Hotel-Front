@@ -315,6 +315,25 @@ const router = createRouter({
       name: "RegisterMemberEmail",
       component: () => import("@/views/RegisterMemberEmail.vue"),
     },
+    {
+      path: "/addtypehotelall",
+      name: "AddTypeHotelAll",
+      component: () =>
+        import(
+          "@/views/Admin/ManagePartner/PartnerSleepGun/AddTypeHotelAll.vue"
+        ),
+    },
+    {
+      path: "/loginpartner",
+      name: "LoginPartner",
+      component: () => import("@/views/LoginPartner.vue"),
+    },
+
+    {
+      path: "/detailpartnerall/:id",
+      name: "DetailPartnerAll",
+      component: () => import("@/views/Admin/ManagePartner/DetailPartnerAll.vue"),
+    },
   ],
 });
 

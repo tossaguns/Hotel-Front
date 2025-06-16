@@ -328,8 +328,6 @@ export default {
                 '/profilecompany': 'editproflie',
                 '/detailhotel': 'editproflie',
 
-
-
                 '/mainbyepromotion': 'promotion',
                 '/mainbookingtossagun': 'reservetossagun',
 

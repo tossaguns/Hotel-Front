@@ -1,3 +1,5 @@
+TODO:เสร็จเเล้ว
+
 <template>
   <div class="w-full min-h-screen flex flex-col items-center justify-center">
     <div class="md:text-6xl text-xl font-bold text-center">

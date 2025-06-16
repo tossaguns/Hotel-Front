@@ -1,9 +1,10 @@
+FIXME: เพิ่มช่องสถานะ โดยจะเก็บสถานนะของ partner ที่ทำการเเก้ไข เเสดงว่า กำลังเเก้ไข/เเก้ไขเสร็จสิ้น เวลา... เมื่อPartner เเก้ไขเสร็จ
 <template>
     <div class="w-full min-h-screen bg-gray-200">
         <SidebarAdmin @toggle-sidebar="handleSidebarToggle" />
 
-        <div class="flex-1 md:px-4 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300" :class="{
-            'md:ml-[260px]': !isSidebarCollapsed,
+        <div class="flex-1 transition-all duration-300 pt-16 md:pt-3 md:pl-3" :class="{
+            'md:ml-[240px]': !isSidebarCollapsed,
             'md:ml-[80px]': isSidebarCollapsed
         }">
             <div>
@@ -40,7 +41,6 @@
                         <button class="bg-green-500 px-3 py-1 rounded-lg text-white font-bold hover:bg-green-600">
                             ค้นหา</button>
                     </div>
-
                 </div>
 
                 <div class="bg-white rounded-lg pb-6">
@@ -60,33 +60,37 @@
                             <thead>
                                 <tr class="bg-gray-200 whitespace-nowrap">
                                     <th class="border px-2 py-1">ลำดับ</th>
-                                    <th class="border px-2 py-1">โลโก้บริษัท</th>
+                                    <th class="border px-2 py-1">รูปที่พักด้านนอก</th>
                                     <th class="border px-2 py-1">ชื่อบริษัท</th>
-                                    <th class="border px-2 py-1">ชื่อ</th>
-                                    <th class="border px-2 py-1">นามสกุล</th>
-                                    <th class="border px-2 py-1">ชื่อเล่น</th>
+                                    <th class="border px-2 py-1">ชื่อที่พัก</th>
+                                    <th class="border px-2 py-1">ชื่อผู้สมัคร</th>
+                                    <th class="border px-2 py-1">นามสกุลผู้สมัคร</th>
                                     <th class="border px-2 py-1">อีเมล</th>
                                     <th class="border px-2 py-1">เบอร์โทร</th>
                                     <th class="border px-2 py-1">วัน/เวลาที่สมัคร</th>
+                                    <th class="border px-2 py-1">สถานะการเเก้ไข</th>
                                     <th class="border px-2 py-1">จัดการ</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(partner, index) in paginatedData" :key="partner.id"
+                                <tr v-for="(partner, index) in paginatedData" :key="partner._id"
                                     class="hover:bg-gray-50 whitespace-nowrap">
                                     <td class="border px-2 py-1 break-words">{{ getRowNumber(index) }}</td>
                                     <td class="border px-2 py-1 break-words">
-                                        <img :src="partner.logo" :alt="partner.companyName + ' logo'"
+                                        <img :src="partner.imagehotelOurdoor"
+                                            :alt="partner.companyName + 'imagehotelOurdoor'"
                                             class="w-10 h-10 rounded-full object-cover">
                                     </td>
                                     <td class="border px-2 py-1 break-words">{{
                                         partner.companyName }}</td>
-                                    <td class="border px-2 py-1 break-words">{{ partner.firstName
-                                    }}</td>
-                                    <td class="border px-2 py-1 break-words">{{ partner.lastName
-                                    }}</td>
-                                    <td class="border px-2 py-1 break-words">{{ partner.nickname
-                                    }}</td>
+                                    <td class="border px-2 py-1 break-words">{{
+                                        partner.hotelName }}</td>
+                                    <td class="border px-2 py-1 break-words">{{ partner.firstname
+                                        }}</td>
+                                    <td class="border px-2 py-1 break-words">{{ partner.lastname
+                                        }}</td>
+
+
                                     <td class="border px-2 py-1 break-words">{{ partner.email }}
                                     </td>
                                     <td class="border px-2 py-1 break-words">{{ partner.phone }}
@@ -94,43 +98,19 @@
                                     <td class="border px-2 py-1 break-words">{{ partner.updatedAt }}
                                     </td>
 
+                                    <td class="border px-2 py-1 break-words">ใส่สถานะด้วย!!!
+                                    </td>
+
                                     <td class="border px-2 py-1 break-words">
                                         <div class="flex gap-2 justify-center">
-                                            <button @click="toggleApproveForm(partner.id)"
-                                                class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm font-medium transition-colors">
-                                                อนุมัติ
-                                            </button>
-                                            <button @click="disapprovePartner(partner)"
-                                                class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm font-medium transition-colors">
-                                                ไม่อนุมัติ
-                                            </button>
-                                            <button @click="navigateToDetailPartnerAdmin"
-                                                class="bg-blue-300 rounded-full text-sm px-2">ข้อมูลเพิ่มเติม</button>
-                                        </div>
 
-                                        <div v-if="activeApproveId === partner.id" class="mt-2 space-y-1 text-left">
-                                            <label class="block">
-                                                <span class="text-sm">Username:</span>
-                                                <input type="text" v-model="credentials.username"
-                                                    class="border px-2 py-1 rounded w-full text-sm" />
-                                            </label>
-                                            <label class="block">
-                                                <span class="text-sm">Password:</span>
-                                                <input type="password" v-model="credentials.password"
-                                                    class="border px-2 py-1 rounded w-full text-sm" />
-                                            </label>
-                                            <button @click="submitApprove(partner)"
-                                                class="bg-blue-500 hover:bg-blue-600 text-white mt-1 px-3 py-1 rounded text-sm">
-                                                ยืนยันการอนุมัติ
-                                            </button>
+                                            <button @click="navigateToDetailPartnerAdmin(partner._id, index + 1)"
+                                                class="bg-blue-300 rounded-full text-sm px-2 py-2">ข้อมูลเพิ่มเติม</button>
                                         </div>
-
                                     </td>
                                 </tr>
                             </tbody>
-
                         </table>
-
                     </div>
 
                     <!-- Pagination -->
@@ -164,169 +144,56 @@
     </div>
 </template>
 
-
-<script>
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
 import SidebarAdmin from '@/components/SidebarAdmin.vue'
 
-export default {
-    name: "MainPartner",
-    components: {
-        SidebarAdmin
-    },
-    data() {
-        return {
-            isSidebarCollapsed: false,
-            activeDropdown: null,
-            currentPage: 1,
-            itemsPerPage: 10,
-            partnerApplications: [
-                {
-                    id: '',
-                    logo: '',
-                    companyName: '',
-                    firstName: '',
-                    lastName: '',
-                    nickname: '',
-                    email: '',
-                    phone: '',
-                    datetime: '',
-                    isApproved: null,
-                },
-            ],
-            activeApproveId: null,
-            credentials: {
-                username: '',
-                password: ''
-            }
-        }
-    },
-    computed: {
-        totalItems() {
-            return this.partnerApplications.length
-        },
-        totalPages() {
-            return Math.ceil(this.totalItems / this.itemsPerPage)
-        },
-        paginatedData() {
-            const start = (this.currentPage - 1) * this.itemsPerPage
-            const end = start + this.itemsPerPage
-            return this.partnerApplications.slice(start, end)
-        },
-        startItem() {
-            return (this.currentPage - 1) * this.itemsPerPage + 1
-        },
-        endItem() {
-            const end = this.currentPage * this.itemsPerPage
-            return end > this.totalItems ? this.totalItems : end
-        },
+const router = useRouter()
+const isSidebarCollapsed = ref(false)
+const currentPage = ref(1)
+const itemsPerPage = 10
+const partnerApplications = ref([])
 
-        visiblePages() {
-            const pages = []
-            const totalPages = this.totalPages
-            const current = this.currentPage
-
-            if (totalPages <= 7) {
-                // แสดงทุกหน้าถ้ามีน้อยกว่าหรือเท่ากับ 7 หน้า
-                for (let i = 1; i <= totalPages; i++) {
-                    pages.push(i)
-                }
-            } else {
-                // แสดงหน้าแรก
-                pages.push(1)
-
-                if (current > 4) {
-                    pages.push('...')
-                }
-
-                // แสดงหน้าใกล้เคียงกับหน้าปัจจุบัน
-                const start = Math.max(2, current - 1)
-                const end = Math.min(totalPages - 1, current + 1)
-
-                for (let i = start; i <= end; i++) {
-                    if (!pages.includes(i)) {
-                        pages.push(i)
-                    }
-                }
-
-                if (current < totalPages - 3) {
-                    pages.push('...')
-                }
-
-                // แสดงหน้าสุดท้าย
-                if (!pages.includes(totalPages)) {
-                    pages.push(totalPages)
-                }
-            }
-
-            return pages
-        }
-    },
-    methods: {
-        handleSidebarToggle(isCollapsed) {
-            this.isSidebarCollapsed = isCollapsed
-        },
-        navigateToApprove() {
-            this.$router.push("/approvepartner");
-        },
-        navigateToNoApprove() {
-            this.$router.push("/noapprovepartner");
-        },
-        navigateToDetailPartnerAdmin() {
-            this.$router.push("/detailpartnerall");
-        },
-        navigateBackToMainPartner() {
-            this.$router.push("/mainpartner");
-        },
-
-        getRowNumber(index) {
-            return (this.currentPage - 1) * this.itemsPerPage + index + 1
-        },
-        changePage(page) {
-            if (page >= 1 && page <= this.totalPages) {
-                this.currentPage = page
-            }
-        },
-
-        approvePartner(partner) {
-            partner.isApproved = true
-            partner.status = 'approved'
-            console.log('อนุมัติ Partner:', partner.companyName)
-        },
-        disapprovePartner(partner) {
-            partner.isApproved = false
-            partner.status = 'disapproved'
-            console.log('ไม่อนุมัติ Partner:', partner.companyName)
-        },
-        toggleApproveForm(partnerId) {
-            this.activeApproveId = this.activeApproveId === partnerId ? null : partnerId
-            this.credentials = { username: '', password: '' }
-        },
-
-        submitApprove(partner) {
-            if (!this.credentials.username || !this.credentials.password) {
-                alert('กรุณากรอก Username และ Password')
-                return
-            }
-            partner.isApproved = true
-            partner.status = 'approved'
-
-            console.log('อนุมัติ Partner:', partner.companyName)
-            console.log('Username:', this.credentials.username)
-            console.log('Password:', this.credentials.password)
-
-
-            this.activeApproveId = null
-            this.credentials = { username: '', password: '' }
-        }
-    },
-    mounted() {
-        const savedState = localStorage.getItem('sidebarCollapsed')
-        if (savedState !== null) {
-            this.isSidebarCollapsed = JSON.parse(savedState)
-        }
-    },
-    beforeUnmount() {
-        document.removeEventListener('click', this.handleClickOutside)
-    }
+function handleSidebarToggle(value) {
+    isSidebarCollapsed.value = value
 }
+
+function getRowNumber(index) {
+    return (currentPage.value - 1) * itemsPerPage + index + 1
+}
+
+function navigateToDetailPartnerAdmin(id, index) {
+    router.push({
+        path: `/detailpartnerall/${id}`,
+        query: { index }
+    })
+}
+
+function navigateBackToMainPartner() {
+    router.push('/mainpartner')
+}
+
+const totalItems = computed(() => partnerApplications.value.length)
+const totalPages = computed(() => Math.ceil(totalItems.value / itemsPerPage))
+const paginatedData = computed(() => {
+    const start = (currentPage.value - 1) * itemsPerPage
+    return partnerApplications.value.slice(start, start + itemsPerPage)
+})
+
+onMounted(() => {
+    const savedState = localStorage.getItem('sidebarCollapsed')
+    if (savedState !== null) {
+        isSidebarCollapsed.value = JSON.parse(savedState)
+    }
+
+    axios.get('http://localhost:9999/SleepGun/partner/getAll')
+        .then(res => {
+            partnerApplications.value = res.data
+        })
+        .catch(err => {
+            console.error('โหลดข้อมูล partner ล้มเหลว:', err)
+        })
+})
 </script>
