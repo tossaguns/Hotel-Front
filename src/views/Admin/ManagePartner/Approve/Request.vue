@@ -1,5 +1,7 @@
-FIXME: เพิ่มช่องสถานะ โดยจะเก็บสถานนะของ partner ที่ทำการเเก้ไข เเสดงว่า กำลังเเก้ไข/เเก้ไขเสร็จสิ้น เวลา... เมื่อPartner เเก้ไขเสร็จ
 <template>
+    FIXME: เพิ่มช่องสถานะ โดยจะเก็บสถานนะของ partner ที่ทำการเเก้ไข เเสดงว่า กำลังเเก้ไข/เเก้ไขเสร็จสิ้น เวลา... เมื่อ
+    Partner เเก้ไขเสร็จ
+
     <div class="w-full min-h-screen bg-gray-200">
         <SidebarAdmin @toggle-sidebar="handleSidebarToggle" />
 
@@ -68,7 +70,6 @@ FIXME: เพิ่มช่องสถานะ โดยจะเก็บส
                                     <th class="border px-2 py-1">อีเมล</th>
                                     <th class="border px-2 py-1">เบอร์โทร</th>
                                     <th class="border px-2 py-1">วัน/เวลาที่สมัคร</th>
-                                    <th class="border px-2 py-1">สถานะการเเก้ไข</th>
                                     <th class="border px-2 py-1">จัดการ</th>
                                 </tr>
                             </thead>
@@ -86,9 +87,9 @@ FIXME: เพิ่มช่องสถานะ โดยจะเก็บส
                                     <td class="border px-2 py-1 break-words">{{
                                         partner.hotelName }}</td>
                                     <td class="border px-2 py-1 break-words">{{ partner.firstname
-                                        }}</td>
+                                    }}</td>
                                     <td class="border px-2 py-1 break-words">{{ partner.lastname
-                                        }}</td>
+                                    }}</td>
 
 
                                     <td class="border px-2 py-1 break-words">{{ partner.email }}
@@ -96,9 +97,6 @@ FIXME: เพิ่มช่องสถานะ โดยจะเก็บส
                                     <td class="border px-2 py-1 break-words">{{ partner.phone }}
                                     </td>
                                     <td class="border px-2 py-1 break-words">{{ partner.updatedAt }}
-                                    </td>
-
-                                    <td class="border px-2 py-1 break-words">ใส่สถานะด้วย!!!
                                     </td>
 
                                     <td class="border px-2 py-1 break-words">
@@ -188,7 +186,7 @@ onMounted(() => {
         isSidebarCollapsed.value = JSON.parse(savedState)
     }
 
-    axios.get('http://localhost:9999/SleepGun/partner/getAll')
+    axios.get('http://localhost:9999/SleepGun/adminApprovePartner/getAllPendingPartners')
         .then(res => {
             partnerApplications.value = res.data
         })

@@ -8,7 +8,7 @@
         }">
             <div>
                 <div class="mt-2 rounded-t-lg bg-rose-400 p-2 text-white text-lg">
-                    <h1>อนุมัติแล้ว</h1>
+                    <h1>ปฏิเสธ</h1>
                 </div>
 
                 <!-- ตัวกรองวัน/เดือน/ปี -->
@@ -51,7 +51,7 @@
                 <!-- ตาราง -->
                 <div class="bg-white rounded-lg pb-6 pt-4">
                     <div class="flex justify-center py-4">
-                        <p class="text-4xl font-bold text-green-600">เป็น partner กับเรา</p>
+                        <p class="text-4xl font-bold text-red-600">ปฏิเสธ</p>
                     </div>
                     <div class="overflow-x-auto px-2">
                         <table class="w-full border border-collapse text-xs md:text-sm">
@@ -83,7 +83,7 @@
                                     <td class="border px-2 py-1">{{ partner.email }}</td>
                                     <td class="border px-2 py-1">{{ partner.phone }}</td>
                                     <td class="border px-2 py-1 text-center">
-                                        <button @click="navigateToDetailPartner(partner._id, index + 1, 'approved')"
+                                        <button @click="navigateToDetailPartner(partner._id, index + 1, 'rejected')"
                                             class="text-blue-600 hover:underline">
                                             ดูข้อมูลเพิ่มเติม
                                         </button>
@@ -194,8 +194,8 @@ const visiblePages = computed(() => {
 // API เรียกข้อมูล partner ที่อนุมัติแล้ว
 const getApprovedPartners = async () => {
     try {
-        const res = await axios.get('http://localhost:9999/SleepGun/adminApprovePartner/getAllStatus/approved')
-        console.log("Approved:", res.data)
+        const res = await axios.get('http://localhost:9999/SleepGun/adminApprovePartner/getAllStatus/rejected')
+        console.log("Reject:", res.data)
         partnerApplications.value = Array.isArray(res.data) ? res.data : []
     } catch (err) {
         console.error("โหลด approved partners ไม่สำเร็จ:", err)
@@ -203,11 +203,9 @@ const getApprovedPartners = async () => {
     }
 }
 
-
-
 function navigateToDetailPartner(id, rowNumber, status) {
     router.push({
-        path: `/detailpartnerapprove/${id}`,
+        path: `/detailpartnerall/${id}`,
         query: {
             index: rowNumber,
             status: status
