@@ -1,214 +1,4 @@
-<!--<template>
-    <div class="w-full min-h-screen bg-gray-200">
-        <SidebarAdmin @toggle-sidebar="handleSidebarToggle" />
-
-        <div class="flex-1 md:px-4 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300" :class="{
-            'md:ml-[260px]': !isSidebarCollapsed,
-            'md:ml-[80px]': isSidebarCollapsed
-        }">
-            <div>
-                <div class="mt-2 rounded-t-lg bg-rose-400 p-2 text-white text-lg">
-                    <h1>ข้อมูลบริษัท</h1>
-                </div>
-
-                <div class="w-full min-h-screen bg-gray-100 py-6 px-2 md:px-4">
-                    <div class="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md">
-                        <h2 class="text-xl font-bold mb-8 text-center">ข้อมูลบริษัทที่ต้องการเข้าร่วม SLEEP GUN</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          
-                            <div>
-                                <p class="block text-sm font-medium">ลำดับ</p>
-                                <p>{{ partner.id }}</p>
-                            </div>
-                            <div>
-                                <p class="block text-sm font-medium">รูปบริษัท</p>
-                                <img v-if="partner.companyLogo" :src="partner.companyLogo"
-                                    class="w-32 h-auto rounded border" />
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">ชื่อบริษัท</p>
-                                <p>{{ partner.companyName }}</p>
-                            </div>
-
-
-                            <div>
-                                <div class="block text-sm font-medium mb-1">เบอร์ติดต่อบริษัท</div>
-                                <p>{{ partner.companyPhone }}</p>
-                            </div>
-
-
-                            <div>
-                                <div class="block text-sm font-medium mb-1">อีเมลติดต่อบริษัท</div>
-                                <p>{{ partner.companyEmail }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">เลขบัญชี</p>
-                                <p>{{ partner.bankNumber }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">ธนาคาร</p>
-                                <p>{{ partner.bankName }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">รูปบัญชี</p>
-                                <img v-if="partner.bankImage" :src="partner.bankImage"
-                                    class="w-32 h-auto rounded border" />
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">เลขประจำตัวผู้เสียภาษี</p>
-                                <p>{{ partner.companyTaxId }}</p>
-                            </div>
-
-
-                            <div>
-                                <p class="block text-sm font-medium">บ้านเลขที่</p>
-                                <p>{{ partner.companyAddress }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">ตำบล</p>
-                                <p>{{ partner.companySubdistrict }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">อำเภอ</p>
-                                <p>{{ partner.companyDistrict }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">จังหวัด</p>
-                                <p>{{ partner.companyProvince }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">รหัสไปรษณีย์</p>
-                                <p>{{ partner.companyPostalCode }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">ละติจูด</p>
-                                <p>{{ partner.hotelLatitude }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">ลองติจูด</p>
-                                <p>{{ partner.hotelLongitude }}</p>
-                            </div>
-
-                        </div>
-
-
-                        <hr class="border-2 my-6" />
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <p class="block text-sm font-medium">ชื่อ</p>
-                                <p>{{ partner.fristName }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">นามสกุล</p>
-                                <p>{{ partner.lastName }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">ชื่อเล่น</p>
-                                <p>{{ partner.nickName }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">เพศ</p>
-                                <p>{{ partner.sex }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">เบอร์โทร</p>
-                                <p>{{ partner.personalPhone }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">เลขบัตรประชาชน</p>
-                                <p>{{ partner.personalId }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">รูปบัตรประชาชน</p>
-                                <img v-if="partner.personalIdImg" :src="partner.personalIdImg"
-                                    class="w-32 h-auto rounded border" />
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">บ้านเลขที่ตัวบุคคล</p>
-                                <p>{{ partner.personalAddress }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">ตำบล</p>
-                                <p>{{ partner.personalSubdistrict }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">อำเภอ</p>
-                                <p>{{ partner.personalDistrict }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">จังหวัด</p>
-                                <p>{{ partner.personalProvince }}</p>
-                            </div>
-
-                            <div>
-                                <p class="block text-sm font-medium">รหัสไปรษณีย์</p>
-                                <p>{{ partner.personalPostalCode }}</p>
-                            </div>
-                        </div>
-
-                        <hr class="border-2 my-6" />
-
-                        <div>
-                            <div>
-                                <p class="block text-sm font-medium">วันเวลาที่ยื่นสมัคร</p>
-                                <p>{{ partner.createdAt }}</p>
-                            </div>
-                        </div>
-
-                        TODO: เพิ่ม promotion
-
-                        <hr class="border-2 my-6" />
-
-                        <div class="flex justify-center space-x-3">
-                            <button
-                                class="bg-green-500 py-2 px-4 rounded-lg text-white font-bold hover:bg-green-600">อนุมัติ</button>
-                            <button
-                                class="bg-yellow-500 py-2 px-4 rounded-lg text-white font-bold hover:bg-yellow-600">เเก้ไข</button>
-                            <button
-                                class="bg-orange-500 py-2 px-4 rounded-lg text-white font-bold hover:bg-orange-600">ไม่อนุมัติ</button>
-                        </div>
-                    </div>
-
-
-                    <div @click="navigateBack" class="flex justify-center my-6">
-                        <button class="bg-red-500 p-2 rounded-lg hover:bg-red-600 text-white ">ย้อนกลับ</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</template>-->
-
-<!--TODO: อย่าพึ่งลบด้านบนเพราะจะเอาไปใช้ทำ template อื่นอยู่ -->
-<!--FIXME: มาเเก้ไขหน้านี้พรุ่งนี้ให้เสร็จ-->
-
-
-
 <template>
-    FIXME: ถ้าสถานะกำลังเเก้ไข ให้ปุ่มอนุมัติเป็นสีเทาซึ่งไม่สามารถกดได้ ที่สามารถกดได้มีเเค่ปุ่มเเก้ไข
-    กับปุ่มไม่อนุมัติเท่านั้น //เมื่อกดปุ่มเเก้ไขซ้ำจะเป็นการส่งข้อความไปยังอีเมลเพิ่ม
     <div class="w-full min-h-screen bg-gray-200">
         <SidebarAdmin @toggle-sidebar="handleSidebarToggle" />
 
@@ -304,8 +94,8 @@
                                 <div class="mt-4">
                                     <p class="block text-sm font-medium mb-2 text-center">รูปที่พักด้านนอก</p>
                                     <div class="w-32 h-32 border rounded flex items-center justify-center overflow-hidden bg-gray-50 cursor-pointer"
-                                        @click="partner.imagehotelOurdoor && openImageModal(partner.imagehotelOurdoor)">
-                                        <img v-if="partner.imagehotelOurdoor" :src="partner.imagehotelOurdoor"
+                                        @click="partner.imageHotelOurDoor && openImageModal(partner.imageHotelOurDoor)">
+                                        <img v-if="partner.imageHotelOurDoor" :src="partner.imageHotelOurDoor"
                                             class="w-full h-full object-cover" alt="รูปที่อยู่ด้านนอก" />
                                         <span v-else class="text-xs text-gray-400">ไม่มีรูป</span>
                                     </div>
@@ -354,37 +144,45 @@
                                 <div class="mb-3">
                                     <p class="block text-sm font-medium mb-1">บ้านเลขที่</p>
                                     <p v-if="partner" class="border rounded-md py-1 px-3 border-stone-300">{{
-                                        partner.address }}</p>
+                                        partner.companyAddress }}</p>
                                 </div>
 
                                 <div class="mb-3">
                                     <p class="block text-sm font-medium mb-1">ตำบล</p>
                                     <p v-if="partner" class="border rounded-md py-1 px-3 border-stone-300">{{
-                                        partner.subdistrict }}</p>
+                                        partner.companySubdistrict }}</p>
                                 </div>
 
                                 <div class="mb-3">
                                     <p class="block text-sm font-medium mb-1">อำเภอ</p>
                                     <p v-if="partner" class="border rounded-md py-1 px-3 border-stone-300">{{
-                                        partner.district }}</p>
+                                        partner.companyDistrict }}</p>
                                 </div>
 
                                 <div class="mb-3">
                                     <p class="block text-sm font-medium mb-1">จังหวัด</p>
                                     <p v-if="partner" class="border rounded-md py-1 px-3 border-stone-300">{{
-                                        partner.province }}</p>
+                                        partner.companyProvince }}</p>
                                 </div>
 
                                 <div class="mb-3">
                                     <p class="block text-sm font-medium mb-1">รหัสไปรษณีย์</p>
                                     <p v-if="partner" class="border rounded-md py-1 px-3 border-stone-300">{{
-                                        partner.postcode }}</p>
+                                        partner.companyPostcode }}</p>
                                 </div>
                             </div>
 
                             <!-- คอลัมน์แผนที่ -->
                             <div class="md:w-1/2 w-full xl:mr-20">
+
                                 <p class="block text-sm font-medium mb-2">ตำแหน่งโรงแรมบนแผนที่</p>
+
+                                <div class="flex space-x-3 text-xs justify-center mt-2">
+                                    <p v-if="partner">Latitude : {{ partner.hotelLatitude }}</p>
+                                    <p v-if="partner">Longitude : {{ partner.hotelLongitude }}</p>
+                                </div>
+
+                                <!--
                                 <iframe v-if="partner.hotelLatitude && partner.hotelLongitude"
                                     :src="`https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=${partner.hotelLatitude},${partner.hotelLongitude}`"
                                     width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
@@ -393,7 +191,7 @@
                                 <div class="flex space-x-3 text-xs justify-center mt-2">
                                     <p v-if="partner">Latitude : {{ partner.hotelLatitude }}</p>
                                     <p v-if="partner">Longitude : {{ partner.hotelLongitude }}</p>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
 
@@ -479,6 +277,8 @@
         </div>
     </div>
 </template>
+
+
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'

@@ -93,25 +93,27 @@ const gAuthOptions = {
   fetch_basic_profile: false,
 };
 app.use(GAuth, gAuthOptions);
+/*
+const token = localStorage.getItem("token");
+if (token) {
+  try {
+    const jwt_decode = jwtDecode(token);
+    console.log("✅ jwt_decode:", jwt_decode);
 
-try {
-  const token = localStorage.getItem("token");
-  const jwt_decode = jwtDecode(token);
-  console.log("jwt_decode:", jwt_decode); // เพิ่มบรรทัดนี้
-
-  if (jwt_decode.roles == "admin") {
-    console.log("admin");
-  } else if (jwt_decode.roles == "partner") {
-    console.log("partner");
-  } else if (jwt_decode.roles == "member") {
-    console.log("member");
-  } else {
-    console.log("ยังไม่ได้ล็อคอิน");
+    if (jwt_decode.role === "admin") {
+      console.log("admin");
+    } else if (jwt_decode.role === "partner") {
+      console.log("partner");
+    } else {
+      console.log("บทบาทไม่ตรง");
+    }
+  } catch (err) {
+    console.error("❌ Error decoding token:", err.message);
   }
-} catch (err) {
-  // กรณีที่มีข้อผิดพลาด
-  console.error("Error decoding JWT:", err.message);
-}
+} else {
+  console.log("🔒 ยังไม่ได้ล็อคอิน (token ไม่มี)");
+}*/
+
 app.use(router);
 //prime flex
 import "primeflex/primeflex.css";

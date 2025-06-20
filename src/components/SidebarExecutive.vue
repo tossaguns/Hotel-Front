@@ -263,7 +263,6 @@
     </div>
 </template>
 
-
 <script setup>
 import { ref, watch, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
@@ -275,33 +274,54 @@ const partner = ref({
     role: ''
 })
 
+const user = ref(null)
+
+try {
+    const raw = localStorage.getItem('user')
+    if (raw && raw !== 'undefined') {
+        user.value = JSON.parse(raw)
+    } else {
+        console.warn("⚠️ localStorage ไม่มี user หรือเป็น undefined")
+        user.value = null
+    }
+} catch (err) {
+    console.error("❌ Failed to parse user JSON:", err.message)
+    user.value = null
+}
+
 const emit = defineEmits(['toggle-sidebar'])
 const router = useRouter()
 const route = useRoute()
-
-
 
 const isCollapsed = ref(getSidebarStateFromStorage())
 const isMobileMenuOpen = ref(false)
 const activeMenu = ref(getActiveMenuFromRoute())
 
-
-
-// ✅ โหลดสถานะ sidebar เมื่อ component ถูก mount
+// โหลดสถานะ sidebar เมื่อ component ถูก mount
 onMounted(() => {
     isCollapsed.value = getSidebarStateFromStorage()
     emitToggleSidebar()
 
-    const savedPartner = localStorage.getItem('partner')
-    if (savedPartner) {
-        partner.value = JSON.parse(savedPartner)
-        if (!partner.value.role) {
-            partner.value.role = 'partner'
+    const rawPartner = localStorage.getItem('partner')
+    if (rawPartner && rawPartner !== 'undefined') {
+        try {
+            partner.value = JSON.parse(rawPartner)
+            if (!partner.value.role) {
+                partner.value.role = 'partner'
+            }
+        } catch (err) {
+            console.error("❌ Failed to parse partner JSON:", err.message)
+            partner.value = {
+                firstname: '',
+                lastname: '',
+                companyName: '',
+                role: 'partner'
+            }
         }
     }
 })
 
-// ✅ เปลี่ยนเมนูที่ active เมื่อ route เปลี่ยน
+// เปลี่ยนเมนูที่ active เมื่อ route เปลี่ยน
 watch(route, () => {
     activeMenu.value = getActiveMenuFromRoute()
 })
@@ -310,7 +330,7 @@ watch(route, () => {
 function getSidebarStateFromStorage() {
     try {
         const saved = localStorage.getItem('sidebarCollapsed')
-        return saved ? JSON.parse(saved) : false
+        return saved && saved !== 'undefined' ? JSON.parse(saved) : false
     } catch (error) {
         console.warn('Could not load sidebar state from localStorage:', error)
         return false
@@ -318,7 +338,6 @@ function getSidebarStateFromStorage() {
 }
 
 function emitToggleSidebar() {
-    // ถ้า component นี้ emit event ออกไป ต้องกำหนด defineEmits
     emit('toggle-sidebar', isCollapsed.value)
 }
 
@@ -375,7 +394,4 @@ function navigateTo(path, menuKey) {
     router.push(path)
     isMobileMenuOpen.value = false
 }
-
-
-// ========= EXPORT TO TEMPLATE =========
 </script>

@@ -87,9 +87,9 @@
                                     <td class="border px-2 py-1 break-words">{{
                                         partner.hotelName }}</td>
                                     <td class="border px-2 py-1 break-words">{{ partner.firstname
-                                    }}</td>
+                                        }}</td>
                                     <td class="border px-2 py-1 break-words">{{ partner.lastname
-                                    }}</td>
+                                        }}</td>
 
 
                                     <td class="border px-2 py-1 break-words">{{ partner.email }}

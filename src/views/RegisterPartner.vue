@@ -116,6 +116,47 @@ FIXME: เหลือเชื่อม api googlemap เเล้วลอง�
 
                             <div class="mb-5">
                                 <div class="flex space-x-1  my-1">
+                                    <p class="pl-3">บ้านเลขที่ (Address)</p><!--address-->
+                                    <p class="text-red-600">*</p>
+                                </div>
+                                <input v-model="address" class="w-full py-2 border rounded-md px-3"
+                                    placeholder="บ้นเลขที่" />
+                            </div>
+                            <div class="mb-5">
+                                <div class="flex space-x-1  my-1">
+                                    <p class="pl-3">ตำบล (Subdistrict)</p><!--subdistrict-->
+                                    <p class="text-red-600">*</p>
+                                </div>
+                                <input v-model="subdistrict" class="w-full py-2 border rounded-md px-3"
+                                    placeholder="ตำบล" />
+                            </div>
+                            <div class="mb-5">
+                                <div class="flex space-x-1  my-1">
+                                    <p class="pl-3">อำเภอ (District)</p>
+                                    <p class="text-red-600">*</p><!--district-->
+                                </div>
+                                <input v-model="district" class="w-full py-2 border rounded-md px-3"
+                                    placeholder="อำเภอ" />
+                            </div>
+                            <div class="mb-5">
+                                <div class="flex space-x-1  my-1">
+                                    <p class="pl-3">จังหวัด (Province)</p><!--province-->
+                                    <p class="text-red-600">*</p>
+                                </div>
+                                <input v-model="province" class="w-full py-2 border rounded-md px-3"
+                                    placeholder="จังหวัด" />
+                            </div>
+                            <div class="mb-5">
+                                <div class="flex space-x-1  my-1">
+                                    <p class="pl-3">รหัสไปรษณีย์ (PostNumber)</p><!--postcode-->
+                                    <p class="text-red-600">*</p>
+                                </div>
+                                <input v-model="postcode" class="w-full py-2 border rounded-md px-3"
+                                    placeholder="รหัสไปรษณีย์" />
+                            </div>
+
+                            <div class="mb-5">
+                                <div class="flex space-x-1  my-1">
                                     <p class="pl-3">เลขบัตรประชาชน
                                         <br />
                                         <span>(IDcard number) </span>
@@ -234,21 +275,21 @@ FIXME: เหลือเชื่อม api googlemap เเล้วลอง�
                                     <p class="pl-3 text-center">รูปที่พักด้านนอก
                                         <br />
                                         <span>(Image Rest Outdoor) </span>
-                                    </p><!--imagehotelOurdoor-->
+                                    </p><!--imageHotelOurDoor-->
                                     <p class="text-red-600">*</p>
                                 </div>
 
-                                <input type="file" id="input-imagehotelOurdoor"
-                                    @change="handleFile($event, 'imagehotelOurdoor')" accept="image/*" class="hidden" />
+                                <input type="file" id="input-imageHotelOurDoor"
+                                    @change="handleFile($event, 'imageHotelOurDoor')" accept="image/*" class="hidden" />
                                 <div class="relative w-40 h-40">
-                                    <label v-if="!previewLogo" for="input-imagehotelOurdoor"
+                                    <label v-if="!previewLogo" for="input-imageHotelOurDoor"
                                         class="w-full h-full flex items-center justify-center border-2 border-dashed border-gray-400 rounded cursor-pointer hover:border-yellow-500">
                                         <span class="text-4xl text-gray-400 hover:text-yellow-500">+</span>
                                     </label>
 
                                     <div v-if="previewLogo" class="w-full h-full rounded overflow-hidden relative">
                                         <img :src="previewLogo" class="object-cover w-full h-full" />
-                                        <button @click="removeimagehotelOurdoor"
+                                        <button @click="removeimageHotelOurDoor"
                                             class="absolute top-1 right-1 bg-white rounded-full p-1 shadow hover:bg-red-500 hover:text-white transition">
                                             ❌
                                         </button>
@@ -304,7 +345,7 @@ FIXME: เหลือเชื่อม api googlemap เเล้วลอง�
                                 <p class="pl-3">บ้านเลขที่ (Address)</p><!--address-->
                                 <p class="text-red-600">*</p>
                             </div>
-                            <input v-model="address" class="w-full py-2 border rounded-md px-3"
+                            <input v-model="companyAddress" class="w-full py-2 border rounded-md px-3"
                                 placeholder="บ้นเลขที่" />
                         </div>
                         <div class="mb-5">
@@ -312,7 +353,7 @@ FIXME: เหลือเชื่อม api googlemap เเล้วลอง�
                                 <p class="pl-3">ตำบล (Subdistrict)</p><!--subdistrict-->
                                 <p class="text-red-600">*</p>
                             </div>
-                            <input v-model="subdistrict" class="w-full py-2 border rounded-md px-3"
+                            <input v-model="companySubdistrict" class="w-full py-2 border rounded-md px-3"
                                 placeholder="ตำบล" />
                         </div>
                         <div class="mb-5">
@@ -320,14 +361,15 @@ FIXME: เหลือเชื่อม api googlemap เเล้วลอง�
                                 <p class="pl-3">อำเภอ (District)</p>
                                 <p class="text-red-600">*</p><!--district-->
                             </div>
-                            <input v-model="district" class="w-full py-2 border rounded-md px-3" placeholder="อำเภอ" />
+                            <input v-model="companyDistrict" class="w-full py-2 border rounded-md px-3"
+                                placeholder="อำเภอ" />
                         </div>
                         <div class="mb-5">
                             <div class="flex space-x-1  my-1">
                                 <p class="pl-3">จังหวัด (Province)</p><!--province-->
                                 <p class="text-red-600">*</p>
                             </div>
-                            <input v-model="province" class="w-full py-2 border rounded-md px-3"
+                            <input v-model="companyProvince" class="w-full py-2 border rounded-md px-3"
                                 placeholder="จังหวัด" />
                         </div>
                         <div class="mb-5">
@@ -335,18 +377,31 @@ FIXME: เหลือเชื่อม api googlemap เเล้วลอง�
                                 <p class="pl-3">รหัสไปรษณีย์ (PostNumber)</p><!--postcode-->
                                 <p class="text-red-600">*</p>
                             </div>
-                            <input v-model="postcode" class="w-full py-2 border rounded-md px-3"
+                            <input v-model="companyPostcode" class="w-full py-2 border rounded-md px-3"
                                 placeholder="รหัสไปรษณีย์" />
                         </div>
 
 
-                        <div>
+                        <!-- ใช้งาน googleMap <div>
                             <div id="map" style="height: 400px;"></div>
                             <div class="text-xs flex justify-center space-x-4">
                                 <p>Latitude: {{ latitude }}</p>
                                 <p>Longitude: {{ longitude }}</p>
                             </div>
+                        </div>-->
+
+                        <div class="mt-4">
+                            <label class="block mb-1">ตำแหน่งที่ตั้งของโรงแรม</label>
+                            <div class="flex gap-4">
+                                <input type="text" v-model="hotelLatitude" class="border p-2 rounded w-full"
+                                    placeholder="Latitude เช่น 13.7563" />
+                                <input type="text" v-model="hotelLongitude" class="border p-2 rounded w-full"
+                                    placeholder="Longitude เช่น 100.5018" />
+                            </div>
                         </div>
+
+
+
                     </div>
 
                     <div>
@@ -408,18 +463,27 @@ const formData = reactive({
 })
 
 const sex = ref('')
+
 const address = ref('')
 const subdistrict = ref('')
 const district = ref('')
 const province = ref('')
 const postcode = ref('')
+
+const companyAddress = ref('')
+const companySubdistrict = ref('')
+const companyDistrict = ref('')
+const companyProvince = ref('')
+const companyPostcode = ref('')
+
 const username = ref('')
 const password = ref('')
+
 const showPassword = ref(false)
 const selectedHotelType = ref(null)
 const hotelTypes = ref([])
-
-
+const hotelLatitude = ref('')
+const hotelLongitude = ref('')
 
 // ======= toggle password =======
 const togglePassword = () => {
@@ -430,7 +494,7 @@ const togglePassword = () => {
 const imageFiles = reactive({
     imageIden: null,
     imageVisa: null,
-    imagehotelOurdoor: null,
+    imageHotelOurDoor: null,
     businessLicense: null
 })
 
@@ -439,48 +503,125 @@ const previewVisa = ref(null)
 const previewLogo = ref(null)
 const selectedPdf = ref(null)
 
+const validateForm = () => {
+    const errors = []
 
+    if (!formData.firstname) errors.push("กรุณากรอกชื่อ")
+    if (!formData.lastname) errors.push("กรุณากรอกนามสกุล")
+    if (!sex.value) errors.push("กรุณาเลือกเพศ")
+    if (!formData.email) errors.push("กรุณากรอกอีเมล")
+    if (!formData.phone || !/^[0-9]{10}$/.test(formData.phone)) errors.push("กรุณากรอกเบอร์โทรให้ถูกต้อง")
+    if (!formData.idenNumber || !/^[0-9]{13}$/.test(formData.idenNumber)) errors.push("กรุณากรอกเลขบัตรประชาชนให้ถูกต้อง")
+    if (!formData.visaNumber) errors.push("กรุณากรอกเลขวีซ่า")
+    if (!formData.hotelName) errors.push("กรุณากรอกชื่อที่พัก")
+
+    if (!address.value) errors.push("กรุณากรอกบ้านเลขที่บุคคล")
+    if (!subdistrict.value) errors.push("กรุณากรอกตำบลบุคคล")
+    if (!district.value) errors.push("กรุณากรอกอำเภอบุคคล")
+    if (!province.value) errors.push("กรุณากรอกจังหวัดบุคคล")
+    if (!postcode.value) errors.push("กรุณากรอกลเขไปรษณีย์บุคคล")
+
+    if (!companyAddress.value) errors.push("กรุณากรอกที่อยู่เลขที่บริษัท")
+    if (!companySubdistrict.value) errors.push("กรุณากรอกตำบลบริษัท")
+    if (!companyDistrict.value) errors.push("กรุณากรอกอำเภอบริษัท")
+    if (!companyProvince.value) errors.push("กรุณากรอกจังหวัดบริษัท")
+    if (!companyPostcode.value) errors.push("กรุณากรอกเลขไปรษณีย์บริษัท")
+
+    if (!imageFiles.imageIden) errors.push("กรุณาอัปโหลดรูปบัตรประชาชน")
+    if (!imageFiles.imageVisa) errors.push("กรุณาอัปโหลดรูปวีซ่า")
+    if (!imageFiles.imageHotelOurDoor) errors.push("กรุณาอัปโหลดรูปที่พัก")
+    if (!selectedHotelType.value) errors.push("กรุณาเลือกประเภทโรงแรม")
+    if (!hotelLatitude.value || isNaN(parseFloat(hotelLatitude.value))) errors.push("กรุณากรอก latitude ให้ถูกต้อง")
+    if (!hotelLongitude.value || isNaN(parseFloat(hotelLongitude.value))) errors.push("กรุณากรอก longitude ให้ถูกต้อง")
+    if (!username.value) errors.push("กรุณากรอก Username")
+    if (!password.value) errors.push("กรุณากรอก Password")
+
+    if (errors.length > 0) {
+        alert(errors.join("\n"))
+        return false
+    }
+
+    return true
+}
 const submitForm = async () => {
+    if (!validateForm()) return;
+
     try {
-        const formDataToSend = new FormData()
-        formDataToSend.append('firstname', formData.firstname)
-        formDataToSend.append('lastname', formData.lastname)
-        formDataToSend.append('email', formData.email)
-        formDataToSend.append('phone', formData.phone)
-        formDataToSend.append('idenNumber', formData.idenNumber)
-        formDataToSend.append('visaNumber', formData.visaNumber)
-        formDataToSend.append('hotelName', formData.hotelName)
-        formDataToSend.append('companyName', formData.companyName)
+        const formDataToSend = new FormData();
 
-        formDataToSend.append('sex', sex.value)
-        formDataToSend.append('hotelLatitude', latitude.value)
-        formDataToSend.append('hotelLongitude', longitude.value)
-        formDataToSend.append('hotelType', selectedHotelType.value)
+        formDataToSend.append('username', username.value);
+        formDataToSend.append('password', password.value);
 
-        if (imageFiles.imagehotelOurdoor) formDataToSend.append('imagehotelOurdoor', imageFiles.imagehotelOurdoor)
-        if (imageFiles.imageIden) formDataToSend.append('imageIden', imageFiles.imageIden)
-        if (imageFiles.imageVisa) formDataToSend.append('imageVisa', imageFiles.imageVisa)
-        if (imageFiles.businessLicense) formDataToSend.append('pdfLegalDocument', imageFiles.businessLicense)
+        formDataToSend.append('firstname', formData.firstname);
+        formDataToSend.append('lastname', formData.lastname);
+        formDataToSend.append('email', formData.email);
+        formDataToSend.append('phone', formData.phone);
+        formDataToSend.append('idenNumber', formData.idenNumber);
+        formDataToSend.append('visaNumber', formData.visaNumber);
+        formDataToSend.append('hotelName', formData.hotelName);
+        formDataToSend.append('companyName', formData.companyName);
 
+        formDataToSend.append('address', address.value);
+        formDataToSend.append('subdistrict', subdistrict.value);
+        formDataToSend.append('district', district.value);
+        formDataToSend.append('province', province.value);
+        formDataToSend.append('postcode', postcode.value);
+
+        formDataToSend.append('companyAddress', address.value);
+        formDataToSend.append('companySubdistrict', subdistrict.value);
+        formDataToSend.append('companyDistrict', district.value);
+        formDataToSend.append('companyProvince', province.value);
+        formDataToSend.append('companyPostcode', postcode.value);
+
+        formDataToSend.append('hotelLatitude', hotelLatitude.value);
+        formDataToSend.append('hotelLongitude', hotelLongitude.value);
+        formDataToSend.append('sex', sex.value);
+        formDataToSend.append('hotelType', selectedHotelType.value);
+
+        if (!username.value || !password.value) {
+            alert('กรุณากรอก Username และ Password');
+            return;
+        }
+        if (imageFiles.imageHotelOurDoor) {
+            formDataToSend.append('imageHotelOurDoor', imageFiles.imageHotelOurDoor);
+        }
+        if (imageFiles.imageIden) {
+            formDataToSend.append('imageIden', imageFiles.imageIden);
+        }
+        if (imageFiles.imageVisa) {
+            formDataToSend.append('imageVisa', imageFiles.imageVisa);
+        }
+        if (imageFiles.businessLicense) {
+            formDataToSend.append('businessLicense', imageFiles.businessLicense);
+        }
 
         const response = await fetch('http://localhost:9999/SleepGun/partner/register', {
             method: 'POST',
             body: formDataToSend,
-        })
+        });
 
         if (!response.ok) {
-            throw new Error('Failed to submit form')
+            const errorData = await response.json();
+            alert(
+                errorData.message +
+                '\n' +
+                (errorData.errors ? errorData.errors.join('\n') : 'กรุณาตรวจสอบข้อมูลอีกครั้ง')
+            );
+            return;
         }
 
-        const result = await response.json()
-        console.log('Response:', result)
-        alert('ลงทะเบียนสำเร็จ!')
+        const result = await response.json();
+        console.log('✅ Response:', result);
+        alert('ลงทะเบียนสำเร็จ!');
+        router.push('/waitforapprove'); // ✅ Redirect ไปหน้ารออนุมัติ
+
 
     } catch (error) {
-        console.error(error)
-        alert('เกิดข้อผิดพลาดในการส่งข้อมูล')
+        console.error('❌ Error:', error);
+        alert('เกิดข้อผิดพลาดในการส่งข้อมูล');
     }
-}
+};
+
 
 // ======= ฟังก์ชันอัปโหลดไฟล์และแสดงพรีวิว =======
 const handleFile = (event, type) => {
@@ -496,11 +637,13 @@ const handleFile = (event, type) => {
         reader.onload = e => {
             if (type === 'imageIden') previewIden.value = e.target.result
             if (type === 'imageVisa') previewVisa.value = e.target.result
-            if (type === 'imagehotelOurdoor') previewLogo.value = e.target.result
+            if (type === 'imageHotelOurDoor') previewLogo.value = e.target.result
         }
         reader.readAsDataURL(file)
     }
 }
+
+
 
 
 
@@ -515,8 +658,8 @@ const removeImageVisa = () => {
     previewVisa.value = null
 }
 
-const removeimagehotelOurdoor = () => {
-    imageFiles.imagehotelOurdoor = null
+const removeimageHotelOurDoor = () => {
+    imageFiles.imageHotelOurDoor = null
     previewLogo.value = null
 }
 
@@ -525,13 +668,30 @@ const removePdf = () => {
     selectedPdf.value = null
 }
 
-// ======= latitude, longitude =======
-const latitude = ref(null)
-const longitude = ref(null)
+
+
+
+
+onMounted(() => {
+    fetchHotelTypes()
+    // latitude.value = 13.7563
+    // longitude.value = 100.5018
+})
+
+
+async function fetchHotelTypes() {
+    try {
+        const res = await axios.get("http://localhost:9999/SleepGun/typeHotel/getAll");
+        console.log('hotelTypes data:', res.data);
+        hotelTypes.value = res.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 
 // ======= โหลด Google Map และจับตำแหน่ง =======
-onMounted(async () => {
+/*onMounted(async () => {
     fetchHotelTypes();
 
     const defaultLat = 13.7563
@@ -555,17 +715,7 @@ onMounted(async () => {
         latitude.value = e.latLng.lat()
         longitude.value = e.latLng.lng()
     })
-})
-
-async function fetchHotelTypes() {
-    try {
-        const res = await axios.get("http://localhost:9999/SleepGun/typeHotel/getAll");
-        console.log('hotelTypes data:', res.data);
-        hotelTypes.value = res.data;
-    } catch (error) {
-        console.error(error);
-    }
-}
+})*/
 
 /*
 function loadGoogleMapsScript() {
@@ -584,6 +734,7 @@ function loadGoogleMapsScript() {
     })
 }
 */
+
 </script>
 
 

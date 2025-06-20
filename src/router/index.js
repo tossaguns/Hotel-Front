@@ -258,7 +258,7 @@ const router = createRouter({
         ),
     },
     {
-      path: "/editdetailhotel",
+      path: "/editdetailhotel/:id",
       name: "EditDetailHotel",
       component: () =>
         import("@/views/Partner/Executive/Profile/EditDetailHotel.vue"),
@@ -296,12 +296,7 @@ const router = createRouter({
       name: "MainProfile",
       component: () => import("@/views/Member/Profile/MainProfile.vue"),
     },
-    {
-      path: "/detailpartnerall",
-      name: "DetailPartnerAll",
-      component: () =>
-        import("@/views/Admin/ManagePartner/DetailPartnerAll.vue"),
-    },
+ 
     {
       path: "/mainpartnersleepgun",
       name: "MainPartnerSleepGun",
@@ -344,7 +339,7 @@ const router = createRouter({
 
     {
       path: "/profileafterlogin/:id",
-      name: "DetailPartnerAll",
+      name: "ProfileAfterLogin",
       component: () =>
         import(
           "@/views/Partner/Executive/UpdateProfileAfterLogin/ProfileAfterLogin.vue"
@@ -363,11 +358,15 @@ const router = createRouter({
     {
       path: "/maincompany",
       name: "MainCompany",
-      component: () =>
-        import(
-          "@/views/Partner/Executive/MainCompany.vue"
-        ),
+      component: () => import("@/views/Partner/Executive/MainCompany.vue"),
     },
+
+      {
+    path: "/detailpartnerapprove/:id",
+    name: "DetailPartnerApprove",
+    component: () =>
+      import("@/views/Admin/ManagePartner/DetailPartnerApprove.vue"),
+  },
   ],
 });
 
