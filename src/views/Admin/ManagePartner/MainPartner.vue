@@ -35,10 +35,9 @@
                             class="bg-amber-400  text-2xl rounded-lg px-3 py-2 hover:bg-amber-500">ให้กลับไปเเก้ไข
                         </button>
 
-                        <button @click="navigateToNoApprovePartner"
+                        <button @click="navigateToRejectPartner"
                             class="bg-red-400  text-2xl rounded-lg px-3 py-2 hover:bg-red-500">ปฎิเสธ
                         </button>
-
                     </div>
                 </div>
             </div>
@@ -70,7 +69,7 @@ export default {
         navigateToApprovePartner() {
             this.$router.push("/approvepartner");
         },
-        navigateToNoApprovePartner() {
+        navigateToRejectPartner() {
             this.$router.push("/rejectpartner");
         },
         navigateToWaitEditPartner() {

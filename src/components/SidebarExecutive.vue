@@ -11,16 +11,15 @@
             </div>
 
             <div class="flex flex-col items-center mt-5 mb-4">
-                <img :src="nav.logocompany" alt="โลโก้บริษัท"
-                    class="object-contain mb-2 shadow-lg rounded-full transition-all duration-300"
+                <img alt="โลโก้บริษัท" class="object-contain mb-2 shadow-lg rounded-full transition-all duration-300"
                     :class="isCollapsed ? 'w-11 h-11' : 'w-20 h-20'" />
-                <p v-show="!isCollapsed" class="text-center text-sm text-gray-300 transition-opacity duration-300">
-                    {{ nav.companyname }}
+                <p v-show="!isCollapsed" class="text-center text-sm text-stone-500 transition-opacity duration-300">
+                    {{ partner.companyName }}
                 </p>
             </div>
 
             <div class="mt-6">
-                <div @click="navigateToDashboardEx('dashboard')"
+                <div @click="navigateTo('dashboardforexecutive', 'dashboard')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-amber-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'dashboard' ? 'bg-amber-400 text-white drop-shadow-lg' : '',
@@ -34,7 +33,7 @@
                     </p>
                 </div>
 
-                <div @click="navigateToStayRoom('satyroom')"
+                <div @click="navigateTo('/mainhotelroom', 'stayroom')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-amber-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'stayroom' ? 'bg-amber-400 text-white drop-shadow-lg' : '',
@@ -48,7 +47,7 @@
                     </p>
                 </div>
 
-                <div @click="navigateToReserveTossagun('reservetossagun')"
+                <div @click="navigateTo('/mainbookingtossagun', 'reservetossagun')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-amber-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'reservetossagun' ? 'bg-amber-400 text-white drop-shadow-lg' : '',
@@ -62,7 +61,7 @@
                     </p>
                 </div>
 
-                <div @click="navigateToReport('report')"
+                <div @click="navigateTo('/mainreport', 'report')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-amber-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'report' ? 'bg-amber-400 text-white drop-shadow-lg' : '',
@@ -75,7 +74,7 @@
                         รายงาน
                     </p>
                 </div>
-                <div @click="navigateToPromotion('promotion')"
+                <div @click="navigateTo('/mainbyepromotion', 'promotion')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-amber-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'promotion' ? 'bg-amber-400 text-white drop-shadow-lg' : '',
@@ -89,7 +88,7 @@
                     </p>
                 </div>
 
-                <div @click="navigateToManageRoom('manageroom')"
+                <div @click="navigateTo('/roomlist', 'manageroom')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-amber-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'manageroom' ? 'bg-amber-400 text-white drop-shadow-lg' : '',
@@ -103,7 +102,7 @@
                     </p>
                 </div>
 
-                <div @click="navigateToManageEmployee('manageemployee')"
+                <div @click="navigateTo('/mainemployee', 'manageemployee')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-amber-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'manageemployee' ? 'bg-amber-400 text-white drop-shadow-lg' : '',
@@ -117,7 +116,7 @@
                     </p>
                 </div>
 
-                <div @click="navigateToEditProflie('editproflie')"
+                <div @click="navigateTo('/mainprofilecompany', 'editproflie')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-amber-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'editproflie' ? 'bg-amber-400 text-white drop-shadow-lg' : '',
@@ -132,17 +131,22 @@
                 </div>
 
 
-                <div class="flex justify-center mt-6 space-x-2 text-sm">
-                    <p>Partner</p>
-                    <p v-show="!isCollapsed"
-                        class="transition-transform duration-300 group-hover:scale-110 text-rose-500">
-                        {{ namePartner }}
-                    </p>
+                <div class="flex flex-col justify-center mt-6 space-x-2 text-sm">
+                    <p class="text-center text-stone-400">role <span class=" text-lg text-amber-500 font-bold">{{
+                        partner.role }}</span></p>
+                    <div v-show="!isCollapsed"
+                        class="text-center mt-1 transition-transform duration-300 group-hover:scale-110 text-stone-500 bg-amber-100 py-1 rounded-lg mx-4">
+                        <div class="flex space-x-2 justify-center">
+                            <p>{{ partner.firstname }}</p>
+                            <p> {{ partner.lastname }}</p>
+                        </div>
+                    </div>
                 </div>
 
 
 
-                <div @click="navigateTologout('logout')"
+
+                <div @click="navigateTo('/logout', 'logout')"
                     class="mt-20 group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-red-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'logout' ? 'bg-red-400 text-white drop-shadow-lg' : '',
@@ -184,63 +188,70 @@
                 <!-- Menu Items -->
                 <div class="flex-1 overflow-y-auto px-4 py-6">
                     <div class="space-y-2">
-                        <div @click="navigateToDashboardEx('dashboard')"
+                        <div @click="navigateTo('dashboardforexecutive', 'dashboard')"
                             class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
                             :class="activeMenu === 'dashboard' ? 'bg-amber-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">Dashboard</span>
                         </div>
 
-                        <div @click="navigateToStayRoom('stayroom')"
+                        <div @click="navigateTo('/mainhotelroom', 'stayroom')"
                             class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
                             :class="activeMenu === 'stayroom' ? 'bg-amber-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">เข้าพัก</span>
                         </div>
 
-                        <div @click="navigateToReserveTossagun('reservetossagun')"
+                        <div @click="navigateTo('/mainbookingtossagun', 'reservetossagun')"
                             class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
                             :class="activeMenu === 'reservetossagun' ? 'bg-amber-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">จองกับTossagun</span>
                         </div>
 
-                        <div @click="navigateToReport('report')"
+                        <div @click="navigateTo('/mainreport', 'report')"
                             class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
                             :class="activeMenu === 'report' ? 'bg-amber-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">รายงาน</span>
                         </div>
 
-                        <div @click="navigateToPromotion('promotion')"
+                        <div @click="navigateTo('/mainbyepromotion', 'promotion')"
                             class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
                             :class="activeMenu === 'promotion' ? 'bg-amber-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">ใช้งานโปรโมชั่น</span>
                         </div>
 
-                        <div @click="navigateToManageRoom('manageroom')"
+                        <div @click="navigateTo('/roomlist', 'manageroom')"
                             class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
                             :class="activeMenu === 'manageroom' ? 'bg-amber-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">จัดการห้องพัก</span>
                         </div>
 
-                        <div @click="navigateToManageEmployee('manageemployee')"
+                        <div @click="navigateTo('/mainemployee', 'manageemployee')"
                             class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
                             :class="activeMenu === 'manageemployee' ? 'bg-amber-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">จัดการพนักงาน</span>
                         </div>
 
-                        <div @click="navigateToEditProflie('editproflie')"
+                        <div @click="navigateTo('/mainprofilecompany', 'editproflie')"
                             class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
                             :class="activeMenu === 'editproflie' ? 'bg-amber-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">แก้ไขโปรไฟล์</span>
                         </div>
 
-                        <div class="flex justify-center mt-6 space-x-2 text-sm">
-                            <p>Partner :</p>
-                            <p v-show="!isCollapsed"
-                                class="transition-transform duration-300 group-hover:scale-110 text-amber-500">
-                                {{ namePartner }}
-                            </p>
+                        <div class="flex flex-col justify-center mt-6 space-x-2 text-sm my-4">
+                            <p class="text-center">Partner : <span class="text-amber-500 font-bold text-lg">{{
+                                partner.role }}</span></p>
+                            <div
+                                class="transition-transform duration-300 group-hover:scale-110 text-stone-500 space-x-2">
+                                <div class="flex space-x-2 justify-center">
+                                    <p>{{ partner.firstname }}</p>
+                                    <p> {{ partner.lastname }}</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-red-400 hover:text-white flex justify-center"
+
+
+                        <div @click="navigateTo('/logout', 'logout')"
+                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-red-400 hover:text-white  justify-center"
                             :class="activeMenu === '' ? 'bg-red-400 text-white' : 'text-gray-700'">
                             <span class="text-lg hover:text-white">LogOut</span>
                         </div>
@@ -252,164 +263,119 @@
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            isCollapsed: this.getSidebarStateFromStorage(), // เปลี่ยนจาก false เป็นการโหลดจาก localStorage
-            isMobileMenuOpen: false,
-            activeMenu: this.getActiveMenuFromRoute(),
-            nav: {
-                logocompany: '/ImgTossagun/Tosdrink.jpg',
-                companyname: 'ชื่อบริษัท',
-                namePartner: 'Agfdii 9e8wfr',
-            }
+
+<script setup>
+import { ref, watch, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+
+const partner = ref({
+    firstname: '',
+    lastname: '',
+    companyName: '',
+    role: ''
+})
+
+const emit = defineEmits(['toggle-sidebar'])
+const router = useRouter()
+const route = useRoute()
+
+
+
+const isCollapsed = ref(getSidebarStateFromStorage())
+const isMobileMenuOpen = ref(false)
+const activeMenu = ref(getActiveMenuFromRoute())
+
+
+
+// ✅ โหลดสถานะ sidebar เมื่อ component ถูก mount
+onMounted(() => {
+    isCollapsed.value = getSidebarStateFromStorage()
+    emitToggleSidebar()
+
+    const savedPartner = localStorage.getItem('partner')
+    if (savedPartner) {
+        partner.value = JSON.parse(savedPartner)
+        if (!partner.value.role) {
+            partner.value.role = 'partner'
         }
-    },
-    created() {
-        this.setActiveMenuFromRoute();
-        // โหลดสถานะ sidebar จาก localStorage เมื่อ component ถูกสร้าง
-        this.loadSidebarState();
-    },
-    watch: {
-        '$route'() {
-            this.setActiveMenuFromRoute();
-        }
-    },
-    methods: {
-        // ฟังก์ชันใหม่สำหรับโหลดสถานะ sidebar จาก localStorage
-        getSidebarStateFromStorage() {
-            try {
-                const saved = localStorage.getItem('sidebarCollapsed');
-                return saved ? JSON.parse(saved) : false;
-            } catch (error) {
-                console.warn('Could not load sidebar state from localStorage:', error);
-                return false;
-            }
-        },
+    }
+})
 
-        // ฟังก์ชันใหม่สำหรับโหลดสถานะ sidebar
-        loadSidebarState() {
-            const savedState = this.getSidebarStateFromStorage();
-            this.isCollapsed = savedState;
-            // ส่ง event ไปยัง parent component เพื่ออัปเดตสถานะ
-            this.$emit('toggle-sidebar', this.isCollapsed);
-        },
+// ✅ เปลี่ยนเมนูที่ active เมื่อ route เปลี่ยน
+watch(route, () => {
+    activeMenu.value = getActiveMenuFromRoute()
+})
 
-        // ฟังก์ชันสำหรับกำหนด active menu จาก route
-        getActiveMenuFromRoute() {
-            const currentRoute = this.$route?.path || window.location.pathname;
-
-            const routeMenuMap = {
-                '/dashboardforexecutive': 'dashboard',
-                '/mainemployee': 'manageemployee',
-                '/addemployee': 'manageemployee',
-                '/employeelist': 'manageemployee',
-                '/editemployee': 'manageemployee',
-                '/editprofilecompany': 'editproflie',
-                '/roomlist': 'manageroom',
-                '/addroom': 'manageroom',
-                '/editroom': 'manageroom',
-
-                '/mainhotelroom': 'stayroom',
-                '/maincheckincheckout': 'stayroom',
-                '/checkin': 'stayroom',
-                '/checkout': 'stayroom',
-
-                '/mainhoteldetailroom': 'stayroom',
-
-                '/maindetailbookingtossagun': 'reservetossagun',
-
-                '/mainreport': 'report',
-                '/editprofilecompany': 'editproflie',
-                '/mainprofilecompany': 'editproflie',
-                '/editdetailhotel': 'editproflie',
-
-                '/profilecompany': 'editproflie',
-                '/detailhotel': 'editproflie',
-
-                '/mainbyepromotion': 'promotion',
-                '/mainbookingtossagun': 'reservetossagun',
-
-
-
-                // เพิ่ม route อื่นๆ ตามต้องการ
-            };
-
-            return routeMenuMap[currentRoute] || 'dashboard';
-        },
-
-        setActiveMenuFromRoute() {
-            this.activeMenu = this.getActiveMenuFromRoute();
-        },
-
-        toggleSidebar() {
-            this.isCollapsed = !this.isCollapsed
-            this.$emit('toggle-sidebar', this.isCollapsed)
-            // บันทึกสถานะใหม่ลง localStorage
-            try {
-                localStorage.setItem('sidebarCollapsed', JSON.stringify(this.isCollapsed))
-            } catch (error) {
-                console.warn('Could not save sidebar state to localStorage:', error);
-            }
-        },
-
-        toggleMobileMenu() {
-            this.isMobileMenuOpen = !this.isMobileMenuOpen;
-        },
-
-        setActiveMobile(menu) {
-            this.activeMenu = menu;
-            this.isMobileMenuOpen = false;
-        },
-
-        navigateToDashboardEx() {
-            this.activeMenu = 'dashboard';
-            this.$router.push("/dashboardforexecutive");
-            this.isMobileMenuOpen = false;
-        },
-
-        navigateToStayRoom() {
-            this.activeMenu = 'stayroom';
-            this.$router.push("/mainhotelroom");
-            this.isMobileMenuOpen = false;
-        },
-
-        navigateToReserveTossagun() {
-            this.activeMenu = 'reservetossagun';
-            this.$router.push("/mainbookingtossagun");
-            this.isMobileMenuOpen = false;
-        },
-
-        navigateToReport() {
-            this.activeMenu = 'report';
-            this.$router.push("/mainreport");
-            this.isMobileMenuOpen = false;
-        },
-
-        navigateToPromotion() {
-            this.activeMenu = 'promotion';
-            this.$router.push("/mainbyepromotion");
-            this.isMobileMenuOpen = false;
-        },
-
-        navigateToManageRoom() {
-            this.activeMenu = 'manageroom';
-            this.$router.push("/roomlist");
-            this.isMobileMenuOpen = false;
-        },
-
-        navigateToManageEmployee() {
-            this.activeMenu = 'manageemployee';
-            this.$router.push("/mainemployee");
-            this.isMobileMenuOpen = false;
-        },
-
-        navigateToEditProflie() {
-            this.activeMenu = 'editproflie';
-            this.$router.push("/mainprofilecompany");
-            this.isMobileMenuOpen = false;
-        },
+// ===== METHODS =====
+function getSidebarStateFromStorage() {
+    try {
+        const saved = localStorage.getItem('sidebarCollapsed')
+        return saved ? JSON.parse(saved) : false
+    } catch (error) {
+        console.warn('Could not load sidebar state from localStorage:', error)
+        return false
     }
 }
+
+function emitToggleSidebar() {
+    // ถ้า component นี้ emit event ออกไป ต้องกำหนด defineEmits
+    emit('toggle-sidebar', isCollapsed.value)
+}
+
+function getActiveMenuFromRoute() {
+    const currentRoute = route.path || window.location.pathname
+
+    const routeMenuMap = {
+        '/dashboardforexecutive': 'dashboard',
+        '/mainemployee': 'manageemployee',
+        '/addemployee': 'manageemployee',
+        '/employeelist': 'manageemployee',
+        '/editemployee': 'manageemployee',
+
+        '/editprofilecompany': 'editproflie',
+        '/mainprofilecompany': 'editproflie',
+        '/profilecompany': 'editproflie',
+        '/editdetailhotel': 'editproflie',
+        '/detailhotel': 'editproflie',
+
+        '/roomlist': 'manageroom',
+        '/addroom': 'manageroom',
+        '/editroom': 'manageroom',
+        '/mainhotelroom': 'stayroom',
+        '/maincheckincheckout': 'stayroom',
+        '/checkin': 'stayroom',
+        '/checkout': 'stayroom',
+        '/mainhoteldetailroom': 'stayroom',
+        '/mainbookingtossagun': 'reservetossagun',
+        '/maindetailbookingtossagun': 'reservetossagun',
+        '/mainreport': 'report',
+        '/mainbyepromotion': 'promotion',
+    }
+
+    return routeMenuMap[currentRoute] || 'dashboard'
+}
+
+function toggleSidebar() {
+    isCollapsed.value = !isCollapsed.value
+    localStorage.setItem('sidebarCollapsed', JSON.stringify(isCollapsed.value))
+    emitToggleSidebar()
+}
+
+function toggleMobileMenu() {
+    isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+function setActiveMobile(menu) {
+    activeMenu.value = menu
+    isMobileMenuOpen.value = false
+}
+
+function navigateTo(path, menuKey) {
+    activeMenu.value = menuKey
+    router.push(path)
+    isMobileMenuOpen.value = false
+}
+
+
+// ========= EXPORT TO TEMPLATE =========
 </script>

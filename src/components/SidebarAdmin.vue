@@ -245,7 +245,7 @@ export default {
                 '/approvepartner': 'managepartner',
                 '/mainpartner': 'managepartner',
                 '/request': 'managepartner',
-                '/noapprovepartner': 'managepartner',
+                '/rejectpartner': 'managepartner',
                 '/mainpartnersleepgun': 'managepartner',
                 '/detailpartnerall': 'managepartner',
 

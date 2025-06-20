@@ -240,7 +240,7 @@ export default {
             this.$router.push("/approvepartner");
         },
         navigateToNoApprove() {
-            this.$router.push("/noapprovepartner");
+            this.$router.push("/rejectpartner");
         },
         navigateToDetailPartnerAdmin() {
             this.$router.push("/detailpartnerall");

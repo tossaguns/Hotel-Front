@@ -1,4 +1,3 @@
-TODO: เสร็จเเล้ว
 <template>
     <div class="relative w-full min-h-screen flex items-center justify-center">
 
@@ -86,24 +85,117 @@ TODO: เสร็จเเล้ว
                     </div>
                 </div>
 
-                <!-- คอลัมน์ขวา (ฟอร์ม) -->
+                <div v-if="errorMessage" class="text-red-600 text-center mt-4">
+                    {{ errorMessage }}
+                </div>
 
             </div>
         </div>
     </div>
 </template>
 
+
+
 <script setup>
+/*
+import { ref } from 'vue'
+import axios from 'axios'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+
+const username = ref('')
+const password = ref('')
+const showPassword = ref(false)
+const errorMessage = ref('')
+
+const togglePassword = () => {
+    showPassword.value = !showPassword.value
+}
 
 function navigateToRegisterPartner() {
     router.push('/registerpartner')
 }
 
-// ======= toggle password =======
+function goBack() {
+    router.back()
+}
+
+const submitForm = async () => {
+    errorMessage.value = ''
+    try {
+        console.log("Sending login with:", username.value, password.value)
+        const response = await axios.post('http://localhost:9999/SleepGun/partnerLogin/login', {
+            username: username.value,
+            password: password.value,
+        })
+
+        const { token, partner } = response.data
+        console.log("Response:", response.data)
+
+        localStorage.setItem('token', token)
+        localStorage.setItem('partner', JSON.stringify(partner))
+
+        router.push('/mainprofilecompany')
+    } catch (error) {
+        if (error.response) {
+            errorMessage.value = error.response.data.message || 'Login ล้มเหลว'
+        } else {
+            errorMessage.value = 'เกิดข้อผิดพลาดในการเชื่อมต่อ'
+        }
+    }
+}*/
+import { ref } from 'vue'
+import axios from 'axios'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const username = ref('')
+const password = ref('')
+const showPassword = ref(false)
+const errorMessage = ref('')
+
 const togglePassword = () => {
     showPassword.value = !showPassword.value
 }
+
+function navigateToRegisterPartner() {
+    router.push('/registerpartner')
+}
+
+function goBack() {
+    router.back()
+}
+
+const submitForm = async () => {
+    errorMessage.value = ''
+    try {
+        console.log("✅ Sending login:", username.value, password.value)
+
+        const response = await axios.post('http://localhost:9999/SleepGun/partnerLogin/login', {
+            username: username.value,
+            password: password.value,
+        })
+
+        console.log("✅ Response OK:", response.data)
+
+        const { token, partner } = response.data
+        localStorage.setItem('token', token)
+        localStorage.setItem('partnerId', partner._id)
+        localStorage.setItem('partner', JSON.stringify(partner))
+
+        console.log("✅ Redirecting to /maincompany")
+        router.push('/maincompany')
+    } catch (error) {
+        console.error("❌ Login failed:", error)
+        if (error.response) {
+            errorMessage.value = error.response.data.message || 'Login ล้มเหลว'
+        } else {
+            errorMessage.value = 'เกิดข้อผิดพลาดในการเชื่อมต่อ'
+        }
+    }
+}
+
+
 </script>

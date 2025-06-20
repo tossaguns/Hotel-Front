@@ -138,6 +138,12 @@ const router = createRouter({
         import("@/views/Admin/ManagePartner/Approve/ApprovePartner.vue"),
     },
     {
+      path: "/requesteditpartner",
+      name: "RequestEditPartner",
+      component: () =>
+        import("@/views/Admin/ManagePartner/Approve/RequestEditPartner.vue"),
+    },
+    {
       path: "/mainpartner",
       name: "MainPartner",
       component: () => import("@/views/Admin/ManagePartner/MainPartner.vue"),
@@ -149,10 +155,10 @@ const router = createRouter({
         import("@/views/Admin/ManagePartner/Approve/Request.vue"),
     },
     {
-      path: "/noapprovepartner",
-      name: "NoApprovePartner",
+      path: "/rejectpartner",
+      name: "RejectPartner",
       component: () =>
-        import("@/views/Admin/ManagePartner/Approve/NoApprovePartner.vue"),
+        import("@/views/Admin/ManagePartner/Approve/RejectPartner.vue"),
     },
     {
       path: "/mainbyepromotion",
@@ -332,7 +338,35 @@ const router = createRouter({
     {
       path: "/detailpartnerall/:id",
       name: "DetailPartnerAll",
-      component: () => import("@/views/Admin/ManagePartner/DetailPartnerAll.vue"),
+      component: () =>
+        import("@/views/Admin/ManagePartner/DetailPartnerAll.vue"),
+    },
+
+    {
+      path: "/profileafterlogin/:id",
+      name: "DetailPartnerAll",
+      component: () =>
+        import(
+          "@/views/Partner/Executive/UpdateProfileAfterLogin/ProfileAfterLogin.vue"
+        ),
+    },
+
+    {
+      path: "/mainprofileafterlogin",
+      name: "MainProfileAfterLogin",
+      component: () =>
+        import(
+          "@/views/Partner/Executive/UpdateProfileAfterLogin/MainProfileAfterLogin.vue"
+        ),
+    },
+
+    {
+      path: "/maincompany",
+      name: "MainCompany",
+      component: () =>
+        import(
+          "@/views/Partner/Executive/MainCompany.vue"
+        ),
     },
   ],
 });
