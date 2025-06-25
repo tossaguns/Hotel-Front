@@ -202,7 +202,7 @@ export default {
       }
 
       if (!hasError) {
-        alert('เข้าสู่ระบบ Partner สำเร็จ');
+        alert('เข้าสู่ระบบ Employee สำเร็จ');
         this.$router.push({ name: 'CheckEmployeeLogin' });
       }
     },
@@ -234,7 +234,7 @@ export default {
 
       if (!hasError) {
         alert('เข้าสู่ระบบ Partner สำเร็จ');
-        // this.$router.push({ name: 'CheckEmployeeLogin' }); //เข้าระบบ Partner
+        this.$router.push({ name: 'DashBoardforAdmin' });
       }
     },
 

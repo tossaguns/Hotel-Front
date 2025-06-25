@@ -149,9 +149,9 @@ const router = createRouter({
         import("@/views/Admin/ManagePartner/Approve/RequestEditPartner.vue"),
     },
     {
-      path: "/managepartner",
-      name: "ManagePartner",
-      component: () => import("@/views/Admin/ManagePartner/ManagePartner.vue"),
+      path: "/mainpartner",
+      name: "MainPartner",
+      component: () => import("@/views/Admin/ManagePartner/MainPartner.vue"),
     },
     {
       path: "/request",
@@ -165,6 +165,7 @@ const router = createRouter({
       component: () =>
         import("@/views/Admin/ManagePartner/Approve/RejectPartner.vue"),
     },
+   
     {
       path: "/mainbyepromotion",
       name: "MainByeProMotion",
