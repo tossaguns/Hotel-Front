@@ -24,7 +24,8 @@
                     <div class="mt-6">
                         <div class="text-md text-center">
                             <p>ขณะนี้เจ้าหน้าที่กำลังทำการตรวจสอบหากการอนุมัติสำเร็จ
-                                ทางเราจะเเจ้งให้ท่านทราบผ่านทาง <span class="text-red-600  pr-1 font-bold">Email</span>ภายใน
+                                ทางเราจะเเจ้งให้ท่านทราบผ่านทาง <span
+                                    class="text-red-600  pr-1 font-bold">Email</span>ภายใน
                                 <span class="text-red-600  pr-1 font-bold">1-3 วัน</span>
                             </p>
                         </div>
@@ -41,12 +42,11 @@
                         </div>
                     </div>
 
-
-
                 </div>
             </div>
         </div>
     </div>
+
 </template>
 
 <script setup>

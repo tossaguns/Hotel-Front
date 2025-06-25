@@ -1,5 +1,4 @@
 <template>
-    TODO: ให้เป็ฯ partner กับเราเเล้วเด่นสุด อยู่ข้างล่างสุด
     <div class="w-full min-h-screen bg-gray-200">
         <SidebarAdmin @toggle-sidebar="handleSidebarToggle" />
 
@@ -8,39 +7,71 @@
             'md:ml-[80px]': isSidebarCollapsed
         }">
 
-            <div>
-                <div class="mt-2 rounded-t-lg bg-rose-400 p-2 text-white text-lg">
+            <div class="mt-3 relative bg-gradient-to-b from-rose-100 via-white to-white rounded-xl overflow-hidden">
+
+                <div class="rounded-t-lg bg-rose-400 p-2 text-white text-lg">
                     <h1>จัดการ Partner</h1>
                 </div>
 
-                <div class="bg-white rounded-b-lg pb-6 ">
-                    <div class="flex justify-center pt-7 mb-5 space-x-3">
-                        <div>
-                            <button @click="navigateToRequest"
-                                class="bg-stone-300 text-2xl rounded-lg px-3 py-2 hover:bg-stone-400">คำขอสมัคร
-                                Partner</button>
-                        </div>
-                    </div>
+                <!-- Header -->
+                <div class="relative z-10 text-center py-6">
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-rose-500 drop-shadow">
+                        ระบบจัดการ Partner
+                    </h1>
+                    <p class="text-gray-600 mt-2 text-base sm:text-lg max-w-md mx-auto">
+                        ดูแลและจัดการคำขอเป็นพาร์ทเนอร์ของโรงแรมคุณ<br> อย่างมืออาชีพ
+                    </p>
                 </div>
 
-                <div class="bg-white rounded-b-lg pb-6 ">
-                    <div class="flex justify-center pt-7 mb-5 space-x-3">
+                <!-- คำขอสมัคร -->
+                <div class="relative z-10 flex justify-center pb-4">
+                    <button @click="navigateToRequest"
+                        class="bg-white border-2 border-rose-300 text-rose-500 text-lg sm:text-xl font-medium rounded-full px-6 py-3 hover:bg-rose-100 transition duration-300 shadow">
+                        📄 คำขอสมัคร Partner
+                    </button>
+                </div>
 
-                        <button @click="navigateToApprovePartner"
-                            class="bg-green-400  text-2xl rounded-lg px-3 py-2 hover:bg-green-500">เป็น Partner
-                            กับเราเเล้ว
-                        </button>
+                <!-- การจัดการสถานะ -->
+                <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 py-10 justify-center">
 
+                    <!-- แก้ไข -->
+                    <div class="bg-white rounded-xl shadow p-4 hover:shadow-lg transition">
+                        <p class="text-sm text-gray-500 mb-2">รีวิวข้อมูลพาร์ทเนอร์</p>
                         <button @click="navigateToWaitEditPartner"
-                            class="bg-amber-400  text-2xl rounded-lg px-3 py-2 hover:bg-amber-500">ให้กลับไปเเก้ไข
+                            class="bg-amber-300 text-white text-base sm:text-lg font-semibold rounded-xl w-full px-4 py-3 hover:bg-amber-400 transition">
+                            ✏️ ให้กลับไปแก้ไข
                         </button>
+                    </div>
 
-                        <button @click="navigateToRejectPartner"
-                            class="bg-red-400  text-2xl rounded-lg px-3 py-2 hover:bg-red-500">ปฎิเสธ
+                    <!-- ปฏิเสธ -->
+                    <div class="bg-white rounded-xl shadow p-4 hover:shadow-lg transition">
+                        <p class="text-sm text-gray-500 mb-2">กรณีไม่ผ่านการตรวจสอบ</p>
+                        <button @click="navigateToNoApprovePartner"
+                            class="bg-red-400 text-white text-base sm:text-lg font-semibold rounded-xl w-full px-4 py-3 hover:bg-red-500 transition">
+                            ❌ ปฏิเสธ
+                        </button>
+                    </div>
+
+                    <!-- ผ่านแล้ว -->
+                    <div class="bg-white rounded-xl shadow p-4 hover:shadow-lg transition">
+                        <p class="text-sm text-gray-500 mb-2">พาร์ทเนอร์ที่ผ่านแล้ว</p>
+                        <button @click="navigateToApprovePartner"
+                            class="bg-green-500 text-white text-base sm:text-lg font-semibold rounded-xl w-full px-4 py-3 hover:bg-green-600 transition">
+                            ✅ ผ่านแล้ว
                         </button>
                     </div>
                 </div>
+
+                <!-- เป็น Partner กับเราแล้ว -->
+                <div class="relative z-10 flex justify-center pb-12">
+                    <button @click="navigateToApprovePartner"
+                        class="bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 text-white text-sm sm:text-2xl font-bold rounded-full px-6 py-3 sm:py-5 hover:scale-105 hover:shadow-2xl transition duration-500 ease-in-out shadow-lg animate-pulse  text-center">
+                        🌟 เป็น Partner กับเราแล้ว 🌟
+                    </button>
+                </div>
+
             </div>
+
         </div>
     </div>
 </template>
@@ -75,8 +106,6 @@ export default {
         navigateToWaitEditPartner() {
             this.$router.push("/requesteditpartner");
         },
-
-
     },
     mounted() {
         const savedState = localStorage.getItem('sidebarCollapsed')

@@ -31,7 +31,7 @@
                                         <input v-model="checkInForm"
                                             class="border rounded-md px-3 py-1 w-24 text-center" placeholder="00:00" />
                                         <p>ถึง :</p>
-                                        <input v-model="checkInTo" class="border rounded-md px-3 py-1 w-24 text-center"
+                                        <input class="border rounded-md px-3 py-1 w-24 text-center"
                                             placeholder="00:00" />
                                     </div>
                                     <div class="max-w-xl mx-auto">
@@ -50,7 +50,7 @@
                                         <input v-model="checkOutForm"
                                             class="border rounded-md px-3 py-1 w-24 text-center" placeholder="00:00" />
                                         <p>ถึง :</p>
-                                        <input v-model="checkOutTo" class="border rounded-md px-3 py-1 w-24 text-center"
+                                        <input class="border rounded-md px-3 py-1 w-24 text-center"
                                             placeholder="00:00" />
                                     </div>
                                 </div>
@@ -134,12 +134,12 @@
                                         </p>
                                         <div class="flex space-x-3">
                                             <p>ค่ามัดจำต่อห้องราคา :</p>
-                                            <input v-model="price" class="border rounded-md px-3 py-1 w-24 "
+                                            <input class="border rounded-md px-3 py-1 w-24 "
                                                 placeholder="ราคา" /><span>บาท</span>
                                         </div>
                                         <div class="flex-col mt-2">
                                             <p class="text-left">ราคาที่ต้องจ่ายของค่ามัดจำมีอะไรบ้าง :</p>
-                                            <input v-model="note" class="border rounded-md px-3 py-2 w-full mt-2"
+                                            <input class="border rounded-md px-3 py-2 w-full mt-2"
                                                 placeholder="ค่ากุญเเจ ค่าคีย์การ์ด..." />
                                         </div>
 
@@ -332,10 +332,26 @@ import Sidebar from '@/components/SidebarExecutive.vue'
 import axios from 'axios'
 
 const router = useRouter()
-const route = useRoute()
 
 
 const isSidebarCollapsed = ref(false)
+const hasExtraBed = ref(null)
+const hasExtraCashPledge = ref(null)
+
+const facilities = ref([])
+const hotelLocation = ref([])
+const roomHotel = ref([])
+const hotelFor = ref([])
+const foodHotel = ref([])
+
+const selectedFacilities = ref([])
+const selectedHotelLocation = ref([])
+const selectedRoomHotel = ref([])
+const selectedHotelFor = ref([])
+const selectedFoodHotel = ref([])
+
+
+
 function handleSidebarToggle(collapsed) {
     isSidebarCollapsed.value = collapsed
 }
@@ -384,6 +400,8 @@ onMounted(async () => {
 });
 
 </script>
+
+
 
 <style scoped>
 .fade-slide-enter-active,
