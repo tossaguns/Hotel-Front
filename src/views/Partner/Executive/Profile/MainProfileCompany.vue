@@ -2,10 +2,11 @@
     <div class="w-full min-h-screen bg-gray-200">
         <Sidebar @toggle-sidebar="handleSidebarToggle" />
 
-        <div class="flex-1 md:px-4  md:py-3 mt-16 md:mt-0 transition-all duration-300" :class="{
-            'md:ml-[260px]': !isSidebarCollapsed,
-            'md:ml-[80px]': isSidebarCollapsed
-        }">
+        <div class="flex-1 md:pl-4 md:pr-2 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300"
+            style="top: 1rem; bottom: 1rem; height: auto;" :class="{
+                'md:ml-[232px]': !isSidebarCollapsed,
+                'md:ml-[72px]': isSidebarCollapsed
+            }">
 
             <div class="bg-white md:rounded-lg mt-2 px-4 min-h-screen flex justify-center pt-32 space-x-5">
                 <div>

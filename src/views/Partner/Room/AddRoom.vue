@@ -2,13 +2,14 @@
 ให้เข้าธีม
 <template>
 
-    <div class="w-full min-h-screen bg-gray-200">
+<div class="w-full min-h-screen bg-gray-100">
         <Sidebar @toggle-sidebar="handleSidebarToggle" />
 
-        <div class="flex-1 px-4 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300" :class="{
-            'md:ml-[260px]': !isSidebarCollapsed,
-            'md:ml-[80px]': isSidebarCollapsed
-        }">
+        <div class="flex-1 md:pl-4 md:pr-2 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300"
+            style="top: 1rem; bottom: 1rem; height: auto;" :class="{
+                'md:ml-[232px]': !isSidebarCollapsed,
+                'md:ml-[72px]': isSidebarCollapsed
+            }">
             <div class="text-center border mx-1 mt-2 mb-12 rounded-md shadow-xl bg-white">
                 <div
                     class="text-center text-4xl sm:text-6xl font-bold mb-20 text-white bg-stone-500 pt-20 pb-10 rounded-t-lg">

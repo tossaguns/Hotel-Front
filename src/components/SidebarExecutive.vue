@@ -1,8 +1,8 @@
 <template>
     <!-- Desktop Sidebar -->
-    <div class="hidden md:flex flex-col fixed top-0 left-0 h-screen bg-white ml-2 my-4 rounded-lg transition-all duration-300 ease-in-out z-40"
-        :class="isCollapsed ? 'w-[80px]' : 'w-[240px]'">
-        <nav class="flex flex-col space-y-1 p-2 overflow-y-auto">
+    <div class="hidden ml-2 md:flex flex-col fixed left-0 bg-white rounded-lg transition-all duration-300 ease-in-out z-40"
+        style="top: 1rem; bottom: 1rem; height: auto;" :class="isCollapsed ? 'w-[80px]' : 'w-[240px]'">
+        <nav class="flex flex-col space-y-1 p-2 overflow-y-auto custom-scrollbar">
             <div class="m-2" :class="isCollapsed ? 'flex justify-center' : ''">
                 <img v-if="!isCollapsed" src="/images/icon/closeopenbar.png" @click="toggleSidebar" alt="ไอคอนปิดบาร์"
                     class="w-2 h-5 cursor-pointer hover:opacity-70 ml-auto" />
@@ -18,7 +18,7 @@
                 </p>
             </div>
 
-            <div class="mt-6">
+            <div class="mt-3">
                 <div @click="navigateTo('dashboardforexecutive', 'dashboard')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-amber-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
@@ -147,7 +147,7 @@
 
 
                 <div @click="navigateTo('/logout', 'logout')"
-                    class="mt-20 group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-red-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
+                    class="mt-12 group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-red-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'logout' ? 'bg-red-400 text-white drop-shadow-lg' : '',
                         isCollapsed ? 'justify-center' : 'px-3'
@@ -395,3 +395,28 @@ function navigateTo(path, menuKey) {
     isMobileMenuOpen.value = false
 }
 </script>
+
+<style scoped>
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #dfdfdf #f8f8f9;
+    /* thumb, track */
+}
+
+/* Chrome, Edge, Safari */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 8px;
+    background: #f3f4f6;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(0, 0%, 68%);
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #f59e42;
+}
+</style>

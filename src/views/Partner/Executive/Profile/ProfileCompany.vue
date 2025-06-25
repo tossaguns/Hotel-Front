@@ -2,95 +2,138 @@
     <div class="w-full min-h-screen bg-gray-200">
         <Sidebar @toggle-sidebar="handleSidebarToggle" />
 
-        <div class="flex-1 md:px-4  md:py-3 mt-16 md:mt-0 transition-all duration-300" :class="{
-            'md:ml-[260px]': !isSidebarCollapsed,
-            'md:ml-[80px]': isSidebarCollapsed
-        }">
+        <div class="flex-1 md:pl-4 md:pr-2 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300"
+            style="top: 1rem; bottom: 1rem; height: auto;" :class="{
+                'md:ml-[232px]': !isSidebarCollapsed,
+                'md:ml-[72px]': isSidebarCollapsed
+            }">
 
-            <div class="bg-white md:rounded-lg mt-2 px-4 min-h-screen pb-8">
-                <div class="mb-10 pt-3">
-                    <p class="text-center md:text-left text-3xl">เเก้ไขข้อมูลบริษัท</p>
+            <div class="bg-white md:rounded-lg min-h-screen pb-8">
+                <div class="mt-2 rounded-t-lg bg-amber-400 p-2 text-white text-lg">
+                    <h1>โปรไฟล์บริษัท</h1>
                 </div>
-
-                <div class="flex flex-col  max-w-5xl mx-auto">
-                    <div class="flex flex-col md:flex-row md:items-center md:gap-4">
-                        <p class="md:w-1/3">โลโก้บริษัท</p>
-                        <img />
-                    </div>
-
-                    <div class="flex flex-col md:flex-row md:items-center md:gap-4  mt-3">
-                        <p class="md:w-1/3">ชื่อบริษัท</p>
-                        <p class="w-full border p-2 rounded text-amber-700">{{ }}</p>
-                    </div>
-
-                    <div class="bg-yellow-400 shadow-xl rounded-lg p-4 mt-6 w-full space-y-4">
-                        <div class="flex space-x-2">
-                            <p class="text-red-700">**</p>
-                            <p class="font-semibold">เพิ่มชื่อเเละลายเซ็นสำหรับอนุมัติใบเสร็จหรือเอกสารอื่นๆ</p>
-                        </div>
-
-                        <div class="flex flex-col md:flex-row md:items-center md:gap-4">
-                            <p class="md:w-1/3">ชื่อ-นามสกุล</p>
-                            <p class="w-full border p-2 rounded text-amber-700 bg-white">{{ }}</p>
-                        </div>
-
-                        <div class="flex flex-col md:flex-row md:items-center md:gap-4">
-                            <p class="md:w-1/3">ลายเซ็น (ภาพพื้นหลังสีขาวหรือไม่มีพื้นหลังเท่านั้น)</p>
-                            <img class="w-full border p-2 rounded bg-white" />
-                        </div>
-                    </div>
-
-
-                    <div class="max-w-2xl mx-auto mt-6 w-full">
-                        <div class="px-4 py-3">
-                            <div class="flex space-x-2">
-                                <p class="w-1/3">บ้านเลขที่ </p>
-                                <p class="border w-full py-1 px-3 rounded-md">{{ }}</p>
-                            </div>
-
-                            <div class="flex space-x-2 mt-2">
-                                <p class="w-1/3">ตำบล </p>
-                                <p class="border w-full py-1 px-3 rounded-md">{{ }}</p>
-                            </div>
-
-                            <div class="flex space-x-2 mt-2">
-                                <p class="w-1/3">อำเภอ </p>
-                                <p class="border w-full py-1 px-3 rounded-md">{{ }}</p>
-                            </div>
-
-                            <div class="flex space-x-2 mt-2">
-                                <p class="w-1/3">จังหวัด </p>
-                                <p class="border w-full py-1 px-3 rounded-md">{{ }}</p>
-                            </div>
-
-                            <div class="flex space-x-2 mt-2">
-                                <p class="w-1/3">รหัสไปรษณีย์ </p>
-                                <p class="border w-full py-1 px-3 rounded-md">{{ }}</p>
-                            </div>
-
-
-                            <hr class="border my-4" />
-
-                            <div class="mt-6">
-                                <div class="flex space-x-2 mt-2">
-                                    <p class="w-1/3">เบอร์โทร </p>
-                                    <p class="border w-full py-1 px-3 rounded-md">{{ }}</p>
+                <div class="mt-2 py-2 px-4 ">
+                    <div class="relative max-w-5xl mx-auto w-full mt-6">
+                        <div class="bg-white border rounded-md shadow-md min-h-full px-3 pt-8 pb-8">
+                            <div class="md:flex md:justify-between mt-4">
+                                <div class="md:w-1/2 flex justify-center">
+                                    <div
+                                        class="relative w-52 h-52 border-2 border-dashed rounded-md bg-white flex items-center overflow-hidden group">
+                                        <img v-if="logoPreview" :src="logoPreview" class="w-full h-full object-cover" />
+                                        <div v-else
+                                            class="flex items-center justify-center w-full h-full text-gray-400">
+                                            ไม่มีโลโก้</div>
+                                    </div>
                                 </div>
-
-                                <div class="flex space-x-2 mt-2">
-                                    <p class="w-1/3">อีเมล </p>
-                                    <p class="border w-full py-1 px-3 rounded-md">{{ }}</p>
+                                <div class="lg:w-1/2 md:mt-3 mt-5">
+                                    <div class="flex space-x-2 mt-2">
+                                        <p class="w-1/3">ชื่อบริษัท </p>
+                                        <input class="border w-full py-1 px-3 rounded-md" v-model="companyName"
+                                            readonly />
+                                    </div>
+                                    <div class="flex space-x-2 mt-2">
+                                        <p class="w-1/3">เบอร์โทร </p>
+                                        <input class="border w-full py-1 px-3 rounded-md" v-model="companyPhone"
+                                            readonly />
+                                    </div>
+                                    <div class="flex space-x-2 mt-2">
+                                        <p class="w-1/3">อีเมล </p>
+                                        <input class="border w-full py-1 px-3 rounded-md" v-model="companyEmail"
+                                            readonly />
+                                    </div>
                                 </div>
-
+                            </div>
+                            <hr class="border mt-6" />
+                            <div class="md:flex md:justify-between gap-3">
+                                <div class="max-w-2xl mx-auto mt-6 w-full">
+                                    <div class="px-4 py-3">
+                                        <p class="text-center font-bold mb-5 text-2xl text-stone-500">ที่อยู่บริษัท</p>
+                                        <div class="flex space-x-2">
+                                            <p class="w-1/3">เลขที่ </p>
+                                            <input class="border w-full py-1 px-3 rounded-md" v-model="companyAddress"
+                                                readonly />
+                                        </div>
+                                        <div class="flex space-x-2 mt-2">
+                                            <p class="w-1/3">ตำบล </p>
+                                            <input class="border w-full py-1 px-3 rounded-md"
+                                                v-model="companySubdistrict" readonly />
+                                        </div>
+                                        <div class="flex space-x-2 mt-2">
+                                            <p class="w-1/3">อำเภอ </p>
+                                            <input class="border w-full py-1 px-3 rounded-md" v-model="companyDistrict"
+                                                readonly />
+                                        </div>
+                                        <div class="flex space-x-2 mt-2">
+                                            <p class="w-1/3">จังหวัด </p>
+                                            <input class="border w-full py-1 px-3 rounded-md" v-model="companyProvince"
+                                                readonly />
+                                        </div>
+                                        <div class="flex space-x-2 mt-2">
+                                            <p class="w-1/3">รหัสไปรษณีย์ </p>
+                                            <input class="border w-full py-1 px-3 rounded-md" v-model="companyPostcode"
+                                                readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="max-w-2xl mx-auto mt-6 w-full border rounded-lg shadow-md">
+                                    <div class="px-4 py-3">
+                                        <p>ละติจูด</p>
+                                        <input class="border" v-model="hotelLatitude" readonly />
+                                        <p>ลองติจูด</p>
+                                        <input class="border" v-model="hotelLongitude" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-yellow-400 shadow-xl rounded-lg p-4 mt-6 w-full space-y-4 ">
+                                <div class="flex space-x-2 justify-center">
+                                    <p class="font-semibold">ชื่อเเละลายเซ็นสำหรับอนุมัติใบเสร็จหรือเอกสารอื่นๆ</p>
+                                </div>
+                                <div class="max-w-2xl mx-auto py-3 px-2">
+                                    <div class="flex flex-col md:flex-row md:items-center md:gap-4">
+                                        <p class="md:w-1/3 mb-1">ชื่อ-นามสกุล</p>
+                                        <input type="text" class="w-full border p-2 rounded" v-model="nameSignature"
+                                            readonly />
+                                    </div>
+                                    <div class="flex flex-col md:flex-row md:items-center md:gap-4 mt-4 ">
+                                        <p class="mb-1">ลายเซ็น</p>
+                                        <div
+                                            class="relative w-40 h-40 border-2 border-dashed rounded-md bg-white flex items-center justify-center overflow-hidden group">
+                                            <img v-if="signaturePreview" :src="signaturePreview"
+                                                class="w-full h-full object-cover" />
+                                            <div v-else
+                                                class="flex items-center justify-center w-full h-full text-gray-400">
+                                                ไม่มีลายเซ็น</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="max-w-xl mx-auto w-full my-8">
+                                <div class="flex space-x-2 mt-2">
+                                    <p class="w-1/3">เลขประจำตัวผู้เสียภาษี </p>
+                                    <input class="border w-full py-1 px-3 rounded-md" v-model="companyTaxId" readonly />
+                                </div>
+                                <div class="flex space-x-2 mt-2">
+                                    <p class="w-1/3">เลขบัญชีธนาคาร </p>
+                                    <input class="border w-full py-1 px-3 rounded-md" v-model="bankNumber" readonly />
+                                </div>
+                                <div class="flex space-x-2 mt-2">
+                                    <p class="w-1/3">ชื่อธนาคารที่ทำการเปิดบัญชี </p>
+                                    <input class="border w-full py-1 px-3 rounded-md" v-model="bankName" readonly />
+                                </div>
+                                <div class="flex mb-3 mt-4">
+                                    <p class="md:w-1/5 mb-1">รูปหน้าปกบัญชีธนาคาร</p>
+                                    <img v-if="bankPreview" :src="bankPreview" class="w-32 h-32 object-cover border" />
+                                    <div v-else class="flex items-center justify-center w-32 h-32 text-gray-400 border">
+                                        ไม่มีรูป</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-center mt-14 space-x-4">
+                                <button @click="navigateBackToMainProfileCompany"
+                                    class="bg-red-600 hover:bg-red-500 py-2 transition px-4 text-white font-bold rounded-lg">ย้อนกลับ</button>
+                                <button @click="navigateToEditProfileCompany"
+                                    class="bg-green-600 hover:bg-green-500 py-2 transition px-4 text-white font-bold rounded-lg">แก้ไข</button>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="mt-8 space-x-4 flex justify-center">
-                        <button @click="navigateBackToMainProfileCompany"
-                            class="bg-red-600 py-2 px-4 text-white font-bold hover:bg-red-500 rounded-lg">ย้อนกลับ</button>
-                        <button @click="navigateToEditProfileCompany"
-                            class="bg-stone-500 py-2 px-4 text-white font-bold hover:bg-stone-400 rounded-lg">เเก้ไข</button>
                     </div>
                 </div>
             </div>
@@ -99,38 +142,78 @@
     </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import Sidebar from '@/components/SidebarExecutive.vue'
+import axios from 'axios'
 
-export default {
-    name: "EmployeeList",
-    components: {
-        Sidebar
-    },
-    data() {
-        return {
-            isSidebarCollapsed: false,
+const isSidebarCollapsed = ref(false)
+const router = useRouter()
 
-        }
-    },
-    methods: {
-        handleSidebarToggle(isCollapsed) {
-            this.isSidebarCollapsed = isCollapsed
-        },
-        navigateBackToMainProfileCompany() {
-            this.$router.push("/mainprofilecompany");
-        },
-        navigateToEditProfileCompany() {
-            this.$router.push("/editprofilecompany");
-        },
-
-
-    },
-    mounted() {
-        const savedState = localStorage.getItem('sidebarCollapsed')
-        if (savedState !== null) {
-            this.isSidebarCollapsed = JSON.parse(savedState)
-        }
-    },
+function handleSidebarToggle(isCollapsed) {
+    isSidebarCollapsed.value = isCollapsed
 }
+function navigateBackToMainProfileCompany() {
+    router.push('/mainprofilecompany')
+}
+function navigateToEditProfileCompany() {
+    router.push('/editprofilecompany')
+}
+
+const companyName = ref('')
+const companyPhone = ref('')
+const companyEmail = ref('')
+const companyTaxId = ref('')
+const bankNumber = ref('')
+const bankName = ref('')
+const nameSignature = ref('')
+const companyAddress = ref('')
+const companySubdistrict = ref('')
+const companyDistrict = ref('')
+const companyProvince = ref('')
+const companyPostcode = ref('')
+const hotelLatitude = ref('')
+const hotelLongitude = ref('')
+const signaturePreview = ref(null)
+const logoPreview = ref(null)
+const bankPreview = ref(null)
+
+// ดึงข้อมูล partner จาก backend
+async function fetchPartnerData() {
+    const partnerId = localStorage.getItem('partnerId')
+    if (!partnerId) return
+    try {
+        // เชื่อมต่อ endpoint /partner/get/:id
+        const res = await axios.get(`http://localhost:9999/SleepGun/partner/get/${partnerId}`)
+        const data = res.data
+        companyName.value = data.companyName || ''
+        companyPhone.value = data.companyPhone || ''
+        companyEmail.value = data.companyEmail || ''
+        companyTaxId.value = data.companyTaxId || ''
+        bankNumber.value = data.bankNumber || ''
+        bankName.value = data.bankName || ''
+        nameSignature.value = data.nameSignature || ''
+        companyAddress.value = data.companyAddress || ''
+        companySubdistrict.value = data.companySubdistrict || ''
+        companyDistrict.value = data.companyDistrict || ''
+        companyProvince.value = data.companyProvince || ''
+        companyPostcode.value = data.companyPostcode || ''
+        hotelLatitude.value = data.hotelLatitude || ''
+        hotelLongitude.value = data.hotelLongitude || ''
+        logoPreview.value = data.imageLogoCompany ? `http://localhost:9999/uploads/partners/${data.imageLogoCompany}` : null
+        signaturePreview.value = data.imageSignature ? `http://localhost:9999/uploads/partners/${data.imageSignature}` : null
+        bankPreview.value = data.imageBank ? `http://localhost:9999/uploads/partners/${data.imageBank}` : null
+    } catch (error) {
+        console.error('โหลดข้อมูล partner ไม่สำเร็จ', error)
+    }
+}
+
+onMounted(() => {
+    const savedState = localStorage.getItem('sidebarCollapsed')
+    if (savedState !== null) {
+        isSidebarCollapsed.value = JSON.parse(savedState)
+    }
+    fetchPartnerData()
+})
 </script>

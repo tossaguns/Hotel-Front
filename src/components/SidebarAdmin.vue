@@ -1,8 +1,8 @@
 <template>
     <!-- Desktop Sidebar -->
-    <div class="hidden md:flex flex-col fixed top-0 left-0 h-screen bg-white ml-2 my-4 rounded-lg transition-all duration-300 ease-in-out z-40"
-        :class="isCollapsed ? 'w-[80px]' : 'w-[240px]'">
-        <nav class="flex flex-col space-y-1 p-2 overflow-y-auto">
+    <div class="hidden ml-2 md:flex flex-col fixed left-0 bg-white rounded-lg transition-all duration-300 ease-in-out z-40"
+        style="top: 1rem; bottom: 1rem; height: auto;" :class="isCollapsed ? 'w-[80px]' : 'w-[240px]'">
+        <nav class="flex flex-col space-y-1 p-2 overflow-y-auto custom-scrollbar">
             <div class="m-2" :class="isCollapsed ? 'flex justify-center' : ''">
                 <img v-if="!isCollapsed" src="/images/icon/closeopenbar.png" @click="toggleSidebar" alt="ไอคอนปิดบาร์"
                     class="w-2 h-5 cursor-pointer hover:opacity-70 ml-auto" />
@@ -11,7 +11,7 @@
             </div>
 
             <div class="mt-6">
-                <div @click="navigateToDashboardEx('dashboard')"
+                <div @click="navigateTo('/dashboardforadmin', 'dashboard')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-rose-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'dashboard' ? 'bg-rose-400 text-white drop-shadow-lg' : '',
@@ -25,7 +25,7 @@
                     </p>
                 </div>
 
-                <div @click="navigateToManagePartner('managepartner')"
+                <div @click="navigateTo('/mainpartner', 'managepartner')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-rose-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'managepartner' ? 'bg-rose-400 text-white drop-shadow-lg' : '',
@@ -39,7 +39,7 @@
                     </p>
                 </div>
 
-                <div @click="navigateToManageMember('managemember')"
+                <div @click="navigateTo('/mainmanagemember', 'managemember')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-rose-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'managemember' ? 'bg-rose-400 text-white drop-shadow-lg' : '',
@@ -83,7 +83,7 @@
                 </div>
                 -->
 
-                <div @click="navigateToPromotion('promotion')"
+                <div @click="navigateTo('/mainpromotion', 'promotion')"
                     class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-rose-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'promotion' ? 'bg-rose-400 text-white drop-shadow-lg' : '',
@@ -105,7 +105,7 @@
                     </p>
                 </div>
 
-                <div @click="navigateTologout('logout')"
+                <div @click="navigateTo('/logout', 'logout')"
                     class="mt-20 group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-red-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
                         activeMenu === 'logout' ? 'bg-red-400 text-white drop-shadow-lg' : '',
@@ -146,19 +146,19 @@
                 <!-- Menu Items -->
                 <div class="flex-1 overflow-y-auto px-4 py-6">
                     <div class="space-y-2">
-                        <div @click="navigateToDashboardEx('dashboard')"
+                        <div @click="navigateTo('/dashboardforadmin', 'dashboard')"
                             class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-rose-400 hover:text-white"
                             :class="activeMenu === 'dashboard' ? 'bg-rose-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">Dashboard</span>
                         </div>
 
-                        <div @click="navigateToManagePartner('managepartner')"
+                        <div @click="navigateTo('/mainpartner', 'managepartner')"
                             class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-rose-400 hover:text-white"
                             :class="activeMenu === 'managepartner' ? 'bg-rose-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">จัดการ Partner</span>
                         </div>
 
-                        <div @click="navigateToManageMember('managemember')"
+                        <div @click="navigateTo('/mainmanagemember', 'managemember')"
                             class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-rose-400 hover:text-white"
                             :class="activeMenu === 'managemember' ? 'bg-rose-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">จัดการ member</span>
@@ -178,7 +178,7 @@
                             <span class="text-lg">รายงาน</span>
                         </div>-->
 
-                        <div @click="navigateToPromotion('promotion')"
+                        <div @click="navigateTo('/mainpromotion', 'promotion')"
                             class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-rose-400 hover:text-white"
                             :class="activeMenu === 'promotion' ? 'bg-rose-400 text-white' : 'text-gray-700'">
                             <span class="text-lg">โปรโมชั่น</span>
@@ -204,107 +204,138 @@
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            isCollapsed: false,
-            isMobileMenuOpen: false,
-            activeMenu: this.getActiveMenuFromRoute(),
-            nameAdmin: 'Agfdii 9e8wfr',
-        }
-    },
-    created() {
-        this.setActiveMenuFromRoute();
-        // โหลดสถานะ sidebar จาก localStorage เมื่อ component ถูกสร้าง
-        this.loadSidebarState();
-    },
-    watch: {
-        '$route'() {
-            this.setActiveMenuFromRoute();
-            // ไม่ต้อง reset sidebar state เมื่อเปลี่ยน route
-        }
-    },
-    methods: {
-        // โหลดสถานะ sidebar จาก localStorage
-        loadSidebarState() {
-            const savedState = localStorage.getItem('sidebarCollapsed');
-            if (savedState !== null) {
-                this.isCollapsed = JSON.parse(savedState);
-                // ส่งสถานะไปยัง parent component
-                this.$emit('toggle-sidebar', this.isCollapsed);
-            }
-        },
+<script setup>
+import { ref, watch, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
-        // ฟังก์ชันสำหรับกำหนด active menu จาก route
-        getActiveMenuFromRoute() {
-            const currentRoute = this.$route?.path || window.location.pathname;
+const user = ref(null)
+const admin = ref({
+    firstname: '',
+    lastname: '',
+    role: ''
+})
 
-            const routeMenuMap = {
-                '/dashboardforadmin': 'dashboard',
-                '/approvepartner': 'managepartner',
-                '/mainpartner': 'managepartner',
-                '/request': 'managepartner',
-                '/rejectpartner': 'managepartner',
-                '/mainpartnersleepgun': 'managepartner',
-                '/detailpartnerall': 'managepartner',
+const router = useRouter()
+const route = useRoute()
 
-                
-                '/mainmanagemember': 'managemember',
-                '/mainpromotion': 'promotion',
-                '/addpromotion': 'promotion',
+const emit = defineEmits(['toggle-sidebar'])
+const isCollapsed = ref(getSidebarStateFromStorage())
+const isMobileMenuOpen = ref(false)
+const activeMenu = ref(getActiveMenuFromRoute())
 
-
-
-                // เพิ่ม route อื่นๆ ตามต้องการ
-            };
-
-            return routeMenuMap[currentRoute] || 'dashboard';
-        },
-
-        setActiveMenuFromRoute() {
-            this.activeMenu = this.getActiveMenuFromRoute();
-        },
-
-        toggleSidebar() {
-            this.isCollapsed = !this.isCollapsed;
-            this.$emit('toggle-sidebar', this.isCollapsed);
-
-            localStorage.setItem('sidebarCollapsed', JSON.stringify(this.isCollapsed));
-        },
-
-        toggleMobileMenu() {
-            this.isMobileMenuOpen = !this.isMobileMenuOpen;
-        },
-
-        setActiveMobile(menu) {
-            this.activeMenu = menu;
-            this.isMobileMenuOpen = false;
-        },
-
-        navigateToDashboardEx() {
-            this.activeMenu = 'dashboard';
-            this.$router.push("/dashboardforadmin");
-            this.isMobileMenuOpen = false;
-        },
-
-        navigateToManagePartner() {
-            this.activeMenu = 'managepartner';
-            this.$router.push("/mainpartner");
-            this.isMobileMenuOpen = false;
-        },
-
-        navigateToManageMember() {
-            this.activeMenu = 'managemember';
-            this.$router.push("/mainmanagemember");
-            this.isMobileMenuOpen = false;
-        },
-
-        navigateToPromotion() {
-            this.activeMenu = 'promotion';
-            this.$router.push("/mainpromotion");
-            this.isMobileMenuOpen = false;
-        },
+function loadSidebarState() {
+    const savedState = localStorage.getItem('sidebarCollapsed')
+    if (savedState !== null) {
+        isCollapsed.value = JSON.parse(savedState)
+        emitToggleSidebar()
     }
 }
+watch(route, () => {
+    activeMenu.value = getActiveMenuFromRoute()
+})
+
+function getSidebarStateFromStorage() {
+    try {
+        const saved = localStorage.getItem('sidebarCollapsed')
+        return saved && saved !== 'undefined' ? JSON.parse(saved) : false
+    } catch (error) {
+        console.warn('Could not load sidebar state from localStorage:', error)
+        return false
+    }
+}
+function emitToggleSidebar() {
+    emit('toggle-sidebar', isCollapsed.value)
+}
+
+
+function getActiveMenuFromRoute() {
+    const currentRoute = route?.path || window.location.pathname
+    const routeMenuMap = {
+        '/dashboardforadmin': 'dashboard',
+        '/approvepartner': 'managepartner',
+        '/mainpartner': 'managepartner',
+        '/request': 'managepartner',
+        '/rejectpartner': 'managepartner',
+        '/mainpartnersleepgun': 'managepartner',
+        '/detailpartnerall': 'managepartner',
+        '/mainmanagemember': 'managemember',
+        '/mainpromotion': 'promotion',
+        '/addpromotion': 'promotion',
+        // เพิ่ม route อื่นๆ ตามต้องการ
+    }
+    return routeMenuMap[currentRoute] || 'dashboard'
+}
+
+
+
+function toggleSidebar() {
+    isCollapsed.value = !isCollapsed.value
+    localStorage.setItem('sidebarCollapsed', JSON.stringify(isCollapsed.value))
+    emitToggleSidebar()
+}
+
+function toggleMobileMenu() {
+    isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+function setActiveMobile(menu) {
+    activeMenu.value = menu
+    isMobileMenuOpen.value = false
+}
+function navigateTo(path, menuKey) {
+    activeMenu.value = menuKey
+    router.push(path)
+    isMobileMenuOpen.value = false
+}
+
+
+
+onMounted(() => {
+    isCollapsed.value = getSidebarStateFromStorage()
+    emitToggleSidebar()
+
+    const rawadmin = localStorage.getItem('admin')
+    if (rawadmin && rawadmin !== 'undefined') {
+        try {
+            admin.value = JSON.parse(rawadmin)
+            if (!admin.value.role) {
+                admin.value.role = 'adm'
+            }
+        } catch (err) {
+            console.error("❌ Failed to parse admin JSON:", err.message)
+            admin.value = {
+                firstname: '',
+                lastname: '',
+                companyName: '',
+                role: 'admin'
+            }
+        }
+    }
+})
 </script>
+
+
+<style scoped>
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #dfdfdf #f8f8f9;
+    /* thumb, track */
+}
+
+/* Chrome, Edge, Safari */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 8px;
+    background: #f3f4f6;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(0, 0%, 68%);
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #f59e42;
+}
+</style>

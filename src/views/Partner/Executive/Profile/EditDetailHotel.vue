@@ -1,12 +1,13 @@
 <template>
 
-    <div class="w-full min-h-screen bg-gray-200">
+<div class="w-full min-h-screen bg-gray-200">
         <Sidebar @toggle-sidebar="handleSidebarToggle" />
 
-        <div class="flex-1 md:px-4 md:py-3 mt-16 md:mt-2 transition-all duration-300" :class="{
-            'md:ml-[240px]': !isSidebarCollapsed,
-            'md:ml-[80px]': isSidebarCollapsed
-        }">
+        <div class="flex-1 md:pl-4 md:pr-2 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300"
+            style="top: 1rem; bottom: 1rem; height: auto;" :class="{
+                'md:ml-[232px]': !isSidebarCollapsed,
+                'md:ml-[72px]': isSidebarCollapsed
+            }">
 
             <div class="bg-white rounded-lg pb-10 ">
                 <div class="py-2 bg-amber-400 rounded-t-lg">
@@ -27,14 +28,15 @@
                                             class="text-red-600">*</span></p>
                                     <div class="flex justify-center items-center space-x-3">
                                         <p>จาก :</p>
-                                        <input v-model="checkInForm" class="border rounded-md px-3 py-1 w-24 text-center"
-                                            placeholder="00:00" />
+                                        <input v-model="checkInForm"
+                                            class="border rounded-md px-3 py-1 w-24 text-center" placeholder="00:00" />
                                         <p>ถึง :</p>
                                         <input v-model="checkInTo" class="border rounded-md px-3 py-1 w-24 text-center"
                                             placeholder="00:00" />
                                     </div>
                                     <div class="max-w-xl mx-auto">
-                                        <input v-model="VerifyIden_checkIn"  class="border mt-3 text-xs md:text-sm  p-3 rounded-md w-full"
+                                        <input v-model="VerifyIden_checkIn"
+                                            class="border mt-3 text-xs md:text-sm  p-3 rounded-md w-full"
                                             placeholder="กรอกสิ่งที่ต้องเเสดงในการ check-in เช่น เเสดงวีซ่าหรือเลขบัตรประชาชน..." />
                                     </div>
                                 </div>
@@ -45,8 +47,8 @@
                                             class="text-red-600">*</span></p>
                                     <div class="flex justify-center items-center space-x-3">
                                         <p>จาก :</p>
-                                        <input v-model="checkOutForm" class="border rounded-md px-3 py-1 w-24 text-center"
-                                            placeholder="00:00" />
+                                        <input v-model="checkOutForm"
+                                            class="border rounded-md px-3 py-1 w-24 text-center" placeholder="00:00" />
                                         <p>ถึง :</p>
                                         <input v-model="checkOutTo" class="border rounded-md px-3 py-1 w-24 text-center"
                                             placeholder="00:00" />
@@ -66,18 +68,18 @@
                                     <p>ที่พักของคุณมีให้เพิ่มเตียงเสริมหรือไม่<span class="text-red-600 px-1">*</span>
                                     </p>
                                     <label>
-                                        <input type="radio" name="extraBed" value="yes" v-model="hasExtraBed" />
+                                        <input type="radio" value="yes" v-model="hasExtraBed" />
                                         มี
                                     </label>
                                     <label>
-                                        <input type="radio" name="extraBed" value="no" v-model="hasExtraBed" />
+                                        <input type="radio" value="no" v-model="hasExtraBed" />
                                         ไม่มี
                                     </label>
                                 </div>
 
 
                                 <transition name="fade-slide" mode="out-in">
-                                    <div v-if="hasExtraBed === 'yes'"  class="mb-6 shadow-md rounded-lg p-4">
+                                    <div v-if="hasExtraBed === 'yes'" class="mb-6 shadow-md rounded-lg p-4">
                                         <p class="mb-2 font-semibold text-sm text-stone-500">
                                             ลักษณะเตียงเเละราคา (หากไม่มีเตียงเเบบไหนทำเครื่องหมาย - ) <span
                                                 class="text-red-600 px-1">*</span>
@@ -86,12 +88,14 @@
                                         <div class="flex flex-col justify-center items-center space-y-3">
                                             <div class="flex space-x-3">
                                                 <p>เตียงเด็ก :</p>
-                                                <input v-model="hasExtraBed.child" class="border rounded-md px-3 py-1 w-24 text-center"
+                                                <input v-model="extraBed.child"
+                                                    class="border rounded-md px-3 py-1 w-24 text-center"
                                                     placeholder="ราคา" /><span>บาท</span>
                                             </div>
                                             <div class="flex space-x-3">
                                                 <p>เตียงปกติ :</p>
-                                                <input v-model="hasExtraBed.normal" class="border rounded-md px-3 py-1 w-24 text-center"
+                                                <input v-model="extraBed.normal"
+                                                    class="border rounded-md px-3 py-1 w-24 text-center"
                                                     placeholder="ราคา" /><span>บาท</span>
                                             </div>
 
@@ -113,11 +117,11 @@
                                             class="text-red-600 px-1">*</span>
                                     </p>
                                     <label>
-                                        <input type="radio" name="extraBed" value="yes" v-model="hasExtraCashPledge" />
+                                        <input type="radio" value="yes" v-model="hasExtraCashPledge" />
                                         มี
                                     </label>
                                     <label>
-                                        <input type="radio" name="extraBed" value="no" v-model="hasExtraCashPledge" />
+                                        <input type="radio" value="no" v-model="hasExtraCashPledge" />
                                         ไม่มี
                                     </label>
                                 </div>
@@ -154,7 +158,8 @@
                         <div class="mt-5">
                             <div class="mx-5">
                                 <p class="mb-2 text-lime-700">4.1 อธิบายเกี่ยวกับที่พัก</p>
-                                <textarea v-model="AboutFacilityHotel" rows="3" class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
+                                <textarea v-model="AboutFacilityHotel" rows="3"
+                                    class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
                                     placeholder="พิมพ์รายละเอียดที่นี่..."></textarea>
                             </div>
                             <div>
@@ -182,7 +187,8 @@
                         <div class="mt-5">
                             <div class="mx-5">
                                 <p class="mb-2 text-fuchsia-700">4.2 อธิบายเกี่ยวกับทำเลที่ตั้ง</p>
-                                <textarea v-model="AboutLocationHotel" rows="3" class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
+                                <textarea v-model="AboutHotelLocation" rows="3"
+                                    class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
                                     placeholder="พิมพ์รายละเอียดที่นี่..."></textarea>
                             </div>
                             <div>
@@ -210,7 +216,8 @@
                         <div class="mt-5">
                             <div class="mx-5">
                                 <p class="mb-2 text-stone-700">4.3 อธิบายเกี่ยวกับสิ่งอำนวยความสะดวกภายในที่พัก</p>
-                                <textarea v-model="AboutRoomHotel" rows="3" class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
+                                <textarea v-model="AboutRoomHotel" rows="3"
+                                    class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
                                     placeholder="พิมพ์รายละเอียดที่นี่..."></textarea>
                             </div>
                             <div>
@@ -237,7 +244,8 @@
                         <div class="mt-5">
                             <div class="mx-5">
                                 <p class="mb-2 text-indigo-700">4.4 ที่พักของท่านรองรับสัตว์เลี้ยงหรือไม่</p>
-                                <textarea v-model="AboutHotelFor" rows="3" class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
+                                <textarea v-model="AboutHotelFor" rows="3"
+                                    class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
                                     placeholder="พิมพ์รายละเอียดที่นี่..."></textarea>
                             </div>
                             <div>
@@ -264,7 +272,8 @@
                         <div class="mt-5">
                             <div class="mx-5">
                                 <p class="mb-2 text-amber-600">4.5 มื้ออาหาร</p>
-                                <textarea v-model="AboutFoodHotel" rows="3" class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
+                                <textarea v-model="AboutFoodHotel" rows="3"
+                                    class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
                                     placeholder="พิมพ์รายละเอียดที่นี่..."></textarea>
                             </div>
                             <div>
@@ -296,14 +305,15 @@
 
 
 
-
                         <div class="flex justify-center mt-8 mb-6 space-x-3">
                             <button @click="navigateToDetailHotel"
-                                class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600">กลับ
+                                class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600">ย้อนกลับ
                             </button>
-                            <button class="bg-gray-400 text-white py-2 px-4 rounded-lg hover:bg-gray-500">รีเซต
+                            <button @click="resetForm"
+                                class="bg-gray-400 text-white py-2 px-4 rounded-lg hover:bg-gray-500">รีเซต
                             </button>
-                            <button class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600">บันทึก
+                            <button @click="saveAboutHotel"
+                                class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600">บันทึก
                             </button>
 
 
@@ -317,11 +327,13 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import Sidebar from '@/components/SidebarExecutive.vue'
 import axios from 'axios'
 
 const router = useRouter()
+const route = useRoute()
+
 
 const isSidebarCollapsed = ref(false)
 function handleSidebarToggle(collapsed) {
@@ -329,45 +341,11 @@ function handleSidebarToggle(collapsed) {
 }
 
 function navigateToDetailHotel() {
-    router.push('/detailhotel')
+    router.push("/detailhotel")
 }
 
 
-// Form fields
-const checkInForm = ref('')
-const checkInTo = ref('')
-const checkOutForm = ref('')
-const checkOutTo = ref('')
-const VerifyIden_checkIn = ref('')
-const AboutFacilityHotel = ref('')
-const AboutLocationHotel = ref('')
-const AboutRoomHotel = ref('')
-const AboutHotelFor = ref('')
-const AboutFoodHotel = ref('')
-const price = ref(0)
-const note = ref('')
-const hasExtraBed = ref(null)
-const hasExtraCashPledge = ref(null)
 
-// Dropdown data
-const facilities = ref([])
-const hotelLocation = ref([])
-const roomHotel = ref([])
-const hotelFor = ref([])
-const foodHotel = ref([])
-
-
-// Selected dropdowns
-const selectedFacilities = ref([])
-const selectedHotelLocation = ref([])
-const selectedRoomHotel = ref([])
-const selectedHotelFor = ref([])
-const selectedFoodHotel = ref([])
-const selectedHotelType = ref(null)
-const selectedPaymentPolicy = ref(null)
-
-// เตียงเสริม
-const extraBed = ref({ child: 0, normal: 0 })
 
 // Load dropdown data
 async function fetchFacilities() {
@@ -397,61 +375,14 @@ async function fetchFoodHotel() {
 
 
 
-// Save
-async function saveAboutHotel() {
-    try {
-        const payload = {
-            checkInForm: checkInForm.value,
-            checkInTo: checkInTo.value,
-            checkOutForm: checkOutForm.value,
-            checkOutTo: checkOutTo.value,
-            VerifyIden_checkIn: VerifyIden_checkIn.value,
-            AboutFacilityHotel: AboutFacilityHotel.value,
-            AboutLocationHotel: AboutLocationHotel.value,
-            AboutRoomHotel: AboutRoomHotel.value,
-            AboutHotelFor: AboutHotelFor.value,
-            AboutFoodHotel: AboutFoodHotel.value,
-
-            cashPledge: hasExtraCashPledge.value === 'yes'
-                ? { price: price.value, note: note.value }
-                : { price: 0, note: '' },
-
-            typeBedPrice: hasExtraBed.value === 'yes'
-                ? { child: extraBed.value.child, normal: extraBed.value.normal }
-                : { child: 0, normal: 0 },
-
-            typeFacilityHotel: selectedFacilities.value[0],
-            typeFoodHotel: selectedFoodHotel.value[0],
-            typeHotel: selectedHotelType.value,
-            typeHotelFor: selectedHotelFor.value[0],
-            typeLocationHotel: selectedHotelLocation.value[0],
-            typePaymentPolicy: selectedPaymentPolicy.value,
-            typeRoomHotel: selectedRoomHotel.value[0],
-        }
-
-        const res = await axios.post('http://localhost:9999/SleepGun/aboutHotel/create', payload)
-        alert('บันทึกข้อมูลเรียบร้อยแล้ว')
-        router.push('/detailhotel')
-    } catch (err) {
-        console.error('เกิดข้อผิดพลาดในการบันทึก:', err)
-        alert('บันทึกข้อมูลไม่สำเร็จ กรุณาตรวจสอบฟอร์มให้ครบถ้วน')
-    }
-}
-
-
-
-
-onMounted(() => {
+onMounted(async () => {
     const savedState = localStorage.getItem('sidebarCollapsed')
     if (savedState !== null) {
         isSidebarCollapsed.value = JSON.parse(savedState)
     }
-    fetchFacilities()
-    fetchHotelLocation()
-    fetchRoomHotel()
-    fetchHotelFor()
-    fetchFoodHotel()
-})
+
+});
+
 </script>
 
 <style scoped>

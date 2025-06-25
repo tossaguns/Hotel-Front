@@ -258,7 +258,7 @@ const router = createRouter({
         ),
     },
     {
-      path: "/editdetailhotel/:id",
+      path: "/editdetailhotel",
       name: "EditDetailHotel",
       component: () =>
         import("@/views/Partner/Executive/Profile/EditDetailHotel.vue"),

@@ -2,11 +2,11 @@
     <div class="w-full min-h-screen bg-gray-200">
         <Sidebar @toggle-sidebar="handleSidebarToggle" />
 
-        <!-- Main Content - ใช้ dynamic margin-left ตามสถานะของ sidebar -->
-        <div class="flex-1 px-4 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300" :class="{
-            'md:ml-[260px]': !isSidebarCollapsed,
-            'md:ml-[80px]': isSidebarCollapsed
-        }">
+        <div class="flex-1 md:pl-4 md:pr-2 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300"
+            style="top: 1rem; bottom: 1rem; height: auto;" :class="{
+                'md:ml-[232px]': !isSidebarCollapsed,
+                'md:ml-[72px]': isSidebarCollapsed
+            }">
             <!-- Header Section -->
             <div class="mb-6">
                 <h1 class="text-xl md:text-2xl font-medium mb-2 md:mb-4">Dashboard Executive</h1>

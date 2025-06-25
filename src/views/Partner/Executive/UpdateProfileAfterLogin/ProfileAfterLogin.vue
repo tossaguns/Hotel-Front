@@ -373,7 +373,7 @@ async function handleSubmit() {
                 text: 'บันทึกข้อมูลเรียบร้อยแล้ว!',
                 confirmButtonColor: '#16a34a',
             }).then(() => {
-                router.push('/mainpartner');
+                router.push('/maincompany');
             });
         } else {
             Swal.fire({
