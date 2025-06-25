@@ -22,6 +22,11 @@ const router = createRouter({
       component: () => import("@/views/Login.vue"),
     },
     {
+      path: "/loginmember",
+      name: "LoginMember",
+      component: () => import("@/views/LoginMember.vue"),
+    },
+    {
       path: "/registerpartner",
       name: "RegisterPartner",
       component: () => import("@/views/RegisterPartner.vue"),
@@ -144,9 +149,9 @@ const router = createRouter({
         import("@/views/Admin/ManagePartner/Approve/RequestEditPartner.vue"),
     },
     {
-      path: "/mainpartner",
-      name: "MainPartner",
-      component: () => import("@/views/Admin/ManagePartner/MainPartner.vue"),
+      path: "/managepartner",
+      name: "ManagePartner",
+      component: () => import("@/views/Admin/ManagePartner/ManagePartner.vue"),
     },
     {
       path: "/request",
@@ -367,6 +372,12 @@ const router = createRouter({
     component: () =>
       import("@/views/Admin/ManagePartner/DetailPartnerApprove.vue"),
   },
+
+    {
+      path: "/loginpartneremployee",
+      name: "LoginPartnerEmployee",
+      component: () => import("@/views/Partner/LoginPartnerEmployee.vue"),
+    },
   ],
 });
 

@@ -8,63 +8,94 @@
             'md:ml-[80px]': isSidebarCollapsed
         }">
 
-            <div class=" md:mt-4 mt-20 flex-1">
-                <h1 class="text-3xl md:text-4xl ml-3 mb-8 md:mb-2 text-stone-600">
-                    รายชื่อพนักงาน
-                </h1>
+            <div class="md:mt-4 mt-20 flex-1">
+                <div class="flex flex-col xl:flex-row justify-between md:mb-6 mb-8 mx-3 md:mx-6">
+                    <h1 class="text-2xl md:text-3xl font-semibold text-stone-600 mb-4 xl:mb-0">รายชื่อพนักงาน</h1>
 
-                <div
-                    class="mb-12 flex flex-col items-center space-y-4 md:flex-row md:justify-end md:space-y-0 md:space-x-4 md:mr-20">
-                    <input class="border-2 rounded-xl md:w-3 w-6 p-3 md:py-2 hover:border-yellow-400"
-                        placeholder="ค้นหา..." />
-                    <button class="bg-lime-600 py-3 px-3 md:py-2  rounded-xl text-white hover:bg-lime-800 shadow-2xl"
-                        @click="navigateToAddEmployee">
-                        + เพิ่มรายชื่อพนักงาน
-                    </button>
+                    <div class="flex flex-col gap-3 items-start lg:flex-row justify-end">
+                        <div class="flex items-center border border-gray-300 rounded-lg px-3 py-2 bg-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 mr-2" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103 10.5a7.5 7.5 0 0013.15 6.15z" />
+                            </svg>
+                            <input type="text" placeholder="ค้นหา..."
+                                class="outline-none text-sm w-32 sm:w-40 md:w-60" />
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <label class="text-sm text-gray-600">Showing</label>
+                            <select v-model.number="itemsPerPage" @change="currentPage = 1"
+                                class="border border-gray-300 rounded-lg px-2 py-1 text-sm bg-white focus:outline-none hover:border-yellow-400">
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                            </select>
+                        </div>
+
+                        <button @click="navigateToAddEmployee"
+                            class="bg-lime-600 px-4 py-2 rounded-lg text-white hover:bg-lime-800 text-sm shadow-md">
+                            + เพิ่มรายชื่อพนักงาน
+                        </button>
+                    </div>
                 </div>
 
-
-
-                <div class="h-px bg-stone-300 mx-5 mb-5"></div>
-
                 <!-- ตารางสำหรับหน้าจอ md ขึ้นไป -->
-                <div class="hidden md:block border overflow-visible">
-                    <table class="border-separate border-spacing-y-3 w-full">
+                <div class="hidden md:block border overflow-visible overflow-x-auto px-2">
+                    <table class="w-full border-separate border-spacing-y-1 text-sm">
                         <thead>
-                            <tr class="text-stone-400 text-sm">
-                                <th></th>
-                                <th></th>
-                                <th>ID</th>
-                                <th>ชื่อ-นามสกุล</th>
-                                <th>ตำแหน่ง</th>
-                                <th>โทร</th>
-                                <th>Email</th>
-                                <th>Username</th>
-                                <th>Password</th>
-                                <th></th>
+                            <tr class="bg-white text-stone-400 text-sm text-left ">
+                                <th class="py-3 pl-4 rounded-tl-xl">#</th>
+                                <th class="px-2"></th>
+                                <th class="px-2">ID</th>
+                                <th class="px-2">ชื่อ-นามสกุล</th>
+                                <th class="px-2">ตำแหน่ง</th>
+                                <th class="px-2">โทร</th>
+                                <th class="px-2">Email</th>
+                                <th class="px-2">Username</th>
+                                <th class="px-2">Password</th>
+                                <th class="pr-2 rounded-tr-xl"></th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr class="bg-white transition transform hover:-translate-y-1 hover:shadow-lg rounded-lg text-sm"
-                                v-for="(employee, index) in employees" :key="employee.id">
-                                <td class="rounded-l-md py-3 px-4">{{ index + 1 }}</td>
-                                <td class="py-3">
-                                    <img :src="employee.avatar" alt="avatar" width="50" height="50"
-                                        style="border-radius: 50%" />
+                            <tr v-for="(employee, index) in paginatedEmployees" :key="employee.id"
+                                class="bg-white shadow-sm hover:shadow-lg transition-all">
+                                <td class="py-4 pl-4 font-medium text-gray-700">{{ (currentPage - 1) * itemsPerPage +
+                                    index + 1 }}</td>
+
+                                <td class="py-4 w-14 min-w-[56px] max-w-[56px]">
+                                    <img :src="employee.avatar" class="w-10 h-10 rounded-full object-cover" />
                                 </td>
-                                <td class="py-3 px-3">{{ employee.id }}</td>
-                                <td class="py-3 px-3">{{ employee.name }}</td>
-                                <td class="py-3 px-3">{{ employee.position }}</td>
-                                <td class="py-3 px-3">{{ employee.phone }}</td>
-                                <td class="py-3 px-3">{{ employee.email }}</td>
-                                <td class="py-3 px-3">{{ employee.username }}</td>
+
+                                <td class="py-4 px-2 text-gray-700 font-medium">{{ employee.id }}</td>
+                                <td class="py-4 px-2 text-gray-800">{{ employee.name }}</td>
+
+                                <!-- ตำแหน่ง -->
+                                <td class="py-4 px-2">
+                                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full" :class="{
+                                        'bg-green-100 text-green-700': employee.position === 'พนักงานขาย',
+                                        'bg-purple-100 text-purple-700': employee.position === 'ผู้จัดการ',
+                                        'bg-yellow-100 text-yellow-700': employee.position === 'พนักงานต้อนรับ',
+                                        'bg-blue-100 text-blue-700': employee.position === 'พนักงานครัว',
+                                        'bg-red-100 text-red-600': employee.position === 'รปภ.',
+                                        'bg-cyan-100 text-cyan-600': employee.position === 'แม่บ้าน'
+                                    }">
+                                        {{ employee.position }}
+                                    </span>
+                                </td>
+
+                                <td class="py-4 px-2 text-gray-700">{{ employee.phone }}</td>
+                                <td class="py-4 px-2 text-gray-700">{{ employee.email }}</td>
+                                <td class="py-4 px-2 text-gray-700">{{ employee.username }}</td>
+
                                 <td class="py-3 px-3 flex items-center space-x-2 select-none mt-3">
                                     <span>
                                         {{ showPasswordIndex === index ? employee.password : "••••••" }}
                                     </span>
                                     <button type="button" @click.stop="togglePassword(index)"
-                                        class="text-gray-600 hover:text-gray-900 focus:outline-none" :aria-label="showPasswordIndex === index ? 'ซ่อนรหัสผ่าน' : 'แสดงรหัสผ่าน'
+                                        class="text-gray-600 hover:text-gray-900 focus:outline-none w-8 h-8 min-w-[30px] max-w-[30px]"
+                                        :aria-label="showPasswordIndex === index ? 'ซ่อนรหัสผ่าน' : 'แสดงรหัสผ่าน'
                                             ">
                                         <svg v-if="showPasswordIndex === index" xmlns="http://www.w3.org/2000/svg"
                                             class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -84,20 +115,21 @@
                                     </button>
                                 </td>
 
-                                <td class="rounded-r-md px-2 md:pr-4 py-3 relative">
+                                <td class="py-4 pr-4 text-right">
                                     <button @click.stop="toggleDropdown(index, $event)"
-                                        class="text-2xl font-bold focus:outline-none">
+                                        class="text-2xl font-bold text-gray-400 hover:text-gray-600">
                                         &#8230;
                                     </button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+
                 </div>
 
                 <!-- การ์ดสำหรับหน้าจอเล็ก (sm และ xs) -->
                 <div class="md:hidden space-y-4 px-5">
-                    <div v-for="(employee, index) in employees" :key="employee.id"
+                    <div v-for="(employee, index) in paginatedEmployees" :key="employee.id"
                         class="bg-white rounded-lg shadow p-4 flex flex-col space-y-2">
                         <div class="flex items-center space-x-4">
                             <img :src="employee.avatar" alt="avatar" class="w-16 h-16 rounded-full object-cover" />
@@ -159,6 +191,28 @@
                     </div>
                 </teleport>
 
+                <!-- Pagination -->
+                <div class="flex justify-center items-center gap-1 my-6 text-sm select-none">
+                    <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1"
+                        class="px-3 py-1 rounded-md text-gray-600 hover:bg-gray-300 bg-white disabled:opacity-50">
+                        Previous
+                    </button>
+
+                    <button v-for="page in totalPages" :key="page" @click="goToPage(page)" :class="[
+                        'px-3 py-1 rounded-md',
+                        page === currentPage
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-white hover:bg-gray-300 text-gray-700'
+                    ]">
+                        {{ page.toString().padStart(2, '0') }}
+                    </button>
+
+                    <button @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages"
+                        class="px-3 py-1 rounded-md text-gray-600 hover:bg-gray-300 bg-white disabled:opacity-50">
+                        Next
+                    </button>
+                </div>
+
                 <div class="flex justify-center my-4">
                     <button @click="navigateBackToMainEmployee"
                         class="bg-red-500 px-3 py-2 rounded-lg text-white hover:bg-red-600">ย้อนกลับ</button>
@@ -205,9 +259,15 @@ export default {
                     password: "mysecret",
                     avatar: "https://i.pravatar.cc/50?img=2",
                 },
+
             ],
+
+            windowWidth: window.innerWidth,
+            currentPage: 1,
+            itemsPerPage: 10,
         };
     },
+
     computed: {
         dropdownStyle() {
             return {
@@ -216,7 +276,16 @@ export default {
                 minWidth: "120px",
             };
         },
+        paginatedEmployees() {
+            const start = (this.currentPage - 1) * this.itemsPerPage;
+            const end = start + this.itemsPerPage;
+            return this.employees.slice(start, end);
+        },
+        totalPages() {
+            return Math.ceil(this.employees.length / this.itemsPerPage);
+        },
     },
+
     methods: {
         handleSidebarToggle(isCollapsed) {
             this.isSidebarCollapsed = isCollapsed
@@ -258,7 +327,16 @@ export default {
             alert(`ลบ: ${employee.name}`);
             this.closeDropdown();
         },
+        goToPage(page) {
+            if (page >= 1 && page <= this.totalPages) {
+                this.currentPage = page;
+            }
+        },
+        handleResize() {
+            this.windowWidth = window.innerWidth;
+        },
     },
+
     directives: {
         outside: {
             beforeMount(el, binding) {
@@ -275,5 +353,11 @@ export default {
         },
     },
 
+    mounted() {
+        window.addEventListener('resize', this.handleResize);
+    },
+    beforeUnmount() {
+        window.removeEventListener('resize', this.handleResize);
+    },
 };
 </script>

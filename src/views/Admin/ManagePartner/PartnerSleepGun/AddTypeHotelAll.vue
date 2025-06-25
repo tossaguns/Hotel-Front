@@ -20,21 +20,28 @@ TODO: เสร็จ เหลือออกเเบบ font ให้สว�
                         </div>
                         <hr class="border-2 my-4" />
 
-                        <div v-for="box in boxes" :key="box.id" :ref="el => { if (el) boxRefs[box.id] = el }"
+                        <div v-for="(box, index) in boxes" :key="box.id" :ref="el => { if (el) boxRefs[box.id] = el }"
                             class="scroll-smooth rounded-xl mb-2 transition-all duration-300" :class="{
-                                'border-cyan-500 bg-cyan-50 text-cyan-800': box.id === 'typeHotel',
-                                'border-lime-500 bg-lime-50 text-lime-800': box.id === 'typeFacility',
-                                'border-stone-500 bg-stone-50 text-stone-800': box.id === 'typeRoom',
-                                'border-amber-500 bg-amber-50 text-amber-800': box.id === 'typeFood',
-                                'border-indigo-500 bg-indigo-50 text-indigo-800': box.id === 'typeFor',
-                                'border-fuchsia-500 bg-fuchsia-50 text-fuchsia-800': box.id === 'typeNear',
-                                'border-slate-500 bg-slate-50 text-slate-800': box.id === 'typePayment',
+                                'border-cyan-500 bg-cyan-100 text-cyan-800': box.id === 'typeHotel',
+                                'border-lime-500 bg-lime-100 text-lime-800': box.id === 'typeFacility',
+                                'border-stone-500 bg-stone-200 text-stone-800': box.id === 'typeRoom',
+                                'border-amber-500 bg-amber-100 text-amber-800': box.id === 'typeFood',
+                                'border-indigo-500 bg-indigo-100 text-indigo-800': box.id === 'typeFor',
+                                'border-fuchsia-500 bg-fuchsia-100 text-fuchsia-800': box.id === 'typeNear',
+                                'border-slate-500 bg-slate-300 text-slate-800': box.id === 'typePayment',
                             }">
-                            <!-- ส่วนหัวของกล่อง -->
-                            <div class="w-full h-32 cursor-pointer flex flex-col items-center justify-center text-2xl font-semibold rounded-t-xl transition-all duration-300 hover:brightness-95"
-                                @click="toggleBox(box.id)">
-                                <div class="text-sm mb-1 opacity-70">หมวดหมู่</div>
-                                {{ box.label }}
+
+                            <div class="w-full h-32 cursor-pointer flex items-center justify-between gap-4 rounded-t-xl hover:brightness-95 transition-all duration-300"
+                                :class="index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'" @click="toggleBox(box.id)">
+                                
+                                <img :src="getImageForType(box.id)" alt="icon" class="h-32 w-auto object-cover rounded-xl" />
+
+                                <!-- ส่วนหัวของกล่อง -->
+                                    <div class="w-full h-32 cursor-pointer flex flex-col items-center justify-center text-2xl font-semibold rounded-t-xl transition-all duration-300 hover:brightness-95">
+                                    <div class="text-sm mb-1 opacity-70">หมวดหมู่</div>
+                                    {{ box.label }}
+                                </div>
+
                             </div>
 
                             <!-- เนื้อหาภายใน -->
@@ -44,13 +51,10 @@ TODO: เสร็จ เหลือออกเเบบ font ให้สว�
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
-
 </template>
 
 <script setup>
@@ -65,6 +69,14 @@ import AddTypeFoodHotel from "@/views/Admin/ManagePartner/PartnerSleepGun/typeHo
 import AddTypeHotelFor from "@/views/Admin/ManagePartner/PartnerSleepGun/typeHotel/AddTypeHotelFor.vue";
 import AddTypeHotelNear from "@/views/Admin/ManagePartner/PartnerSleepGun/typeHotel/AddTypeHotelNear.vue";
 import AddTypePaymentPolicy from "@/views/Admin/ManagePartner/PartnerSleepGun/typeHotel/AddTypePaymentPolicy.vue";
+
+// import TypeHotel from '@/assets/img/typehotel/ประเภทโรงแรม 1.png'
+// import TypeFacility from '@/assets/img/typehotel/facility.png'
+// import TypeRoom from '@/assets/img/typehotel/typeroom.png'
+// import TypeFoodHotel from '@/assets/img/typehotel/food.png'
+// import TypeFor from '@/assets/img/typehotel/for.png'
+// import TypeNear from '@/assets/img/typehotel/near.png'
+// import TypePayment from '@/assets/img/typehotel/payment.png'
 
 const boxRefs = ref({})
 const activeBox = ref(null)
@@ -84,7 +96,7 @@ const boxes = [
     { id: 'typeFacility', label: 'สิ่งอำนวยความสะดวก', component: 'AddTypeFacilityHotel' },
     { id: 'typeRoom', label: 'ประเภทห้องพัก', component: 'AddTypeRoomHotel' },
     { id: 'typeFood', label: 'อาหารในโรงแรม', component: 'AddTypeFoodHotel' },
-    { id: 'typeFor', label: 'เหมาะสำหรับ', component: 'AddTypeHotelFor' },
+    { id: 'typeFor', label: 'ที่พักรองรับสำหรับ', component: 'AddTypeHotelFor' },
     { id: 'typeNear', label: 'สถานที่ใกล้เคียง', component: 'AddTypeHotelNear' },
     { id: 'typePayment', label: 'นโยบายการจ่ายเงิน', component: 'AddTypePaymentPolicy' }
 ]
@@ -110,29 +122,6 @@ function toggleBox(id) {
     })
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const router = useRouter();
 
 //======= Sidebar ===========
@@ -142,6 +131,19 @@ const isSidebarCollapsed = ref(false);
 function handleSidebarToggle(isCollapsed) {
     isSidebarCollapsed.value = isCollapsed;
 }
+
+// const getImageForType = (typeId) => {
+//     const imageMap = {
+//         typeHotel: TypeHotel,
+//         typeFacility: TypeFacility,
+//         typeRoom: TypeRoom,
+//         typeFood: TypeFoodHotel,
+//         typeFor: TypeFor,
+//         typeNear: TypeNear,
+//         typePayment: TypePayment,
+//     }
+//     return imageMap[typeId] || '/img/icons/default.png'
+// }
 
 </script>
 

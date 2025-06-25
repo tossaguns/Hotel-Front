@@ -1,115 +1,183 @@
 <template>
-    <div class="min-h-fit w-full bg-gray-200">
-        <div class="flex flex-col-reverse md:flex-row justify-between md:mx-4 md:my-20 shadow-lg rounded-lg bg-white">
-            <div class="w-4/5 flex flex-col">
-                <div>
-                    <div class="flex flex-col rounded-tl-lg md:flex-row md:h-[200px]">
-                        <div class="md:w-1/3 flex flex-col items-center justify-center pl-12">
-                            <img :src="getImageUrl(employee.imageIden)" alt="รูปพนักงาน"
-                                class="w-32 h-32 rounded-full object-cover border" />
-                        </div>
-
-                        <div class="md:w-2/3 mt-6 w-full px-4 md:mt-6">
-                            <p class="text-white mb-1 border w-[300px] bg-green-600 rounded-md text-xs text-center p-1">
-                                ตำแหน่ง {{ employee.positionEmployee }}
-                            </p>
-                            <p class="text-3xl font-bold py-1">{{ employee.firstname }}</p>
-                            <p class="text-3xl font-bold py-1">{{ employee.lastname }}</p>
-                            <div class="text-xs">
-                                <div class="flex">
-                                    <p>
-                                        <span class="text-gray-400">รหัสพนักงาน : </span>{{ employee.employeeCode }}
-                                    </p>
-                                    <p class="ml-5">
-                                        <span class="text-gray-400">ชื่อเล่น : </span>{{ employee.nickname }}
-                                    </p>
-                                </div>
-                                <div class="flex">
-                                    <p><span class="text-gray-400">เบอร์โทร : </span>{{ employee.phone }}</p>
-                                    <p class="ml-5">
-                                        <span class="text-gray-400">อีเมล : </span>{{ employee.email }}
-                                    </p>
-                                </div>
+    <div class="app-container bg-yellow-200">
+        <button @click="isCheckinOpen = true" class="checkin-btn">
+            เปิดเช็คชื่อ
+        </button>
+        <div class="app-content">
+            <div class="projects-section">
+                <div class="flex md:flex-row items-center mb-3 gap-3 profile">
+                    <div class="md:w-1/3 flex justify-center imgprofile">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
+                            alt="profile image" class="sm:w-32 sm:h-32 w-20 h-20 rounded-full object-cover border">
+                        <!-- <img :src="getImageUrl(employee.imageIden)" alt="รูปพนักงาน"
+                                class="w-32 h-32 rounded-full object-cover border" /> -->
+                    </div>
+                    <div class="md:w-2/3 w-full">
+                        <p class="sm:w-8 text-white mb-1 border bg-green-600 rounded-md text-center p-1">
+                            ตำแหน่ง {{ employee.positionEmployee }}
+                        </p>
+                        <p class="text-xs sm:text-xl font-bold py-1">ชื่อ{{ employee.firstname }}</p>
+                        <p class="text-xs sm:text-xl font-bold py-1">นามสกุล{{ employee.lastname }}</p>
+                        <div class="">
+                            <div class="flex">
+                                <p>
+                                    <span class="text-gray-400">รหัสพนักงาน : </span>{{ employee.employeeCode }}
+                                </p>
+                                <p class="ml-5">
+                                    <span class="text-gray-400">ชื่อเล่น : </span>{{ employee.nickname }}
+                                </p>
+                            </div>
+                            <div class="flex">
+                                <p><span class="text-gray-400">เบอร์โทร : </span>{{ employee.phone }}</p>
+                                <p class="ml-5">
+                                    <span class="text-gray-400">อีเมล : </span>{{ employee.email }}
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="project-boxes">
 
-                <div class="w-full md:rounded-bl-lg md:h-[500px] bg-stone-100 pt-5 border">
-                    <div class="px-3">
-                        <table class="border-separate border-spacing-y-1 w-full text-sm text-center table-auto">
-                            <thead>
-                                <tr class="text-gray-400 text-xs">
-                                    <th class="p-2">ลำดับ</th>
-                                    <th class="p-2">รหัสพนักงาน</th>
-                                    <th class="p-2">ชื่อ-นามสกุล</th>
-                                    <th class="p-2">วันที่</th>
-                                    <th class="p-2">เวลา</th>
-                                </tr>
-                            </thead>
+                    <div class="flex justify-end mb-4 space-x-2 hide-on-mobile">
+                        <button @click="viewMode = 'table'"
+                            :class="viewMode === 'table' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'"
+                            class="px-4 py-2 rounded">
+                            ตาราง
+                        </button>
+                        <button @click="viewMode = 'block'"
+                            :class="viewMode === 'block' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'"
+                            class="px-4 py-2 rounded">
+                            บล็อก
+                        </button>
+                    </div>
 
-                            <tbody>
-                                <tr v-for="(record, index) in paginatedRecords" :key="record.id"
-                                    :class="['bg-white', record.justAdded ? 'bounce-glow-animation' : '']">
-                                    <td class="p-2">{{ (currentPage - 1) * perPage + index + 1 }}</td>
-                                    <td class="p-2">{{ record.numberid }}</td>
-                                    <td class="p-2">{{ record.name }}</td>
-                                    <td class="p-2">{{ record.dateLogin }}</td>
-                                    <td class="p-2">{{ record.timeLogin }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="project-box-wrapper w-full md:rounded-bl-lg bg-stone-100 pt-3 border rounded-xl">
+                        <div class="project-box">
 
-                        <div class="mt-4 flex justify-center space-x-2">
-                            <button v-for="page in totalPages" :key="'page-button-' + page" @click="goToPage(page)"
-                                :class="[
-                                    'px-2 rounded ',
-                                    page === currentPage
-                                        ? 'bg-green-600 text-white hover:bg-green-800'
-                                        : 'bg-gray-200 text-gray-800 hover:bg-gray-400',
-                                ]">
-                                {{ page }}
-                            </button>
+                            <!-- แบบตาราง -->
+                            <div v-if="viewMode === 'table'" class="table-section max-h-[280px] overflow-auto w-full">
+                                <table
+                                    class="min-w-max border-separate border-spacing-y-1 w-full text-sm text-center table-auto">
+                                    <thead>
+                                        <tr class="text-gray-400">
+                                            <!-- <th class="p-2">ลำดับ</th> -->
+                                            <th class="p-2">วันที่</th>
+                                            <th class="p-2">เวลา</th>
+                                            <th class="p-2">รหัสพนักงาน</th>
+                                            <th class="p-2">ชื่อ-นามสกุล</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody v-if="paginatedRecords.length > 0">
+                                        <tr v-for="(record, index) in paginatedRecords" :key="record.id"
+                                            :class="['bg-white', record.justAdded ? 'bounce-glow-animation' : '']">
+                                            <!-- <td class="p-2">{{ (currentPage - 1) * perPage + index + 1 }}</td> -->
+                                            <td class="p-2">{{ record.dateLogin }}</td>
+                                            <td class="p-2">{{ record.timeLogin }}</td>
+                                            <td class="p-2">{{ record.numberid }}</td>
+                                            <td class="p-2">{{ record.name }}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody v-else>
+                                        <tr>
+                                            <td colspan="5" class="text-center text-gray-500 py-6 text-lg">
+                                                ไม่มีข้อมูลการเข้างาน
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- แบบบล็อก -->
+                            <div v-if="viewMode === 'block'"
+                                class="block-section overflow-auto w-full grid grid-cols-1 md:grid-cols-2 gap-4 justify-center">
+                                <div v-for="(record, index) in paginatedRecords" :key="record.id"
+                                    class="bg-white p-2 rounded shadow text-sm"
+                                    :class="record.justAdded ? 'bounce-glow-animation' : ''">
+                                    <p class="text-gray-500 text-xs md:text-sm mb-1">วันเวลาเข้างาน</p>
+                                    <p class="text-gray-400 text-xs md:text-sm mb-2">{{ record.dateLogin }} | {{
+                                        record.timeLogin
+                                    }}</p>
+                                    <p class="text-sm md:text-base font-bold">{{ record.numberid }}</p>
+                                    <p class="text-base md:text-gray-600 text-lg">{{ record.name}}</p>
+                                </div>
+                                <div v-if="paginatedRecords.length === 0"
+                                    class="col-span-full text-center text-gray-500 py-6 text-lg">
+                                    ไม่มีข้อมูลการเข้างาน
+                                </div>
+                            </div>
+
+                            <!-- ปุ่มเปลี่ยนหน้า -->
+                            <div class="mt-4 flex justify-center space-x-2">
+                                <button v-for="page in totalPages" :key="'page-button-' + page" @click="goToPage(page)"
+                                    :class="['px-2 rounded ', page === currentPage ? 'bg-green-600 text-white hover:bg-green-800' : 'bg-gray-200 text-gray-800 hover:bg-gray-400',]">
+                                    {{ page }}
+                                </button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+            <div :class="['checkin-section transition-all duration-300 ease-in-out', checked ? '' : 'bg-transparent-check',
+                screenIsSmall ? (isCheckinOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full') : '']"
+                v-show="!screenIsSmall || isCheckinOpen">
+                <button @click="isCheckinOpen = false" class="checkin-close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-x-circle">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="15" y1="9" x2="9" y2="15" />
+                        <line x1="9" y1="9" x2="15" y2="15" />
+                    </svg>
+                </button>
+                <div class="md:mx-4" style="">
+                    <section class="wrapper md:mt-16">
+                        <div
+                            :class="['textcheck text-4xl lg:text-4xl xl:text-6xl font-bold', checked ? '' : 'text-gray-500']">
+                            เช็คชื่อพนักงาน</div>
+                    </section>
+                    <div>
+                        <div @click="checkIn"
+                            :class="['mx-auto rounded-full px-6 py-10 text-center font-bold cursor-pointer relative transition transform duration-300 ease-in-out mt-5 mb-10', checked ? 'border-4 border-green-400 bg-white shadow-green-300' : 'border bg-white hover:translate-y-2 hover:shadow-2xl']">
+                            <p class="text-2xl mb-2">เช็คชื่อ</p>
+                            <p class="text-gray-600 font-bold">{{ employee.dateLogin }}</p>
+                            <br>
+                            <hr>
+                            <div class="mt-6 flex justify-center relative">
+                                <div v-if="!checked"
+                                    class="text-gray-400 text-2xl xl:text-6xl lg:text-4xl font-semibold cursor-pointer transition duration-300 hover:text-shadow-glow my-8">
+                                    Check-in
+                                </div>
 
-            <div class="md:w-1/3 rounded-r-lg p-4 h-[700px]" style="box-shadow: -8px 0 6px -6px rgba(0, 0, 0, 0.1)">
-                <div class="text-center md:mt-16">
-                    <h1 class="text-4xl font-bold text-gray-500">เช็คชื่อพนักงาน</h1>
-                </div>
-                <div>
-                    <div @click="checkIn"
-                        class="mx-auto border rounded-lg bg-white px-6 py-10 text-center text-bold cursor-pointer relative transition transform duration-300 ease-in-out hover:translate-y-2 hover:shadow-2xl mt-5 mb-10">
-                        <p class="text-2xl mb-2">เช็คชื่อ</p>
-                        <p class="text-gray-600 font-bold">{{ employee.dateLogin }}</p>
-
-                        <div class="mt-6 flex justify-center relative">
-                            <div v-if="checked"
-                                class="absolute w-20 h-20 rounded-full border-4 border-green-300 animate-ping z-0">
+                                <div v-else>
+                                    <div
+                                        class="absolute w-20 h-20 rounded-full border-4 border-green-300 animate-ping z-0">
+                                    </div>
+                                    <svg :class="[
+                                        'w-20 h-20 z-10 transition-transform duration-300',
+                                        'hover:scale-125',
+                                        checked ? 'text-green-500' : 'text-gray-400',
+                                    ]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
                             </div>
-                            <svg :class="[
-                                'w-20 h-20 z-10 transition-transform duration-300',
-                                'hover:scale-125',
-                                checked ? 'text-green-500' : 'text-gray-400',
-                            ]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                            </svg>
+                            <p v-if="checked" class="text-green-600 mt-4 text-sx lg:text-3xl">เช็คชื่อสำเร็จ</p>
+                            <p v-if="checked" class="text-green-600 text-sx lg:text-xl">เวลา {{ employee.timeLogin }}
+                            </p>
                         </div>
-                        <p v-if="checked" class="text-green-600 mt-4 text-3xl">เช็คชื่อสำเร็จ</p>
-                        <p v-if="checked" class="text-green-600 text-xl">เวลา {{ employee.timeLogin }}</p>
                     </div>
-                </div>
 
-                <div>
-                    <transition name="fade">
-                        <button v-if="checked" @click="navigateToExecutive"
-                            class="w-full bg-amber-400 hover:bg-amber-500 text-stone-700 hover:text-white font-bold md:py-2 rounded-lg transition">
-                            <p>เข้าใช้งาน</p>
-                            <p>SleepHotel by Tossagun</p>
-                        </button>
-                    </transition>
+                    <div>
+                        <transition name="fade">
+                            <button v-if="checked" @click="navigateToExecutive"
+                                class="w-full bg-amber-400 hover:bg-amber-500 text-stone-700 hover:text-white font-bold md:py-2 rounded-lg transition">
+                                <p>เข้าใช้งาน</p>
+                                <p>SleepHotel by Tossagun</p>
+                            </button>
+                        </transition>
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,10 +185,12 @@
 </template>
 
 <script>
+import { faLessThan } from '@fortawesome/free-solid-svg-icons';
+
 export default {
     data() {
         return {
-            currentPage: 1,
+            currentPage: 0,
             perPage: 8,
             employee: {
                 username: "",
@@ -141,6 +211,9 @@ export default {
                 timeLogin: "",
             },
             checked: false,
+            isCheckinOpen: false,
+            viewMode: 'table',
+            screenIsSmall: window.innerWidth <= 880,
             checkInRecords: [
                 {
                     id: '',
@@ -163,7 +236,24 @@ export default {
             return Math.ceil(this.checkInRecords.length / this.perPage);
         },
     },
+
+    beforeDestroy() {
+        window.removeEventListener('resize', this.checkScreenSize);
+    },
+
+    // เปลี่ยนเป็น "block" โดยอัตโนมัติ
+    beforeUnmount() {
+        window.removeEventListener("resize", this.handleResize);
+    },
+
     mounted() {
+        this.checkScreenSize();
+        window.addEventListener('resize', this.checkScreenSize);
+
+        // เปลี่ยนเป็น "block" โดยอัตโนมัติ
+        this.handleResize();
+        window.addEventListener("resize", this.handleResize);
+
         const today = new Date();
         const formattedDate = today.toLocaleDateString("th-TH", {
             year: "numeric",
@@ -239,10 +329,24 @@ export default {
                 console.error("เกิดข้อผิดพลาดในการเช็คชื่อ:", err);
             }
         },
+        checkScreenSize() {
+            this.screenIsSmall = window.innerWidth <= 880;
+            if (!this.screenIsSmall) {
+                this.isCheckinOpen = true; // ให้แสดงบนจอใหญ่เสมอ
+            } else {
+                this.isCheckinOpen = false;
+            }
+        },
+
+        // เปลี่ยนเป็น block เมื่อจอถึง 500px
+        handleResize() {
+            if (window.innerWidth <= 500) {
+                this.viewMode = "block";
+            }
+        },
     },
 };
 </script>
-
 <style>
 @keyframes ping {
     0% {
@@ -261,7 +365,6 @@ export default {
     animation: ping 1s cubic-bezier(0, 0, 0.2, 1) 1;
 }
 
-/* เปลี่ยนชื่อ class และลบส่วนที่ไม่ใช้ */
 .bounce-glow-animation {
     animation: bounceGlow 1s ease forwards;
 }
@@ -291,13 +394,292 @@ export default {
     }
 }
 
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s;
+:root {
+    --projects-section: #fff;
+    --check-btn: #fff;
+    --background-color: black;
+    --text-color: hsl(0, 0%, 96%);
 }
 
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
+.app-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: var(--app-container);
+    transition: 0.2s;
+    /* max-width: 1800px; */
+}
+
+.app-content {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    padding: 16px 24px 24px 0;
+    margin: 10px 0 0 0;
+}
+
+.wrapper {
+    display: grid;
+    place-content: center;
+    color: var(--text-color);
+}
+
+.textcheck {
+    color: transparent;
+    background: linear-gradient(90deg, #fa8565 53%, #ffe07b 65%);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.projects-section {
+    flex: 2;
+    background-color: var(--projects-section);
+    border-radius: 32px;
+    padding: 32px 32px 32px 32px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+
+    .project-boxes {
+        height: 100%;
+        padding-bottom: 60px;
+    }
+}
+
+.checkin-section {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    background: linear-gradient(90deg, var(--c1, #f6d365), var(--c2, #fda085) 51%, var(--c1, #f6d365)) var(--x, 0)/ 200%;
+    margin-left: 24px;
+    flex: 1;
+    border-radius: 30px;
+}
+
+.checkin-section:hover {
+    --x: 100%;
+}
+
+.bg-transparent-check {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(6px);
+    color: black;
+}
+
+.checkin-section .checkin-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 3;
+    border: none;
+    background-color: transparent;
+    color: var(--main-color);
+    display: none;
+}
+
+.checkin-section.show {
+    transform: translateX(0);
+    opacity: 1;
+    margin-left: 0;
+}
+
+.checkin-section .projects-section-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 32px 24px 0 24px;
+    background-color: var(--projects-section);
+}
+
+.check-line {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 8px 0;
+    color: var(--secondary-color);
+    opacity: 0.7;
+}
+
+.check-line.time {
+    text-align: right;
+    margin-bottom: 0;
+}
+
+.project-box {
+    --main-color-card: #dbf6fd;
+    border-radius: 30px;
+    padding: 16px;
+    background-color: var(--main-color-card);
+    margin: 0 8px 0 8px;
+}
+
+.project-box-wrapper {
+    height: 100%;
+}
+
+.block-section {
+    max-height: 300px;
+    display: flex;
+    justify-content: centrer;
+}
+
+.checkin-btn {
+    background: linear-gradient(90deg, var(--c1, #f6d365), var(--c2, #fda085) 51%, var(--c1, #f6d365)) var(--x, 0)/ 200%;
+    border-radius: 4px 0 0 4px;
+    position: absolute;
+    right: 0;
+    top: 58px;
+    background-color: var(--check-btn);
+    border: none;
+    color: var(--main-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    display: none;
+}
+
+@media screen and (max-width: 1300px) {
+    .block-section {
+        max-height: 300px
+    }
+
+    .table-section {
+        max-height: 280px
+    }
+}
+
+@media screen and (max-width: 880px) {
+    .checkin-section {
+        position: absolute;
+        top: 0;
+        z-index: 2;
+        height: 96%;
+        width: 450px;
+        right: 0;
+        margin-top: 20px;
+        padding: 0 20px 0 20px;
+        display: grid;
+        align-items: center;
+    }
+
+    .checkin-section .checkin-close {
+        display: block;
+    }
+
+    .checkin-btn {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 546px) {
+    table {
+        font-size: 12px;
+    }
+
+    table th,
+    table td {
+        padding: 6px 4px;
+    }
+
+    .project-box {
+        padding: 8px;
+    }
+
+    .project-box-wrapper {
+        padding: 4px;
+    }
+
+    .profile {
+        font-size: 12px;
+    }
+
+    .block-section {
+        max-height: 340px;
+        padding: 20px;
+        display: grid;
+    }
+
+    .table-section {
+        max-height: 340px
+    }
+}
+
+@media screen and (max-width: 500px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 456px) {
+    .checkin-section {
+        width: 350px;
+        font-size: small;
+    }
+
+    .profile {
+        font-size: 13px;
+        display: block !important;
+
+        .imgprofile {
+            margin-bottom: 20px;
+        }
+    }
+
+    .projects-section {
+        padding: 16px;
+    }
+
+    .project-box {
+        padding: 8px;
+    }
+
+    .project-box-wrapper {
+        padding: 4px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    .block-section {
+        max-height: 260px;
+    }
+}
+
+@media screen and (max-width: 431px) and (min-height: 931px) {
+    .block-section {
+        max-height: 410px;
+    }
+}
+
+@media screen and (max-width: 415px) and (min-height: 895px) {
+    .block-section {
+        max-height: 370px;
+    }
+}
+
+@media screen and (max-width: 391px) and (min-height: 843px) {
+    .block-section {
+        max-height: 310px;
+    }
+}
+
+@media screen and (max-width: 376px) and (min-height: 666px) {
+    .block-section {
+        max-height: 150px;
+    }
+}
+
+@media screen and (max-width: 346px) and (min-height: 881px) {
+    .block-section {
+        max-height: 370px;
+    }
+}
+
+@media screen and (max-width: 378px) {
+    .checkin-section {
+        width: 250px;
+
+    }
 }
 </style>
