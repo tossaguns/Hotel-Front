@@ -9,16 +9,21 @@
 
       <div class="container-pagelogin">
 
-        <div class="partner" @click="selectRole('partner')">
+        <div class="partner">
           <div class="partner-content">
             <div class="partner-bar"></div>
             <div class="text-content text-right w-7">
               <h2>Partner</h2>
               <p>
                 เข้าสู่ระบบสำหรับเจ้าของโรงแรมที่ต้องการนำโรงแรมของท่านเข้าร่วมกับแพลตฟอร์มของเรา
-                เพื่อให้ลูกค้าสามารถค้นหาและจองห้องพักผ่านเว็บไซต์ได้อย่างสะดวก
+                เพื่อให้ลูกค้าสามารถค้นหาและจองห้องพักผ่านเว็บไซต์ได้อย่างสะดวก<br>หากยังไม่ได้เป็น Partner สามารถสมัครสมาชิกได้เลย
               </p>
-              <button class="partner-button">เข้าสู่ระบบ Partner</button>
+              <div class="flex flex-col sm:flex-row sm:justify-between gap-2">
+                <button class="partner-button" @click="selectRole('partner')">เข้าสู่ระบบ Partner</button>
+                <button class="partner-button" @click="selectRole('registerpartner')">
+                  สมัครสมาชิก Partner
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -32,15 +37,18 @@
           </div>
         </div>
 
-        <div class="member" @click="selectRole('member')">
+        <div class="member">
           <div class="member-content">
             <div class="text-member w-7 ml-0 md:ml-auto">
               <h2>Member</h2>
               <p>
                 สำหรับลูกค้าที่ต้องการจองโรงแรมผ่านระบบของเรา
-                เข้าสู่ระบบเพื่อดูประวัติการจอง ชำระเงิน และรับสิทธิพิเศษต่าง ๆ
+                เข้าสู่ระบบเพื่อดูประวัติการจอง ชำระเงิน และรับสิทธิพิเศษต่าง ๆ<br>หากยังไม่ได้เป็น Member สามารถสมัครสมาชิกได้เลย
               </p>
-              <button class="member-button" @click="selectRole('member')">เข้าสู่ระบบ Member</button>
+              <div class="flex flex-col sm:flex-row sm:justify-between gap-2">
+                <button class="member-button" @click="selectRole('member')">เข้าสู่ระบบ Member</button>
+                <button class="member-button" @click="selectRole('registermember')">สมัครสมาชิก Member</button>
+              </div>
             </div>
             <div class="member-bar"></div>
           </div>
@@ -50,11 +58,17 @@
     </div>
 
     <transition name="slide-fade">
-      <LoginMember v-if="showLogin" @back="resetRole" />
+      <LoginMember v-if="showLogin && selectedRole === 'member'" @back="resetRole" />
+    </transition>
+    <transition name="slide-fade">
+      <RegisterMember v-if="showLogin && selectedRole === 'registermember'" @back="resetRole" />
     </transition>
 
-    <transition name="slide-fade">
-      <LoginPartner v-if="selectedRole === 'partner'" @back="resetRole" />
+    <transition name="slide-partner">
+      <LoginPartner v-if="showLogin && selectedRole === 'partner'" @back="resetRole" />
+    </transition>
+    <transition name="slide-partner">
+      <RegisterPartner v-if="showLogin && selectedRole === 'registerpartner'" @back="resetRole" />
     </transition>
   </div>
 </template>
@@ -62,8 +76,12 @@
 <script setup>
 import { ref } from 'vue'
 import LoginMember from './LoginMember.vue'
-// import LoginPartner from './LoginPartner.vue'
+import LoginPartner from './LoginPartner.vue'
+import RegisterMember from './RegisterMember.vue'
+import RegisterPartner from './RegisterPartner.vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const selectedRole = ref(null)
 const expanded = ref(false);
 const showLogin = ref(false);
@@ -74,6 +92,34 @@ function selectRole(role) {
   if (role === 'member') {
     expanded.value = true;
     showLogin.value = true;
+
+    setTimeout(() => {
+      router.push('/loginmember');
+    }, 1000);
+  }
+  else if (role === 'registermember') {
+    expanded.value = true;
+    showLogin.value = true;
+
+    setTimeout(() => {
+      router.push('/registermember');
+    }, 1000);
+  }
+  else if (role === 'partner') {
+    expanded.value = true;
+    showLogin.value = true;
+
+    setTimeout(() => {
+      router.push('/loginpartner');
+    }, 1000);
+  }
+  else {
+    expanded.value = true;
+    showLogin.value = true;
+
+    setTimeout(() => {
+      router.push('/registerpartner');
+    }, 1000);
   }
 }
 
@@ -193,6 +239,7 @@ function resetRole() {
 .partner h2 {
   font-size: 28px;
   font-weight: bold;
+  font-family: 'Prompt', sans-serif;
 }
 
 .partner p {
@@ -256,6 +303,7 @@ function resetRole() {
   font-size: 28px;
   font-weight: bold;
   text-align: left;
+  font-family: 'Prompt', sans-serif;
 }
 
 .member p {
@@ -358,6 +406,31 @@ function resetRole() {
 
 .slide-fade-leave-to {
   transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide-partner-enter-active,
+.slide-partner-leave-active {
+  transition: all 0.8s ease;
+}
+
+.slide-partner-enter-from {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide-partner-enter-to {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slide-partner-leave-from {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slide-partner-leave-to {
+  transform: translateX(100%);
   opacity: 0;
 }
 

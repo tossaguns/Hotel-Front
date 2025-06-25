@@ -13,7 +13,7 @@
          rounded-full shadow-md
          hover:bg-white hover:shadow-lg
          active:scale-95 transition-all duration-200">
-      {{ isVerifyOtp ? '👤Partner' : '🧑‍💼Employee' }}
+      {{ isVerifyOtp ? '👤Partner' : '🧑Employee' }}
     </button>
 
     <div
@@ -25,7 +25,7 @@
         
         <form class="bg-white flex flex-col h-full tems-center justify-center px-6 md:px-10"
           @submit.prevent="handleLoginEmployee">
-          <div class="w-full max-w-md">
+          <div class="w-full max-w-md text-employee">
             <h1 class="text-center text-2xl font-semibold mb-6">เข้าสู่ระบบ Employee</h1>
 
             <!-- email -->
@@ -69,7 +69,7 @@
         
         <form class="bg-white flex flex-col h-full tems-center justify-center px-6 md:px-10"
           @submit.prevent="handleLoginPartner">
-          <div class="w-full max-w-md">
+          <div class="w-full max-w-md text-partner">
             <h1 class="text-center text-2xl font-semibold mb-6">เข้าสู่ระบบ Partner</h1>
 
             <!-- email -->
@@ -353,6 +353,14 @@ h1.title {
   font-size: 12px;
   margin-top: 10px;
   display: flex;
+}
+
+.text-employee {
+  font-family: 'Prompt', sans-serif;
+}
+
+.text-partner {
+  font-family: 'Prompt', sans-serif;
 }
 
 @keyframes show {
