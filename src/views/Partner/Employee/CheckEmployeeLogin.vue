@@ -1,5 +1,12 @@
 <template>
-    <div class="app-container bg-yellow-200">
+    <div class="w-full min-h-screen bg-gray-200">
+        <BarEmployee @toggle-sidebar="handleSidebarToggle" />
+
+        <div class="flex-1 md:pl-4 md:pr-2 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300" :class="{
+            'md:ml-[240px]': !isSidebarCollapsed,
+            'md:ml-[80px]': isSidebarCollapsed
+        }">
+    <div class="app-container bg-gray-400">
         <button @click="isCheckinOpen = true" class="checkin-btn">
             เปิดเช็คชื่อ
         </button>
@@ -13,7 +20,7 @@
                                 class="w-32 h-32 rounded-full object-cover border" /> -->
                     </div>
                     <div class="md:w-2/3 w-full">
-                        <p class="sm:w-8 text-white mb-1 border bg-green-600 rounded-md text-center p-1">
+                        <p class="sm:w-8 text-white mb-1 border bg-gray-700 rounded-md text-center p-1">
                             ตำแหน่ง {{ employee.positionEmployee }}
                         </p>
                         <p class="text-xs sm:text-xl font-bold py-1">ชื่อ{{ employee.firstname }}</p>
@@ -40,26 +47,26 @@
 
                     <div class="flex justify-end mb-4 space-x-2 hide-on-mobile">
                         <button @click="viewMode = 'table'"
-                            :class="viewMode === 'table' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'"
+                            :class="viewMode === 'table' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'"
                             class="px-4 py-2 rounded">
                             ตาราง
                         </button>
                         <button @click="viewMode = 'block'"
-                            :class="viewMode === 'block' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'"
+                            :class="viewMode === 'block' ? 'bg-gray-800 text-white' : 'bg-gray-200 text-black'"
                             class="px-4 py-2 rounded">
                             บล็อก
                         </button>
                     </div>
 
                     <div class="project-box-wrapper w-full md:rounded-bl-lg bg-stone-100 pt-3 border rounded-xl">
-                        <div class="project-box">
+                        <div class="project-box bg-gray-400">
 
                             <!-- แบบตาราง -->
                             <div v-if="viewMode === 'table'" class="table-section max-h-[280px] overflow-auto w-full">
                                 <table
                                     class="min-w-max border-separate border-spacing-y-1 w-full text-sm text-center table-auto">
                                     <thead>
-                                        <tr class="text-gray-400">
+                                        <tr class="text-black">
                                             <!-- <th class="p-2">ลำดับ</th> -->
                                             <th class="p-2">วันที่</th>
                                             <th class="p-2">เวลา</th>
@@ -90,27 +97,37 @@
 
                             <!-- แบบบล็อก -->
                             <div v-if="viewMode === 'block'"
-                                class="block-section overflow-auto w-full grid grid-cols-1 md:grid-cols-2 gap-4 justify-center">
-                                <div v-for="(record, index) in paginatedRecords" :key="record.id"
-                                    class="bg-white p-2 rounded shadow text-sm"
-                                    :class="record.justAdded ? 'bounce-glow-animation' : ''">
-                                    <p class="text-gray-500 text-xs md:text-sm mb-1">วันเวลาเข้างาน</p>
-                                    <p class="text-gray-400 text-xs md:text-sm mb-2">{{ record.dateLogin }} | {{
-                                        record.timeLogin
-                                    }}</p>
-                                    <p class="text-sm md:text-base font-bold">{{ record.numberid }}</p>
-                                    <p class="text-base md:text-gray-600 text-lg">{{ record.name}}</p>
+                            class="overflow-auto w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 max-h-full px-2">
+
+                            <div v-for="(record, index) in paginatedRecords" :key="record.id"
+                                class="bg-white rounded-2xl shadow-md p-4 border border-gray-200 relative transition hover:shadow-lg"
+                                :class="record.justAdded ? 'bounce-glow-animation' : ''">
+
+                                <!-- Header -->
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="text-sm font-semibold text-emerald-800">รหัสพนักงาน: {{ record.numberid }}
+                                    </h4>
                                 </div>
-                                <div v-if="paginatedRecords.length === 0"
-                                    class="col-span-full text-center text-gray-500 py-6 text-lg">
-                                    ไม่มีข้อมูลการเข้างาน
-                                </div>
+                                <span class="text-xs text-gray-400">{{ record.dateLogin }} | {{ record.timeLogin
+                                }}</span>
+
+                                <!-- Name -->
+                                <p class="text-base font-bold text-gray-800 mb-1">{{ record.name }}</p>
+
+                                <!-- Footer label -->
+                                <p class="text-xs text-gray-500">บันทึกการเข้างาน</p>
                             </div>
+
+                            <div v-if="paginatedRecords.length === 0"
+                                class="col-span-full text-center text-gray-500 py-6 text-lg">
+                                ไม่มีข้อมูลการเข้างาน
+                            </div>
+                        </div>
 
                             <!-- ปุ่มเปลี่ยนหน้า -->
                             <div class="mt-4 flex justify-center space-x-2">
                                 <button v-for="page in totalPages" :key="'page-button-' + page" @click="goToPage(page)"
-                                    :class="['px-2 rounded ', page === currentPage ? 'bg-green-600 text-white hover:bg-green-800' : 'bg-gray-200 text-gray-800 hover:bg-gray-400',]">
+                                    :class="['px-2 rounded ', page === currentPage ? 'bg-gray-800 text-white hover:bg-gray-600' : 'bg-gray-200 text-gray-800 hover:bg-gray-400',]">
                                     {{ page }}
                                 </button>
                             </div>
@@ -139,7 +156,7 @@
                     </section>
                     <div>
                         <div @click="checkIn"
-                            :class="['mx-auto rounded-full px-6 py-10 text-center font-bold cursor-pointer relative transition transform duration-300 ease-in-out mt-5 mb-10', checked ? 'border-4 border-green-400 bg-white shadow-green-300' : 'border bg-white hover:translate-y-2 hover:shadow-2xl']">
+                            :class="['mx-auto rounded-full px-6 py-10 text-center font-bold cursor-pointer relative transition transform duration-300 ease-in-out mt-5 mb-10', checked ? 'border-4 border-gray-400 bg-white shadow-gray-300' : 'border bg-white hover:translate-y-2 hover:shadow-2xl']">
                             <p class="text-2xl mb-2">เช็คชื่อ</p>
                             <p class="text-gray-600 font-bold">{{ employee.dateLogin }}</p>
                             <br>
@@ -163,8 +180,8 @@
                                     </svg>
                                 </div>
                             </div>
-                            <p v-if="checked" class="text-green-600 mt-4 text-sx lg:text-3xl">เช็คชื่อสำเร็จ</p>
-                            <p v-if="checked" class="text-green-600 text-sx lg:text-xl">เวลา {{ employee.timeLogin }}
+                            <p v-if="checked" class="text-gray-600 mt-4 text-sx lg:text-3xl">เช็คชื่อสำเร็จ</p>
+                            <p v-if="checked" class="text-gray-600 text-sx lg:text-xl">เวลา {{ employee.timeLogin }}
                             </p>
                         </div>
                     </div>
@@ -172,7 +189,7 @@
                     <div>
                         <transition name="fade">
                             <button v-if="checked" @click="navigateToExecutive"
-                                class="w-full bg-amber-400 hover:bg-amber-500 text-stone-700 hover:text-white font-bold md:py-2 rounded-lg transition">
+                                class="w-full bg-gray-800 hover:bg-gray-600 text-white hover:text-white font-bold md:py-2 rounded-lg transition">
                                 <p>เข้าใช้งาน</p>
                                 <p>SleepHotel by Tossagun</p>
                             </button>
@@ -182,14 +199,21 @@
             </div>
         </div>
     </div>
+    </div>
+    </div>
 </template>
 
 <script>
 import { faLessThan } from '@fortawesome/free-solid-svg-icons';
-
+import BarEmployee from '@/components/BarEmployee.vue'
 export default {
+    name: 'CheckEmployeeLogin',
+    components: {
+        BarEmployee
+    },
     data() {
         return {
+            isSidebarCollapsed: false,
             currentPage: 0,
             perPage: 8,
             employee: {
@@ -261,8 +285,18 @@ export default {
             day: "2-digit",
         });
         this.employee.dateLogin = formattedDate;
+
+        // เช็คสถานะ sidebar เริ่มต้นจาก localStorage หรือ default
+        const savedState = localStorage.getItem('sidebarCollapsed')
+        if (savedState !== null) {
+            this.isSidebarCollapsed = JSON.parse(savedState)
+        }
     },
     methods: {
+        handleSidebarToggle(isCollapsed) {
+            this.isSidebarCollapsed = isCollapsed
+        },
+        
         goToPage(page) {
             this.currentPage = page;
         },
@@ -377,21 +411,21 @@ export default {
     }
 
     50% {
-        opacity: 1;
-        transform: translateY(-30%);
-        box-shadow: 0 0 20px 5px rgba(0, 255, 26, 0.881);
-    }
+    opacity: 1;
+    transform: translateY(-30%);
+    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.8); /* White glow */
+}
 
-    70% {
-        transform: translateY(15%);
-        box-shadow: 0 0 15px 3px rgba(102, 247, 69, 0.931);
-    }
+70% {
+    transform: translateY(15%);
+    box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.6); /* Slightly dimmer white */
+}
 
-    100% {
-        opacity: 1;
-        transform: translateY(0%);
-        box-shadow: 0 0 10px 0px rgba(255, 215, 0, 0);
-    }
+100% {
+    opacity: 1;
+    transform: translateY(0%);
+    box-shadow: 0 0 10px 0px rgba(255, 255, 255, 0); /* Faded out */
+}
 }
 
 :root {
@@ -427,7 +461,7 @@ export default {
 
 .textcheck {
     color: transparent;
-    background: linear-gradient(90deg, #fa8565 53%, #ffe07b 65%);
+    background: linear-gradient(90deg, #e5e7eb 53%, #9ca3af 65%);
     background-clip: text;
     -webkit-background-clip: text;
 }
@@ -450,7 +484,12 @@ export default {
 
 .checkin-section {
     transition: transform 0.5s ease, opacity 0.5s ease;
-    background: linear-gradient(90deg, var(--c1, #f6d365), var(--c2, #fda085) 51%, var(--c1, #f6d365)) var(--x, 0)/ 200%;
+    background: linear-gradient(
+  90deg,
+  var(--c1, #f3f4f6),         
+  var(--c2, #9ca3af) 51%,      
+  var(--c1, #f3f4f6)
+) var(--x, 0) / 200%;
     margin-left: 24px;
     flex: 1;
     border-radius: 30px;
@@ -505,7 +544,7 @@ export default {
 }
 
 .project-box {
-    --main-color-card: #dbf6fd;
+    /* --main-color-card: #dbf6fd; */
     border-radius: 30px;
     padding: 16px;
     background-color: var(--main-color-card);
@@ -612,6 +651,7 @@ export default {
 
 @media screen and (max-width: 456px) {
     .checkin-section {
+        margin-top: 50px;
         width: 350px;
         font-size: small;
     }

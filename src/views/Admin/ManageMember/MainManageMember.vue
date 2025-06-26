@@ -7,7 +7,7 @@
             'md:ml-[80px]': isSidebarCollapsed
         }">
             <div>
-                <div class="mt-2 rounded-t-lg bg-rose-400 p-2 text-white text-lg">
+                <div class="mt-2 rounded-t-lg bg-emerald-800 p-2 text-white text-lg">
                     <h1>จัดการคำขออนุมัติ</h1>
                 </div>
 
@@ -40,7 +40,7 @@
                         <input class="border rounded-md" />
                     </div>
                     <div>
-                        <button class="bg-green-500 px-3 py-1 rounded-lg text-white font-bold hover:bg-green-600">
+                        <button class="bg-emerald-600 px-3 py-1 rounded-lg text-white font-bold hover:bg-emerald-500">
                             ค้นหา</button>
                     </div>
 
@@ -49,11 +49,11 @@
                 <div class="bg-white rounded-lg pb-6">
                     <div class="flex justify-center pt-7 mb-5">
                         <button @click="navigateToApprove"
-                            class="rounded-lg px-2 py- text-lg hover:bg-rose-300 shadow-lg">บริษัทที่อนุมัติเเล้ว
+                            class="rounded-lg px-2 py- text-lg hover:bg-emerald-800 hover:text-white shadow-lg">บริษัทที่อนุมัติเเล้ว
                         </button>
                         <p class="text-2xl px-2 text-gray-400 font-bold">|</p>
                         <button @click="navigateToNoApprove"
-                            class="rounded-lg px-2 py-1 text-lg hover:bg-rose-300 shadow-lg">บริษัทที่ไม่อนุมัติ</button>
+                            class="rounded-lg px-2 py-1 text-lg hover:bg-emerald-800 hover:text-white shadow-lg">บริษัทที่ไม่อนุมัติ</button>
                     </div>
 
                     <!-- เพิ่ม wrapper -->
@@ -115,7 +115,7 @@
                         </button>
                         <button v-for="page in totalPages" :key="page" @click="currentPage = page"
                             class="px-3 py-1 border rounded"
-                            :class="{ 'bg-blue-500 text-white': currentPage === page }">
+                            :class="{ 'bg-emerald-800 text-white': currentPage === page }">
                             {{ page }}
                         </button>
                         <button @click="currentPage++" :disabled="currentPage === totalPages"

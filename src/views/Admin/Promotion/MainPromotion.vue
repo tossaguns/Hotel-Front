@@ -8,14 +8,14 @@
         }">
 
             <div>
-                <div class="mt-2 rounded-t-lg bg-rose-400 p-2 text-white text-lg">
+                <div class="mt-2 rounded-t-lg bg-emerald-800 p-2 text-white text-lg">
                     <h1>โปรโมชั่น</h1>
                 </div>
 
                 <div class="bg-white rounded-b-lg pb-6 ">
                     <div class="flex justify-center pt-7 mb-5">
                         <button @click="navigateToAddPromotion"
-                            class="rounded-lg px-2 py- text-lg hover:bg-rose-300 shadow-lg">
+                            class="rounded-lg px-2 py- text-lg hover:bg-emerald-500 shadow-lg">
                             + เพิ่มโปรโมชั่น
                         </button>
 
@@ -59,15 +59,15 @@
 
                                     <td class="border px-2 py-1 break-words space-x-2">
                                         <button @click="editRoom(room.promotion_id)"
-                                            class="text-white bg-blue-400 px-2 py-2 rounded-lg hover:bg-blue-700 shadow-lg transition">
+                                            class="text-white bg-emerald-700 px-2 py-2 rounded-lg hover:bg-emerald-500 shadow-lg transition">
                                             ✏️
                                         </button>
                                         <button @click="detailRoom(promotion.promotion_id)"
-                                            class="text-white bg-blue-400 px-2 py-2 rounded-lg hover:bg-blue-700 shadow-lg transition">
+                                            class="text-white bg-emerald-700 px-2 py-2 rounded-lg hover:bg-emerald-500 shadow-lg transition">
                                             👁️
                                         </button>
                                         <button @click="deleteRoom(room.promotion_id)"
-                                            class="text-white bg-red-400 px-2 py-2 rounded-lg hover:bg-red-700 shadow-lg transition">
+                                            class="text-white bg-red-600 px-2 py-2 rounded-lg hover:bg-red-400 shadow-lg transition">
                                             🗑️
                                         </button>
                                     </td>
