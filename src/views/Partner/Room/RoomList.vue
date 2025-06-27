@@ -26,11 +26,11 @@
                         </div>
 
                         <div class="flex space-x-3">
-                            <button class="border bg-green-400 rounded-lg py-2 px-3 hover:bg-green-500"
+                            <button class="border bg-emerald-600 rounded-lg py-2 px-3 hover:bg-emerald-400"
                                 @click="setAllRoomsStatus('ใช้งานได้')">
                                 เปิดใช้งานทั้งหมด
                             </button>
-                            <button class="border bg-red-400 rounded-lg py-2 px-3 hover:bg-red-500"
+                            <button class="border bg-red-600 rounded-lg py-2 px-3 hover:bg-red-400"
                                 @click="setAllRoomsStatus('ปิดใช้งาน')">
                                 ปิดใช้งานทั้งหมด
                             </button>
@@ -96,11 +96,11 @@
                                     </td>
                                     <td class="border px-2 py-1 break-words space-x-2">
                                         <button @click="editRoom(room.Room_id)"
-                                            class="text-white bg-blue-400 px-2 py-2 rounded-lg hover:bg-blue-700 shadow-lg transition">
+                                            class="text-white bg-blue-600 px-2 py-2 rounded-lg hover:bg-blue-400 shadow-lg transition">
                                             แก้ไข
                                         </button>
                                         <button @click="deleteRoom(room.Room_id)"
-                                            class="text-white bg-red-400 px-2 py-2 rounded-lg hover:bg-red-700 shadow-lg transition">
+                                            class="text-white bg-red-600 px-2 py-2 rounded-lg hover:bg-red-400 shadow-lg transition">
                                             ลบ
                                         </button>
                                     </td>

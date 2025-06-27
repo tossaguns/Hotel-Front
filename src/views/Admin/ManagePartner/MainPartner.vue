@@ -46,7 +46,7 @@
                     <!-- ปฏิเสธ -->
                     <div class="bg-white rounded-xl shadow p-4 hover:shadow-lg transition">
                         <p class="text-sm text-gray-800 mb-2">กรณีไม่ผ่านการตรวจสอบ</p>
-                        <button @click="navigateToNoApprovePartner"
+                        <button @click="navigateToRejectPartner"
                             class="bg-red-800 text-white text-base sm:text-lg font-semibold rounded-xl w-full px-4 py-3 hover:bg-red-800 transition">
                             ❌ ปฏิเสธ
                         </button>

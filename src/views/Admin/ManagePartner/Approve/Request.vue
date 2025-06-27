@@ -11,24 +11,30 @@
         }">
             <div>
                 <!-- หัวข้อ -->
-                <div class="mt-2 rounded-t-lg bg-rose-400 p-2 text-white text-lg">
+                <div class="mt-2 rounded-t-lg bg-emerald-800 p-2 text-white text-lg">
                     <h1>จัดการคำขออนุมัติ</h1>
                 </div>
 
                 <!-- ฟิลเตอร์ วัน/เดือน/ปี -->
                 <div class="bg-white rounded-b-lg py-4 px-4">
-                    <div class="flex justify-center sm:space-x-5 gap-3">
-                        <div class="flex items-center justify-start space-x-2">
+                    <div class="flex flex-col sm:flex-row justify-center sm:space-x-5 gap-2">
+                        <div class="flex items-center justify-between sm:justify-start space-x-2">
                             <p>วัน</p>
-                            <dropdown class="border sm:w-auto"></dropdown>
+                            <select class="border rounded px-2 py-1 text-sm w-full sm:w-auto">
+                                <option>ทั้งหมด</option>
+                            </select>
                         </div>
-                        <div class="flex items-center justify-start space-x-2">
+                        <div class="flex items-center justify-between sm:justify-start space-x-2">
                             <p>เดือน</p>
-                            <dropdown class="border sm:w-auto"></dropdown>
+                            <select class="border rounded px-2 py-1 text-sm w-full sm:w-auto">
+                                <option>ทั้งหมด</option>
+                            </select>
                         </div>
-                        <div class="flex items-center justify-start space-x-2">
+                        <div class="flex items-center justify-between sm:justify-start space-x-2">
                             <p>ปี</p>
-                            <dropdown class="border sm:w-auto"></dropdown>
+                            <select class="border rounded px-2 py-1 text-sm w-full sm:w-auto">
+                                <option>ทั้งหมด</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -42,7 +48,7 @@
                         </div>
                         <div>
                             <button
-                                class="w-auto sm:w-auto bg-green-500 px-3 py-2 rounded-lg text-white text-xs sm:text-base font-bold hover:bg-green-600">
+                                class="w-auto sm:w-auto bg-emerald-700 px-3 py-2 rounded-lg text-white text-xs sm:text-base font-bold hover:bg-emerald-500">
                                 ค้นหา
                             </button>
                         </div>
@@ -53,12 +59,12 @@
                 <div class="bg-white mt-2 py-4 rounded-lg px-4">
                     <div class="flex justify-center items-center gap-3 mb-3">
                         <button @click="navigateToApprove"
-                            class="rounded-lg w-full sm:w-auto px-4 py-2 text-sm sm:text-lg bg-rose-100 hover:bg-rose-300 shadow-md">
+                            class="rounded-lg w-full sm:w-auto px-4 py-2 text-sm sm:text-lg hover:bg-emerald-500 shadow-md">
                             บริษัทที่อนุมัติแล้ว
                         </button>
                         <p class="hidden sm:inline text-2xl text-gray-400 font-bold">|</p>
                         <button @click="navigateToNoApprove"
-                            class="rounded-lg w-full sm:w-auto px-4 py-2 text-sm sm:text-lg bg-rose-100 hover:bg-rose-300 shadow-md">
+                            class="rounded-lg w-full sm:w-auto px-4 py-2 text-sm sm:text-lg hover:bg-emerald-500 shadow-md">
                             บริษัทที่ไม่อนุมัติ
                         </button>
                     </div>
@@ -129,7 +135,7 @@
                         </button>
                         <button v-for="page in totalPages" :key="page" @click="currentPage = page"
                             class="px-3 py-1 border rounded"
-                            :class="{ 'bg-blue-500 text-white': currentPage === page }">
+                            :class="{ 'bg-emerald-500 text-white': currentPage === page }">
                             {{ page }}
                         </button>
                         <button @click="currentPage++" :disabled="currentPage === totalPages"
@@ -141,7 +147,7 @@
                     <!-- ปุ่มย้อนกลับ -->
                     <div class="flex justify-center mt-8 px-4">
                         <button @click="navigateBackToMainPartner"
-                            class="text-white bg-red-500 px-3 py-2 rounded-lg hover:bg-red-600">
+                            class="text-white bg-red-700 px-3 py-2 rounded-lg hover:bg-red-500">
                             ย้อนกลับ
                         </button>
                     </div>

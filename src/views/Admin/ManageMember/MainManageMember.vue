@@ -11,24 +11,29 @@
                     <h1>จัดการคำขออนุมัติ</h1>
                 </div>
 
-                <div class="bg-white rounded-b-lg py-4 px-2">
-
+                <div class="bg-white rounded-b-lg py-4 px-4">
                     <div class="text-gray-400 flex justify-center my-3">
                         <p>ค้นหาวันที่ member สมัครใช้งาน</p>
                     </div>
 
-                    <div class="flex justify-center space-x-5 mb-2">
-                        <div class="flex space-x-2">
+                    <div class="flex flex-col sm:flex-row justify-center sm:space-x-5 gap-2">
+                        <div class="flex items-center justify-between sm:justify-start space-x-2">
                             <p>วัน</p>
-                            <dropdown class="border "></dropdown>
+                            <select class="border rounded px-2 py-1 text-sm w-full sm:w-auto">
+                                <option>ทั้งหมด</option>
+                            </select>
                         </div>
-                        <div class="flex space-x-2">
+                        <div class="flex items-center justify-between sm:justify-start space-x-2">
                             <p>เดือน</p>
-                            <dropdown class="border "></dropdown>
+                            <select class="border rounded px-2 py-1 text-sm w-full sm:w-auto">
+                                <option>ทั้งหมด</option>
+                            </select>
                         </div>
-                        <div class="flex space-x-2">
+                        <div class="flex items-center justify-between sm:justify-start space-x-2">
                             <p>ปี</p>
-                            <dropdown class="border "></dropdown>
+                            <select class="border rounded px-2 py-1 text-sm w-full sm:w-auto">
+                                <option>ทั้งหมด</option>
+                            </select>
                         </div>
                     </div>
                 </div>

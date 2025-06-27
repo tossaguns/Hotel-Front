@@ -12,7 +12,7 @@
             }">
             <div class="text-center border mx-1 mt-2 mb-12 rounded-md shadow-xl bg-white">
                 <div
-                    class="text-center text-4xl sm:text-6xl font-bold mb-20 text-white bg-stone-500 pt-20 pb-10 rounded-t-lg">
+                    class="text-center text-4xl sm:text-6xl font-bold mb-20 text-white bg-amber-500 pt-20 pb-10 rounded-t-lg">
                     <h1>เพิ่มห้องพัก</h1>
                 </div>
 
@@ -137,14 +137,14 @@
                     </div>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-4 py-6 px-3">
-                    <button class="flex-1 bg-lime-500 text-white py-3 rounded-lg hover:bg-lime-700 shadow-xl">
+                    <button class="flex-1 bg-emerald-700 text-white py-3 rounded-lg hover:bg-emerald-500 shadow-xl">
                         บันทึก
                     </button>
-                    <button class="flex-1 bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-700 shadow-xl"
+                    <button class="flex-1 bg-gray-700 text-white py-3 rounded-lg hover:bg-gray-500 shadow-xl"
                         @click="reseatall">
                         รีเซ็ต
                     </button>
-                    <button class="flex-1 bg-red-500 text-white py-3 rounded-lg hover:bg-red-700 shadow-xl"
+                    <button class="flex-1 bg-red-700 text-white py-3 rounded-lg hover:bg-red-500 shadow-xl"
                         @click="navigateToBackMainRoom">
                         ย้อนกลับ
                     </button>
