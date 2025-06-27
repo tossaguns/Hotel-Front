@@ -97,6 +97,20 @@
                     </p>
                 </div>
 
+                <div @click="navigateTo('/mainmanagebank', 'bank')"
+                    class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-emerald-800 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
+                    :class="[
+                        activeMenu === 'bank' ? 'bg-emerald-800 text-white drop-shadow-lg' : '',
+                        isCollapsed ? 'justify-center' : 'px-3'
+                    ]">
+                    <img src="/images/icon/promotion_nav.png" alt="icon"
+                        class="w-4 h-5 object-contain transition-transform duration-300 group-hover:scale-110"
+                        :class="isCollapsed ? '' : 'mr-3'" />
+                    <p v-show="!isCollapsed" class="transition-transform duration-300 group-hover:scale-110">
+                        การชำระเงิน
+                    </p>
+                </div>
+
                 <div class="flex justify-center mt-6 space-x-2 text-sm">
                     <p>Admin </p>
                     <p v-show="!isCollapsed"
@@ -192,7 +206,7 @@
                             </p>
                         </div>
 
-                        <div class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-red-800 hover:text-white flex justify-center"
+                        <div class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-red-800 hover:text-white  justify-center"
                             :class="activeMenu === '' ? 'bg-red-800 text-white' : 'text-gray-700'">
                             <span class="text-lg hover:text-white">LogOut</span>
                         </div>
@@ -261,6 +275,10 @@ function getActiveMenuFromRoute() {
         '/mainmanagemember': 'managemember',
         '/mainpromotion': 'promotion',
         '/addpromotion': 'promotion',
+        '/mainmanagebank': 'bank',
+
+
+
         // เพิ่ม route อื่นๆ ตามต้องการ
     }
     return routeMenuMap[currentRoute] || 'dashboard'

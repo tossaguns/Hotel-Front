@@ -208,7 +208,6 @@ const getApprovedPartners = async () => {
 }
 
 
-
 function navigateToDetailPartner(id, rowNumber, status) {
     router.push({
         path: `/detailpartnerapprove/${id}`,
@@ -218,7 +217,6 @@ function navigateToDetailPartner(id, rowNumber, status) {
         }
     })
 }
-
 
 // ปุ่มย้อนกลับ
 const navigateBack = () => {
