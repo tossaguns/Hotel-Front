@@ -74,7 +74,7 @@
                 </div>
 
 
-                <div class="bg-white rounded-lg pb-6">
+                <div class="bg-white md:min-h-[70vh] rounded-lg pb-6">
                     <div class="flex justify-center pt-7 mb-5">
                         <button @click="navigateBackToTossagunbooking"
                             class="rounded-lg px-2 py- text-lg hover:bg-amber-300 shadow-lg">ดูข้อมูลห้องพัก

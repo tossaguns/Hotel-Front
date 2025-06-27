@@ -8,7 +8,7 @@
                 'md:ml-[72px]': isSidebarCollapsed
             }">
             <div>
-                <div class="mt-2 rounded-t-lg bg-amber-400 p-2 text-white text-lg">
+                <div class="rounded-t-lg bg-amber-400 p-2 text-white text-lg">
                     <h1>จัดการการจองกับ Sleep Gun</h1>
                 </div>
 
@@ -59,7 +59,7 @@
                 </div>
 
 
-                <div class="bg-white rounded-lg pb-6 pt-3">
+                <div class="bg-white md:min-h-[71vh] rounded-lg pb-6 pt-3">
                     <!-- เพิ่ม wrapper -->
                     <div class="overflow-x-auto px-2 ">
                         <table class="w-full border border-collapse text-xs md:text-sm ">

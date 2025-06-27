@@ -6,8 +6,9 @@
             'md:ml-[232px]': !isSidebarCollapsed,
             'md:ml-[72px]': isSidebarCollapsed
         }">
-
-            <div class="rounded-t-lg bg-amber-400 p-2 text-white text-lg">
+            <div class="fixed top-0 left-0 right-0 h-4 z-[100] bg-white pointer-events-none"></div>
+            <div
+                class="sticky top-4 z-30 rounded-t-lg bg-amber-400 p-2 text-white text-lg shadow-lg shadow-gray-200 overflow-t-hidden">
                 <h1>โปรไฟล์บริษัท</h1>
             </div>
 
@@ -15,7 +16,6 @@
 
                 <div class="flex justify-center max-h-screen space-x-2 mx-2">
 
-                    
                     <div class="w-1/2 pl-6 pr-3 py-5">
                         <a class="relative group cursor-pointer" @click="navigateBackToEditProfileCompany">
                             <div class="absolute inset-0 rounded-lg transition-all duration-200 bg-center bg-cover filter brightness-75 saturate-120 contrast-85 group-hover:scale-105 group-hover:filter-none"
@@ -52,6 +52,7 @@
                     </div>
                 </div>
             </div>
+            <div class="fixed bottom-0 left-0 right-0 h-4 z-[40] bg-gray-100 pointer-events-none"></div>
         </div>
     </div>
 </template>

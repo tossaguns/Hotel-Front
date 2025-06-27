@@ -172,7 +172,7 @@ export default {
                 'md:ml-[72px]': isSidebarCollapsed
             }">
             <div>
-                <div class="mt-2 rounded-t-lg bg-amber-400 p-2 text-white text-lg">
+                <div class="rounded-t-lg bg-amber-400 p-2 text-white text-lg">
                     <h1>จัดการพนักงาน</h1>
                 </div>
 
@@ -199,8 +199,6 @@ export default {
                     </div>
                 </div>
 
-
-
                 <div class="flex justify-center space-x-5 mb-2 bg-white mt-2 py-4 rounded-lg px-2">
                     <div class="flex space-x-2">
                         <p>ค้นหาด้วยรหัสพนักงาน</p>
@@ -216,7 +214,7 @@ export default {
                     </div>
                 </div>
 
-                <div class="bg-white rounded-lg pb-6">
+                <div class="bg-white md:min-h-[74vh] rounded-lg pb-6">
                     <div class="flex justify-center pt-7 mb-5">
                         <button @click="navigateBackToDataEmployee"
                             class="rounded-lg px-2 py- text-lg hover:bg-amber-300 shadow-lg">ดูข้อมูลพนักงาน
@@ -227,7 +225,6 @@ export default {
                     </div>
 
                     <!-- เพิ่ม wrapper -->
-
                     <div class="overflow-x-auto px-2 ">
                         <table class="w-full border border-collapse text-xs md:text-sm ">
                             <thead>
@@ -248,7 +245,7 @@ export default {
                                 <tr v-for="(item, index) in paginatedData" :key="index"
                                     class="hover:bg-gray-50 whitespace-nowrap">
                                     <td class="border px-2 py-1 break-words">{{ index + 1 + (currentPage - 1) * perPage
-                                    }}</td>
+                                        }}</td>
                                     <td class="border px-2 py-1 break-words">{{ item.code }}</td>
                                     <td class="border px-2 py-1 break-words">{{ item.position }}</td>
                                     <td class="border px-2 py-1 break-words">{{ item.name }}</td>
@@ -287,8 +284,6 @@ export default {
 
     </div>
 </template>
-
-
 <script>
 import Sidebar from '@/components/SidebarExecutive.vue'
 

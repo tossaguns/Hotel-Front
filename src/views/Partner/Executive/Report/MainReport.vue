@@ -8,7 +8,7 @@
                 'md:ml-[72px]': isSidebarCollapsed
             }">
             <div>
-                <div class="mt-2 rounded-t-lg bg-amber-400 p-2 text-white text-lg">
+                <div class="rounded-t-lg bg-amber-400 p-2 text-white text-lg">
                     <h1>รายงาน</h1>
                 </div>
 
