@@ -21,12 +21,6 @@
                             <input v-for="(digit, index) in otp" :key="index" type="text" maxlength="1"
                                 v-model="otp[index]" class="otp-digit" />
                         </div>
-                        <!-- <p v-if="countdown > 0" class="text-sm text-gray-500">
-                        ขอรหัสใหม่ได้ใน {{ countdown }} วินาที
-                    </p>
-                    <button type="button" :disabled="countdown > 0" @click="resendOtp">
-                        ขอรหัสใหม่
-                    </button> -->
                     </div>
                     <p v-if="countdown > 0" class="text-sm text-gray-500 mt-3">
                         ขอรหัสใหม่ได้ใน {{ countdown }} วินาที
@@ -46,20 +40,10 @@
                     <div class="form-login">
                         <h1 class="">เข้าสู่ระบบสมาชิก</h1>
 
-                        <div class="form-control2">
+                        <div class="form-control2 mb-5">
                             <input type="email" v-model="login.email" @input="onEmailInput" placeholder="อีเมล" />
                             <small>{{ loginErrors.email }}</small>
                             <span></span>
-                        </div>
-
-                        <div class="contentlogin">
-                            <div class="checkbox">
-                                <input type="checkbox" v-model="login.remember" id="checkbox" />
-                                <label for="checkbox">จำรหัสผ่าน</label>
-                            </div>
-                            <div class="pass-link">
-                                <a href="#">รหัสผ่านไม่ถูกต้อง</a>
-                            </div>
                         </div>
 
                         <button class="" type="submit">เข้าสู่ระบบ</button>
@@ -192,7 +176,7 @@ export default {
                 } else {
                     clearInterval(timer);
                 }
-            }, 500);
+            }, 1000);
         },
 
         onEmailInput() {
@@ -674,15 +658,15 @@ button[type="submit"]:hover {
         padding: 0 20px;
     }
 
-    .form-container h1{
+    .form-container h1 {
         margin: 0;
     }
 
-    .form-login{
-        margin-top: 50px;   
+    .form-login {
+        margin-top: 50px;
     }
 
-    .contentlogin{
+    .contentlogin {
         margin-bottom: 0;
     }
 }
@@ -797,7 +781,7 @@ button[type="submit"]:hover {
         text-align: center;
     }
 
-    .verify-otp-container form{
+    .verify-otp-container form {
         gap: 0px;
     }
 }

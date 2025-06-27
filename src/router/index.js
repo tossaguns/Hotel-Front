@@ -94,10 +94,28 @@ const router = createRouter({
         import("@/views/Partner/Executive/ManageEmployee/EmployeeList.vue"),
     },
     {
+      path: "/profileemployee",
+      name: "ProfileEmployee",
+      component: () =>
+        import("@/views/Partner/Employee/ProfileEmployee.vue"),
+    },
+    {
+      path: "/dashboardforemployee",
+      name: "DashBoardforEmployee",
+      component: () =>
+        import("@/views/Partner/Employee/DashBoardforEmployee.vue"),
+    },
+    {
       path: "/editprofilecompany",
       name: "EditProfileCompany",
       component: () =>
         import("@/views/Partner/Executive/Profile/EditProfileCompany.vue"),
+    },
+    {
+      path: "/mainhotelforemployee",
+      name: "MainHotelforEmployee",
+      component: () =>
+        import("@/views/Partner/Employee/MainHotelforEmployee.vue"),
     },
     {
       path: "/dashboardforadmin",
@@ -120,11 +138,6 @@ const router = createRouter({
       path: "/addroom",
       name: "AddRoom",
       component: () => import("@/views/Partner/Room/AddRoom.vue"),
-    },
-    {
-      path: "/editroom/:id",
-      name: "EditRoom",
-      component: () => import("@/views/Partner/Room/EditRoom.vue"),
     },
     {
       path: "/editroom/:id",
@@ -378,6 +391,11 @@ const router = createRouter({
       path: "/loginpartneremployee",
       name: "LoginPartnerEmployee",
       component: () => import("@/views/Partner/LoginPartnerEmployee.vue"),
+    },
+    {
+      path: "/logout",
+      name: "Logout",
+      component: () => import("@/views/Login.vue"),
     },
   ],
 });

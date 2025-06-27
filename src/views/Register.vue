@@ -2,8 +2,8 @@ TODO:เสร็จเเล้ว
 
 <template>
   <div class="background-wrapper">
-    <div class="backgr w-full min-h-screen flex flex-col items-center justify-center backgr">
-      <div class="blur-overlay"></div>
+    <div class="backgr bg-gradient-to-t from-black from-2% via-gray-500 to-white w-full min-h-screen flex flex-col items-center justify-center backgr">
+      <!-- <div class="blur-overlay"></div> -->
       <div class="container">
         <div class="box">
           <span></span>
@@ -57,7 +57,7 @@ export default {
   overflow: hidden;
 }
 
-.backgr {
+/* .backgr {
   background-image: url('https://i.pinimg.com/736x/ee/fa/74/eefa7498eac4d16a10c18e316a276199.jpg');
   background-size: cover;
   background-position: center;
@@ -65,7 +65,7 @@ export default {
   width: 100%;
   position: absolute;
   z-index: 1;
-}
+} */
 
 .blur-overlay {
   position: absolute;

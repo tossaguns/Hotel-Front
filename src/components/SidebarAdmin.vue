@@ -12,9 +12,9 @@
 
             <div class="mt-6">
                 <div @click="navigateTo('/dashboardforadmin', 'dashboard')"
-                    class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-rose-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
+                    class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-emerald-800 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
-                        activeMenu === 'dashboard' ? 'bg-rose-400 text-white drop-shadow-lg' : '',
+                        activeMenu === 'dashboard' ? 'bg-emerald-800 text-white drop-shadow-lg' : '',
                         isCollapsed ? 'justify-center' : 'px-3'
                     ]">
                     <img src="/images/icon/dashboard_nav.png" alt="icon"
@@ -26,9 +26,9 @@
                 </div>
 
                 <div @click="navigateTo('/mainpartner', 'managepartner')"
-                    class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-rose-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
+                    class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-emerald-800 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
-                        activeMenu === 'managepartner' ? 'bg-rose-400 text-white drop-shadow-lg' : '',
+                        activeMenu === 'managepartner' ? 'bg-emerald-800 text-white drop-shadow-lg' : '',
                         isCollapsed ? 'justify-center' : 'px-3'
                     ]">
                     <img src="/images/icon/employee_navAdmin.png" alt="icon"
@@ -40,9 +40,9 @@
                 </div>
 
                 <div @click="navigateTo('/mainmanagemember', 'managemember')"
-                    class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-rose-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
+                    class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-emerald-800 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
-                        activeMenu === 'managemember' ? 'bg-rose-400 text-white drop-shadow-lg' : '',
+                        activeMenu === 'managemember' ? 'bg-emerald-800 text-white drop-shadow-lg' : '',
                         isCollapsed ? 'justify-center' : 'px-3'
                     ]">
                     <img src="/images/icon/people.png" alt="icon"
@@ -55,9 +55,9 @@
 
                 <!--TODO: เดี๋ยวกลับมาทำ
                 <div @click="navigateToReserveTossagun('reservetossagun')"
-                    class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-rose-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
+                    class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-emerald-800 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
-                        activeMenu === 'reservetossagun' ? 'bg-rose-400 text-white drop-shadow-lg' : '',
+                        activeMenu === 'reservetossagun' ? 'bg-emerald-800 text-white drop-shadow-lg' : '',
                         isCollapsed ? 'justify-center' : 'px-3'
                     ]">
                     <img src="/images/icon/calendartossagun_nav.png" alt="icon"
@@ -69,9 +69,9 @@
                 </div>
 
                 <div @click="navigateToReceipt('receipt')"
-                    class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-rose-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
+                    class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-emerald-800 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
-                        activeMenu === 'receipt' ? 'bg-rose-400 text-white drop-shadow-lg' : '',
+                        activeMenu === 'receipt' ? 'bg-emerald-800 text-white drop-shadow-lg' : '',
                         isCollapsed ? 'justify-center' : 'px-3'
                     ]">
                     <img src="/images/icon/receipt_nav.png" alt="icon"
@@ -84,9 +84,9 @@
                 -->
 
                 <div @click="navigateTo('/mainpromotion', 'promotion')"
-                    class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-rose-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
+                    class="group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-emerald-800 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
-                        activeMenu === 'promotion' ? 'bg-rose-400 text-white drop-shadow-lg' : '',
+                        activeMenu === 'promotion' ? 'bg-emerald-800 text-white drop-shadow-lg' : '',
                         isCollapsed ? 'justify-center' : 'px-3'
                     ]">
                     <img src="/images/icon/promotion_nav.png" alt="icon"
@@ -100,15 +100,15 @@
                 <div class="flex justify-center mt-6 space-x-2 text-sm">
                     <p>Admin </p>
                     <p v-show="!isCollapsed"
-                        class="transition-transform duration-300 group-hover:scale-110 text-rose-500">
+                        class="transition-transform duration-300 group-hover:scale-110 text-emerald-500">
                         {{ nameAdmin }}
                     </p>
                 </div>
 
                 <div @click="navigateTo('/logout', 'logout')"
-                    class="mt-20 group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-red-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
+                    class="mt-20 group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-red-800 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
-                        activeMenu === 'logout' ? 'bg-red-400 text-white drop-shadow-lg' : '',
+                        activeMenu === 'logout' ? 'bg-red-800 text-white drop-shadow-lg' : '',
                         isCollapsed ? 'justify-center' : 'px-3'
                     ]">
                     <img src="/images/icon/logout.png" alt="icon"
@@ -147,53 +147,53 @@
                 <div class="flex-1 overflow-y-auto px-4 py-6">
                     <div class="space-y-2">
                         <div @click="navigateTo('/dashboardforadmin', 'dashboard')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-rose-400 hover:text-white"
-                            :class="activeMenu === 'dashboard' ? 'bg-rose-400 text-white' : 'text-gray-700'">
+                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-emerald-800 hover:text-white"
+                            :class="activeMenu === 'dashboard' ? 'bg-emerald-800 text-white' : 'text-gray-700'">
                             <span class="text-lg">Dashboard</span>
                         </div>
 
                         <div @click="navigateTo('/mainpartner', 'managepartner')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-rose-400 hover:text-white"
-                            :class="activeMenu === 'managepartner' ? 'bg-rose-400 text-white' : 'text-gray-700'">
+                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-emerald-800 hover:text-white"
+                            :class="activeMenu === 'managepartner' ? 'bg-emerald-800 text-white' : 'text-gray-700'">
                             <span class="text-lg">จัดการ Partner</span>
                         </div>
 
                         <div @click="navigateTo('/mainmanagemember', 'managemember')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-rose-400 hover:text-white"
-                            :class="activeMenu === 'managemember' ? 'bg-rose-400 text-white' : 'text-gray-700'">
+                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-emerald-800 hover:text-white"
+                            :class="activeMenu === 'managemember' ? 'bg-emerald-800 text-white' : 'text-gray-700'">
                             <span class="text-lg">จัดการ member</span>
                         </div>
 
                         <!--
                         TODO: เดี๋ยวกับมาทำหน้าจองกับ tossagun เเละ รายงสน 
                         <div @click="navigateToReserveTossagun('reservetossagun')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-rose-400 hover:text-white"
-                            :class="activeMenu === 'reservetossagun' ? 'bg-rose-400 text-white' : 'text-gray-700'">
+                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-emerald-800 hover:text-white"
+                            :class="activeMenu === 'reservetossagun' ? 'bg-emerald-800 text-white' : 'text-gray-700'">
                             <span class="text-lg">จองกับTossagun</span>
                         </div>
 
                         <div @click="navigateToReceipt('receipt')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-rose-400 hover:text-white"
-                            :class="activeMenu === 'receipt' ? 'bg-rose-400 text-white' : 'text-gray-700'">
+                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-emerald-800 hover:text-white"
+                            :class="activeMenu === 'receipt' ? 'bg-emerald-800 text-white' : 'text-gray-700'">
                             <span class="text-lg">รายงาน</span>
                         </div>-->
 
                         <div @click="navigateTo('/mainpromotion', 'promotion')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-rose-400 hover:text-white"
-                            :class="activeMenu === 'promotion' ? 'bg-rose-400 text-white' : 'text-gray-700'">
+                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-emerald-800 hover:text-white"
+                            :class="activeMenu === 'promotion' ? 'bg-emerald-800 text-white' : 'text-gray-700'">
                             <span class="text-lg">โปรโมชั่น</span>
                         </div>
 
                         <div class="flex justify-center mt-6 space-x-2 text-sm">
                             <p>Admin :</p>
                             <p v-show="!isCollapsed"
-                                class="transition-transform duration-300 group-hover:scale-110 text-rose-500">
+                                class="transition-transform duration-300 group-hover:scale-110 text-emerald-500">
                                 {{ nameAdmin }}
                             </p>
                         </div>
 
-                        <div class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-red-400 hover:text-white flex justify-center"
-                            :class="activeMenu === '' ? 'bg-red-400 text-white' : 'text-gray-700'">
+                        <div class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-red-800 hover:text-white flex justify-center"
+                            :class="activeMenu === '' ? 'bg-red-800 text-white' : 'text-gray-700'">
                             <span class="text-lg hover:text-white">LogOut</span>
                         </div>
 
