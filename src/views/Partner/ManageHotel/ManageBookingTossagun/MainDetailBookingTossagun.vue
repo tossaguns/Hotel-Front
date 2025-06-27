@@ -104,10 +104,10 @@
                         </form>
                     </div>
                     <div class="flex justify-center mt-5 space-x-3">
-                        <button class="bg-green-400 p-2 rounded-lg hover:bg-green-600">บันทึก</button>
-                        <button class="bg-gray-300 p-2 rounded-lg hover:bg-gray-500">รีเซ็ท</button>
+                        <button class="bg-emerald-600 p-2 rounded-lg hover:bg-emerald-400">บันทึก</button>
+                        <button class="bg-gray-500 p-2 rounded-lg hover:bg-gray-300">รีเซ็ท</button>
                         <button @click="navigateBackToMainBookingTossagun"
-                            class="bg-red-400 p-2 rounded-lg hover:bg-red-600">ย้อนกลับ</button>
+                            class="bg-red-600 p-2 rounded-lg hover:bg-red-400">ย้อนกลับ</button>
                     </div>
                 </div>
             </div>

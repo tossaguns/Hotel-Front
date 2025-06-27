@@ -12,25 +12,34 @@
                     <h1>จัดการการจองกับ Sleep Gun</h1>
                 </div>
 
-                <div class="bg-white rounded-b-lg py-4 px-2">
+                <div class="bg-white rounded-b-lg py-4 px-4">
                     <div class="flex justify-center space-x-5 mb-2">
-                        <div class="flex space-x-2">
+                        <div class="flex items-center justify-between sm:justify-start space-x-2">
                             <p>เลือกสถานะ</p>
-                            <dropdown class="border">{{ StatusBooking }}</dropdown>
+                            <select class="border rounded px-2 py-1 text-sm w-full sm:w-auto">
+                                <option>ทั้งหมด</option>
+                                <option>{{ StatusBooking }}</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="flex justify-center space-x-5 mb-2">
-                        <div class="flex space-x-2">
+                    <div class="flex flex-col sm:flex-row justify-center sm:space-x-5 gap-2">
+                        <div class="flex items-center justify-between sm:justify-start space-x-2">
                             <p>วัน</p>
-                            <dropdown class="border "></dropdown>
+                            <select class="border rounded px-2 py-1 text-sm w-full sm:w-auto">
+                                <option>ทั้งหมด</option>
+                            </select>
                         </div>
-                        <div class="flex space-x-2">
+                        <div class="flex items-center justify-between sm:justify-start space-x-2">
                             <p>เดือน</p>
-                            <dropdown class="border "></dropdown>
+                            <select class="border rounded px-2 py-1 text-sm w-full sm:w-auto">
+                                <option>ทั้งหมด</option>
+                            </select>
                         </div>
-                        <div class="flex space-x-2">
+                        <div class="flex items-center justify-between sm:justify-start space-x-2">
                             <p>ปี</p>
-                            <dropdown class="border "></dropdown>
+                            <select class="border rounded px-2 py-1 text-sm w-full sm:w-auto">
+                                <option>ทั้งหมด</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -43,7 +52,7 @@
                         <input class="border rounded-md" />
                     </div>
                     <div>
-                        <button class="bg-green-500 px-3 py-1 rounded-lg text-white font-bold hover:bg-green-600">
+                        <button class="bg-emerald-600 px-3 py-1 rounded-lg text-white font-bold hover:bg-emerald-400">
                             ค้นหา</button>
                     </div>
 
@@ -93,7 +102,7 @@
                                     <td class="border px-2 py-1 break-words">{{ item.note }}</td>
                                     <td class="border px-2 py-1 text-center">
                                         <button @click="navigateToDetail"
-                                            class="bg-rose-400 hover:bg-rose-500 text-white px-3 py-1 rounded">
+                                            class="bg-blue-600 hover:bg-blue-400 text-white px-3 py-1 rounded">
                                             แก้ไข
                                         </button>
                                     </td>
@@ -111,7 +120,7 @@
                         </button>
                         <button v-for="page in totalPages" :key="page" @click="currentPage = page"
                             class="px-3 py-1 border rounded"
-                            :class="{ 'bg-blue-500 text-white': currentPage === page }">
+                            :class="{ 'bg-amber-500 text-white': currentPage === page }">
                             {{ page }}
                         </button>
                         <button @click="currentPage++" :disabled="currentPage === totalPages"

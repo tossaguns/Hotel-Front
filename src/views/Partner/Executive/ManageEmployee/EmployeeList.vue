@@ -34,7 +34,7 @@
                         </div>
 
                         <button @click="navigateToAddEmployee"
-                            class="bg-lime-600 px-4 py-2 rounded-lg text-white hover:bg-lime-800 text-sm shadow-md">
+                            class="bg-emerald-800 px-4 py-2 rounded-lg text-white hover:bg-emerald-600 text-sm shadow-md">
                             + เพิ่มรายชื่อพนักงาน
                         </button>
                     </div>
@@ -195,13 +195,13 @@
                 <div class="flex justify-center items-center gap-1 my-6 text-sm select-none">
                     <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1"
                         class="px-3 py-1 rounded-md text-gray-600 hover:bg-gray-300 bg-white disabled:opacity-50">
-                        Previous
+                        ย้อนกลับ
                     </button>
 
                     <button v-for="page in totalPages" :key="page" @click="goToPage(page)" :class="[
                         'px-3 py-1 rounded-md',
                         page === currentPage
-                            ? 'bg-blue-600 text-white'
+                            ? 'bg-amber-500 text-white'
                             : 'bg-white hover:bg-gray-300 text-gray-700'
                     ]">
                         {{ page.toString().padStart(2, '0') }}
@@ -209,13 +209,13 @@
 
                     <button @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages"
                         class="px-3 py-1 rounded-md text-gray-600 hover:bg-gray-300 bg-white disabled:opacity-50">
-                        Next
+                        ถัดไป
                     </button>
                 </div>
 
                 <div class="flex justify-center my-4">
                     <button @click="navigateBackToMainEmployee"
-                        class="bg-red-500 px-3 py-2 rounded-lg text-white hover:bg-red-600">ย้อนกลับ</button>
+                        class="bg-red-700 px-3 py-2 rounded-lg text-white hover:bg-red-500">ย้อนกลับ</button>
                 </div>
             </div>
         </div>

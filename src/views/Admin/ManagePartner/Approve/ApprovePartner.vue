@@ -8,7 +8,7 @@
         }">
             <div>
                 <!-- หัวข้อ -->
-                <div class="mt-2 rounded-t-lg bg-rose-400 p-2 text-white text-lg">
+                <div class="mt-2 rounded-t-lg bg-emerald-800 p-2 text-white text-lg">
                     <h1>อนุมัติแล้ว</h1>
                 </div>
 
@@ -45,7 +45,7 @@
                         </div>
                         <div>
                             <button
-                                class="w-auto sm:w-auto bg-green-500 px-3 py-2 rounded-lg text-white text-xs sm:text-base font-bold hover:bg-green-600">
+                                class="w-auto sm:w-auto bg-emerald-700 px-3 py-2 rounded-lg text-white text-xs sm:text-base font-bold hover:bg-emerald-500">
                                 ค้นหา
                             </button>
                         </div>
@@ -55,7 +55,7 @@
                 <!-- ตาราง -->
                 <div class="bg-white rounded-lg pb-6 pt-4">
                     <div class="flex justify-center py-4 px-2 text-center">
-                        <p class="text-2xl md:text-4xl font-bold text-green-600">รายชื่อ partner</p>
+                        <p class="text-2xl md:text-4xl font-bold text-emerald-600">รายชื่อ partner</p>
                     </div>
                     <div class="overflow-x-auto px-2">
                         <table class="responsive-table w-full border border-collapse text-xs md:text-sm">
@@ -108,7 +108,7 @@
                         </button>
                         <button v-for="page in totalPages" :key="page" @click="currentPage = page"
                             class="px-3 py-1 border rounded"
-                            :class="{ 'bg-blue-500 text-white': currentPage === page }">
+                            :class="{ 'bg-emerald-600 text-white': currentPage === page }">
                             {{ page }}
                         </button>
                         <button @click="currentPage++" :disabled="currentPage === totalPages"
@@ -120,7 +120,7 @@
                     <!-- ปุ่มย้อนกลับ -->
                     <div class="flex justify-center mt-8 px-4">
                         <button @click="navigateBack"
-                            class="text-white bg-red-500 px-3 py-2 rounded-lg hover:bg-red-600">
+                            class="text-white bg-red-700 px-3 py-2 rounded-lg hover:bg-red-500">
                             ย้อนกลับ
                         </button>
                     </div>

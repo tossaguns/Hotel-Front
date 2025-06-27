@@ -26,9 +26,9 @@
                         </div>
                         <div class="space-x-3">
                             <button
-                                class="bg-green-300 py-2 px-4 mb-3 rounded-lg border-2 hover:bg-green-400">รายงานCheckIn</button>
+                                class="bg-emerald-700 py-2 px-4 mb-3 rounded-lg border-2 hover:bg-emerald-500">รายงานCheckIn</button>
                             <button
-                                class="bg-red-300 py-2 px-4 mb-3 rounded-lg border-2 hover:bg-red-400">รายงานCheckOut</button>
+                                class="bg-red-700 py-2 px-4 mb-3 rounded-lg border-2 hover:bg-red-500">รายงานCheckOut</button>
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@
                         </div>
                         <div>
                             <button
-                                class="bg-amber-300 py-2 px-4 mb-3 rounded-lg border-2 hover:bg-amber-400">รายงานการเข้างานของพนักงาน
+                                class="bg-amber-400 py-2 px-4 mb-3 rounded-lg border-2 hover:bg-amber-300">รายงานการเข้างานของพนักงาน
                                 login</button>
                         </div>
                     </div>
