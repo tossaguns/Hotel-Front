@@ -1,14 +1,16 @@
 <template>
-    <div class="w-full min-h-screen bg-gray-200">
+    <div class="w-full min-h-screen bg-gray-100">
         <SidebarAdmin @toggle-sidebar="handleSidebarToggle" />
 
-        <div class="flex-1 px-4 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300" :class="{
-            'md:ml-[260px]': !isSidebarCollapsed,
-            'md:ml-[80px]': isSidebarCollapsed
-        }">
+        <div class="flex-1 md:pl-4 md:pr-2 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300"
+            style="top: 1rem; bottom: 1rem; height: auto;" :class="{
+                'md:ml-[232px]': !isSidebarCollapsed,
+                'md:ml-[72px]': isSidebarCollapsed
+            }">
+
 
             <div>
-                <div class="mt-2 rounded-t-lg bg-rose-400 p-2 text-white text-lg">
+                <div class=" rounded-t-lg bg-rose-400 p-2 text-white text-lg">
                     <h1>โปรโมชั่น</h1>
                 </div>
 
@@ -44,7 +46,9 @@
                                     class="hover:bg-gray-50 whitespace-nowrap">
                                     <td class="col-index border px-2 py-1 break-words">{{ index + 1 }}</td>
                                     <td class="border px-2 py-1 break-words">{{ promotion.namePromotion }}</td>
-                                    <td class="col-detail border px-2 py-1 max-w-[340px] truncate overflow-hidden whitespace-nowrap">{{ promotion.detailPromotion }}
+                                    <td
+                                        class="col-detail border px-2 py-1 max-w-[340px] truncate overflow-hidden whitespace-nowrap">
+                                        {{ promotion.detailPromotion }}
                                     </td>
                                     <td class="col-datestart border px-2 py-1 break-words">{{ promotion.dateStart }}
                                     </td>
@@ -77,6 +81,7 @@
                     </div>
                 </div>
             </div>
+
             <div v-if="showPreviewModal"
                 class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                 <div class="bg-white rounded-lg shadow-lg w-full max-w-lg mx-4 relative overflow-auto max-h-[90vh]"
@@ -93,13 +98,14 @@
                         class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl font-bold">✖</button>
 
                     <!-- หัว -->
-                    <div class="py-3 rounded-t-md text-white text-center font-bold text-lg break-all whitespace-pre-wrap" :class="{
-                        'bg-yellow-300': selectedPromotion?.tonecolor === 'yellow',
-                        'bg-blue-300': selectedPromotion?.tonecolor === 'blue',
-                        'bg-green-300': selectedPromotion?.tonecolor === 'green',
-                        'bg-red-300': selectedPromotion?.tonecolor === 'red',
-                        'bg-purple-300': selectedPromotion?.tonecolor === 'purple'
-                    }">
+                    <div class="py-3 rounded-t-md text-white text-center font-bold text-lg break-all whitespace-pre-wrap"
+                        :class="{
+                            'bg-yellow-300': selectedPromotion?.tonecolor === 'yellow',
+                            'bg-blue-300': selectedPromotion?.tonecolor === 'blue',
+                            'bg-green-300': selectedPromotion?.tonecolor === 'green',
+                            'bg-red-300': selectedPromotion?.tonecolor === 'red',
+                            'bg-purple-300': selectedPromotion?.tonecolor === 'purple'
+                        }">
                         {{ selectedPromotion?.namePromotion || 'ชื่อโปรโมชั่น' }}
                     </div>
 

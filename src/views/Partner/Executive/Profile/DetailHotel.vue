@@ -1,6 +1,6 @@
 <template>
 
-<div class="w-full min-h-screen bg-gray-200">
+    <div class="w-full min-h-screen bg-gray-200">
         <Sidebar @toggle-sidebar="handleSidebarToggle" />
 
         <div class="flex-1 md:pl-4 md:pr-2 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300"
@@ -40,7 +40,7 @@
                                 <p>
                                     ที่พักของคุณมีให้เพิ่มเตียงเสริมหรือไม่ :
                                     <span class="border px-3 mx-3 py-1 rounded-md text-amber-600">{{ hasExtraBedText
-                                        }}</span>
+                                    }}</span>
                                 </p>
 
                                 <!-- แสดงเฉพาะเมื่อ hasExtraBed เป็น true -->
@@ -76,7 +76,7 @@
                                             }}</span> บาท</p>
                                     <p class="text-left">ราคาที่ต้องจ่ายของค่ามัดจำมีอะไรบ้าง : </p>
                                     <p class="border py-2 px-3 rounded-md text-left text-amber-600">{{ cashPledge.note
-                                    }}</p>
+                                        }}</p>
                                 </div>
                             </div>
                         </div>
@@ -187,6 +187,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import Sidebar from '@/components/SidebarExecutive.vue'
 
+const router = useRouter()
 
 // Sidebar control
 const isSidebarCollapsed = ref(false)

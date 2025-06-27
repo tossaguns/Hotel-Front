@@ -33,11 +33,13 @@ TODO: เสร็จ เหลือออกเเบบ font ให้สว�
 
                             <div class="w-full h-32 cursor-pointer flex items-center justify-between gap-4 rounded-t-xl hover:brightness-95 transition-all duration-300"
                                 :class="index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'" @click="toggleBox(box.id)">
-                                
-                                <img :src="getImageForType(box.id)" alt="icon" class="h-32 w-auto object-cover rounded-xl" />
+
+                                <img :src="getImageForType(box.id)" alt="icon"
+                                    class="h-32 w-auto object-cover rounded-xl" />
 
                                 <!-- ส่วนหัวของกล่อง -->
-                                    <div class="w-full h-32 cursor-pointer flex flex-col items-center justify-center text-2xl font-semibold rounded-t-xl transition-all duration-300 hover:brightness-95">
+                                <div
+                                    class="w-full h-32 cursor-pointer flex flex-col items-center justify-center text-2xl font-semibold rounded-t-xl transition-all duration-300 hover:brightness-95">
                                     <div class="text-sm mb-1 opacity-70">หมวดหมู่</div>
                                     {{ box.label }}
                                 </div>
@@ -132,18 +134,18 @@ function handleSidebarToggle(isCollapsed) {
     isSidebarCollapsed.value = isCollapsed;
 }
 
-// const getImageForType = (typeId) => {
-//     const imageMap = {
-//         typeHotel: TypeHotel,
-//         typeFacility: TypeFacility,
-//         typeRoom: TypeRoom,
-//         typeFood: TypeFoodHotel,
-//         typeFor: TypeFor,
-//         typeNear: TypeNear,
-//         typePayment: TypePayment,
-//     }
-//     return imageMap[typeId] || '/img/icons/default.png'
-// }
+const getImageForType = (typeId) => {
+    const imageMap = {
+        typeHotel: '/images/icon/hotel.png',
+        typeFacility: '/images/icon/facility.png',
+        typeRoom: '/images/icon/bedroom.png',
+        typeFood: '/images/icon/food.png',
+        typeFor: '/images/icon/for.png',
+        typeNear: '/images/icon/near.png',
+        typePayment: '/images/icon/payment.png',
+    }
+    return imageMap[typeId] || '/images/icon/default.png'
+}
 
 </script>
 

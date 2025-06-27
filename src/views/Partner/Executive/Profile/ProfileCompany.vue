@@ -10,7 +10,7 @@
             }">
 
             <div class="bg-white md:rounded-lg min-h-screen pb-8">
-                <div class="mt-2 rounded-t-lg bg-amber-400 p-2 text-white text-lg">
+                <div class="rounded-t-lg bg-amber-400 p-2 text-white text-lg">
                     <h1>โปรไฟล์บริษัท</h1>
                 </div>
                 <div class="mt-2 py-2 px-4 ">

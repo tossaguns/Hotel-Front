@@ -8,7 +8,7 @@
                             <p class="md:pl-3 font-bold text-stone-500">รอการอนุมัติ</p>
                             <p class="font-bold md:text-7xl text-4xl font-serif">Waiting <br /><span
                                     class="md:text-3xl text-xl text-stone-500">for</span>
-                                <span class="text-red-800 ml-2">approval </span><br /><span
+                                <span class="text-amber-500 ml-2">approval </span><br /><span
                                     class="font-thin md:text-7xl text-2xl ">from officials</span>
                             </p>
                         </div>
@@ -25,12 +25,12 @@
                         <div class="text-md text-center">
                             <p>ขณะนี้เจ้าหน้าที่กำลังทำการตรวจสอบหากการอนุมัติสำเร็จ
                                 ทางเราจะเเจ้งให้ท่านทราบผ่านทาง <span
-                                    class="text-red-600  pr-1 font-bold">Email</span>ภายใน
-                                <span class="text-red-600  pr-1 font-bold">1-3 วัน</span>
+                                    class="text-amber-600  pr-1 font-bold">Email</span>ภายใน
+                                <span class="text-amber-600  pr-1 font-bold">1-3 วัน</span>
                             </p>
                         </div>
 
-                        <div class="font-bold mt-2 text-amber-700">
+                        <div class="font-bold mt-2 text-amber-500">
                             <p class="text-center">
                                 ขอบคุณทุกท่านที่สนใจเป็นพาทเนอร์กับเรา
                             </p>
