@@ -194,6 +194,8 @@
             </div>
         </div>
     </div>
+   
+
 </template>
 
 <script setup>
@@ -205,6 +207,8 @@ import BarServePromotion from '@/views/Partner/Executive/Promotion/BarServePromo
 const isSidebarCollapsed = ref(false)
 const allPromotions = ref([])
 const showHistory = ref(false)
+const showBuyModal = ref(false)
+const selectedPromotion = ref(null)
 const toggleMobilePromo = ref(false)
 
 const handleSidebarToggle = (isCollapsed) => {
@@ -212,11 +216,17 @@ const handleSidebarToggle = (isCollapsed) => {
 }
 
 const buyPromotion = (promotion) => {
-    console.log('ซื้อโปรโมชั่น:', promotion)
+    selectedPromotion.value = promotion
+    showBuyModal.value = true
 }
 
 const toggleHistory = () => {
     showHistory.value = !showHistory.value
+}
+
+const closeBuyModal = () => {
+    showBuyModal.value = false
+    selectedPromotion.value = null
 }
 
 const activePromotions = computed(() => {

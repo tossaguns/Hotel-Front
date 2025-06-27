@@ -136,115 +136,97 @@
     </div>
 </template>
 
-
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import SidebarAdmin from '@/components/SidebarAdmin.vue'
 
-export default {
-    name: "Promotion",
-    components: {
-        SidebarAdmin,
-        // promotion: {
-        //     promotion_id: '',
-        //     namePromotion: '',
-        //     detailPromotion: '',
-        //     dateStart: '',
-        //     dateFinish: '',
-        //     createAt: '',
-        //     nameUpdate: '',
-        //     tonecolor: '',
-        // },
-    },
-    data() {
-        return {
-            isSidebarCollapsed: false,
-            showPreviewModal: false, // สำหรับควบคุม popup
-            selectedPromotion: null,
-            promotion: [ //ตัวอย่าง Promotion
-                {
-                    promotion_id: 1,
-                    namePromotion: "Business Basic",
-                    tonecolor: "yellow",
-                    detailPromotion: "พื้นที่ 50GB\nCloud 1TB\n...",
-                    price: "980",
-                    dateStart: "2025-07-01",
-                    dateFinish: "2025-12-31",
-                    createAt: '',
-                    nameUpdate: '',
-                },
-                {
-                    promotion_id: 2,
-                    namePromotion: "หมดอายุ",
-                    tonecolor: "red",
-                    detailPromotion: "ไม่ควรแสดง",
-                    price: "500",
-                    dateStart: "2023-01-01",
-                    dateFinish: "2023-12-31"
-                },
-                {
-                    promotion_id: 3,
-                    namePromotion: "Business Basic",
-                    tonecolor: "blue",
-                    detailPromotion: "พื้นที่ 50GB\nCloud 1TB\n...",
-                    price: "980",
-                    dateStart: "2025-07-01",
-                    dateFinish: "2025-12-31",
-                    createAt: '',
-                    nameUpdate: '',
-                },
-                {
-                    promotion_id: 4,
-                    namePromotion: "Premium Plan",
-                    tonecolor: "green",
-                    detailPromotion: "พื้นที่ไม่จำกัด\nCloud 5TB\nทีมงานดูแล 24/7\nฟีเจอร์ครบครัน",
-                    price: "1,890",
-                    dateStart: "2025-07-01",
-                    dateFinish: "2025-12-31",
-                    createAt: '',
-                    nameUpdate: '',
-                },
-                {
-                    promotion_id: 5,
-                    namePromotion: "Startup Pack",
-                    tonecolor: "purple",
-                    detailPromotion: "พื้นที่ 20GB\nCloud 500GB\nเหมาะสำหรับเริ่มต้นธุรกิจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจ",
-                    price: "490",
-                    dateStart: "2025-07-01",
-                    dateFinish: "2025-12-31",
-                    createAt: '',
-                    nameUpdate: '',
-                }
-            ],
-        }
-    },
-    methods: {
-        handleSidebarToggle(isCollapsed) {
-            this.isSidebarCollapsed = isCollapsed
-        },
-        navigateToAddPromotion() {
-            this.$router.push("/addpromotion");
-        },
+const isSidebarCollapsed = ref(false)
+const showPreviewModal = ref(false)
+const selectedPromotion = ref(null)
+const router = useRouter()
 
-        detailRoom(promotionId) {
-            // สมมุติคุณมีรายการโปรโมชั่นใน this.promotionList
-            const found = this.promotion.find(p => p.promotion_id === promotionId)
-            if (found) {
-                this.selectedPromotion = { ...found } // Clone data
-                this.showPreviewModal = true
-            }
-        }
-
+const promotion = ref([
+    {
+        promotion_id: 1,
+        namePromotion: "Business Basic",
+        tonecolor: "yellow",
+        detailPromotion: "พื้นที่ 50GB\nCloud 1TB\n...",
+        price: "980",
+        dateStart: "2025-07-01",
+        dateFinish: "2025-12-31",
+        createAt: '',
+        nameUpdate: '',
     },
-    mounted() {
-        const savedState = localStorage.getItem('sidebarCollapsed')
-        if (savedState !== null) {
-            this.isSidebarCollapsed = JSON.parse(savedState)
-        }
-
-        localStorage.setItem('adminPromotions', JSON.stringify(this.promotion))
+    {
+        promotion_id: 2,
+        namePromotion: "หมดอายุ",
+        tonecolor: "red",
+        detailPromotion: "ไม่ควรแสดง",
+        price: "500",
+        dateStart: "2023-01-01",
+        dateFinish: "2023-12-31"
     },
+    {
+        promotion_id: 3,
+        namePromotion: "Business Basic",
+        tonecolor: "blue",
+        detailPromotion: "พื้นที่ 50GB\nCloud 1TB\n...",
+        price: "980",
+        dateStart: "2025-07-01",
+        dateFinish: "2025-12-31",
+        createAt: '',
+        nameUpdate: '',
+    },
+    {
+        promotion_id: 4,
+        namePromotion: "Premium Plan",
+        tonecolor: "green",
+        detailPromotion: "พื้นที่ไม่จำกัด\nCloud 5TB\nทีมงานดูแล 24/7\nฟีเจอร์ครบครัน",
+        price: "1,890",
+        dateStart: "2025-07-01",
+        dateFinish: "2025-12-31",
+        createAt: '',
+        nameUpdate: '',
+    },
+    {
+        promotion_id: 5,
+        namePromotion: "Startup Pack",
+        tonecolor: "purple",
+        detailPromotion: "พื้นที่ 20GB\nCloud 500GB\nเหมาะสำหรับเริ่มต้นธุรกิจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจ",
+        price: "490",
+        dateStart: "2025-07-01",
+        dateFinish: "2025-12-31",
+        createAt: '',
+        nameUpdate: '',
+    }
+])
+
+function handleSidebarToggle(isCollapsed) {
+    isSidebarCollapsed.value = isCollapsed
 }
+
+function navigateToAddPromotion() {
+    router.push("/addpromotion")
+}
+
+function detailRoom(promotionId) {
+    const found = promotion.value.find(p => p.promotion_id === promotionId)
+    if (found) {
+        selectedPromotion.value = { ...found }
+        showPreviewModal.value = true
+    }
+}
+
+onMounted(() => {
+    const savedState = localStorage.getItem('sidebarCollapsed')
+    if (savedState !== null) {
+        isSidebarCollapsed.value = JSON.parse(savedState)
+    }
+    localStorage.setItem('adminPromotions', JSON.stringify(promotion.value))
+})
 </script>
+
 <style>
 .responsive-table {
     width: 100%;

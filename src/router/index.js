@@ -397,6 +397,11 @@ const router = createRouter({
       name: "Logout",
       component: () => import("@/views/Login.vue"),
     },
+    {
+      path: "/mainmanagebank",
+      name: "MainManageBank",
+      component: () => import("@/views/Admin/ManageMoney/MainManageBank.vue"),
+    },
   ],
 });
 

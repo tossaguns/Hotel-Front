@@ -77,41 +77,34 @@
 </template>
 
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import SidebarAdmin from '@/components/SidebarAdmin.vue'
 
-export default {
-    name: "Promotion",
-    components: {
-        SidebarAdmin
-    },
-    data() {
-        return {
-            isSidebarCollapsed: false,
-        }
-    },
-    methods: {
-        handleSidebarToggle(isCollapsed) {
-            this.isSidebarCollapsed = isCollapsed
-        },
-        navigateToRequest() {
-            this.$router.push("/request");
-        },
-        navigateToApprovePartner() {
-            this.$router.push("/approvepartner");
-        },
-        navigateToRejectPartner() {
-            this.$router.push("/rejectpartner");
-        },
-        navigateToWaitEditPartner() {
-            this.$router.push("/requesteditpartner");
-        },
-    },
-    mounted() {
-        const savedState = localStorage.getItem('sidebarCollapsed')
-        if (savedState !== null) {
-            this.isSidebarCollapsed = JSON.parse(savedState)
-        }
-    },
+const isSidebarCollapsed = ref(false)
+const router = useRouter()
+
+function handleSidebarToggle(isCollapsed) {
+    isSidebarCollapsed.value = isCollapsed
 }
+function navigateToRequest() {
+    router.push("/request")
+}
+function navigateToApprovePartner() {
+    router.push("/approvepartner")
+}
+function navigateToRejectPartner() {
+    router.push("/rejectpartner")
+}
+function navigateToWaitEditPartner() {
+    router.push("/requesteditpartner")
+}
+
+onMounted(() => {
+    const savedState = localStorage.getItem('sidebarCollapsed')
+    if (savedState !== null) {
+        isSidebarCollapsed.value = JSON.parse(savedState)
+    }
+})
 </script>

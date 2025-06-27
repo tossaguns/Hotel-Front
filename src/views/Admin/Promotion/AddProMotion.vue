@@ -10,7 +10,7 @@
 
 			<div class="bg-white rounded-lg pb-10 min-h-screen">
 				<div class="w-full">
-					<div class="py-2 bg-rose-400 rounded-t-lg">
+					<div class="py-2 bg-emerald-800 rounded-t-lg">
 						<p class="text-center md:text-left text-xl text-white px-2">เพิ่มโปรโมชั่น</p>
 					</div>
 
