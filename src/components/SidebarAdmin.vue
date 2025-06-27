@@ -210,7 +210,6 @@
                             :class="activeMenu === '' ? 'bg-red-800 text-white' : 'text-gray-700'">
                             <span class="text-lg hover:text-white">LogOut</span>
                         </div>
-
                     </div>
                 </div>
             </div>
