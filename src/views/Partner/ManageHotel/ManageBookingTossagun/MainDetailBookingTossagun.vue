@@ -12,104 +12,101 @@
                     <h1>จัดการการจองกับ Sleep Gun</h1>
                 </div>
 
-                <div class="w-full min-h-screen bg-gray-100 py-6 px-2 md:px-4">
-                    <div class="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md">
-                        <h2 class="text-xl font-bold mb-8 text-center">ข้อมูลการจองกับ SleepGun</h2>
-                        <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <!-- ลำดับ -->
-                            <div>
-                                <label class="block text-sm font-medium">ลำดับ</label>
-                                <input type="number" class="w-full border rounded px-2 py-1" />
-                            </div>
+                <div class="w-full bg-gradient-to-br from-[#f8fafc] via-white to-[#e2e8f0] py-16 px-4">
+  <div class="max-w-5xl mx-auto bg-white/80 backdrop-blur-md p-12 rounded-[2rem] shadow-2xl ring-1 ring-gray-200">
+    <h2 class="text-center text-4xl font-light text-gray-800 tracking-wide mb-14">
+      ข้อมูลการจองกับ SleepGun
+    </h2>
 
-                            <!-- เลขที่ห้อง -->
-                            <div>
-                                <label class="block text-sm font-medium">เลขที่ห้อง</label>
-                                <input type="text" class="w-full border rounded px-2 py-1" />
-                            </div>
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <!-- กลุ่มข้อมูลทั่วไป -->
+      <div>
+        <label class="block text-sm text-gray-500 mb-2">ลำดับ</label>
+        <input type="number" class="w-full bg-white/60 backdrop-blur-md shadow-inner border border-gray-200 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+      </div>
+      <div>
+        <label class="block text-sm text-gray-500 mb-2">เลขที่ห้อง</label>
+        <input type="text" class="w-full bg-white/60 backdrop-blur-md shadow-inner border border-gray-200 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+      </div>
 
-                            <!-- สถานะ -->
-                            <div>
-                                <div class="block text-sm font-medium mb-1">สถานะ</div>
-                                <select class="w-full border rounded px-2 py-1">
-                                    <option>จองผ่าน Tossagun</option>
-                                    <option>ยกเลิก</option>
-                                </select>
-                            </div>
+      <div>
+        <label class="block text-sm text-gray-500 mb-2">สถานะ</label>
+        <select class="w-full bg-white/60 backdrop-blur-md shadow-inner border border-gray-200 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition">
+          <option>จองผ่าน Tossagun</option>
+          <option>ยกเลิก</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-500 mb-2">ราคา</label>
+        <input type="text" class="w-full bg-white/60 backdrop-blur-md shadow-inner border border-gray-200 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+      </div>
 
-                            <!-- ราคา -->
-                            <div>
-                                <label class="block text-sm font-medium">ราคา</label>
-                                <input type="text" class="w-full border rounded px-2 py-1" />
-                            </div>
+      <div>
+        <label class="block text-sm text-gray-500 mb-2">การจ่ายเงิน</label>
+        <select class="w-full bg-white/60 backdrop-blur-md shadow-inner border border-gray-200 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition">
+          <option>เงินสด</option>
+          <option>บัตรเครดิต</option>
+          <option>โอนเงิน</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm text-gray-500 mb-2">ชื่อ</label>
+        <input type="text" class="w-full bg-white/60 backdrop-blur-md shadow-inner border border-gray-200 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+      </div>
 
-                            <!-- การจ่ายเงิน -->
-                            <div>
-                                <label class="block text-sm font-medium">การจ่ายเงิน</label>
-                                <select class="w-full border rounded px-2 py-1">
-                                    <option>เงินสด</option>
-                                    <option>บัตรเครดิต</option>
-                                    <option>โอนเงิน</option>
-                                </select>
-                            </div>
+      <!-- แบ่งโซนด้วยเส้นบาง -->
+      <div class="md:col-span-2 border-t pt-6 border-gray-200" />
 
-                            <!-- ชื่อ -->
-                            <div>
-                                <div class="block text-sm font-medium mb-1">ชื่อ</div>
-                                <input type="text" class="w-full border rounded px-2 py-1" />
-                            </div>
+      <!-- วันที่และเวลา -->
+      <div>
+        <label class="block text-sm text-gray-500 mb-2">วันที่จอง</label>
+        <input type="date" class="w-full bg-white/60 backdrop-blur-md shadow-inner border border-gray-200 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+      </div>
+      <div>
+        <label class="block text-sm text-gray-500 mb-2">เวลาที่จอง</label>
+        <input type="time" class="w-full bg-white/60 backdrop-blur-md shadow-inner border border-gray-200 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+      </div>
 
-                            <!-- วันที่จอง -->
-                            <div>
-                                <div class="block text-sm font-medium mb-1">วันที่จอง</div>
-                                <input type="date" class="w-full border rounded px-2 py-1" />
-                            </div>
+      <div>
+        <label class="block text-sm text-gray-500 mb-2">วันที่เข้าพัก</label>
+        <input type="date" class="w-full bg-white/60 backdrop-blur-md shadow-inner border border-gray-200 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+      </div>
+      <div>
+        <label class="block text-sm text-gray-500 mb-2">เวลาที่เข้าพัก</label>
+        <input type="time" class="w-full bg-white/60 backdrop-blur-md shadow-inner border border-gray-200 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+      </div>
 
-                            <!-- เวลาที่จอง -->
-                            <div>
-                                <label class="block text-sm font-medium">เวลาที่จอง</label>
-                                <input type="time" class="w-full border rounded px-2 py-1" />
-                            </div>
+      <div>
+        <label class="block text-sm text-gray-500 mb-2">วันที่ออก</label>
+        <input type="date" class="w-full bg-white/60 backdrop-blur-md shadow-inner border border-gray-200 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+      </div>
+      <div>
+        <label class="block text-sm text-gray-500 mb-2">เวลาที่ออก</label>
+        <input type="time" class="w-full bg-white/60 backdrop-blur-md shadow-inner border border-gray-200 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+      </div>
 
-                            <!-- วันที่เข้าพัก -->
-                            <div>
-                                <div class="block text-sm font-medium mb-1">วันที่เข้าพัก</div>
-                                <input type="date" class="w-full border rounded px-2 py-1" />
-                            </div>
+      <!-- หมายเหตุ -->
+      <div class="md:col-span-2">
+        <label class="block text-sm text-gray-500 mb-2">หมายเหตุ</label>
+        <textarea rows="4" class="w-full bg-white/60 backdrop-blur-md shadow-inner border border-gray-200 rounded-2xl px-5 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"></textarea>
+      </div>
+    </form>
 
-                            <!-- เวลาที่เข้าพัก -->
-                            <div>
-                                <label class="block text-sm font-medium">เวลาที่เข้าพัก</label>
-                                <input type="time" class="w-full border rounded px-2 py-1" />
-                            </div>
+    <div class="mt-12 flex flex-col sm:flex-row justify-center gap-4">
+      <button class="bg-black text-white px-8 py-3 rounded-xl font-light tracking-wide hover:bg-gray-900 transition">
+        บันทึก
+      </button>
+      <button class="bg-gray-200 text-gray-700 px-8 py-3 rounded-xl font-light tracking-wide hover:bg-gray-100 transition">
+        รีเซ็ท
+      </button>
+      <button @click="navigateBackToMainBookingTossagun"
+        class="bg-red-500 text-white px-8 py-3 rounded-xl font-light tracking-wide hover:bg-red-400 transition">
+        ย้อนกลับ
+      </button>
+    </div>
+  </div>
+</div>
 
-
-                            <!-- วันที่ออก -->
-                            <div>
-                                <div class="block text-sm font-medium mb-1">วันที่ออก</div>
-                                <input type="date" class="w-full border rounded px-2 py-1" />
-                            </div>
-
-                            <!-- เวลาที่ออก -->
-                            <div>
-                                <label class="block text-sm font-medium">เวลาที่ออก</label>
-                                <input type="time" class="w-full border rounded px-2 py-1" />
-                            </div>
-
-                            <!-- หมายเหตุ -->
-                            <div class="md:col-span-2">
-                                <div class="block text-sm font-medium mb-1">หมายเหตุ</div>
-                                <textarea class="w-full border rounded px-2 py-1" rows="3"></textarea>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="flex justify-center mt-5 space-x-3">
-                        <button class="bg-emerald-600 p-2 rounded-lg hover:bg-emerald-400">บันทึก</button>
-                        <button class="bg-gray-500 p-2 rounded-lg hover:bg-gray-300">รีเซ็ท</button>
-                        <button @click="navigateBackToMainBookingTossagun"
-                            class="bg-red-600 p-2 rounded-lg hover:bg-red-400">ย้อนกลับ</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
