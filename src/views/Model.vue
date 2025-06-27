@@ -9,7 +9,6 @@
             <div>
                 <p>uigroidtj</p>
             </div>
-
         </div>
     </div>
 </template>
@@ -25,7 +24,6 @@ export default {
     data() {
         return {
             isSidebarCollapsed: false,
-
         }
     },
     methods: {
