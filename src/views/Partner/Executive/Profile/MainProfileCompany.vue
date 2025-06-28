@@ -8,7 +8,7 @@
         }">
             <div class="fixed top-0 left-0 right-0 h-4 z-[100] bg-white pointer-events-none"></div>
             <div
-                class="sticky top-4 z-30 rounded-t-lg bg-amber-400 p-2 text-white text-lg shadow-lg shadow-gray-200 overflow-t-hidden">
+                class="sticky top-4 z-30 rounded-t-lg bg-amber-400 p-2 text-white text-lg shadow-lg shadow-gray-200">
                 <h1>โปรไฟล์บริษัท</h1>
             </div>
 
