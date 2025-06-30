@@ -2,13 +2,19 @@
     <div class="w-full min-h-screen bg-gray-200">
         <Sidebar @toggle-sidebar="handleSidebarToggle" />
 
-        <div class="flex-1 md:pl-4 md:pr-2 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300"
+        <div class="flex-1 md:pl-4 md:pr-2 py-0 md:py-3 transition-all duration-300"
             style="top: 1rem; bottom: 1rem; height: auto;" :class="{
                 'md:ml-[232px]': !isSidebarCollapsed,
                 'md:ml-[72px]': isSidebarCollapsed
             }">
-            <div class="fixed top-0 left-0 right-0 h-4 z-[100] bg-white pointer-events-none"></div>
-            <div class="sticky top-4 z-30 rounded-t-lg bg-amber-400 p-2 text-white text-lg">
+            <div class="fixed top-0 left-0 right-0 h-4 z-[100] bg-gray-200 pointer-events-none md:block hidden"></div>
+            <div
+                class="sticky top-4 z-30 rounded-none md:rounded-t-lg bg-amber-400 p-2 text-white text-lg md:block hidden">
+                <h1>จัดการพนักงาน</h1>
+            </div>
+
+            <div
+                class="sticky top-0 z-30 rounded-none md:rounded-t-lg bg-amber-400 p-2 text-white text-lg block md:hidden">
                 <h1>จัดการพนักงาน</h1>
             </div>
 
@@ -78,8 +84,8 @@
                             <tr class="bg-gray-200 whitespace-nowrap">
                                 <th class="border px-2 py-1">ลำดับ</th>
                                 <th class="border px-2 py-1">รหัสพนักงาน</th>
-                                <th class="border px-2 py-1 relative text-center cursor-pointer select-none"
-                                    @click.stop="toggleDropdown($event)" tabindex="0">
+                                <th class="border px-2 py-1 relative text-left cursor-pointer select-none"
+                                    @click.stop="toggleDropdown" tabindex="0">
                                     ตำแหน่ง
                                     <svg class="w-3 h-3 inline ml-1" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
@@ -89,8 +95,7 @@
 
                                     <!-- Dropdown Filter -->
                                     <div v-if="showPositionDropdown" ref="positionDropdown"
-                                        class="position-dropdown z-50 mt-1 bg-white border shadow-md rounded"
-                                        :style="{ position: 'fixed', left: dropdownPosition.left + 'px', top: dropdownPosition.top + 'px', minWidth: dropdownPosition.width + 'px' }"
+                                        class="position-dropdown absolute left-0 top-full z-50 mt-1 bg-white border shadow-md rounded w-40"
                                         @click.stop>
                                         <ul>
                                             <li>
@@ -202,12 +207,13 @@
                         class="px-3 py-1 border rounded hover:bg-gray-200">ย้อนกลับ</button>
                     <button v-for="page in totalPages" :key="page" @click="currentPage = page"
                         class="px-3 py-1 border rounded" :class="{ 'bg-amber-500 text-white': currentPage === page }">{{
-                            page }}</button>
+                        page }}</button>
                     <button @click="currentPage++" :disabled="currentPage === totalPages"
                         class="px-3 py-1 border rounded hover:bg-gray-200">ถัดไป</button>
                 </div>
             </div>
-            <div class="fixed bottom-0 left-0 right-0 h-4 z-[40] bg-gray-100 pointer-events-none md:hidden"></div>
+            <div class="fixed bottom-0 left-0 right-0 h-4 z-[40] bg-gray-200 pointer-events-none md:block hidden"></div>
+
         </div>
 
     </div>
@@ -230,7 +236,6 @@ export default {
             positionFilter: '',
             showPositionDropdown: false,
             tableMinWidth: null,
-            dropdownPosition: { left: 0, top: 0, width: 0 },
         }
     },
     computed: {
@@ -270,22 +275,14 @@ export default {
         navigateBackToAddEmployee() {
             this.$router.push("/addemployee");
         },
-        toggleDropdown(event) {
+        toggleDropdown() {
             this.showPositionDropdown = !this.showPositionDropdown;
             this.$nextTick(() => {
                 if (this.showPositionDropdown) {
-                    // คำนวณตำแหน่ง header cell
-                    const th = event ? event.currentTarget : this.$el.querySelector('th[tabindex="0"]');
-                    if (th) {
-                        const rect = th.getBoundingClientRect();
-                        this.dropdownPosition = {
-                            left: rect.left,
-                            top: rect.bottom,
-                            width: rect.width
-                        };
-                    }
+                    this.adjustTableMinWidth();
                     document.addEventListener('click', this.handleOutsideClick);
                 } else {
+                    this.resetTableMinWidth();
                     document.removeEventListener('click', this.handleOutsideClick);
                 }
             });
