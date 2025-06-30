@@ -141,20 +141,7 @@
                     selectedPromotion.dateFinish.slice(0, 10) : '-'
                   }}</span>
                 </li>
-                <!-- วันที่ลดราคา -->
-                <li
-                  v-if="selectedPromotion?.wantToReduce === 'yesReduced' && (selectedPromotion?.discountType === 'reduced' || selectedPromotion?.discountType === 'percent')"
-                  class="flex items-start">
-                  <span class="mr-2 mt-1">⬇️</span>
-                  <span class="text-sm">
-                    ลดราคา: {{ selectedPromotion?.dateReducedPercentPriceStart ?
-                      selectedPromotion.dateReducedPercentPriceStart.slice(0, 10) : '-' }}
-                    ถึง
-                    {{ selectedPromotion?.dateReducedPercentPriceFinish ?
-                      selectedPromotion.dateReducedPercentPriceFinish.slice(0, 10)
-                      : '-' }}
-                  </span>
-                </li>
+
               </ul>
             </div>
           </div>

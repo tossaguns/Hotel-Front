@@ -100,24 +100,14 @@
                       <p class="mb-2">ลดราคา</p>
                       <input v-model="promotion.reducedPrice"
                         class="border border- gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
-                      <p>วันที่เริ่มลดราคา</p>
-                      <input type="date" v-model="promotion.dateReducedPercentPriceStart"
-                        class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
-                      <p>วันสุดท้ายที่ลดราคา</p>
-                      <input type="date" v-model="promotion.dateReducedPercentPriceFinish"
-                        class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
+
                     </div>
 
                     <div v-if="promotion.discountType === 'percent'">
                       <p class="mb-2">คิดเป็น %</p>
                       <input v-model="promotion.percentPrice"
                         class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
-                      <p>วันที่เริ่มลดราคา</p>
-                      <input type="date" v-model="promotion.dateReducedPercentPriceStart"
-                        class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
-                      <p>วันสุดท้ายที่ลดราคา</p>
-                      <input type="date" v-model="promotion.dateReducedPercentPriceFinish"
-                        class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
+
                     </div>
                   </div>
                 </div>
@@ -178,16 +168,7 @@
                           <span class="text-sm">สิ้นสุด: {{ promotion.dateFinish || '-' }}</span>
                         </li>
                         <!-- วันที่ลดราคา -->
-                        <li
-                          v-if="promotion.wantToReduce === 'yesReduced' && (promotion.discountType === 'reduced' || promotion.discountType === 'percent')"
-                          class="flex items-start">
-                          <span class="mr-2 mt-1">⬇️</span>
-                          <span class="text-sm">
-                            ลดราคา: {{ promotion.dateReducedPercentPriceStart || '-' }} ถึง {{
-                              promotion.dateReducedPercentPriceFinish || '-'
-                            }}
-                          </span>
-                        </li>
+
                       </ul>
                     </div>
                   </div>
