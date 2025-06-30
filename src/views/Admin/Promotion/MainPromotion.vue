@@ -1,280 +1,302 @@
 <template>
-    <div class="w-full min-h-screen bg-gray-100">
-        <SidebarAdmin @toggle-sidebar="handleSidebarToggle" />
+  <div class="w-full min-h-screen bg-gray-100">
+    <SidebarAdmin @toggle-sidebar="handleSidebarToggle" />
 
-        <div class="flex-1 md:pl-4 md:pr-2 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300"
-            style="top: 1rem; bottom: 1rem; height: auto;" :class="{
-                'md:ml-[232px]': !isSidebarCollapsed,
-                'md:ml-[72px]': isSidebarCollapsed
-            }">
-
-
-            <div>
-                <div class="mt-2 rounded-t-lg bg-emerald-800 p-2 text-white text-lg">
-                    <h1>โปรโมชั่น</h1>
-                </div>
-
-                <div class="bg-white rounded-b-lg pb-6 ">
-                    <div class="flex justify-center pt-7 mb-5">
-                        <button @click="navigateToAddPromotion"
-                            class="rounded-lg px-2 py- text-lg hover:bg-emerald-500 shadow-lg">
-                            + เพิ่มโปรโมชั่น
-                        </button>
-
-                    </div>
-
-                    <!-- เพิ่ม wrapper -->
-
-                    <div class="overflow-x-auto px-2 ">
-                        <table
-                            class="responsive-table-mainpromotion w-full table-auto border-separate border-spacing-0 text-xs md:text-sm ">
-                            <thead>
-                                <tr class="bg-gray-200 whitespace-nowrap">
-                                    <th class="col-index border px-2 py-1 rounded-tl-xl">ลำดับ</th>
-                                    <th class="border px-2 py-1">ชื่อ โปรโมชั่น</th>
-                                    <th class="col-detail border px-2 py-1">รายละเอียด</th>
-                                    <th class="col-datestart border px-2 py-1">วันเริ่มโปรโมชั่น</th>
-                                    <th class="col-datefinish border px-2 py-1">วันสิ้นสุดโปรโมชั่น</th>
-                                    <th class="border px-2 py-1">ราคา</th>
-                                    <th class="col-createAt border px-2 py-1">วันเวลาที่อัปเดต</th>
-                                    <th class="border px-2 py-1">ผู้ทำการอัปเดต</th>
-                                    <th class="px-2 py-2 border sm:px-3 sm:py-3 rounded-tr-xl">จัดการ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(promotion, index) in promotion" :key="promotion.promotion_id"
-                                    class="hover:bg-gray-50 whitespace-nowrap">
-                                    <td class="col-index border px-2 py-1 break-words">{{ index + 1 }}</td>
-                                    <td class="border px-2 py-1 break-words">{{ promotion.namePromotion }}</td>
-                                    <td
-                                        class="col-detail border px-2 py-1 max-w-[340px] truncate overflow-hidden whitespace-nowrap">
-                                        {{ promotion.detailPromotion }}
-                                    </td>
-                                    <td class="col-datestart border px-2 py-1 break-words">{{ promotion.dateStart }}
-                                    </td>
-                                    <td class="col-datefinish border px-2 py-1 break-words">{{ promotion.dateFinish }}
-                                    </td>
-                                    <td class="border px-2 py-1 break-words">
-                                        {{ promotion.price }}
-                                    </td>
-                                    <td class="col-createAt border px-2 py-1 break-words">{{ promotion.createAt }}</td>
-                                    <td class="border px-2 py-1 break-words">{{ promotion.nameUpdate }}</td>
+    <div class="flex-1 md:pl-4 md:pr-2 py-4 md:py-3 mt-16 md:mt-0 transition-all duration-300"
+      style="top: 1rem; bottom: 1rem; height: auto;" :class="{
+        'md:ml-[232px]': !isSidebarCollapsed,
+        'md:ml-[72px]': isSidebarCollapsed
+      }">
 
 
-                                    <td class="border px-2 py-1 break-words space-x-2">
-                                        <button @click="editRoom(room.promotion_id)"
-                                            class="text-white bg-emerald-700 px-2 py-2 rounded-lg hover:bg-emerald-500 shadow-lg transition">
-                                            ✏️
-                                        </button>
-                                        <button @click="detailRoom(promotion.promotion_id)"
-                                            class="text-white bg-emerald-700 px-2 py-2 rounded-lg hover:bg-emerald-500 shadow-lg transition">
-                                            👁️
-                                        </button>
-                                        <button @click="deleteRoom(room.promotion_id)"
-                                            class="text-white bg-red-600 px-2 py-2 rounded-lg hover:bg-red-400 shadow-lg transition">
-                                            🗑️
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div v-if="showPreviewModal"
-                class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                <div class="bg-white rounded-lg shadow-lg w-full max-w-lg mx-4 relative overflow-auto max-h-[90vh]"
-                    :class="{
-                        'border-yellow-300 border-4': selectedPromotion?.tonecolor === 'yellow',
-                        'border-blue-300 border-4': selectedPromotion?.tonecolor === 'blue',
-                        'border-green-300 border-4': selectedPromotion?.tonecolor === 'green',
-                        'border-red-300 border-4': selectedPromotion?.tonecolor === 'red',
-                        'border-purple-300 border-4': selectedPromotion?.tonecolor === 'purple'
-                    }">
-
-                    <!-- ปุ่มปิด -->
-                    <button @click="showPreviewModal = false"
-                        class="absolute top-2 right-2 text-gray-500 hover:text-red-500 text-xl font-bold">✖</button>
-
-                    <!-- หัว -->
-                    <div class="py-3 rounded-t-md text-white text-center font-bold text-lg break-all whitespace-pre-wrap"
-                        :class="{
-                            'bg-yellow-300': selectedPromotion?.tonecolor === 'yellow',
-                            'bg-blue-300': selectedPromotion?.tonecolor === 'blue',
-                            'bg-green-300': selectedPromotion?.tonecolor === 'green',
-                            'bg-red-300': selectedPromotion?.tonecolor === 'red',
-                            'bg-purple-300': selectedPromotion?.tonecolor === 'purple'
-                        }">
-                        {{ selectedPromotion?.namePromotion || 'ชื่อโปรโมชั่น' }}
-                    </div>
-
-                    <!-- เนื้อหา -->
-                    <div class="bg-white px-6 py-6 space-y-2 text-gray-700">
-                        <div class="text-5xl font-bold text-center text-gray-900">
-                            {{ selectedPromotion?.price || '0' }} <br><span class="text-sm">บาท / คน / บัญชี</span>
-                        </div>
-                        <ul class="list-none space-y-1 mt-4">
-                            <li v-for="(line, index) in selectedPromotion?.detailPromotion?.split('\n')" :key="index"
-                                class="flex items-start">
-                                <span class="mr-2 mt-1">✔</span>
-                                <span class="break-all whitespace-pre-wrap w-0 flex-1 text-gray-700">{{ line }}</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-2 mt-1">📅</span>
-                                <span class="text-sm">เริ่ม: {{ selectedPromotion?.dateStart || '-' }}</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-2 mt-1">📅</span>
-                                <span class="text-sm">สิ้นสุด: {{ selectedPromotion?.dateFinish || '-' }}</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+      <div>
+        <div class="mt-2 rounded-t-lg bg-emerald-800 p-2 text-white text-lg">
+          <h1>โปรโมชั่น</h1>
         </div>
+
+        <div class="bg-white rounded-b-lg pb-6 ">
+          <div class="flex justify-center pt-7 mb-5">
+            <button @click="navigateToAddPromotion" class="rounded-lg px-2 py- text-lg hover:bg-emerald-500 shadow-lg">
+              + เพิ่มโปรโมชั่น
+            </button>
+
+          </div>
+
+          <!-- เพิ่ม wrapper -->
+
+          <div class="overflow-x-auto px-2 ">
+            <table
+              class="responsive-table-mainpromotion w-full table-auto border-separate border-spacing-0 text-xs md:text-sm ">
+              <thead>
+                <tr class="bg-gray-200 whitespace-nowrap">
+                  <th class="border px-2 py-1 rounded-tl-xl">ลำดับ</th>
+                  <th class="border px-2 py-1">ชื่อ โปรโมชั่น</th>
+                  <th class="border px-2 py-1">รายละเอียด</th>
+                  <th class="border px-2 py-1">ราคา</th>
+                  <th class="border px-2 py-1">ราคาลด</th>
+                  <th class="border px-2 py-1">เปอร์เซ็นต์ส่วนลด</th>
+                  <th class="border px-2 py-1">ราคาที่ลดเเล้ว</th>
+                  <th class="border px-2 py-1">วันเริ่มโปรโมชั่น</th>
+                  <th class="border px-2 py-1">วันสิ้นสุดโปรโมชั่น</th>
+                  <th class="border px-2 py-1">วันเริ่มส่วนลด</th>
+                  <th class="border px-2 py-1">วันสิ้นสุดส่วนลด</th>
+                  <th class="border px-2 py-1">ผู้ทำการอัปเดต</th>
+                  <th class="border px-2 py-1">วันเวลาที่อัปเดต</th>
+                  <th class="px-2 py-2 border sm:px-3 sm:py-3 rounded-tr-xl">จัดการ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item, index) in promotion" :key="item._id" class="hover:bg-gray-50 whitespace-nowrap">
+                  <td class="border px-2 py-1">{{ index + 1 }}</td>
+                  <td class="border px-2 py-1">{{ item.name }}</td>
+                  <td class="border px-2 py-1">{{ item.detail }}</td>
+                  <td class="border px-2 py-1">{{ item.price }}</td>
+                  <td class="border px-2 py-1">{{ item.reducedPrice ?? '-' }}</td>
+                  <td class="border px-2 py-1">{{ item.percentPrice ?? '-' }}</td>
+                  <td class="border px-2 py-1">{{ item.finalPrice }}</td>
+                  <td class="border px-2 py-1">{{ item.dateStart ? item.dateStart.slice(0, 10) : '-' }}</td>
+                  <td class="border px-2 py-1">{{ item.dateFinish ? item.dateFinish.slice(0, 10) : '-' }}</td>
+                  <td class="border px-2 py-1">{{ item.dateReducedPercentPriceStart ?
+                    item.dateReducedPercentPriceStart.slice(0, 10) :
+                    '-' }}</td>
+                  <td class="border px-2 py-1">{{ item.dateReducedPercentPriceFinish ?
+                    item.dateReducedPercentPriceFinish.slice(0, 10)
+                    : '-' }}</td>
+
+                  <td class="border px-2 py-1">{{ item.nameUpdate ?? '-' }}</td>
+                  <td class="border px-2 py-1">{{ item.updatedAt ? item.updatedAt.slice(0, 10) : '-' }}</td>
+                  <td class="border px-2 py-1 space-x-2">
+                    <button @click="detailRoom(item._id)"
+                      class="text-white bg-emerald-700 px-2 py-2 rounded-lg hover:bg-emerald-500 shadow-lg transition">
+                      👁️
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- เนื้อหา Modal Preview -->
+      <div v-if="showPreviewModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        @click.self="showPreviewModal = false">
+        <div class="md:max-w-md mx-auto mt-6 rounded-lg shadow-lg border-2 bg-white relative">
+          <!-- ปุ่มกากบาท -->
+          <button class="absolute top-2 right-2 text-gray-400 hover:text-red-600 text-2xl font-bold"
+            @click="showPreviewModal = false" aria-label="ปิด">×</button>
+          <!-- หัวโปรโมชั่น -->
+          <div class="py-4 text-center font-bold text-lg break-all whitespace-pre-wrap text-gray-400">
+            {{ selectedPromotion?.name || 'ชื่อโปรโมชั่น' }}
+          </div>
+          <!-- เนื้อหาข้างใน -->
+          <div>
+            <div class="bg-white px-6 pb-6 space-y-2 text-gray-700">
+              <!-- ถ้ามีลดราคา -->
+              <div v-if="selectedPromotion?.wantToReduce === 'yesReduced' && (
+                (selectedPromotion?.discountType === 'reduced' && selectedPromotion?.price && selectedPromotion?.reducedPrice) ||
+                (selectedPromotion?.discountType === 'percent' && selectedPromotion?.price && selectedPromotion?.percentPrice)
+              )" class="text-center mt-2">
+                <div class="flex flex-col justify-center items-center">
+                  <span class="text-xl text-gray-400 line-through mr-2">
+                    {{ selectedPromotion.price }}
+                  </span>
+                  <span class="text-6xl font-bold text-red-600 align-middle">
+                    <!-- ลดราคาบาท -->
+                    <template v-if="selectedPromotion.discountType === 'reduced'">
+                      {{ Number(selectedPromotion.price) - Number(selectedPromotion.reducedPrice) }}
+                    </template>
+                    <!-- ลดราคาคิดเป็น % -->
+                    <template v-else-if="selectedPromotion.discountType === 'percent'">
+                      {{ (Number(selectedPromotion.price) - (Number(selectedPromotion.price) *
+                        Number(selectedPromotion.percentPrice) / 100)).toFixed(2) }}
+                    </template>
+                  </span>
+                </div>
+                <div>
+                  <span class="text-sm font-thin text-gray-400">บาท / คน / บัญชี</span>
+                </div>
+              </div>
+              <!-- ถ้าไม่มีลดราคา -->
+              <div v-else class="text-6xl font-bold text-center text-gray-900">
+                {{ selectedPromotion?.price || '0' }} <br>
+                <span class="text-sm font-thin text-gray-400">บาท / คน / บัญชี</span>
+              </div>
+              <ul class="list-none mt-4">
+                <li v-for="(line, index) in (selectedPromotion?.detail?.split('\n') || [])" :key="index"
+                  class="flex items-start">
+                  <span class="mr-2">✔</span>
+                  <span class="break-all whitespace-pre-wrap w-0 flex-1 text-gray-700">{{ line }}</span>
+                </li>
+                <li class="flex items-center mt-5">
+                  <span class="mr-2 mt-1">📅</span>
+                  <span class="text-sm">เริ่ม: {{ selectedPromotion?.dateStart ? selectedPromotion.dateStart.slice(0,
+                    10)
+                    : '-'
+                  }}</span>
+                </li>
+                <li class="flex items-center">
+                  <span class="mr-2 mt-1">📅</span>
+                  <span class="text-sm">สิ้นสุด: {{ selectedPromotion?.dateFinish ?
+                    selectedPromotion.dateFinish.slice(0, 10) : '-'
+                  }}</span>
+                </li>
+                <!-- วันที่ลดราคา -->
+                <li
+                  v-if="selectedPromotion?.wantToReduce === 'yesReduced' && (selectedPromotion?.discountType === 'reduced' || selectedPromotion?.discountType === 'percent')"
+                  class="flex items-start">
+                  <span class="mr-2 mt-1">⬇️</span>
+                  <span class="text-sm">
+                    ลดราคา: {{ selectedPromotion?.dateReducedPercentPriceStart ?
+                      selectedPromotion.dateReducedPercentPriceStart.slice(0, 10) : '-' }}
+                    ถึง
+                    {{ selectedPromotion?.dateReducedPercentPriceFinish ?
+                      selectedPromotion.dateReducedPercentPriceFinish.slice(0, 10)
+                      : '-' }}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <button @click="editPromotion"
+              class="text-white bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-500 shadow-md transition">
+              แก้ไข
+            </button>
+            <button @click="deletePromotion"
+              class="text-white bg-red-600 px-4 py-2 rounded-lg hover:bg-red-500 shadow-md transition">
+              ลบ
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
+
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import SidebarAdmin from '@/components/SidebarAdmin.vue'
+import Swal from 'sweetalert2'
 
 const isSidebarCollapsed = ref(false)
 const showPreviewModal = ref(false)
 const selectedPromotion = ref(null)
 const router = useRouter()
 
-const promotion = ref([
-    {
-        promotion_id: 1,
-        namePromotion: "Business Basic",
-        tonecolor: "yellow",
-        detailPromotion: "พื้นที่ 50GB\nCloud 1TB\n...",
-        price: "980",
-        dateStart: "2025-07-01",
-        dateFinish: "2025-12-31",
-        createAt: '',
-        nameUpdate: '',
-    },
-    {
-        promotion_id: 2,
-        namePromotion: "หมดอายุ",
-        tonecolor: "red",
-        detailPromotion: "ไม่ควรแสดง",
-        price: "500",
-        dateStart: "2023-01-01",
-        dateFinish: "2023-12-31"
-    },
-    {
-        promotion_id: 3,
-        namePromotion: "Business Basic",
-        tonecolor: "blue",
-        detailPromotion: "พื้นที่ 50GB\nCloud 1TB\n...",
-        price: "980",
-        dateStart: "2025-07-01",
-        dateFinish: "2025-12-31",
-        createAt: '',
-        nameUpdate: '',
-    },
-    {
-        promotion_id: 4,
-        namePromotion: "Premium Plan",
-        tonecolor: "green",
-        detailPromotion: "พื้นที่ไม่จำกัด\nCloud 5TB\nทีมงานดูแล 24/7\nฟีเจอร์ครบครัน",
-        price: "1,890",
-        dateStart: "2025-07-01",
-        dateFinish: "2025-12-31",
-        createAt: '',
-        nameUpdate: '',
-    },
-    {
-        promotion_id: 5,
-        namePromotion: "Startup Pack",
-        tonecolor: "purple",
-        detailPromotion: "พื้นที่ 20GB\nCloud 500GB\nเหมาะสำหรับเริ่มต้นธุรกิจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจจ",
-        price: "490",
-        dateStart: "2025-07-01",
-        dateFinish: "2025-12-31",
-        createAt: '',
-        nameUpdate: '',
-    }
-])
+const promotion = ref([]) // ลบข้อมูลตัวอย่างออก
 
 function handleSidebarToggle(isCollapsed) {
-    isSidebarCollapsed.value = isCollapsed
+  isSidebarCollapsed.value = isCollapsed
 }
 
 function navigateToAddPromotion() {
-    router.push("/addpromotion")
+  router.push("/addpromotion")
 }
 
 function detailRoom(promotionId) {
-    const found = promotion.value.find(p => p.promotion_id === promotionId)
-    if (found) {
-        selectedPromotion.value = { ...found }
-        showPreviewModal.value = true
-    }
+  const found = promotion.value.find(p => p._id === promotionId)
+  if (found) {
+    selectedPromotion.value = { ...found }
+    showPreviewModal.value = true
+  }
 }
 
-onMounted(() => {
-    const savedState = localStorage.getItem('sidebarCollapsed')
-    if (savedState !== null) {
-        isSidebarCollapsed.value = JSON.parse(savedState)
+function editPromotion() {
+  // ไปหน้าแก้ไข (ส่ง id ไปด้วย)
+  router.push(`/editpromotion/${selectedPromotion.value._id}`)
+}
+
+async function deletePromotion() {
+  const result = await Swal.fire({
+    title: 'ยืนยันการลบ',
+    text: 'คุณต้องการลบโปรโมชั่นนี้ใช่หรือไม่?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'ลบ',
+    cancelButtonText: 'ยกเลิก'
+  })
+  if (result.isConfirmed) {
+    try {
+      const res = await fetch(`http://localhost:9999/SleepGun/promotion/delete/${selectedPromotion.value._id}`, {
+        method: 'DELETE'
+      })
+      if (!res.ok) throw new Error('ลบไม่สำเร็จ')
+      showPreviewModal.value = false
+      promotion.value = promotion.value.filter(p => p._id !== selectedPromotion.value._id)
+      Swal.fire('ลบสำเร็จ', '', 'success')
+    } catch (err) {
+      Swal.fire('เกิดข้อผิดพลาด', err.message, 'error')
     }
-    localStorage.setItem('adminPromotions', JSON.stringify(promotion.value))
+  }
+}
+
+// ดึงข้อมูลโปรโมชั่นจาก backend
+onMounted(async () => {
+  const savedState = localStorage.getItem('sidebarCollapsed')
+  if (savedState !== null) {
+    isSidebarCollapsed.value = JSON.parse(savedState)
+  }
+  try {
+    const res = await fetch('http://localhost:9999/SleepGun/promotion/getAll')
+    const data = await res.json()
+    promotion.value = data
+  } catch (err) {
+    alert('ไม่สามารถโหลดข้อมูลโปรโมชั่นได้')
+  }
 })
 </script>
 
 <style>
 .responsive-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
 }
 
 .responsive-table th,
 .responsive-table td {
-    border: 1px solid #ccc;
-    padding: 6px;
-    text-align: center;
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: center;
 }
 
 /* ✅ ซ่อนคอลัมน์เมื่อหน้าจอเล็ก */
 @media (max-width: 1188px) {
-    .col-detail {
-        display: none;
-    }
+  .col-detail {
+    display: none;
+  }
 }
 
 @media (max-width: 1024px) {
-    .col-datefinish {
-        display: none;
-    }
+  .col-datefinish {
+    display: none;
+  }
 }
 
 @media (max-width: 900px) {
-    .col-datestart {
-        display: none;
-    }
+  .col-datestart {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
-    .col-createAt {
-        display: none;
-    }
+  .col-createAt {
+    display: none;
+  }
 }
 
 @media (max-width: 640px) {
-    .col-index {
-        display: none;
-    }
+  .col-index {
+    display: none;
+  }
 
-    .responsive-table th:nth-child(1),
-    .responsive-table td:nth-child(1) {
-        display: none;
-        /* ซ่อนลำดับ */
-    }
+  .responsive-table th:nth-child(1),
+  .responsive-table td:nth-child(1) {
+    display: none;
+    /* ซ่อนลำดับ */
+  }
 }
 </style>
