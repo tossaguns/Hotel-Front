@@ -30,13 +30,14 @@
                 <div>
                   <p class="mb-2">รายละเอียด</p>
                   <textarea rows="5" v-model="promotion.detail"
-                    class="border border-gray-300 px-3 py-2 rounded w-full resize-none"
+                    class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4"
                     placeholder="พิมพ์ทีละบรรทัด เช่น&#10;พื้นที่อีเมล 50GB&#10;พื้นที่ Cloud 1TB..."></textarea>
                 </div>
 
                 <div>
                   <p class="mb-2">วันเริ่มโปรโมชั่น</p>
                   <input type="date" v-model="promotion.dateStart"
+                    :min="new Date().toISOString().split('T')[0]"
                     class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
                 </div>
                 <div>
@@ -58,13 +59,14 @@
                   <div v-if="hasEndDate === 'yes'">
                     <p class="mb-2">วันสิ้นสุดโปรโมชั่น</p>
                     <input type="date" v-model="promotion.dateFinish"
+                      :min="promotion.dateStart"
                       class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
                   </div>
                 </div>
 
                 <div>
                   <p class="mb-2">ราคาเต็ม</p>
-                  <input v-model="promotion.price"
+                  <input type="number" v-model="promotion.price"
                     class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
                 </div>
 
@@ -98,14 +100,19 @@
 
                     <div v-if="promotion.discountType === 'reduced'">
                       <p class="mb-2">ลดราคา</p>
-                      <input v-model="promotion.reducedPrice"
-                        class="border border- gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
-
+                      <input type="number" v-model="promotion.reducedPrice"
+                        :max="promotion.price || null"
+                        :min="0"
+                        @input="handleReducedInput"
+                        class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
                     </div>
 
                     <div v-if="promotion.discountType === 'percent'">
                       <p class="mb-2">คิดเป็น %</p>
-                      <input v-model="promotion.percentPrice"
+                      <input type="number" v-model="promotion.percentPrice"
+                        :max="100"
+                        :min="0"
+                        @input="handlePercentInput"
                         class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
 
                     </div>
@@ -115,9 +122,9 @@
 
 
               <div class="lg:w-3/6">
-                <div class="md:max-w-md mx-auto mt-6 rounded-lg shadow-lg border-2">
+                <div class="md:max-w-md mx-auto rounded-lg mt-3 shadow-lg border-2">
                   <!-- หัวโปรโมชั่น -->
-                  <div class="py-4 text-center font-bold text-lg break-all whitespace-pre-wrap text-gray-400">
+                  <div class="py-4 text-center font-bold text-lg break-all whitespace-pre-wrap text-black">
                     {{ promotion.name || 'ชื่อโปรโมชั่น' }}
                   </div>
 
@@ -190,7 +197,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import SidebarAdmin from '@/components/SidebarAdmin.vue'
 
@@ -249,4 +256,28 @@ onMounted(() => {
     isSidebarCollapsed.value = JSON.parse(savedState)
   }
 })
+
+watch(() => promotion.value.dateStart, (newStartDate) => {
+  if (promotion.value.dateFinish && promotion.value.dateFinish < newStartDate) {
+    promotion.value.dateFinish = ''
+  }
+})
+
+function handlePercentInput() {
+  if (Number(promotion.value.percentPrice) > 100) {
+    promotion.value.percentPrice = 100;
+  }
+  if (Number(promotion.value.percentPrice) < 0) {
+    promotion.value.percentPrice = 0;
+  }
+}
+
+function handleReducedInput() {
+  if (Number(promotion.value.reducedPrice) > Number(promotion.value.price)) {
+    promotion.value.reducedPrice = promotion.value.price;
+  }
+  if (Number(promotion.value.reducedPrice) < 0) {
+    promotion.value.reducedPrice = 0;
+  }
+}
 </script>
