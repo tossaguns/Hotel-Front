@@ -143,9 +143,6 @@
                     </div>
                 </div>
 
-
-
-
                 <div @click="navigateTo('/logout', 'logout')"
                     class="mt-12 group mb-2 font-semibold py-2 rounded-lg transition duration-300 hover:bg-red-400 hover:text-white hover:drop-shadow-lg flex items-center cursor-pointer"
                     :class="[
@@ -165,101 +162,93 @@
 
     <!-- Mobile Top Tab Bar -->
     <div class="md:hidden">
-        <!-- Mobile Top Bar -->
-        <div class="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
-            <div class="flex items-center justify-center px-4 py-3 h-16 ">
-                <button @click="toggleMobileMenu" class="p-2 rounded-lg hover:bg-gray-100 transition-colors w-full">
-                    รายการ
-                </button>
-            </div>
-        </div>
+        <!-- Mobile Hamburger Button (small, top-left, floating) -->
+        <button
+            @click="toggleMobileMenu"
+            class="fixed top-3 right-4 z-50 rounded-full flex items-center justify-center w-[40px] h-6 transition"
+            aria-label="Open menu"
+        >
+            <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="6" x2="20" y2="6" />
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <line x1="4" y1="18" x2="20" y2="18" />
+            </svg>
+        </button>
 
-        <div v-if="isMobileMenuOpen" @click="toggleMobileMenu" class="fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+        <!-- Overlay -->
+        <div v-if="isMobileMenuOpen" @click="toggleMobileMenu" class="fixed inset-0 bg-black bg-opacity-40 z-[105]"></div>
 
-        <div v-if="isMobileMenuOpen" class="fixed inset-0 z-50 bg-white">
-            <div class="flex flex-col h-full">
-
-                <div class="flex items-center justify-center px-4 py-3 border-b shadow-sm h-16 w-full">
-                    <button @click="toggleMobileMenu" class="p-2 rounded-lg hover:bg-gray-100 transition-colors w-full">
-                        ปิด
+        <!-- Slide-in Menu (from left) -->
+        <transition name="slide">
+            <div v-if="isMobileMenuOpen" class="fixed top-0 left-0 bottom-0 w-56 bg-white z-[110] shadow-lg flex flex-col">
+                <div class="flex items-center justify-between px-4 py-3 border-b h-14">
+                    <span class="font-bold text-base">เมนู</span>
+                    <button @click="toggleMobileMenu" class="p-1 rounded hover:bg-gray-100 transition" aria-label="Close menu">
+                        <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                            <line x1="6" y1="18" x2="18" y2="6" />
+                        </svg>
                     </button>
                 </div>
-
-                <!-- Menu Items -->
-                <div class="flex-1 overflow-y-auto px-4 py-6">
+                <div class="flex-1 overflow-y-auto px-3 py-4">
                     <div class="space-y-2">
                         <div @click="navigateTo('dashboardforexecutive', 'dashboard')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
+                            class="w-full p-2 rounded text-left font-semibold transition hover:bg-amber-400 hover:text-white cursor-pointer"
                             :class="activeMenu === 'dashboard' ? 'bg-amber-400 text-white' : 'text-gray-700'">
-                            <span class="text-lg">Dashboard</span>
+                            Dashboard
                         </div>
-
                         <div @click="navigateTo('/mainhotelroom', 'stayroom')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
+                            class="w-full p-2 rounded text-left font-semibold transition hover:bg-amber-400 hover:text-white cursor-pointer"
                             :class="activeMenu === 'stayroom' ? 'bg-amber-400 text-white' : 'text-gray-700'">
-                            <span class="text-lg">เข้าพัก</span>
+                            เข้าพัก
                         </div>
-
                         <div @click="navigateTo('/mainbookingtossagun', 'reservetossagun')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
+                            class="w-full p-2 rounded text-left font-semibold transition hover:bg-amber-400 hover:text-white cursor-pointer"
                             :class="activeMenu === 'reservetossagun' ? 'bg-amber-400 text-white' : 'text-gray-700'">
-                            <span class="text-lg">จองกับTossagun</span>
+                            จองกับTossagun
                         </div>
-
                         <div @click="navigateTo('/mainreport', 'report')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
+                            class="w-full p-2 rounded text-left font-semibold transition hover:bg-amber-400 hover:text-white cursor-pointer"
                             :class="activeMenu === 'report' ? 'bg-amber-400 text-white' : 'text-gray-700'">
-                            <span class="text-lg">รายงาน</span>
+                            รายงาน
                         </div>
-
                         <div @click="navigateTo('/mainbyepromotion', 'promotion')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
+                            class="w-full p-2 rounded text-left font-semibold transition hover:bg-amber-400 hover:text-white cursor-pointer"
                             :class="activeMenu === 'promotion' ? 'bg-amber-400 text-white' : 'text-gray-700'">
-                            <span class="text-lg">ใช้งานโปรโมชั่น</span>
+                            ใช้งานโปรโมชั่น
                         </div>
-
                         <div @click="navigateTo('/roomlist', 'manageroom')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
+                            class="w-full p-2 rounded text-left font-semibold transition hover:bg-amber-400 hover:text-white cursor-pointer"
                             :class="activeMenu === 'manageroom' ? 'bg-amber-400 text-white' : 'text-gray-700'">
-                            <span class="text-lg">จัดการห้องพัก</span>
+                            จัดการห้องพัก
                         </div>
-
                         <div @click="navigateTo('/mainemployee', 'manageemployee')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
+                            class="w-full p-2 rounded text-left font-semibold transition hover:bg-amber-400 hover:text-white cursor-pointer"
                             :class="activeMenu === 'manageemployee' ? 'bg-amber-400 text-white' : 'text-gray-700'">
-                            <span class="text-lg">จัดการพนักงาน</span>
+                            จัดการพนักงาน
                         </div>
-
                         <div @click="navigateTo('/mainprofilecompany', 'editproflie')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-amber-400 hover:text-white"
+                            class="w-full p-2 rounded text-left font-semibold transition hover:bg-amber-400 hover:text-white cursor-pointer"
                             :class="activeMenu === 'editproflie' ? 'bg-amber-400 text-white' : 'text-gray-700'">
-                            <span class="text-lg">แก้ไขโปรไฟล์</span>
+                            แก้ไขโปรไฟล์
                         </div>
-
-                        <div class="flex flex-col justify-center mt-6 space-x-2 text-sm my-4">
-                            <p class="text-center">Partner : <span class="text-amber-500 font-bold text-lg">{{
-                                partner.role }}</span></p>
-                            <div
-                                class="transition-transform duration-300 group-hover:scale-110 text-stone-500 space-x-2">
-                                <div class="flex space-x-2 justify-center">
-                                    <p>{{ partner.firstname }}</p>
-                                    <p> {{ partner.lastname }}</p>
-                                </div>
+                        <div class="flex flex-col justify-center mt-6 text-xs my-2">
+                            <p class="text-center">Partner: <span class="text-amber-500 font-bold">{{ partner.role }}</span></p>
+                            <div class="text-center text-stone-500">
+                                <p>{{ partner.firstname }} {{ partner.lastname }}</p>
                             </div>
                         </div>
-
-
-
                         <div @click="navigateTo('/logout', 'logout')"
-                            class="flex items-center w-full p-3 rounded-lg text-left font-semibold transition duration-300 hover:bg-red-400 hover:text-white  justify-center"
+                            class="w-full p-2 rounded text-center font-semibold transition hover:bg-red-400 hover:text-white cursor-pointer mt-4"
                             :class="activeMenu === '' ? 'bg-red-400 text-white' : 'text-gray-700'">
-                            <span class="text-lg hover:text-white">LogOut</span>
+                            LogOut
                         </div>
-
                     </div>
                 </div>
             </div>
-        </div>
+        </transition>
     </div>
 </template>
 
