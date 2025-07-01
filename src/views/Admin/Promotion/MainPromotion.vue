@@ -38,7 +38,6 @@
                   <th class="border px-2 py-1">ราคาที่ลดเเล้ว</th>
                   <th class="border px-2 py-1">วันเริ่มโปรโมชั่น</th>
                   <th class="border px-2 py-1">วันสิ้นสุดโปรโมชั่น</th>
-              
                   <th class="border px-2 py-1">ผู้ทำการอัปเดต</th>
                   <th class="border px-2 py-1">วันเวลาที่อัปเดต</th>
                   <th class="px-2 py-2 border sm:px-3 sm:py-3 rounded-tr-xl">จัดการ</th>
@@ -55,7 +54,6 @@
                   <td class="border px-2 py-1">{{ item.finalPrice }}</td>
                   <td class="border px-2 py-1">{{ item.dateStart ? item.dateStart.slice(0, 10) : '-' }}</td>
                   <td class="border px-2 py-1">{{ item.dateFinish ? item.dateFinish.slice(0, 10) : '-' }}</td>
-                  
                   <td class="border px-2 py-1">{{ item.nameUpdate ?? '-' }}</td>
                   <td class="border px-2 py-1">{{ item.updatedAt ? item.updatedAt.slice(0, 10) : '-' }}</td>
                   <td class="border px-2 py-1 space-x-2">
