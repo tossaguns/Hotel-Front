@@ -36,8 +36,7 @@
 
                 <div>
                   <p class="mb-2">วันเริ่มโปรโมชั่น</p>
-                  <input type="date" v-model="promotion.dateStart"
-                    :min="new Date().toISOString().split('T')[0]"
+                  <input type="date" v-model="promotion.dateStart" :min="new Date().toISOString().split('T')[0]"
                     class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
                 </div>
                 <div>
@@ -58,8 +57,7 @@
                   <!-- แสดง input วันสิ้นสุดเฉพาะเมื่อเลือก "มี" -->
                   <div v-if="hasEndDate === 'yes'">
                     <p class="mb-2">วันสิ้นสุดโปรโมชั่น</p>
-                    <input type="date" v-model="promotion.dateFinish"
-                      :min="promotion.dateStart"
+                    <input type="date" v-model="promotion.dateFinish" :min="promotion.dateStart"
                       class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
                   </div>
                 </div>
@@ -100,18 +98,14 @@
 
                     <div v-if="promotion.discountType === 'reduced'">
                       <p class="mb-2">ลดราคา</p>
-                      <input type="number" v-model="promotion.reducedPrice"
-                        :max="promotion.price || null"
-                        :min="0"
+                      <input type="number" v-model="promotion.reducedPrice" :max="promotion.price || null" :min="0"
                         @input="handleReducedInput"
                         class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
                     </div>
 
                     <div v-if="promotion.discountType === 'percent'">
                       <p class="mb-2">คิดเป็น %</p>
-                      <input type="number" v-model="promotion.percentPrice"
-                        :max="100"
-                        :min="0"
+                      <input type="number" v-model="promotion.percentPrice" :max="100" :min="0"
                         @input="handlePercentInput"
                         class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
                     </div>
@@ -229,20 +223,45 @@ function navigateBackToMainPromotion() {
 // ฟังก์ชันสำหรับบันทึกโปรโมชั่น
 async function createPromotion() {
   try {
-    // ดึงชื่อผู้ใช้จาก localStorage
+    // Validation: ถ้าเลือก "มี" วันสิ้นสุด แต่ไม่กรอกวันสิ้นสุด
+    if (hasEndDate.value === 'yes' && !promotion.value.dateFinish) {
+      alert('กรุณากรอกวันสิ้นสุดโปรโมชั่น');
+      return;
+    }
+    // Validation: ถ้าเลือก "ไม่มี" วันสิ้นสุด ให้ลบ dateFinish ออก
+    if (hasEndDate.value !== 'yes') {
+      promotion.value.dateFinish = '';
+    }
+
     const username = localStorage.getItem('username') || '';
-    // เตรียมข้อมูลที่จะส่ง
-    const payload = {
+    let payload = {
       ...promotion.value,
-      nameUpdate: username, // เพิ่มผู้ที่ทำการอัปเดต
-      percentPrice: promotion.value.percentPrice // ได้จาก input "คิดเป็น %"
+      nameUpdate: username,
     };
+
+    // ถ้าไม่ลดราคา ให้ลบ field ที่เกี่ยวข้องออกจาก payload
+    if (payload.wantToReduce === 'noReduced') {
+      delete payload.discountType
+      delete payload.reducedPrice
+      delete payload.percentPrice
+    } else {
+      if (payload.discountType === 'reduced') {
+        delete payload.percentPrice
+      }
+      if (payload.discountType === 'percent') {
+        delete payload.reducedPrice
+      }
+    }
+
     const res = await fetch('http://localhost:9999/SleepGun/promotion/create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
-    if (!res.ok) throw new Error('เกิดข้อผิดพลาดในการบันทึก')
+    if (!res.ok) {
+      const errData = await res.json()
+      throw new Error(errData.error || 'เกิดข้อผิดพลาดในการบันทึก')
+    }
     router.push('/mainpromotion')
   } catch (err) {
     alert(err.message)
