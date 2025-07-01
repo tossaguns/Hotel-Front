@@ -12,14 +12,13 @@
     <div
       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center justify-center">
       <div
-        class="w-full max-w-[285px] rounded-lg bg-white shadow-md border transition hover:scale-105 flex flex-col justify-between min-h-[300px]"
+        class="w-full max-w-[285px] rounded-lg bg-white shadow-md border transition hover:scale-105 flex flex-col min-h-[300px]"
         v-for="promotion in allPromotions" :key="promotion._id">
         <div class="py-3 text-gray-400 text-center font-bold text-lg break-all whitespace-pre-wrap">
           {{ promotion.name || 'ชื่อโปรโมชั่น' }}
         </div>
-
         <div class="px-3 pb-6 pt-4 text-gray-700 flex flex-col flex-1 justify-between">
-          <div class=" text-center ">
+          <div>
             <div class="text-center">
               <template v-if="promotion.wantToReduce === 'yesReduced' && (
                 (promotion.discountType === 'reduced' && promotion.price && promotion.reducedPrice) ||
@@ -28,7 +27,7 @@
                 <span class="text-gray-400 line-through mr-2">
                   {{ promotion.price }}
                 </span>
-                <br/>
+                <br />
                 <span class="text-3xl font-bold text-red-600 align-middle">
                   <!-- ลดราคาบาท -->
                   <template v-if="promotion.discountType === 'reduced'">
@@ -37,7 +36,7 @@
                   <!-- ลดราคาคิดเป็น % -->
                   <template v-else-if="promotion.discountType === 'percent'">
                     {{ (Number(promotion.price) - (Number(promotion.price) * Number(promotion.percentPrice) /
-                    100)).toFixed(2) }}
+                      100)).toFixed(2) }}
                   </template>
                 </span>
               </template>
@@ -59,19 +58,19 @@
                   </span>
                 </div>
               </div>
-
-
-              <div class="mt-4 md:text-sm text-xs px-6">
-                <div class="flex items-start">
-                  <span class="mr-2 mt-1">📅</span>
-                  <span>เริ่ม: {{ promotion.dateStart || '-' }}</span>
-                </div>
-                <div class="flex items-start">
-                  <span class="mr-2 mt-1">📅</span>
-                  <span>สิ้นสุด: {{ promotion.dateFinish || '-' }}</span>
-                </div>
+            </div>
+          </div>
+          <!-- ส่วนนี้จะอยู่ล่างสุดเสมอ -->
+          <div class="mt-auto">
+            <div class="mt-4 md:text-sm text-xs px-6">
+              <div class="flex items-start">
+                <span class="mr-2 mt-1">📅</span>
+                <span>เริ่ม: {{ promotion.dateStart ? promotion.dateStart.slice(0, 10) : '-' }}</span>
               </div>
-
+              <div class="flex items-start">
+                <span class="mr-2 mt-1">📅</span>
+                <span>สิ้นสุด: {{ promotion.dateFinish ? promotion.dateFinish.slice(0, 10) : '-' }}</span>
+              </div>
             </div>
             <div class="flex justify-center mt-4">
               <button @click="openPaymentPopup(promotion._id)"

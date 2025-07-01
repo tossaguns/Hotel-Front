@@ -32,49 +32,74 @@
 
                   <div
                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center justify-center">
-                    <div v-for="promotion in activePromotions" :key="promotion.promotion_id"
-                      class="w-full max-w-[285px] rounded-lg bg-white shadow-md border transition hover:scale-105 flex flex-col justify-between min-h-[300px]">
+                    <div
+                      class="w-full max-w-[285px] rounded-lg bg-white shadow-md border transition hover:scale-105 flex flex-col min-h-[300px]"
+                      v-for="promotion in allPromotions" :key="promotion._id">
                       <div class="py-3 text-gray-400 text-center font-bold text-lg break-all whitespace-pre-wrap">
-                        {{ promotion.namePromotion || 'ชื่อโปรโมชั่น' }}
+                        {{ promotion.name || 'ชื่อโปรโมชั่น' }}
                       </div>
-
                       <div class="px-3 pb-6 pt-4 text-gray-700 flex flex-col flex-1 justify-between">
-                        <div class=" text-center ">
-                          <p class="font-bold text-3xl text-gray-900">{{ promotion.price ||
-                            '0' }}
-                          </p>
-                          <p class="text-sm text-gray-500">บาท / คน / บัญชี</p>
-                        </div>
-
-                        <div class="list-none space-y-1 mt-4">
-                          <div class="bg-gray-50 p-3 rounded-md ">
-                            <div v-for="(line, index) in promotion.detailPromotion.split('\n')" :key="index"
-                              class="flex items-start ">
-                              <span class="mr-2 mt-1">✔</span>
-                              <span class="break-all whitespace-pre-wrap flex-1 md:text-sm text-xs ">
-                                {{ line }}
+                        <div>
+                          <div class="text-center">
+                            <template v-if="promotion.wantToReduce === 'yesReduced' && (
+                              (promotion.discountType === 'reduced' && promotion.price && promotion.reducedPrice) ||
+                              (promotion.discountType === 'percent' && promotion.price && promotion.percentPrice)
+                            )">
+                              <span class="text-gray-400 line-through mr-2">
+                                {{ promotion.price }}
                               </span>
-                            </div>
+                              <br />
+                              <span class="text-3xl font-bold text-red-600 align-middle">
+                                <!-- ลดราคาบาท -->
+                                <template v-if="promotion.discountType === 'reduced'">
+                                  {{ Number(promotion.price) - Number(promotion.reducedPrice) }}
+                                </template>
+                                <!-- ลดราคาคิดเป็น % -->
+                                <template v-else-if="promotion.discountType === 'percent'">
+                                  {{ (Number(promotion.price) - (Number(promotion.price) *
+                                    Number(promotion.percentPrice) /
+                                    100)).toFixed(2) }}
+                                </template>
+                              </span>
+                            </template>
+                            <template v-else>
+                              <span class="font-bold text-3xl text-gray-900">
+                                {{ promotion.price || '0' }}
+                              </span>
+                            </template>
+                            <p class="text-sm text-gray-500">บาท / คน / บัญชี</p>
                           </div>
 
-
+                          <div class="list-none space-y-1 mt-4">
+                            <div class="bg-gray-50 p-3 rounded-md ">
+                              <div v-for="(line, index) in (promotion.detail ? promotion.detail.split('\n') : [])"
+                                :key="index" class="flex items-start ">
+                                <span class="mr-2 mt-1">✔</span>
+                                <span class="break-all whitespace-pre-wrap flex-1 md:text-sm text-xs ">
+                                  {{ line }}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- ส่วนนี้จะอยู่ล่างสุดเสมอ -->
+                        <div class="mt-auto">
                           <div class="mt-4 md:text-sm text-xs px-6">
                             <div class="flex items-start">
                               <span class="mr-2 mt-1">📅</span>
-                              <span>เริ่ม: {{ promotion.dateStart || '-' }}</span>
+                              <span>เริ่ม: {{ promotion.dateStart ? promotion.dateStart.slice(0, 10) : '-' }}</span>
                             </div>
                             <div class="flex items-start">
                               <span class="mr-2 mt-1">📅</span>
-                              <span>สิ้นสุด: {{ promotion.dateFinish || '-' }}</span>
+                              <span>สิ้นสุด: {{ promotion.dateFinish ? promotion.dateFinish.slice(0, 10) : '-' }}</span>
                             </div>
                           </div>
-
-                        </div>
-                        <div class="flex justify-center mt-4">
-                          <button @click="openPaymentPopup(promotion.promotion_id)"
-                            class="bg-amber-500 hover:bg-amber-400 text-white font-semibold px-4 py-1 rounded-lg transition">
-                            ซื้อเลย
-                          </button>
+                          <div class="flex justify-center mt-4">
+                            <button @click="openPaymentPopup(promotion._id)"
+                              class="bg-amber-500 hover:bg-amber-400 text-white font-semibold px-4 py-1 rounded-lg transition">
+                              ซื้อเลย
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -594,14 +619,14 @@ watch(toggleMobilePromo, (newValue) => {
   }
 })
 
-onMounted(() => {
-  const saved = localStorage.getItem('adminPromotions')
-  if (saved) {
-    try {
-      allPromotions.value = JSON.parse(saved)
-    } catch (e) {
-      console.error('ไม่สามารถอ่าน promotion จาก localStorage ได้:', e)
-    }
+
+onMounted(async () => {
+  try {
+    const res = await fetch('http://localhost:9999/SleepGun/promotion/getAll')
+    const data = await res.json()
+    allPromotions.value = data
+  } catch (e) {
+    console.error('โหลดโปรโมชั่นไม่สำเร็จ:', e)
   }
 })
 
