@@ -96,8 +96,7 @@ const router = createRouter({
     {
       path: "/profileemployee",
       name: "ProfileEmployee",
-      component: () =>
-        import("@/views/Partner/Employee/ProfileEmployee.vue"),
+      component: () => import("@/views/Partner/Employee/ProfileEmployee.vue"),
     },
     {
       path: "/dashboardforemployee",
@@ -178,7 +177,7 @@ const router = createRouter({
       component: () =>
         import("@/views/Admin/ManagePartner/Approve/RejectPartner.vue"),
     },
-   
+
     {
       path: "/mainbyepromotion",
       name: "MainByeProMotion",
@@ -315,7 +314,7 @@ const router = createRouter({
       name: "MainProfile",
       component: () => import("@/views/Member/Profile/MainProfile.vue"),
     },
- 
+
     {
       path: "/mainpartnersleepgun",
       name: "MainPartnerSleepGun",
@@ -380,12 +379,12 @@ const router = createRouter({
       component: () => import("@/views/Partner/Executive/MainCompany.vue"),
     },
 
-      {
-    path: "/detailpartnerapprove/:id",
-    name: "DetailPartnerApprove",
-    component: () =>
-      import("@/views/Admin/ManagePartner/DetailPartnerApprove.vue"),
-  },
+    {
+      path: "/detailpartnerapprove/:id",
+      name: "DetailPartnerApprove",
+      component: () =>
+        import("@/views/Admin/ManagePartner/DetailPartnerApprove.vue"),
+    },
 
     {
       path: "/loginpartneremployee",
@@ -401,6 +400,11 @@ const router = createRouter({
       path: "/mainmanagebank",
       name: "MainManageBank",
       component: () => import("@/views/Admin/ManageMoney/MainManageBank.vue"),
+    },
+    {
+      path: "/editpromotion",
+      name: "EditPromotion",
+      component: () => import("@/views/Admin/Promotion/EditPromotion.vue"),
     },
   ],
 });

@@ -107,7 +107,6 @@
                       <p class="mb-2">คิดเป็น %</p>
                       <input v-model="promotion.percentPrice"
                         class="border border-gray-300 px-3 py-2 rounded w-full resize-none mb-4" />
-
                     </div>
                   </div>
                 </div>
