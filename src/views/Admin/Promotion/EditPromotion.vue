@@ -87,7 +87,6 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-
 const allPromotions = ref([])
 
 onMounted(async () => {
