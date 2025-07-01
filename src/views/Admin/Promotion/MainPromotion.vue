@@ -141,7 +141,6 @@
                     selectedPromotion.dateFinish.slice(0, 10) : '-'
                   }}</span>
                 </li>
-
               </ul>
             </div>
           </div>
