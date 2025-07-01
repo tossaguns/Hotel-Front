@@ -18,7 +18,7 @@
         <div class="bg-white min-h-screen ">
           <div>
             <div class="flex lg:justify-between">
-              <div class="lg:w-5/6">
+              <di class="lg:w-5/6">
                 <div class="max-w-7xl mx-auto md:px-4">
 
                   <div class="text-center mb-10 md:mt-20 mt-6">
@@ -213,33 +213,11 @@
                     </div>
                   </div>
                 </div>
-              </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+              </di>
 
               <div
                 class="w-[400px] hidden pl-2 lg:flex justify-center sticky top-0 h-screen overflow-y-auto custom-scrollbar">
-                <!--ประวัติการทำรายการ-->
+
                 <div class="w-full">
                   <BarServePromotion />
                 </div>
@@ -511,14 +489,6 @@ const calcDiscount = (item) => {
 }
 
 
-
-
-
-
-
-
-
-
 const isSidebarCollapsed = ref(false)
 const allPromotions = ref([])
 const showHistory = ref(false)
@@ -535,19 +505,6 @@ const handleSidebarToggle = (isCollapsed) => {
   isSidebarCollapsed.value = isCollapsed
 }
 
-const buyPromotion = (promotion) => {
-  selectedPromotion.value = promotion
-  showBuyModal.value = true
-}
-
-const toggleHistory = () => {
-  showHistory.value = !showHistory.value
-}
-
-const closeBuyModal = () => {
-  showBuyModal.value = false
-  selectedPromotion.value = null
-}
 
 const activePromotions = computed(() => {
   const today = new Date()
@@ -558,7 +515,6 @@ const activePromotions = computed(() => {
 })
 
 function openPaymentPopup(promotionId) {
-  // ดึงข้อมูลจาก activePromotions ที่มีอยู่แล้ว
   const found = activePromotions.value.find(p => p.promotion_id === promotionId)
   if (found) {
     selectedPromotion.value = found
@@ -594,7 +550,6 @@ function openMobilePromo() {
 }
 
 function closeMobilePromo() {
-  // Animate ออกไป
   gsap.to(mobilePromoContent.value, {
     x: '100%',
     duration: 0.3,
@@ -610,7 +565,7 @@ function closeMobilePromo() {
   })
 }
 
-// ควบคุม scroll ของ body เมื่อ popup แสดง
+
 watch(toggleMobilePromo, (newValue) => {
   if (newValue) {
     document.body.style.overflow = 'hidden'

@@ -1,4 +1,3 @@
-TODO: เสร็จ เหลือออกเเบบ font ให้สวย
 <template>
     <div class="w-full min-h-screen bg-gray-200">
         <SidebarAdmin @toggle-sidebar="handleSidebarToggle" />

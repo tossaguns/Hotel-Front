@@ -402,7 +402,7 @@ const router = createRouter({
       component: () => import("@/views/Admin/ManageMoney/MainManageBank.vue"),
     },
     {
-      path: "/editpromotion",
+      path: "/editpromotion/:id",
       name: "EditPromotion",
       component: () => import("@/views/Admin/Promotion/EditPromotion.vue"),
     },
