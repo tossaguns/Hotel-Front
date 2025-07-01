@@ -406,6 +406,11 @@ const router = createRouter({
       name: "EditPromotion",
       component: () => import("@/views/Admin/Promotion/EditPromotion.vue"),
     },
+    {
+      path: "/main",
+      name: "Main",
+      component: () => import("@/views/tt/main.vue"),
+    },
   ],
 });
 
