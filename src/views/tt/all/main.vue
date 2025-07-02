@@ -1,51 +1,68 @@
-<template>
-  <div>
-    <div class="bg-gray-200  flex md:justify-between items-center py-4 px-4">
-      <div class="w-2/3 px-12">
-        <p>
-          สวัสดิการพันธุ์หมื่นให้ สร้างสังคมแห่งความสุข
-          สู่สังคมไร้เงินสดในรูปแบบของสหกรณ์ดิจิทัล
-          ที่ใช้เทคโนโลยีแพลตฟอร์มอัจฉริยะที่มีประสิทธิภาพความแม่นยำ
-          มาบริหารจัดการทุกๆ รายจ่ายทั้งหมดที่เกิดขึ้นจากการกินใช้
-          ในชีวิตประจำวันของมนุษย์ นำมาแบ่งปันช่วยเหลือเกื้อกูล
-          ให้แก่สมาชิกผู้บริโภคให้มีรายได้กลับคืน และหมุนเวียนภายในชุมชน
-          ที่มั่นคง มั่งคั่ง และยั่งยืนตลอดไป
-        </p>
-      </div>
-      <div class="w-1/3">
-        <img class="w-full h-48 object-cover rounded-xl bg-gray-300" />
-      </div>
+<!--<template>
+  <div class="pb-8">
+    <div class="py-4 flex flex-col md:flex-row md:px-4 md:justify-between items-center relative md:rounded-lg"
+      style="background-image: url('/icon1/rice.jpg'); background-size: cover; background-position: center;">
+
+      <div class="absolute inset-0 bg-black/40 backdrop-blur-sm md:rounded-xl"></div>
+   
+      <transition name="fade-slide" appear>
+        <div v-if="showText" class="relative w-2/3 pb-3 md:pb-0 md:px-12 text-white z-10">
+          <p class="indent-8">
+            สวัสดิการพันธุ์หมื่นให้ สร้างสังคมแห่งความสุข
+            สู่สังคมไร้เงินสดในรูปแบบของสหกรณ์ดิจิทัล
+            ที่ใช้เทคโนโลยีแพลตฟอร์มอัจฉริยะที่มีประสิทธิภาพความแม่นยำ
+            มาบริหารจัดการทุกๆ รายจ่ายทั้งหมดที่เกิดขึ้นจากการกินใช้
+            ในชีวิตประจำวันของมนุษย์ นำมาแบ่งปันช่วยเหลือเกื้อกูล
+            ให้แก่สมาชิกผู้บริโภคให้มีรายได้กลับคืน และหมุนเวียนภายในชุมชน
+            ที่มั่นคง มั่งคั่ง และยั่งยืนตลอดไป
+          </p>
+        </div>
+      </transition>
+      <transition name="fade-slide-small" appear>
+        <div v-if="showImg" class="relative md:w-1/3 w-10/12 rounded-xl shadow-lg z-10 
+           mx-auto md:mx-0 mt-4 md:mt-0">
+          <img class="h-48 rounded-xl w-full object-cover" src="/icon1/rice.jpg" />
+        </div>
+      </transition>
     </div>
 
-    <div class="bg-gray-200 mt-5 p-6">
-      <p class="text-xl font-semibold">เป้าหมาย</p>
-      <div class="mt-2">
-        <p>
-          1. สร้างเครือข่ายผู้บริโภค
-          แปลงรายจ่ายที่จำเป็นในชีวิตประจำวันของมนุษย์มาบริหารจัดการด้วยแพลตฟอร์มอัจฉริยะสวัสดิการพันธุ์หมื่นให้
-        </p>
-
-        <p>2. สร้างวัฒนธรรมการทำความดี
-          ช่วยเหลือเกื้อกูลกันในสังคมด้วยกิจกรรมเปลี่ยนที่จ่ายย้ายที่ซื้อผ่านร้านค้ามินิมาร์ทชุมชน
-          ซึ่งจะก่อให้เกิดรายได้หมุนเวียนส่งต่อความสุข และผลกำไรกลับไปยังผู้ที่ซื้อ</p>
-        <p>
-          3. สร้างหลักประกันความเชื่อมั่นให้แก่ชาวบ้าน เด็ก ผู้สูงอายุ ผู้ป่วยติดเตียงคนชรา คนพิการ ในชุมชน
-          อันนำไปสู่การอารักขาความมั่นคงทางรายได้โดยไม่ต้องพึ่งพาลูกหลาน และรัฐบาลให้มีความมั่งคั่ง และยั่งยืน
-          รวมทั้งยังเป็นมรดกตกทอดไปยังลูกหลานเมื่อท่าน ถึงแก่กรรม
-        </p>
+    <transition name="fade-up" appear>
+      <div v-if="showGoal" class="mt-3 py-6 md:px-6 px-4 rounded-lg">
+        <p class="md:text-2xl text-xl text-center md:text-left font-semibold text-red-800 italic">เป้าหมาย</p>
+        <div class="mt-2 md:px-4">
+          <p class="indent-8">
+            1. สร้างเครือข่ายผู้บริโภค
+            แปลงรายจ่ายที่จำเป็นในชีวิตประจำวันของมนุษย์มาบริหารจัดการด้วยแพลตฟอร์มอัจฉริยะสวัสดิการพันธุ์หมื่นให้
+          </p>
+          <p class="indent-8">2. สร้างวัฒนธรรมการทำความดี
+            ช่วยเหลือเกื้อกูลกันในสังคมด้วยกิจกรรมเปลี่ยนที่จ่ายย้ายที่ซื้อผ่านร้านค้ามินิมาร์ทชุมชน
+            ซึ่งจะก่อให้เกิดรายได้หมุนเวียนส่งต่อความสุข และผลกำไรกลับไปยังผู้ที่ซื้อ</p>
+          <p class="indent-8">
+            3. สร้างหลักประกันความเชื่อมั่นให้แก่ชาวบ้าน เด็ก ผู้สูงอายุ ผู้ป่วยติดเตียงคนชรา คนพิการ ในชุมชน
+            อันนำไปสู่การอารักขาความมั่นคงทางรายได้โดยไม่ต้องพึ่งพาลูกหลาน และรัฐบาลให้มีความมั่งคั่ง และยั่งยืน
+            รวมทั้งยังเป็นมรดกตกทอดไปยังลูกหลานเมื่อท่าน ถึงแก่กรรม
+          </p>
+        </div>
       </div>
-    </div>
+    </transition>
 
+    <div ref="box"
+      :class="['transition-all duration-1000', isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10']"
+      class="flex flex-col md:flex-row justify-between items-center mt-5 border">
 
-    <div class="flex justify-between items-center mt-5">
-      <div class="w-4/6 bg-gray-200 rounded-lg">
-        <img />
+      <div class="w-full md:w-4/6 bg-gray-200 md:rounded-l-lg overflow-hidden h-72">
+        <img src="/icon1/rice.jpg" class="w-full h-full object-cover" />
       </div>
 
+      <div
+        class="w-full md:w-2/6 flex justify-center items-center relative overflow-hidden md:rounded-r-lg md:h-72 h-56"
+        style="background-image: url('/icon1/rice.jpg'); background-size: cover; background-position: center;">
 
-      <div class="w-2/6 bg-gray-200 rounded-md flex justify-center items-center">
-        <div class="flex flex-col justify-center items-center text-center px-4 py-6">
-          <p class="text-xl font-bold mb-4">
+        <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-black/70 to-transparent z-10"></div>
+        <div class="absolute inset-0 bg-black/10 backdrop-blur-sm rounded-lg"></div>
+
+        <div class="flex flex-col justify-center items-center text-center px-4 py-6 relative z-20">
+          <p class="text-xl font-bold mb-4 text-white drop-shadow-lg">
             PMH ทำอะไร ?<br />
             เป็นสมาชิก PMH ได้อะไร ?<br />
             ยุทธศาสตร์ 5 ด้าน
@@ -58,7 +75,203 @@
     </div>
   </div>
 </template>
-<script>
+<script setup>
+
+import { ref, onMounted } from 'vue'
+
+const showText = ref(false)
+const showImg = ref(false)
+const showGoal = ref(false)
+const box = ref(null)
+const isVisible = ref(false)
+
+const revealInSequence = () => {
+  showText.value = true
+
+  setTimeout(() => {
+    showImg.value = true
+  }, 500)
+
+  setTimeout(() => {
+    showGoal.value = true
+
+
+    setTimeout(() => {
+      if (box.value) {
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              isVisible.value = true
+              observer.unobserve(entry.target)
+            }
+          },
+          { threshold: 0.1 }
+        )
+        observer.observe(box.value)
+      }
+    }, 200)
+  }, 700)
+}
+
+onMounted(revealInSequence)
+</script>
+
+
+
+
+<style>
+.fade-slide-enter-active {
+  transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+}
+
+.fade-slide-enter-to {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.fade-slide-small-enter-active {
+  transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-slide-small-enter-from {
+  opacity: 0;
+  transform: translateY(40px) scale(0.8);
+}
+
+.fade-slide-small-enter-to {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.fade-up-enter-active {
+  transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-up-enter-from {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.fade-up-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>-->
+
+<template>
+  <div>
+    <div ref="myBox"
+      class="py-8 flex flex-col md:flex-row md:px-4 md:justify-between items-center relative md:rounded-lg "
+      style="background-image: url('/icon1/rice.jpg'); background-size: cover; background-position: center;">
+
+      <div class="absolute inset-0 bg-black/50 backdrop-blur-sm md:rounded-xl"></div>
+
+      <div :class="[
+        'transition-all duration-700 ease-out will-change-transform will-change-opacity',
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      ]" class="relative md:w-2/3 px-4 pb-3 md:pb-0 md:px-12 text-white z-10">
+        <p class="indent-8">
+          สวัสดิการพันธุ์หมื่นให้ สร้างสังคมแห่งความสุข
+          สู่สังคมไร้เงินสดในรูปแบบของสหกรณ์ดิจิทัล
+          ที่ใช้เทคโนโลยีแพลตฟอร์มอัจฉริยะที่มีประสิทธิภาพความแม่นยำ
+          มาบริหารจัดการทุกๆ รายจ่ายทั้งหมดที่เกิดขึ้นจากการกินใช้
+          ในชีวิตประจำวันของมนุษย์ นำมาแบ่งปันช่วยเหลือเกื้อกูล
+          ให้แก่สมาชิกผู้บริโภคให้มีรายได้กลับคืน และหมุนเวียนภายในชุมชน
+          ที่มั่นคง มั่งคั่ง และยั่งยืนตลอดไป
+        </p>
+      </div>
+      <div :class="[
+        'transition-all duration-700 ease-out will-change-transform will-change-opacity',
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      ]" class="md:w-1/3 z-10 flex justify-center md:justify-end mt-2 md:mt-0">
+        <img class="h-48  rounded-xl shadow-lg" src="/icon1/rice.jpg" />
+      </div>
+
+    </div>
+
+    <div div ref="goalRef" :class="[
+      'mt-3 py-6 md:px-6 px-4 rounded-lg transition-all duration-1000 ease-out will-change-transform will-change-opacity',
+      isGoalVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+    ]">
+      <p class="md:text-2xl text-xl text-center md:text-left font-semibold text-red-800 italic">เป้าหมาย</p>
+      <div class="mt-2 md:px-4">
+        <p class="indent-8">
+          1. สร้างเครือข่ายผู้บริโภค
+          แปลงรายจ่ายที่จำเป็นในชีวิตประจำวันของมนุษย์มาบริหารจัดการด้วยแพลตฟอร์มอัจฉริยะสวัสดิการพันธุ์หมื่นให้
+        </p>
+        <p class="indent-8">
+          2. สร้างวัฒนธรรมการทำความดี
+          ช่วยเหลือเกื้อกูลกันในสังคมด้วยกิจกรรมเปลี่ยนที่จ่ายย้ายที่ซื้อผ่านร้านค้ามินิมาร์ทชุมชน
+          ซึ่งจะก่อให้เกิดรายได้หมุนเวียนส่งต่อความสุข และผลกำไรกลับไปยังผู้ที่ซื้อ
+        </p>
+        <p class="indent-8">
+          3. สร้างหลักประกันความเชื่อมั่นให้แก่ชาวบ้าน เด็ก ผู้สูงอายุ ผู้ป่วยติดเตียงคนชรา คนพิการ ในชุมชน
+          อันนำไปสู่การอารักขาความมั่นคงทางรายได้โดยไม่ต้องพึ่งพาลูกหลาน และรัฐบาลให้มีความมั่งคั่ง และยั่งยืน
+          รวมทั้งยังเป็นมรดกตกทอดไปยังลูกหลานเมื่อท่าน ถึงแก่กรรม
+        </p>
+      </div>
+    </div>
+
+    <!-- กล่องล่าง -->
+    <div ref="box" class="flex flex-col md:flex-row justify-between items-center mt-5 ">
+      <div class="w-full md:w-[70%] bg-gray-200 md:rounded-l-lg overflow-hidden h-72">
+        <img src="/icon1/rice.jpg" class="w-full h-full object-cover" />
+        <button>อ่านต่อได้ที่นี่</button>
+      </div>
+
+      <div
+        class="w-full md:w-[30%] flex justify-center items-center relative overflow-hidden md:rounded-r-lg md:h-72 h-56"
+        style="background-image: url('/icon1/rice.jpg'); background-size: cover; background-position: center;">
+        <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-black/70 to-transparent z-10"></div>
+        <div class="absolute inset-0 bg-black/10 backdrop-blur-sm rounded-lg"></div>
+
+        <div class="flex flex-col justify-center items-center text-center px-4 py-6 relative z-20">
+          <p class="text-xl font-bold mb-4 text-white drop-shadow-lg">
+            PMH ทำอะไร ?<br />
+            เป็นสมาชิก PMH ได้อะไร ?<br />
+            ยุทธศาสตร์ 5 ด้าน
+          </p>
+          <button class="bg-black  rounded-lg text-white px-4 py-2 hover:bg-gray-900 transition-colors">
+            คลิ๊กเลย!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<script setup>
+import { ref, onMounted } from 'vue'
+
+const myBox = ref(null)
+const isVisible = ref(false)
+const goalRef = ref(null)
+const isGoalVisible = ref(false)
+
+
+onMounted(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      isVisible.value = entry.isIntersecting
+    },
+    { threshold: 0.4 }
+  )
+  if (myBox.value) observer.observe(myBox.value)
+})
+onMounted(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      isGoalVisible.value = entry.isIntersecting
+    },
+    { threshold: 0.4 }
+  )
+  if (goalRef.value) observer.observe(goalRef.value)
+})
 
 </script>
-<style></style>

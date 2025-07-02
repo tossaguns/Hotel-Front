@@ -407,9 +407,9 @@ const router = createRouter({
       component: () => import("@/views/Admin/Promotion/EditPromotion.vue"),
     },
     {
-      path: "/main",
+      path: "/mainpage",
       name: "Main",
-      component: () => import("@/views/tt/main.vue"),
+      component: () => import("@/views/tt/mainpage.vue"),
     },
   ],
 });
