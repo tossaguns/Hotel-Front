@@ -166,7 +166,7 @@ onMounted(revealInSequence)
 <template>
   <div>
     <div ref="myBox"
-      class="py-8 flex flex-col md:flex-row md:px-4 md:justify-between items-center relative md:rounded-lg "
+      class="sm:py-4 flex flex-col md:flex-row md:px-4 md:justify-between items-center relative md:rounded-lg "
       style="background-image: url('/icon1/rice.jpg'); background-size: cover; background-position: center;">
 
       <div class="absolute inset-0 bg-black/50 backdrop-blur-sm md:rounded-xl"></div>
@@ -175,7 +175,7 @@ onMounted(revealInSequence)
         'transition-all duration-700 ease-out will-change-transform will-change-opacity',
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       ]" class="relative md:w-2/3 px-4 pb-3 md:pb-0 md:px-12 text-white z-10">
-        <p class="indent-8">
+        <p class="indent-8 mt-4 md:mt-0">
           สวัสดิการพันธุ์หมื่นให้ สร้างสังคมแห่งความสุข
           สู่สังคมไร้เงินสดในรูปแบบของสหกรณ์ดิจิทัล
           ที่ใช้เทคโนโลยีแพลตฟอร์มอัจฉริยะที่มีประสิทธิภาพความแม่นยำ
@@ -184,14 +184,14 @@ onMounted(revealInSequence)
           ให้แก่สมาชิกผู้บริโภคให้มีรายได้กลับคืน และหมุนเวียนภายในชุมชน
           ที่มั่นคง มั่งคั่ง และยั่งยืนตลอดไป
         </p>
+        
       </div>
-      <div :class="[
-        'transition-all duration-700 ease-out will-change-transform will-change-opacity',
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      ]" class="md:w-1/3 z-10 flex justify-center md:justify-end mt-2 md:mt-0">
-        <img class="h-48  rounded-xl shadow-lg" src="/icon1/rice.jpg" />
+      <div  class="md:w-1/3 z-10 flex justify-center md:justify-end mt-2 md:mt-0">
+       <img
+  class="w-full h-auto sm:max-h-96 sm:rounded-xl shadow-lg object-contain"
+  src="/graphics/pmh-02.jpg"
+/>
       </div>
-
     </div>
 
     <div div ref="goalRef" :class="[
@@ -221,7 +221,7 @@ onMounted(revealInSequence)
     <div ref="box" class="flex flex-col md:flex-row justify-between items-center mt-5 ">
       <div class="w-full md:w-[70%] bg-gray-200 md:rounded-l-lg overflow-hidden h-72">
         <img src="/icon1/rice.jpg" class="w-full h-full object-cover" />
-        <button>อ่านต่อได้ที่นี่</button>
+        
       </div>
 
       <div

@@ -18,7 +18,7 @@
       <div class="text-center md:text-left mt-4 w-full md:w-2/3 ">
         <p>สำนักงานใหญ่ : เลขที่ 111/23 หมู่ 8 ตำบลท่าช้าง อำเภอเมืองจันทบุรี จังหวัดจันทบุรี 22000</p>
         <p>โทร. 098-247-8988 E-Mail:phanmuenhai2016@gmail.com</p>
-        <p>สงวนลิขสิทธิ์ & สำเนา, 2023 บริษัท พันธุ์หมื่นให้ จำกัด</p>
+        <p class="mt-3 font-bold" >สงวนลิขสิทธิ์ & สำเนา, 2023 บริษัท พันธุ์หมื่นให้ จำกัด</p>
       </div>
       <div class="w-full md:w-1/3 flex justify-center md:justify-end space-x-2 items-center mt-4 md:mt-0">
         <img src="/icon1/YouTube.png" class="h-8" />
@@ -28,6 +28,7 @@
       </div>
     </div>
   </div>
+  
 </template>
 <script>
 </script>
