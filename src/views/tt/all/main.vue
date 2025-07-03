@@ -174,7 +174,8 @@ onMounted(revealInSequence)
       <div :class="[
         'transition-all duration-700 ease-out will-change-transform will-change-opacity',
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      ]" class="relative md:w-2/3 px-4 pb-3 md:pb-0 md:px-12 text-white z-10">
+      ]"
+        class="relative md:w-2/3 px-4 pb-3 md:pb-0 md:px-12 text-white z-10 flex justify-center flex-col items-center">
         <p class="indent-8 mt-4 md:mt-0">
           สวัสดิการพันธุ์หมื่นให้ สร้างสังคมแห่งความสุข
           สู่สังคมไร้เงินสดในรูปแบบของสหกรณ์ดิจิทัล
@@ -184,13 +185,16 @@ onMounted(revealInSequence)
           ให้แก่สมาชิกผู้บริโภคให้มีรายได้กลับคืน และหมุนเวียนภายในชุมชน
           ที่มั่นคง มั่งคั่ง และยั่งยืนตลอดไป
         </p>
-        
+        <a href="https://www.pmhphanmuenhai.com/about-6" target="_blank" rel="noopener noreferrer">
+          <button class="bg-green-800 px-3 py-2 mt-4 rounded-lg hover:bg-green-900 transition text-white">
+            อ่านเพิ่มได้ที่นี่
+          </button>
+        </a>
+
+
       </div>
-      <div  class="md:w-1/3 z-10 flex justify-center md:justify-end mt-2 md:mt-0">
-       <img
-  class="w-full h-auto sm:max-h-96 sm:rounded-xl shadow-lg object-contain"
-  src="/graphics/pmh-02.jpg"
-/>
+      <div class="md:w-1/3 z-10 flex justify-center md:justify-end mt-2 md:mt-0">
+        <img class="w-full h-auto sm:max-h-96 sm:rounded-xl shadow-lg object-contain" src="/graphics/pmh-02.jpg" />
       </div>
     </div>
 
@@ -217,28 +221,34 @@ onMounted(revealInSequence)
       </div>
     </div>
 
-    <!-- กล่องล่าง -->
-    <div ref="box" class="flex flex-col md:flex-row justify-between items-center mt-5 ">
-      <div class="w-full md:w-[70%] bg-gray-200 md:rounded-l-lg overflow-hidden h-72">
-        <img src="/icon1/rice.jpg" class="w-full h-full object-cover" />
-        
+
+    <div class="flex flex-col md:flex-row mt-5">
+      <!-- VIDEO -->
+      <div class="w-full md:flex-[7] bg-gray-200 md:rounded-l-lg flex items-center justify-center "
+        @click="toggleVideo">
+        <video ref="videoRef" class="w-full rounded-l-lg aspect-video object-contain cursor-pointer" autoplay muted loop playsinline>
+          <source src="/graphics/compare_vipnormal.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
 
-      <div
-        class="w-full md:w-[30%] flex justify-center items-center relative overflow-hidden md:rounded-r-lg md:h-72 h-56"
+      <!-- TEXT -->
+      <div class="w-full md:flex-[3] flex justify-center items-center relative overflow-hidden md:rounded-r-lg"
         style="background-image: url('/icon1/rice.jpg'); background-size: cover; background-position: center;">
         <div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-black/70 to-transparent z-10"></div>
         <div class="absolute inset-0 bg-black/10 backdrop-blur-sm rounded-lg"></div>
 
-        <div class="flex flex-col justify-center items-center text-center px-4 py-6 relative z-20">
-          <p class="text-xl font-bold mb-4 text-white drop-shadow-lg">
+        <div class="flex flex-col justify-center items-center text-center px-4 py-4 md:py-6 relative z-20">
+          <p class="md:text-xl font-bold mb-4 text-white drop-shadow-lg">
             PMH ทำอะไร ?<br />
             เป็นสมาชิก PMH ได้อะไร ?<br />
             ยุทธศาสตร์ 5 ด้าน
           </p>
-          <button class="bg-black  rounded-lg text-white px-4 py-2 hover:bg-gray-900 transition-colors">
-            คลิ๊กเลย!
-          </button>
+          <a href="https://www.pmhphanmuenhai.com/s-projects-basic" target="_blank" rel="noopener noreferrer">
+            <button class="bg-black rounded-lg text-white px-4 py-2 hover:bg-gray-800 transition-colors">
+              คลิ๊กเลย!
+            </button>
+          </a>
         </div>
       </div>
     </div>
@@ -255,6 +265,18 @@ const goalRef = ref(null)
 const isGoalVisible = ref(false)
 
 
+const videoRef = ref(null)
+
+const toggleVideo = () => {
+  const video = videoRef.value
+  if (video) {
+    if (video.paused) {
+      video.play()
+    } else {
+      video.pause()
+    }
+  }
+}
 onMounted(() => {
   const observer = new IntersectionObserver(
     ([entry]) => {
