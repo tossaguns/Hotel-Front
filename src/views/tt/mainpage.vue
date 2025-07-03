@@ -1,18 +1,32 @@
 <template>
   <div class="bg-white">
+
     <div class="border max-w-5xl mx-auto md:px-6 mt-5 md:text-lg text-sm">
-      <!-- แบนเนอร์ -->
-      <div class="relative">
-        <img src="/your-image.jpg" alt="แบนเนอร์" class="w-full md:h-72 h-48 object-cover md:rounded-xl bg-gray-200" />
+      <div class="relative overflow-hidden h-48 md:h-72">
+        <div ref="carouselRef" class="flex transition-transform duration-500 ease-in-out" :style="transformStyle"
+          @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
+          <img v-for="(img, index) in images" :key="index" :src="img"
+            class="w-full flex-shrink-0 h-48 md:h-72 object-cover md:rounded-xl bg-gray-200" alt="แบนเนอร์" />
+        </div>
+
+        <!-- จุดวงกลม -->
+        <div
+          class="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30 bg-white/50 rounded-full px-3 py-1">
+          <button v-for="(img, idx) in images" :key="idx" @click="currentIndex = idx" :class="[
+            'md:w-[6px] md:h-[6px] w-[4px] h-[4px] rounded-full md:my-1',
+            currentIndex === idx ? 'bg-green-800' : 'bg-white',
+          ]" :aria-label="`ไปยังรูปภาพ ${idx + 1}`" />
+        </div>
       </div>
 
+
       <!-- เมนูแนวนอน -->
-      <div ref="stickyContainer" class="sticky top-0 z-50 bg-white/70 backdrop-blur-md" style="position: relative">
+      <div ref="stickyContainer" class="mt-4 sticky top-0 z-50 bg-white/70 backdrop-blur-md" style="position: relative">
         <div ref="menuBar"
           class="flex py-2 font-bold overflow-x-auto whitespace-nowrap gap-2 scrollbar-hide min-w-0 cursor-grab active:cursor-grabbing select-none relative px-2"
           @mousedown="startDrag" @mousemove="onDrag" @mouseup="stopDrag" @mouseleave="stopDrag" @touchstart="startDrag"
           @touchmove="onDrag" @touchend="stopDrag">
-          
+
           <div v-for="(menu, idx) in menus" :key="idx" class="relative inline-block min-w-max"
             @mouseenter="onMouseEnter(idx)" @mouseleave="onMouseLeave(idx)">
             <button :ref="(el) => (menuButtonRefs[idx] = el)" :class="[
@@ -70,6 +84,7 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script setup>
@@ -81,6 +96,13 @@ import BS from "@/views/tt/all/businessperson.vue";
 import Product from "@/views/tt/all/product.vue";
 import News from "@/views/tt/all/news.vue";
 import Contact from "@/views/tt/all/contact.vue";
+
+
+const images = [
+  '/icon1/rice.jpg',
+  '/icon1/bg_main.jpg',
+  '/icon1/rice2.jpg'
+];
 
 const menus = [
   { label: "หน้าหลัก", dropdown: [] },
@@ -123,6 +145,8 @@ const menus = [
   { label: "ติดต่อเรา", dropdown: [] },
 ];
 
+
+
 const mainRef = ref(null);
 const aboutRef = ref(null);
 const bsoRef = ref(null);
@@ -130,14 +154,31 @@ const bsRef = ref(null);
 const productRef = ref(null);
 const newsRef = ref(null);
 const contactRef = ref(null);
-
 const activeIndex = ref(0);
 const menuButtonRefs = reactive({});
 const dropdownPositions = reactive({});
 const dropdownOpen = reactive({});
-
-
 const stickyContainer = ref(null);
+
+const currentIndex = ref(0);
+
+const carouselRef = ref(null);
+let animationInProgress = false;
+let lastTouchTime = 0;
+
+let endX = 0;
+const dragging = ref(false);
+const dragOffsetX = ref(0);
+let startX = 0;
+let isDragging = false;
+let dragThreshold = 50;
+let autoSlideTimer = null;
+
+
+const menuBar = ref(null);
+let isDown = false;
+let scrollLeft;
+
 
 function scrollToSection(index) {
   activeIndex.value = index;
@@ -158,13 +199,34 @@ function scrollToSection(index) {
   }
 }
 
+function startAutoSlide() {
+  stopAutoSlide();
+  autoSlideTimer = setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % images.length;
+  }, 5000);
+}
+
+function stopAutoSlide() {
+  if (autoSlideTimer) {
+    clearInterval(autoSlideTimer);
+    autoSlideTimer = null;
+  }
+}
+
+function startAutoSlideAfterDelay() {
+  stopAutoSlide();
+  setTimeout(() => {
+    startAutoSlide();
+  }, 5000);
+}
+
 function openDropdown(idx) {
   dropdownOpen[idx] = true
   nextTick(() => {
     const btn = menuButtonRefs[idx]
     if (btn) {
       const rect = btn.getBoundingClientRect()
-      const dropdownWidth = 192 // ความกว้าง dropdown ปรับตามของจริง
+      const dropdownWidth = 192
       const viewportWidth = window.innerWidth
 
       let left = rect.left
@@ -187,8 +249,42 @@ function openDropdown(idx) {
     }
   })
 }
+function onTouchStart(e) {
+  stopAutoSlide();
+  isDragging = true;
+  dragging.value = true;
+  startX = e.touches[0].clientX;
+  dragOffsetX.value = 0;
+  lastTouchTime = Date.now();
+}
 
+function onTouchMove(e) {
+  if (!isDragging) return;
+  const currentX = e.touches[0].clientX;
+  dragOffsetX.value = currentX - startX;
+}
 
+function onTouchEnd() {
+  if (!isDragging) return;
+  isDragging = false;
+  dragging.value = false;
+
+  const elapsedTime = Date.now() - lastTouchTime;
+  const velocity = dragOffsetX.value / elapsedTime;
+  const width = carouselRef.value?.offsetWidth || 1;
+  const percentage = Math.abs(dragOffsetX.value) / width;
+
+  if (percentage > 0.2 || Math.abs(velocity) > 0.5) {
+    if (dragOffsetX.value < 0 && currentIndex.value < images.length - 1) {
+      currentIndex.value++;
+    } else if (dragOffsetX.value > 0 && currentIndex.value > 0) {
+      currentIndex.value--;
+    }
+  }
+
+  dragOffsetX.value = 0;
+  startAutoSlideAfterDelay();
+}
 
 function onMouseEnter(idx) {
   if (window.innerWidth >= 768) {
@@ -229,9 +325,14 @@ function onMenuClick(idx, menu) {
 
 onMounted(() => {
   document.addEventListener("click", onClickOutside);
+  startAutoSlide();
+
 });
+
 onBeforeUnmount(() => {
   document.removeEventListener("click", onClickOutside);
+  stopAutoSlide();
+
 });
 
 function onClickOutside(e) {
@@ -248,16 +349,11 @@ function onClickOutside(e) {
   }
 }
 
-
 function onDropdownItemClick(menuIdx, itemIdx) {
   alert(`เลือก "${menus[menuIdx].dropdown[itemIdx]}" ในเมนู "${menus[menuIdx].label}"`);
   dropdownOpen[menuIdx] = false;
 }
 
-const menuBar = ref(null);
-let isDown = false;
-let startX;
-let scrollLeft;
 
 function startDrag(e) {
   isDown = true;
